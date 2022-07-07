@@ -280,6 +280,9 @@ export default function Header() {
         >
           {t('pool')}
         </StyledNavLink>
+        <StyledNavLink id={`faucet-nav-link`} to={'/faucet'}>
+          {t('Faucet')}
+        </StyledNavLink>
       </HeaderLinks>
 
       <HeaderControls>
