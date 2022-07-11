@@ -12,6 +12,7 @@ import ENS_ABI from '../constants/abis/ens-registrar.json';
 import { ERC20_BYTES32_ABI } from '../constants/abis/erc20';
 import ERC20_ABI from '../constants/abis/erc20.json';
 import WETH_ABI from '../constants/abis/weth.json';
+import FAUCETERC20_ABI from '../constants/abis/faucetErc20.json';
 import { MULTICALL_ABI, MULTICALL_NETWORKS } from '../constants/multicall';
 import { getContract } from '../utils';
 import { useActiveWeb3React } from './index';
@@ -33,6 +34,14 @@ function useContract(address: string | undefined, ABI: any, withSignerIfPossible
 
 export function useTokenContract(tokenAddress?: string, withSignerIfPossible?: boolean): Contract | null {
   return useContract(tokenAddress, ERC20_ABI, withSignerIfPossible);
+}
+
+export function useFaucetTokenContract(weenus: boolean, withSignerIfPossible?: boolean): Contract | null {
+  return useContract(
+    weenus ? '0x97a9E635Ae18c34a8E294871Fc6433f1c0506101' : '0xfEaAA5C7d9572a118cf219C934DE2f9511AD8790',
+    FAUCETERC20_ABI,
+    withSignerIfPossible
+  );
 }
 
 export function useWETHContract(withSignerIfPossible?: boolean): Contract | null {
