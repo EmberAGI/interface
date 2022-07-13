@@ -81,27 +81,27 @@ export default function Faucet() {
   const ethereum = window.ethereum as any;
   const theme = useContext(ThemeContext);
   const { account } = useActiveWeb3React();
-  const getTokenDrip = async (xeenux: boolean) => {
+  const getTokenDrip = async (BigToken: boolean) => {
     const provider = new ethers.providers.Web3Provider(window.ethereum as any);
     await provider.send('eth_requestAccounts', []);
     const signer = await provider.getSigner();
-    const faucet = xeenux
-      ? new ethers.Contract('0xfEaAA5C7d9572a118cf219C934DE2f9511AD8790', FAUCETERC20_ABI, signer)
-      : new ethers.Contract('0x97a9E635Ae18c34a8E294871Fc6433f1c0506101', FAUCETERC20_ABI, signer);
+    const faucet = BigToken
+      ? new ethers.Contract('0xD45f1F799097a30243605E9ba938FcB0e3f5cBC3', FAUCETERC20_ABI, signer)
+      : new ethers.Contract('0x99FB3e5534E6781C341aB3b02452c2B8Bc99777D', FAUCETERC20_ABI, signer);
     await faucet.drip();
   };
 
-  const addTokenFunction = async (xeenux: boolean) => {
+  const addTokenFunction = async (bigToken: boolean) => {
     try {
       const wasAdded = await ethereum.request({
         method: 'wallet_watchAsset',
         params: {
           type: 'ERC20',
           options: {
-            address: xeenux
-              ? '0xfEaAA5C7d9572a118cf219C934DE2f9511AD8790'
-              : '0x97a9E635Ae18c34a8E294871Fc6433f1c0506101',
-            symbol: xeenux ? 'XEENUS' : 'WEENUS',
+            address: bigToken
+              ? '0xD45f1F799097a30243605E9ba938FcB0e3f5cBC3'
+              : '0x99FB3e5534E6781C341aB3b02452c2B8Bc99777D',
+            symbol: bigToken ? 'BIG' : 'SML',
             decimals: 18,
           },
         },
@@ -174,7 +174,7 @@ export default function Faucet() {
               <ButtonRow>
                 <ResponsiveButtonPrimary padding="6px 10px" onClick={() => getTokenDrip(true)}>
                   <Text fontWeight={200} fontSize={14}>
-                    Drip Xeenus
+                    Drip BigTkn
                   </Text>
                 </ResponsiveButtonPrimary>
                 <IconWrapper size={16} onClick={() => addTokenFunction(true)}>
@@ -183,7 +183,7 @@ export default function Faucet() {
                 </IconWrapper>
                 <ResponsiveButtonPrimary id="join-pool-button" padding="6px 10px" onClick={() => getTokenDrip(false)}>
                   <Text fontWeight={200} fontSize={14}>
-                    Drip Weenus
+                    Drip SmlTkn
                   </Text>
                 </ResponsiveButtonPrimary>
                 <IconWrapper size={16} onClick={() => addTokenFunction(false)}>

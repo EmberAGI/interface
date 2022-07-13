@@ -25,7 +25,7 @@ var _SOLIDITY_TYPE_MAXIMA
   ChainId[(ChainId['ROPSTEN'] = 3)] = 'ROPSTEN'
   ChainId[(ChainId['RINKEBY'] = 4)] = 'RINKEBY'
   ChainId[(ChainId['G\xD6RLI'] = 5)] = 'G\xD6RLI'
-  ChainId[(ChainId['AMBTEST'] = 22040)] = 'AMBTEST'
+  ChainId[(ChainId['AMBTEST'] = 30746)] = 'AMBTEST'
 })(exports.ChainId || (exports.ChainId = {}))
 ;(function (TradeType) {
   TradeType[(TradeType['EXACT_INPUT'] = 0)] = 'EXACT_INPUT'
@@ -37,8 +37,8 @@ var _SOLIDITY_TYPE_MAXIMA
   Rounding[(Rounding['ROUND_UP'] = 2)] = 'ROUND_UP'
 })(exports.Rounding || (exports.Rounding = {}))
 
-var FACTORY_ADDRESS = '0xCE1c717c7614D484eeE90cE7939DAA43A89CE9Cd'
-var INIT_CODE_HASH = '0x540f9235bd489359c92418b1562b7c7fe8db0cfea912ecebb67b7f591b640b64'
+var FACTORY_ADDRESS = '0x97a9E635Ae18c34a8E294871Fc6433f1c0506101'
+var INIT_CODE_HASH = '0x1892ee6b3b8f653471529d0b06a772bdc5588bb0b15607cb427c8148f70004a9'
 var MINIMUM_LIQUIDITY = /*#__PURE__*/ JSBI.BigInt(1000) // exports for internal consumption
 
 var ZERO = /*#__PURE__*/ JSBI.BigInt(0)
@@ -501,7 +501,7 @@ var WETH =
   )),
   (_WETH[exports.ChainId.AMBTEST] = /*#__PURE__*/ new Token(
     exports.ChainId.AMBTEST,
-    '0x980acb3112B516DA8856f0833ec78e6Bad6A4B5A',
+    '0x18951A2D6527A01C089D5Ad595Ae4f0B5d749786',
     18,
     'WETH',
     'Wrapped Ether'

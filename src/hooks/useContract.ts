@@ -36,9 +36,9 @@ export function useTokenContract(tokenAddress?: string, withSignerIfPossible?: b
   return useContract(tokenAddress, ERC20_ABI, withSignerIfPossible);
 }
 
-export function useFaucetTokenContract(weenus: boolean, withSignerIfPossible?: boolean): Contract | null {
+export function useFaucetTokenContract(BigToken: boolean, withSignerIfPossible?: boolean): Contract | null {
   return useContract(
-    weenus ? '0x97a9E635Ae18c34a8E294871Fc6433f1c0506101' : '0xfEaAA5C7d9572a118cf219C934DE2f9511AD8790',
+    BigToken ? '0xD45f1F799097a30243605E9ba938FcB0e3f5cBC3' : '0x99FB3e5534E6781C341aB3b02452c2B8Bc99777D',
     FAUCETERC20_ABI,
     withSignerIfPossible
   );
