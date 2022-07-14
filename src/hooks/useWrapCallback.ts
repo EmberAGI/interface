@@ -27,6 +27,7 @@ export default function useWrapCallback(
   const { chainId, account } = useActiveWeb3React();
   const wethContract = useWETHContract();
   const balance = useCurrencyBalance(account ?? undefined, inputCurrency);
+  console.log(inputCurrency, 'Input currency');
   // we can always parse the amount typed as the input currency, since wrapping is 1:1
   const inputAmount = useMemo(() => tryParseAmount(typedValue, inputCurrency), [inputCurrency, typedValue]);
   const addTransaction = useTransactionAdder();
@@ -44,13 +45,13 @@ export default function useWrapCallback(
             ? async () => {
                 try {
                   const txReceipt = await wethContract.deposit({ value: `0x${inputAmount.raw.toString(16)}` });
-                  addTransaction(txReceipt, { summary: `Wrap ${inputAmount.toSignificant(6)} ETH to WETH` });
+                  addTransaction(txReceipt, { summary: `Wrap ${inputAmount.toSignificant(6)} AMB to SAMB` });
                 } catch (error) {
                   console.error('Could not deposit', error);
                 }
               }
             : undefined,
-        inputError: sufficientBalance ? undefined : 'Insufficient ETH balance',
+        inputError: sufficientBalance ? undefined : 'Insufficient SAMB balance',
       };
     } else if (currencyEquals(WETH[chainId], inputCurrency) && outputCurrency === ETHER) {
       return {

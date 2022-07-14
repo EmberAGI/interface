@@ -109,7 +109,6 @@ export function useDerivedSwapInfo(): {
   inputError?: string;
 } {
   const { account } = useActiveWeb3React();
-
   const {
     independentField,
     typedValue,
@@ -117,7 +116,7 @@ export function useDerivedSwapInfo(): {
     [Field.OUTPUT]: { currencyId: outputCurrencyId },
     recipient,
   } = useSwapState();
-
+  console.log(inputCurrencyId, 'InputCurrencyId');
   const inputCurrency = useCurrency(inputCurrencyId);
   const outputCurrency = useCurrency(outputCurrencyId);
   const recipientLookup = useENS(recipient ?? undefined);

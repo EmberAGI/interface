@@ -1,12 +1,11 @@
 diff --git a/node_modules/@uniswap/default-token-list/build/uniswap-default.tokenlist.json b/node_modules/@uniswap/default-token-list/build/uniswap-default.tokenlist.json
-index 3726fda..994b82a 100644
+index 3726fda..4ab262a 100644
 --- a/node_modules/@uniswap/default-token-list/build/uniswap-default.tokenlist.json
 +++ b/node_modules/@uniswap/default-token-list/build/uniswap-default.tokenlist.json
-@@ -389,36 +389,12 @@
-       "chainId": 5,
+@@ -390,35 +390,11 @@
        "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6/logo.png"
      },
--    {
+     {
 -      "name": "Dai Stablecoin",
 -      "address": "0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa",
 -      "symbol": "DAI",
@@ -30,11 +29,13 @@ index 3726fda..994b82a 100644
 -      "chainId": 42,
 -      "logoURI": "ipfs://QmXttGpZrECX5qCyXbBQiqgQNytVGeZW5Anewvh2jc4psg"
 -    },
-     {
-       "name": "Wrapped Ether",
+-    {
+-      "name": "Wrapped Ether",
 -      "address": "0xd0A1E359811322d97991E03f863a0C30C2cF029C",
+-      "symbol": "WETH",
++      "name": "Wrapped Amber",
 +      "address": "0x18951A2D6527A01C089D5Ad595Ae4f0B5d749786",
-       "symbol": "WETH",
++      "symbol": "SAMB",
        "decimals": 18,
 -      "chainId": 42,
 +      "chainId": 30746,
