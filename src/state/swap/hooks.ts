@@ -1,6 +1,6 @@
 import useENS from '../../hooks/useENS';
 import { parseUnits } from '@ethersproject/units';
-import { Currency, CurrencyAmount, ETHER, JSBI, Token, TokenAmount, Trade } from '@uniswap/sdk';
+import { Currency, CurrencyAmount, AMBER, JSBI, Token, TokenAmount, Trade } from '@uniswap/sdk';
 import { ParsedQs } from 'qs';
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -33,7 +33,7 @@ export function useSwapActionHandlers(): {
       dispatch(
         selectCurrency({
           field,
-          currencyId: currency instanceof Token ? currency.address : currency === ETHER ? 'ETH' : '',
+          currencyId: currency instanceof Token ? currency.address : currency === AMBER ? 'AMB' : '',
         })
       );
     },
@@ -199,10 +199,10 @@ function parseCurrencyFromURLParameter(urlParam: any): string {
   if (typeof urlParam === 'string') {
     const valid = isAddress(urlParam);
     if (valid) return valid;
-    if (urlParam.toUpperCase() === 'ETH') return 'ETH';
-    if (valid === false) return 'ETH';
+    if (urlParam.toUpperCase() === 'AMB') return 'AMB';
+    if (valid === false) return 'AMB';
   }
-  return 'ETH' ?? '';
+  return 'AMB' ?? '';
 }
 
 function parseTokenAmountURLParameter(urlParam: any): string {

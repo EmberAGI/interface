@@ -1,4 +1,4 @@
-import { Currency, currencyEquals, ETHER, WETH } from '@uniswap/sdk';
+import { Currency, currencyEquals, AMBER, WETH } from '@uniswap/sdk';
 import { useMemo } from 'react';
 import { tryParseAmount } from '../state/swap/hooks';
 import { useTransactionAdder } from '../state/transactions/hooks';
@@ -37,7 +37,7 @@ export default function useWrapCallback(
 
     const sufficientBalance = inputAmount && balance && !balance.lessThan(inputAmount);
 
-    if (inputCurrency === ETHER && currencyEquals(WETH[chainId], outputCurrency)) {
+    if (inputCurrency === AMBER && currencyEquals(WETH[chainId], outputCurrency)) {
       return {
         wrapType: WrapType.WRAP,
         execute:
@@ -53,7 +53,7 @@ export default function useWrapCallback(
             : undefined,
         inputError: sufficientBalance ? undefined : 'Insufficient SAMB balance',
       };
-    } else if (currencyEquals(WETH[chainId], inputCurrency) && outputCurrency === ETHER) {
+    } else if (currencyEquals(WETH[chainId], inputCurrency) && outputCurrency === AMBER) {
       return {
         wrapType: WrapType.UNWRAP,
         execute:
@@ -61,7 +61,7 @@ export default function useWrapCallback(
             ? async () => {
                 try {
                   const txReceipt = await wethContract.withdraw(`0x${inputAmount.raw.toString(16)}`);
-                  addTransaction(txReceipt, { summary: `Unwrap ${inputAmount.toSignificant(6)} WETH to ETH` });
+                  addTransaction(txReceipt, { summary: `Unwrap ${inputAmount.toSignificant(6)} WETH to AMB` });
                 } catch (error) {
                   console.error('Could not withdraw', error);
                 }

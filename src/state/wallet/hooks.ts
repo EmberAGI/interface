@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, ETHER, JSBI, Token, TokenAmount } from '@uniswap/sdk';
+import { Currency, CurrencyAmount, AMBER, JSBI, Token, TokenAmount } from '@uniswap/sdk';
 import { useMemo } from 'react';
 import ERC20_INTERFACE from '../../constants/abis/erc20';
 import { useAllTokens } from '../../hooks/Tokens';
@@ -8,7 +8,7 @@ import { isAddress } from '../../utils';
 import { useSingleContractMultipleData, useMultipleContractSingleData } from '../multicall/hooks';
 
 /**
- * Returns a map of the given addresses to their eventually consistent ETH balances.
+ * Returns a map of the given addresses to their eventually consistent AMB balances.
  */
 export function useETHBalances(uncheckedAddresses?: (string | undefined)[]): {
   [address: string]: CurrencyAmount | undefined;
@@ -104,7 +104,7 @@ export function useCurrencyBalances(
   );
 
   const tokenBalances = useTokenBalances(account, tokens);
-  const containsETH: boolean = useMemo(() => currencies?.some((currency) => currency === ETHER) ?? false, [currencies]);
+  const containsETH: boolean = useMemo(() => currencies?.some((currency) => currency === AMBER) ?? false, [currencies]);
   const ethBalance = useETHBalances(containsETH ? [account] : []);
 
   return useMemo(
@@ -112,7 +112,7 @@ export function useCurrencyBalances(
       currencies?.map((currency) => {
         if (!account || !currency) return undefined;
         if (currency instanceof Token) return tokenBalances[currency.address];
-        if (currency === ETHER) return ethBalance[account];
+        if (currency === AMBER) return ethBalance[account];
         return undefined;
       }) ?? [],
     [account, currencies, ethBalance, tokenBalances]

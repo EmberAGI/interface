@@ -1,6 +1,6 @@
 import { TokenAddressMap, useDefaultTokenList } from './../state/lists/hooks';
 import { parseBytes32String } from '@ethersproject/strings';
-import { Currency, ETHER, Token, currencyEquals } from '@uniswap/sdk';
+import { Currency, AMBER, Token, currencyEquals } from '@uniswap/sdk';
 import { useMemo } from 'react';
 import { useCombinedActiveList, useCombinedInactiveList } from '../state/lists/hooks';
 import { NEVER_RELOAD, useSingleCallResult } from '../state/multicall/hooks';
@@ -182,7 +182,7 @@ export function useToken(tokenAddress?: string): Token | undefined | null {
 }
 
 export function useCurrency(currencyId: string | undefined): Currency | null | undefined {
-  const isETH = currencyId?.toUpperCase() === 'ETH';
+  const isETH = currencyId?.toUpperCase() === 'AMB';
   const token = useToken(isETH ? undefined : currencyId);
-  return isETH ? ETHER : token;
+  return isETH ? AMBER : token;
 }

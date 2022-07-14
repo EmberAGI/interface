@@ -383,14 +383,14 @@ function sortedInsert(items, add, maxSize, comparator) {
 }
 
 /**
- * A currency is any fungible financial instrument on Ethereum, including Ether and all ERC20 tokens.
+ * A currency is any fungible financial instrument on Ethereum, including Amber and all ERC20 tokens.
  *
- * The only instance of the base class `Currency` is Ether.
+ * The only instance of the base class `Currency` is Amber.
  */
 
 var Currency =
   /**
-   * Constructs an instance of the base class `Currency`. The only instance of the base class `Currency` is `Currency.ETHER`.
+   * Constructs an instance of the base class `Currency`. The only instance of the base class `Currency` is `Currency.AMBER`.
    * @param decimals decimals of the currency
    * @param symbol symbol of the currency
    * @param name of the currency
@@ -405,8 +405,8 @@ var Currency =
  * The only instance of the base class `Currency`.
  */
 
-Currency.ETHER = /*#__PURE__*/ new Currency(18, 'ETH', 'Ether')
-var ETHER = Currency.ETHER
+Currency.AMBER = /*#__PURE__*/ new Currency(18, 'AMB', 'Amber')
+var AMBER = Currency.AMBER
 
 var _WETH
 /**
@@ -476,35 +476,35 @@ var WETH =
     '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
     18,
     'WETH',
-    'Wrapped Ether'
+    'Wrapped Amber'
   )),
   (_WETH[exports.ChainId.ROPSTEN] = /*#__PURE__*/ new Token(
     exports.ChainId.ROPSTEN,
     '0x97a9E635Ae18c34a8E294871Fc6433f1c0506101',
     18,
     'WETH',
-    'Wrapped Ether'
+    'Wrapped Amber'
   )),
   (_WETH[exports.ChainId.RINKEBY] = /*#__PURE__*/ new Token(
     exports.ChainId.RINKEBY,
     '0x97a9E635Ae18c34a8E294871Fc6433f1c0506101',
     18,
     'WETH',
-    'Wrapped Ether'
+    'Wrapped Amber'
   )),
   (_WETH[exports.ChainId.GÖRLI] = /*#__PURE__*/ new Token(
     exports.ChainId.GÖRLI,
     '0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6',
     18,
     'WETH',
-    'Wrapped Ether'
+    'Wrapped Amber'
   )),
   (_WETH[exports.ChainId.AMBTEST] = /*#__PURE__*/ new Token(
     exports.ChainId.AMBTEST,
     '0x18951A2D6527A01C089D5Ad595Ae4f0B5d749786',
     18,
     'WETH',
-    'Wrapped Ether'
+    'Wrapped Amber'
   )),
   _WETH)
 
@@ -685,12 +685,12 @@ var CurrencyAmount = /*#__PURE__*/ (function (_Fraction) {
     return _this
   }
   /**
-   * Helper that calls the constructor with the ETHER currency
+   * Helper that calls the constructor with the AMBER currency
    * @param amount ether amount in wei
    */
 
   CurrencyAmount.ether = function ether(amount) {
-    return new CurrencyAmount(ETHER, amount)
+    return new CurrencyAmount(AMBER, amount)
   }
 
   var _proto = CurrencyAmount.prototype
@@ -1133,14 +1133,14 @@ var Route = /*#__PURE__*/ (function () {
       : void 0
     !(
       (input instanceof Token && pairs[0].involvesToken(input)) ||
-      (input === ETHER && pairs[0].involvesToken(WETH[pairs[0].chainId]))
+      (input === AMBER && pairs[0].involvesToken(WETH[pairs[0].chainId]))
     )
       ? invariant(false, 'INPUT')
       : void 0
     !(
       typeof output === 'undefined' ||
       (output instanceof Token && pairs[pairs.length - 1].involvesToken(output)) ||
-      (output === ETHER && pairs[pairs.length - 1].involvesToken(WETH[pairs[0].chainId]))
+      (output === AMBER && pairs[pairs.length - 1].involvesToken(WETH[pairs[0].chainId]))
     )
       ? invariant(false, 'OUTPUT')
       : void 0
@@ -1264,19 +1264,19 @@ function tradeComparator(a, b) {
 }
 /**
  * Given a currency amount and a chain ID, returns the equivalent representation as the token amount.
- * In other words, if the currency is ETHER, returns the WETH token amount for the given chain. Otherwise, returns
+ * In other words, if the currency is AMBER, returns the WETH token amount for the given chain. Otherwise, returns
  * the input currency amount.
  */
 
 function wrappedAmount(currencyAmount, chainId) {
   if (currencyAmount instanceof TokenAmount) return currencyAmount
-  if (currencyAmount.currency === ETHER) return new TokenAmount(WETH[chainId], currencyAmount.raw)
+  if (currencyAmount.currency === AMBER) return new TokenAmount(WETH[chainId], currencyAmount.raw)
   invariant(false, 'CURRENCY')
 }
 
 function wrappedCurrency(currency, chainId) {
   if (currency instanceof Token) return currency
-  if (currency === ETHER) return WETH[chainId]
+  if (currency === AMBER) return WETH[chainId]
   invariant(false, 'CURRENCY')
 }
 /**
@@ -1324,13 +1324,13 @@ var Trade = /*#__PURE__*/ (function () {
     this.inputAmount =
       tradeType === exports.TradeType.EXACT_INPUT
         ? amount
-        : route.input === ETHER
+        : route.input === AMBER
         ? CurrencyAmount.ether(amounts[0].raw)
         : amounts[0]
     this.outputAmount =
       tradeType === exports.TradeType.EXACT_OUTPUT
         ? amount
-        : route.output === ETHER
+        : route.output === AMBER
         ? CurrencyAmount.ether(amounts[amounts.length - 1].raw)
         : amounts[amounts.length - 1]
     this.executionPrice = new Price(
@@ -1639,8 +1639,8 @@ var Router = /*#__PURE__*/ (function () {
    */
 
   Router.swapCallParameters = function swapCallParameters(trade, options) {
-    var etherIn = trade.inputAmount.currency === ETHER
-    var etherOut = trade.outputAmount.currency === ETHER // the router does not support both ether in and out
+    var etherIn = trade.inputAmount.currency === AMBER
+    var etherOut = trade.outputAmount.currency === AMBER // the router does not support both ether in and out
 
     !!(etherIn && etherOut) ? invariant(false, 'ETHER_IN_OUT') : void 0
     !(!('ttl' in options) || options.ttl > 0) ? invariant(false, 'TTL') : void 0
@@ -1856,7 +1856,7 @@ var Fetcher = /*#__PURE__*/ (function () {
 exports.JSBI = JSBI
 exports.Currency = Currency
 exports.CurrencyAmount = CurrencyAmount
-exports.ETHER = ETHER
+exports.AMBER = AMBER
 exports.FACTORY_ADDRESS = FACTORY_ADDRESS
 exports.Fetcher = Fetcher
 exports.Fraction = Fraction

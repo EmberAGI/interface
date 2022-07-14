@@ -105,10 +105,10 @@ export default function Pool() {
                 <TYPE.mediumHeader style={{ justifySelf: 'flex-start' }}>Your liquidity</TYPE.mediumHeader>
               </HideSmall>
               <ButtonRow>
-                <ResponsiveButtonPrimary as={Link} padding="6px 10px" to="/create/ETH">
+                <ResponsiveButtonPrimary as={Link} padding="6px 10px" to="/create/AMB">
                   Create a pair
                 </ResponsiveButtonPrimary>
-                <ResponsiveButtonPrimary id="join-pool-button" as={Link} padding="6px 10px" to="/add/ETH">
+                <ResponsiveButtonPrimary id="join-pool-button" as={Link} padding="6px 10px" to="/add/AMB">
                   <Text fontWeight={500} fontSize={16}>
                     Add Liquidity
                   </Text>
