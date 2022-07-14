@@ -2,7 +2,7 @@ import { Currency, AMBER, Token } from '@uniswap/sdk';
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
 
-import EthereumLogo from '../../assets/images/ethereum-logo.png';
+import AmbrosusLogo from '../../assets/images/ambrosusLogo.png';
 import useHttpLocations from '../../hooks/useHttpLocations';
 import { WrappedTokenInfo } from '../../state/lists/hooks';
 import Logo from '../Logo';
@@ -10,11 +10,11 @@ import Logo from '../Logo';
 const getTokenLogoURL = (address: string) =>
   `https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/${address}/logo.png`;
 
-const StyledEthereumLogo = styled.img<{ size: string }>`
+const StyledAmbrosusLogo = styled.img<{ size: string }>`
   width: ${({ size }) => size};
   height: ${({ size }) => size};
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.075);
-  border-radius: 24px;
+  border-radius: 1px;
 `;
 
 const StyledLogo = styled(Logo)<{ size: string }>`
@@ -27,7 +27,7 @@ const StyledLogo = styled(Logo)<{ size: string }>`
 
 export default function CurrencyLogo({
   currency,
-  size = '24px',
+  size = '29px',
   style,
 }: {
   currency?: Currency;
@@ -50,7 +50,7 @@ export default function CurrencyLogo({
   }, [currency, uriLocations]);
 
   if (currency === AMBER) {
-    return <StyledEthereumLogo src={EthereumLogo} size={size} style={style} />;
+    return <StyledAmbrosusLogo src={AmbrosusLogo} size={size} style={style} />;
   }
 
   return <StyledLogo size={size} srcs={srcs} alt={`${currency?.symbol ?? 'token'} logo`} style={style} />;
