@@ -66,10 +66,6 @@ export function listToTokenMap(list: TokenList): TokenAddressMap {
           })
           ?.filter((x): x is TagInfo => Boolean(x)) ?? [];
       const token = new WrappedTokenInfo(tokenInfo, tags);
-      // console.log(tokenMap, 'TokenMap');
-      // console.log(token, 'What is the token');
-      // console.log(token.chainId, 'What is this ChainId');
-      // console.log(token.address, 'What is this address');
       if (tokenMap[token.chainId][token.address] !== undefined) throw Error('Duplicate tokens.');
       return {
         ...tokenMap,
@@ -135,24 +131,79 @@ function useCombinedTokenMapFromUrls(urls: string[] | undefined): TokenAddressMa
     );
   }, [lists, urls]);
 }
-
 // filter out unsupported lists
 export function useActiveListUrls(): string[] | undefined {
   //return useSelector<AppState, AppState['lists']['activeListUrls']>((state) => state.lists.activeListUrls);
-  return [];
+  const json = {
+    name: 'Uniswap Labs Default',
+    timestamp: '2022-06-29T15:57:01.868Z',
+    version: {
+      major: 4,
+      minor: 1,
+      patch: 0,
+    },
+    tags: {},
+    logoURI: 'ipfs://QmNa8mQkrNKp1WEEeGjFezDmDeodkWRevGFN8JCV7b4Xir',
+    keywords: ['uniswap', 'default'],
+    tokens: [
+      {
+        chainId: 30746,
+        address: '0xD45f1F799097a30243605E9ba938FcB0e3f5cBC3',
+        name: 'BigToken',
+        symbol: 'BIG',
+        decimals: 18,
+        logoURI: 'https://assets.coingecko.com/coins/images/12390/thumb/ACH_%281%29.png?1599691266',
+      },
+      {
+        chainId: 30746,
+        address: '0x99FB3e5534E6781C341aB3b02452c2B8Bc99777D',
+        name: 'SmallToken',
+        symbol: 'SML',
+        decimals: 18,
+        logoURI: 'https://assets.coingecko.com/coins/images/4490/thumb/aergo.png?1647696770',
+      },
+    ],
+  };
+  return [JSON.stringify(json)];
 }
 
 export function useInactiveListUrls(): string[] {
-  // const lists = useAllLists();
-  // const allActiveListUrls = useActiveListUrls();
-  //return Object.keys(lists).filter((url) => !allActiveListUrls?.includes(url));
-  return [];
+  const json = {
+    name: 'Uniswap Labs Default',
+    timestamp: '2022-06-29T15:57:01.868Z',
+    version: {
+      major: 4,
+      minor: 1,
+      patch: 0,
+    },
+    tags: {},
+    logoURI: 'ipfs://QmNa8mQkrNKp1WEEeGjFezDmDeodkWRevGFN8JCV7b4Xir',
+    keywords: ['uniswap', 'default'],
+    tokens: [
+      {
+        chainId: 30746,
+        address: '0xD45f1F799097a30243605E9ba938FcB0e3f5cBC3',
+        name: 'BigToken',
+        symbol: 'BIG',
+        decimals: 18,
+        logoURI: 'https://assets.coingecko.com/coins/images/12390/thumb/ACH_%281%29.png?1599691266',
+      },
+      {
+        chainId: 30746,
+        address: '0x99FB3e5534E6781C341aB3b02452c2B8Bc99777D',
+        name: 'SmallToken',
+        symbol: 'SML',
+        decimals: 18,
+        logoURI: 'https://assets.coingecko.com/coins/images/4490/thumb/aergo.png?1647696770',
+      },
+    ],
+  };
+  return [JSON.stringify(json)];
 }
 
 // get all the tokens from active lists, combine with local default tokens
 export function useCombinedActiveList(): TokenAddressMap {
   const activeListUrls = useActiveListUrls();
-  console.log(activeListUrls, 'active list url');
   const activeTokens = useCombinedTokenMapFromUrls(activeListUrls);
   const defaultTokenMap = listToTokenMap(DEFAULT_TOKEN_LIST);
   return combineMaps(activeTokens, defaultTokenMap);
@@ -161,7 +212,6 @@ export function useCombinedActiveList(): TokenAddressMap {
 // all tokens from inactive lists
 export function useCombinedInactiveList(): TokenAddressMap {
   const allInactiveListUrls: string[] = useInactiveListUrls();
-  console.log(allInactiveListUrls, ' All inactive list');
   return useCombinedTokenMapFromUrls(allInactiveListUrls);
 }
 

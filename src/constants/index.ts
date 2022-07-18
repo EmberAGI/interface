@@ -14,6 +14,8 @@ export const ROUTER_ADDRESS = '0xfEaAA5C7d9572a118cf219C934DE2f9511AD8790';
 
 export const LP_TOKEN_NAME = 'Uniswap V2';
 export const LP_TOKEN_SYMBOL = 'UNI-V2';
+// export const LP_TOKEN_NAME = 'Swap-LP-Token';
+// export const LP_TOKEN_SYMBOL = 'SWAP-LP';
 
 // a list of tokens by chain
 type ChainTokenList = {

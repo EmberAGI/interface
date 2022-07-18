@@ -130,14 +130,16 @@ export default function Pool() {
               </EmptyProposals>
             ) : allV2PairsWithLiquidity?.length > 0 ? (
               <>
+                {console.log(allV2PairsWithLiquidity, 'all V2 Pairs with Liquidity')}
+                {/* {console.log(liquidityTokensWithBalances, ' LiquidityTokensWithBlanaces')}
+                {console.log(tokenPairsWithLiquidityTokens, 'tokenPairsWithliquidityTokens')}
+                {console.log(allV2PairsWithLiquidity, 'allV2PairsWithLiquidity')} */}
                 {allV2PairsWithLiquidity.map((v2Pair) => (
                   <FullPositionCard key={v2Pair.liquidityToken.address} pair={v2Pair} />
                 ))}
               </>
             ) : (
               <EmptyProposals>
-                {console.log(tokenPairsWithLiquidityTokens, 'hi')}
-                {console.log(allV2PairsWithLiquidity, 'Liquidity Pairs')}
                 <TYPE.body color={theme.text3} textAlign="center">
                   No Liquidity found
                 </TYPE.body>
