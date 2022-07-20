@@ -35,7 +35,15 @@ export const COMP = new Token(ChainId.MAINNET, '0xc00e94Cb662C3520282E6f57172140
 export const MKR = new Token(ChainId.MAINNET, '0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2', 18, 'MKR', 'Maker');
 export const AMPL = new Token(ChainId.MAINNET, '0xD46bA6D942050d489DBd938a2C909A5d5039A161', 9, 'AMPL', 'Ampleforth');
 export const WBTC = new Token(ChainId.MAINNET, '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599', 8, 'WBTC', 'Wrapped BTC');
-
+export const BIG = new Token(ChainId.AMBTEST, '0xD45f1F799097a30243605E9ba938FcB0e3f5cBC3', 18, 'BIG', 'Big Token');
+export const SML = new Token(ChainId.AMBTEST, '0x99FB3e5534E6781C341aB3b02452c2B8Bc99777D', 18, 'SML', 'Small Token');
+export const wETH = new Token(
+  ChainId.AMBTEST,
+  '0x3Ed6b39Ad815e08d9e7FF111FBbe975E7F778c64',
+  18,
+  'wETH',
+  'Wrapped Ethereum'
+);
 // Block time here is slightly higher (~1s) than average in order to avoid ongoing proposals past the displayed time
 export const AVERAGE_BLOCK_TIME_IN_SECS = 13;
 export const PROPOSAL_LENGTH_IN_BLOCKS = 40_320;
@@ -94,6 +102,11 @@ export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } 
     ],
     [USDC, USDT],
     [DAI, USDT],
+  ],
+  [ChainId.AMBTEST]: [
+    [BIG, SML],
+    [BIG, wETH],
+    [SML, wETH],
   ],
 };
 
