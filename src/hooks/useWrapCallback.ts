@@ -60,13 +60,13 @@ export default function useWrapCallback(
             ? async () => {
                 try {
                   const txReceipt = await wethContract.withdraw(`0x${inputAmount.raw.toString(16)}`);
-                  addTransaction(txReceipt, { summary: `Unwrap ${inputAmount.toSignificant(6)} WETH to AMB` });
+                  addTransaction(txReceipt, { summary: `Unwrap ${inputAmount.toSignificant(6)} SAMB to AMB` });
                 } catch (error) {
                   console.error('Could not withdraw', error);
                 }
               }
             : undefined,
-        inputError: sufficientBalance ? undefined : 'Insufficient WETH balance',
+        inputError: sufficientBalance ? undefined : 'Insufficient SAMB balance',
       };
     } else {
       return NOT_APPLICABLE;
