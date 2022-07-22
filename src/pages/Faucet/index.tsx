@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from 'react';
+import React, { useContext, useMemo, useEffect } from 'react';
 import styled, { ThemeContext } from 'styled-components';
 import { SwapPoolTabs } from '../../components/NavigationTabs';
 import AppBody from '../AppBody';
@@ -78,6 +78,12 @@ const EmptyProposals = styled.div`
 `;
 
 export default function Faucet() {
+  useEffect(() => {
+    (async () => {
+      const balance = await getTokenBalance(true);
+      console.log(balance, 'Balance');
+    })();
+  }, []);
   const ethereum = window.ethereum as any;
   const theme = useContext(ThemeContext);
   const { account } = useActiveWeb3React();
@@ -91,6 +97,14 @@ export default function Faucet() {
     await faucet.drip();
   };
 
+  const getTokenBalance = async (BigToken: boolean) => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum as any);
+    await provider.send('eth_requestAccounts', []);
+    const faucetContract = BigToken
+      ? new ethers.Contract('0xD45f1F799097a30243605E9ba938FcB0e3f5cBC3', FAUCETERC20_ABI, provider)
+      : new ethers.Contract('0x99FB3e5534E6781C341aB3b02452c2B8Bc99777D', FAUCETERC20_ABI, provider);
+    return faucetContract.balanceOf(account);
+  };
   const addTokenFunction = async (bigToken: boolean) => {
     try {
       const wasAdded = await ethereum.request({
