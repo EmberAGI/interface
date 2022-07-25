@@ -1,6 +1,7 @@
 import React, { useContext, useMemo, useEffect, useState } from 'react';
 import styled, { ThemeContext } from 'styled-components';
 import { SwapPoolTabs } from '../../components/NavigationTabs';
+import { useETHBalances } from '../../state/wallet/hooks';
 import AppBody from '../AppBody';
 import { BigNumber, ethers } from 'ethers';
 //import { BigNumber } from '@ethersproject/bignumber';
@@ -84,6 +85,8 @@ const EmptyProposals = styled.div`
 
 export default function Faucet() {
   const [tokenBalance, setTokenBalance] = useState({ bigToken: 0, smallToken: 0 });
+  const { account } = useActiveWeb3React();
+  const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? ''];
   useEffect(() => {
     (async () => {
       const bigTokenBalanceHex = await getTokenBalance(true);
@@ -99,7 +102,7 @@ export default function Faucet() {
   }, []);
   const ethereum = window.ethereum as any;
   const theme = useContext(ThemeContext);
-  const { account } = useActiveWeb3React();
+
   const bigNumberToDecimal18 = (bigNumber: BigNumber) => {
     return parseInt(bigNumber._hex, 16) / 10 ** 18;
   };
@@ -205,7 +208,7 @@ export default function Faucet() {
                 <ButtonRow>
                   <ResponsiveButtonPrimary padding="6px 10px" onClick={() => getTokenDrip(true)}>
                     <Text fontWeight={200} fontSize={14}>
-                      Drip BigTkn
+                      Get BigTkn
                     </Text>
                   </ResponsiveButtonPrimary>
                   <IconWrapper size={16} onClick={() => addTokenFunction(true)}>
@@ -214,7 +217,7 @@ export default function Faucet() {
                   </IconWrapper>
                   <ResponsiveButtonPrimary id="join-pool-button" padding="6px 10px" onClick={() => getTokenDrip(false)}>
                     <Text fontWeight={200} fontSize={14}>
-                      Drip SmlTkn
+                      Get SmlTkn
                     </Text>
                   </ResponsiveButtonPrimary>
                   <IconWrapper size={16} onClick={() => addTokenFunction(false)}>
@@ -224,10 +227,18 @@ export default function Faucet() {
                 </ButtonRow>
                 <FixedHeightRow>
                   <Text fontSize={16} fontWeight={500}>
+                    Your test Amb balance:
+                  </Text>
+                  <Text fontSize={16} fontWeight={500}>
+                    {userEthBalance?.toSignificant(4)}
+                  </Text>
+                </FixedHeightRow>
+                <FixedHeightRow>
+                  <Text fontSize={16} fontWeight={500}>
                     Your BigToken Balance:
                   </Text>
                   <Text fontSize={16} fontWeight={500}>
-                    {tokenBalance.bigToken}
+                    {tokenBalance.bigToken.toFixed(3)}
                   </Text>
                 </FixedHeightRow>
                 <FixedHeightRow>
@@ -235,7 +246,7 @@ export default function Faucet() {
                     Your SmallToken Balance:
                   </Text>
                   <Text fontSize={16} fontWeight={500}>
-                    {tokenBalance.smallToken}
+                    {tokenBalance.smallToken.toFixed(3)}
                   </Text>
                 </FixedHeightRow>
               </>
