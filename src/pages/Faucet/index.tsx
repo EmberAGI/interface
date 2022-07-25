@@ -1,8 +1,9 @@
-import React, { useContext, useMemo, useEffect } from 'react';
+import React, { useContext, useMemo, useEffect, useState } from 'react';
 import styled, { ThemeContext } from 'styled-components';
 import { SwapPoolTabs } from '../../components/NavigationTabs';
 import AppBody from '../AppBody';
-import { ethers } from 'ethers';
+import { BigNumber, ethers } from 'ethers';
+//import { BigNumber } from '@ethersproject/bignumber';
 //import FullPositionCard from '../../components/PositionCard';
 import { useTokenBalancesWithLoadingIndicator } from '../../state/wallet/hooks';
 import { TYPE, HideSmall } from '../../theme';
@@ -23,6 +24,10 @@ const PageWrapper = styled(AutoColumn)`
   max-width: 640px;
   width: 100%;
   padding: 1rem;
+`;
+
+const FixedHeightRow = styled(RowBetween)`
+  height: 24px;
 `;
 
 const IconWrapper = styled.div<{ size?: number }>`
@@ -78,15 +83,26 @@ const EmptyProposals = styled.div`
 `;
 
 export default function Faucet() {
+  const [tokenBalance, setTokenBalance] = useState({ bigToken: 0, smallToken: 0 });
   useEffect(() => {
     (async () => {
-      const balance = await getTokenBalance(true);
-      console.log(balance, 'Balance');
+      const bigTokenBalanceHex = await getTokenBalance(true);
+      const bigNumberDecimal = bigNumberToDecimal18(bigTokenBalanceHex);
+      const smlTokenBalanceHex = await getTokenBalance(false);
+      const smlTokenBalance = bigNumberToDecimal18(smlTokenBalanceHex);
+      setTokenBalance({
+        ...tokenBalance,
+        bigToken: bigNumberDecimal,
+        smallToken: smlTokenBalance,
+      });
     })();
   }, []);
   const ethereum = window.ethereum as any;
   const theme = useContext(ThemeContext);
   const { account } = useActiveWeb3React();
+  const bigNumberToDecimal18 = (bigNumber: BigNumber) => {
+    return parseInt(bigNumber._hex, 16) / 10 ** 18;
+  };
   const getTokenDrip = async (BigToken: boolean) => {
     const provider = new ethers.providers.Web3Provider(window.ethereum as any);
     await provider.send('eth_requestAccounts', []);
@@ -185,26 +201,44 @@ export default function Faucet() {
                 </TYPE.body>
               </EmptyProposals>
             ) : (
-              <ButtonRow>
-                <ResponsiveButtonPrimary padding="6px 10px" onClick={() => getTokenDrip(true)}>
-                  <Text fontWeight={200} fontSize={14}>
-                    Drip BigTkn
+              <>
+                <ButtonRow>
+                  <ResponsiveButtonPrimary padding="6px 10px" onClick={() => getTokenDrip(true)}>
+                    <Text fontWeight={200} fontSize={14}>
+                      Drip BigTkn
+                    </Text>
+                  </ResponsiveButtonPrimary>
+                  <IconWrapper size={16} onClick={() => addTokenFunction(true)}>
+                    +
+                    <img src={MetamaskIcon} alt={'metamask logo'} />
+                  </IconWrapper>
+                  <ResponsiveButtonPrimary id="join-pool-button" padding="6px 10px" onClick={() => getTokenDrip(false)}>
+                    <Text fontWeight={200} fontSize={14}>
+                      Drip SmlTkn
+                    </Text>
+                  </ResponsiveButtonPrimary>
+                  <IconWrapper size={16} onClick={() => addTokenFunction(false)}>
+                    +
+                    <img src={MetamaskIcon} alt={'metamask logo'} />
+                  </IconWrapper>
+                </ButtonRow>
+                <FixedHeightRow>
+                  <Text fontSize={16} fontWeight={500}>
+                    Your BigToken Balance:
                   </Text>
-                </ResponsiveButtonPrimary>
-                <IconWrapper size={16} onClick={() => addTokenFunction(true)}>
-                  +
-                  <img src={MetamaskIcon} alt={'metamask logo'} />
-                </IconWrapper>
-                <ResponsiveButtonPrimary id="join-pool-button" padding="6px 10px" onClick={() => getTokenDrip(false)}>
-                  <Text fontWeight={200} fontSize={14}>
-                    Drip SmlTkn
+                  <Text fontSize={16} fontWeight={500}>
+                    {tokenBalance.bigToken}
                   </Text>
-                </ResponsiveButtonPrimary>
-                <IconWrapper size={16} onClick={() => addTokenFunction(false)}>
-                  +
-                  <img src={MetamaskIcon} alt={'metamask logo'} />
-                </IconWrapper>
-              </ButtonRow>
+                </FixedHeightRow>
+                <FixedHeightRow>
+                  <Text fontSize={16} fontWeight={500}>
+                    Your SmallToken Balance:
+                  </Text>
+                  <Text fontSize={16} fontWeight={500}>
+                    {tokenBalance.smallToken}
+                  </Text>
+                </FixedHeightRow>
+              </>
             )}
           </AutoColumn>
         </AutoColumn>
