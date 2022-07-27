@@ -101,7 +101,7 @@ function combineMaps(map1: TokenAddressMap, map2: TokenAddressMap): TokenAddress
     3: { ...map1[3], ...map2[3] },
     4: { ...map1[4], ...map2[4] },
     5: { ...map1[5], ...map2[5] },
-    30746: { ...map1[30746], ...map2[30746] },
+    22040: { ...map1[22040], ...map2[22040] },
   };
 }
 
@@ -147,16 +147,16 @@ export function useActiveListUrls(): string[] | undefined {
     keywords: ['uniswap', 'default'],
     tokens: [
       {
-        chainId: 30746,
-        address: '0xD45f1F799097a30243605E9ba938FcB0e3f5cBC3',
+        chainId: 22040,
+        address: '0x8FB30d1A78d7E622CCB10376A585383Cf9dEc920',
         name: 'BigToken',
         symbol: 'BIG',
         decimals: 18,
         logoURI: 'https://assets.coingecko.com/coins/images/12390/thumb/ACH_%281%29.png?1599691266',
       },
       {
-        chainId: 30746,
-        address: '0x99FB3e5534E6781C341aB3b02452c2B8Bc99777D',
+        chainId: 22040,
+        address: '0xD45f1F799097a30243605E9ba938FcB0e3f5cBC3',
         name: 'SmallToken',
         symbol: 'SML',
         decimals: 18,
@@ -181,16 +181,16 @@ export function useInactiveListUrls(): string[] {
     keywords: ['uniswap', 'default'],
     tokens: [
       {
-        chainId: 30746,
-        address: '0xD45f1F799097a30243605E9ba938FcB0e3f5cBC3',
+        chainId: 22040,
+        address: '0x8FB30d1A78d7E622CCB10376A585383Cf9dEc920',
         name: 'BigToken',
         symbol: 'BIG',
         decimals: 18,
         logoURI: 'https://assets.coingecko.com/coins/images/12390/thumb/ACH_%281%29.png?1599691266',
       },
       {
-        chainId: 30746,
-        address: '0x99FB3e5534E6781C341aB3b02452c2B8Bc99777D',
+        chainId: 22040,
+        address: '0xD45f1F799097a30243605E9ba938FcB0e3f5cBC3',
         name: 'SmallToken',
         symbol: 'SML',
         decimals: 18,

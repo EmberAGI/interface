@@ -25,7 +25,7 @@ var _SOLIDITY_TYPE_MAXIMA
   ChainId[(ChainId['ROPSTEN'] = 3)] = 'ROPSTEN'
   ChainId[(ChainId['RINKEBY'] = 4)] = 'RINKEBY'
   ChainId[(ChainId['G\xD6RLI'] = 5)] = 'G\xD6RLI'
-  ChainId[(ChainId['AMBTEST'] = 30746)] = 'AMBTEST'
+  ChainId[(ChainId['AMBTEST'] = 22040)] = 'AMBTEST'
 })(exports.ChainId || (exports.ChainId = {}))
 ;(function (TradeType) {
   TradeType[(TradeType['EXACT_INPUT'] = 0)] = 'EXACT_INPUT'
@@ -37,8 +37,8 @@ var _SOLIDITY_TYPE_MAXIMA
   Rounding[(Rounding['ROUND_UP'] = 2)] = 'ROUND_UP'
 })(exports.Rounding || (exports.Rounding = {}))
 
-var FACTORY_ADDRESS = '0x97a9E635Ae18c34a8E294871Fc6433f1c0506101'
-var INIT_CODE_HASH = '0x1892ee6b3b8f653471529d0b06a772bdc5588bb0b15607cb427c8148f70004a9'
+var FACTORY_ADDRESS = '0x22337942F0fe81832f7ee2FC4aa2705Efe487949'
+var INIT_CODE_HASH = '0xa34cdb0d118125fb59c4453193c194e607f092ee38acc6c567c6b228f07cda96'
 var MINIMUM_LIQUIDITY = /*#__PURE__*/ JSBI.BigInt(1000) // exports for internal consumption
 
 var ZERO = /*#__PURE__*/ JSBI.BigInt(0)
@@ -476,35 +476,35 @@ var WETH =
     '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
     18,
     'WETH',
-    'Wrapped Amber'
+    'Synthetic Amber'
   )),
   (_WETH[exports.ChainId.ROPSTEN] = /*#__PURE__*/ new Token(
     exports.ChainId.ROPSTEN,
-    '0x97a9E635Ae18c34a8E294871Fc6433f1c0506101',
+    '0x22337942F0fe81832f7ee2FC4aa2705Efe487949',
     18,
     'WETH',
-    'Wrapped Amber'
+    'Synthetic Amber'
   )),
   (_WETH[exports.ChainId.RINKEBY] = /*#__PURE__*/ new Token(
     exports.ChainId.RINKEBY,
-    '0x97a9E635Ae18c34a8E294871Fc6433f1c0506101',
+    '0x22337942F0fe81832f7ee2FC4aa2705Efe487949',
     18,
     'WETH',
-    'Wrapped Amber'
+    'Synthetic Amber'
   )),
   (_WETH[exports.ChainId.GÖRLI] = /*#__PURE__*/ new Token(
     exports.ChainId.GÖRLI,
     '0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6',
     18,
     'WETH',
-    'Wrapped Amber'
+    'Synthetic Amber'
   )),
   (_WETH[exports.ChainId.AMBTEST] = /*#__PURE__*/ new Token(
     exports.ChainId.AMBTEST,
-    '0x18951A2D6527A01C089D5Ad595Ae4f0B5d749786',
+    '0x615D835e0C492b4309E79439765F66Db7BdcE200',
     18,
     'WETH',
-    'Wrapped Amber'
+    'Synthetic Amber'
   )),
   _WETH)
 

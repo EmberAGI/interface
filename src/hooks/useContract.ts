@@ -38,7 +38,7 @@ export function useTokenContract(tokenAddress?: string, withSignerIfPossible?: b
 
 export function useFaucetTokenContract(BigToken: boolean, withSignerIfPossible?: boolean): Contract | null {
   return useContract(
-    BigToken ? '0xD45f1F799097a30243605E9ba938FcB0e3f5cBC3' : '0x99FB3e5534E6781C341aB3b02452c2B8Bc99777D',
+    BigToken ? '0x8FB30d1A78d7E622CCB10376A585383Cf9dEc920' : '0xD45f1F799097a30243605E9ba938FcB0e3f5cBC3',
     FAUCETERC20_ABI,
     withSignerIfPossible
   );

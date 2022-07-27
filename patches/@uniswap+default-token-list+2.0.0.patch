@@ -1,8 +1,8 @@
 diff --git a/node_modules/@uniswap/default-token-list/build/uniswap-default.tokenlist.json b/node_modules/@uniswap/default-token-list/build/uniswap-default.tokenlist.json
-index 3726fda..4ab262a 100644
+index 3726fda..8d6d0fc 100644
 --- a/node_modules/@uniswap/default-token-list/build/uniswap-default.tokenlist.json
 +++ b/node_modules/@uniswap/default-token-list/build/uniswap-default.tokenlist.json
-@@ -390,35 +390,11 @@
+@@ -390,36 +390,12 @@
        "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6/logo.png"
      },
      {
@@ -33,12 +33,14 @@ index 3726fda..4ab262a 100644
 -      "name": "Wrapped Ether",
 -      "address": "0xd0A1E359811322d97991E03f863a0C30C2cF029C",
 -      "symbol": "WETH",
-+      "name": "Wrapped Amber",
-+      "address": "0x18951A2D6527A01C089D5Ad595Ae4f0B5d749786",
++      "name": "Synthetic Amber",
++      "address": "0x615D835e0C492b4309E79439765F66Db7BdcE200",
 +      "symbol": "SAMB",
        "decimals": 18,
 -      "chainId": 42,
-+      "chainId": 30746,
-       "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xd0A1E359811322d97991E03f863a0C30C2cF029C/logo.png"
+-      "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xd0A1E359811322d97991E03f863a0C30C2cF029C/logo.png"
++      "chainId": 22040,
++      "logoURI": "https://img.api.cryptorank.io/coins/amber1524754367851.png"
      }
    ]
+ }

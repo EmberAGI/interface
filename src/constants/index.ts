@@ -9,8 +9,8 @@ import {
 } from '../connectors';
 
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
-export const FACTORY_ADDRESS = '0x97a9E635Ae18c34a8E294871Fc6433f1c0506101';
-export const ROUTER_ADDRESS = '0xfEaAA5C7d9572a118cf219C934DE2f9511AD8790';
+export const FACTORY_ADDRESS = '0x22337942F0fe81832f7ee2FC4aa2705Efe487949';
+export const ROUTER_ADDRESS = '0x980acb3112B516DA8856f0833ec78e6Bad6A4B5A';
 
 export const LP_TOKEN_NAME = 'Uniswap V2';
 export const LP_TOKEN_SYMBOL = 'UNI-V2';
@@ -35,11 +35,11 @@ export const COMP = new Token(ChainId.MAINNET, '0xc00e94Cb662C3520282E6f57172140
 export const MKR = new Token(ChainId.MAINNET, '0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2', 18, 'MKR', 'Maker');
 export const AMPL = new Token(ChainId.MAINNET, '0xD46bA6D942050d489DBd938a2C909A5d5039A161', 9, 'AMPL', 'Ampleforth');
 export const WBTC = new Token(ChainId.MAINNET, '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599', 8, 'WBTC', 'Wrapped BTC');
-export const BIG = new Token(ChainId.AMBTEST, '0xD45f1F799097a30243605E9ba938FcB0e3f5cBC3', 18, 'BIG', 'Big Token');
-export const SML = new Token(ChainId.AMBTEST, '0x99FB3e5534E6781C341aB3b02452c2B8Bc99777D', 18, 'SML', 'Small Token');
+export const BIG = new Token(ChainId.AMBTEST, '0x8FB30d1A78d7E622CCB10376A585383Cf9dEc920', 18, 'BIG', 'Big Token');
+export const SML = new Token(ChainId.AMBTEST, '0xD45f1F799097a30243605E9ba938FcB0e3f5cBC3', 18, 'SML', 'Small Token');
 export const wETH = new Token(
   ChainId.AMBTEST,
-  '0x3Ed6b39Ad815e08d9e7FF111FBbe975E7F778c64',
+  '0x0c3001D98a02dFFf10814E2e5e1DA5a276C2552a',
   18,
   'wETH',
   'Wrapped Ethereum'

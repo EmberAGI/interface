@@ -111,8 +111,8 @@ export default function Faucet() {
     await provider.send('eth_requestAccounts', []);
     const signer = await provider.getSigner();
     const faucet = BigToken
-      ? new ethers.Contract('0xD45f1F799097a30243605E9ba938FcB0e3f5cBC3', FAUCETERC20_ABI, signer)
-      : new ethers.Contract('0x99FB3e5534E6781C341aB3b02452c2B8Bc99777D', FAUCETERC20_ABI, signer);
+      ? new ethers.Contract('0x8FB30d1A78d7E622CCB10376A585383Cf9dEc920', FAUCETERC20_ABI, signer)
+      : new ethers.Contract('0xD45f1F799097a30243605E9ba938FcB0e3f5cBC3', FAUCETERC20_ABI, signer);
     await faucet.drip();
   };
 
@@ -120,8 +120,8 @@ export default function Faucet() {
     const provider = new ethers.providers.Web3Provider(window.ethereum as any);
     await provider.send('eth_requestAccounts', []);
     const faucetContract = BigToken
-      ? new ethers.Contract('0xD45f1F799097a30243605E9ba938FcB0e3f5cBC3', FAUCETERC20_ABI, provider)
-      : new ethers.Contract('0x99FB3e5534E6781C341aB3b02452c2B8Bc99777D', FAUCETERC20_ABI, provider);
+      ? new ethers.Contract('0x8FB30d1A78d7E622CCB10376A585383Cf9dEc920', FAUCETERC20_ABI, provider)
+      : new ethers.Contract('0xD45f1F799097a30243605E9ba938FcB0e3f5cBC3', FAUCETERC20_ABI, provider);
     return faucetContract.balanceOf(account);
   };
   const addTokenFunction = async (bigToken: boolean) => {
@@ -132,8 +132,8 @@ export default function Faucet() {
           type: 'ERC20',
           options: {
             address: bigToken
-              ? '0xD45f1F799097a30243605E9ba938FcB0e3f5cBC3'
-              : '0x99FB3e5534E6781C341aB3b02452c2B8Bc99777D',
+              ? '0x8FB30d1A78d7E622CCB10376A585383Cf9dEc920'
+              : '0xD45f1F799097a30243605E9ba938FcB0e3f5cBC3',
             symbol: bigToken ? 'BIG' : 'SML',
             decimals: 18,
           },
