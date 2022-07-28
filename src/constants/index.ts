@@ -9,8 +9,8 @@ import {
 } from '../connectors';
 
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
-export const FACTORY_ADDRESS = '0x22337942F0fe81832f7ee2FC4aa2705Efe487949';
-export const ROUTER_ADDRESS = '0x980acb3112B516DA8856f0833ec78e6Bad6A4B5A';
+export const FACTORY_ADDRESS = '0xfA0a6F9d10F1f90cD8e90F0801fAed93259bd343';
+export const ROUTER_ADDRESS = '0x5495fa029eEC4d48fAd3898655e9984BB971aDEb';
 
 export const LP_TOKEN_NAME = 'Uniswap V2';
 export const LP_TOKEN_SYMBOL = 'UNI-V2';
@@ -39,11 +39,12 @@ export const BIG = new Token(ChainId.AMBTEST, '0x8FB30d1A78d7E622CCB10376A585383
 export const SML = new Token(ChainId.AMBTEST, '0xD45f1F799097a30243605E9ba938FcB0e3f5cBC3', 18, 'SML', 'Small Token');
 export const wETH = new Token(
   ChainId.AMBTEST,
-  '0x0c3001D98a02dFFf10814E2e5e1DA5a276C2552a',
+  '0xA9646A0281996fDcB88f8f6f01Af52BB0268c494',
   18,
   'wETH',
   'Wrapped Ethereum'
 );
+export const wBNB = new Token(ChainId.AMBTEST, '0x4798Cbd108e3D7b531ef2f3d67E7fFabdEe29867', 18, 'wBNB', 'Wrapped BNB');
 // Block time here is slightly higher (~1s) than average in order to avoid ongoing proposals past the displayed time
 export const AVERAGE_BLOCK_TIME_IN_SECS = 13;
 export const PROPOSAL_LENGTH_IN_BLOCKS = 40_320;
@@ -106,7 +107,6 @@ export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } 
   [ChainId.AMBTEST]: [
     [BIG, SML],
     [BIG, wETH],
-    [SML, wETH],
   ],
 };
 

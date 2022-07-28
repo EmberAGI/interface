@@ -35,7 +35,7 @@ var Rounding
   Rounding[(Rounding['ROUND_UP'] = 2)] = 'ROUND_UP'
 })(Rounding || (Rounding = {}))
 
-var FACTORY_ADDRESS = '0x22337942F0fe81832f7ee2FC4aa2705Efe487949'
+var FACTORY_ADDRESS = '0xfA0a6F9d10F1f90cD8e90F0801fAed93259bd343'
 var INIT_CODE_HASH = '0xa34cdb0d118125fb59c4453193c194e607f092ee38acc6c567c6b228f07cda96'
 var MINIMUM_LIQUIDITY = /*#__PURE__*/ JSBI.BigInt(1000) // exports for internal consumption
 
@@ -500,14 +500,14 @@ var WETH =
   )),
   (_WETH[ChainId.ROPSTEN] = /*#__PURE__*/ new Token(
     ChainId.ROPSTEN,
-    '0x22337942F0fe81832f7ee2FC4aa2705Efe487949',
+    '0xfA0a6F9d10F1f90cD8e90F0801fAed93259bd343',
     18,
     'WETH',
     'Synthetic Amber'
   )),
   (_WETH[ChainId.RINKEBY] = /*#__PURE__*/ new Token(
     ChainId.RINKEBY,
-    '0x22337942F0fe81832f7ee2FC4aa2705Efe487949',
+    '0xfA0a6F9d10F1f90cD8e90F0801fAed93259bd343',
     18,
     'WETH',
     'Synthetic Amber'
@@ -521,7 +521,7 @@ var WETH =
   )),
   (_WETH[ChainId.AMBTEST] = /*#__PURE__*/ new Token(
     ChainId.AMBTEST,
-    '0x615D835e0C492b4309E79439765F66Db7BdcE200',
+    '0x55C402b5F9C2c3DfE3d866B36598f0Fd53e03B89',
     18,
     'WETH',
     'Synthetic Amber'
