@@ -87,6 +87,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
+    "postinstall": "rm -r ./node_modules/@uniswap/sdk; cp -r ./forks/@uniswap/sdk ./node_modules/@uniswap/sdk; patch-package",
     "deploy": "gh-pages -d build"
   },
   "dependencies": {
