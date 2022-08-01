@@ -1,8 +1,8 @@
 diff --git a/node_modules/@uniswap/default-token-list/build/uniswap-default.tokenlist.json b/node_modules/@uniswap/default-token-list/build/uniswap-default.tokenlist.json
-index 3726fda..0905cfe 100644
+index 3726fda..a854a65 100644
 --- a/node_modules/@uniswap/default-token-list/build/uniswap-default.tokenlist.json
 +++ b/node_modules/@uniswap/default-token-list/build/uniswap-default.tokenlist.json
-@@ -22,403 +22,35 @@
+@@ -22,404 +22,36 @@
        "logoURI": "https://assets.coingecko.com/coins/images/12645/thumb/AAVE.png?1601374110"
      },
      {
@@ -25,10 +25,7 @@ index 3726fda..0905cfe 100644
 -      "name": "Balancer",
 -      "address": "0xba100000625a3754423978a60c9317c58a424e3D",
 -      "symbol": "BAL",
-+      "name": "Synthetic Amber",
-+      "address": "0x55C402b5F9C2c3DfE3d866B36598f0Fd53e03B89",
-+      "symbol": "SAMB",
-       "decimals": 18,
+-      "decimals": 18,
 -      "chainId": 1,
 -      "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xba100000625a3754423978a60c9317c58a424e3D/logo.png"
 -    },
@@ -284,7 +281,10 @@ index 3726fda..0905cfe 100644
 -      "name": "Wrapped Ether",
 -      "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
 -      "symbol": "WETH",
--      "decimals": 18,
++      "name": "Synthetic Amber",
++      "address": "0x55C402b5F9C2c3DfE3d866B36598f0Fd53e03B89",
++      "symbol": "SAMB",
+       "decimals": 18,
 -      "chainId": 1,
 -      "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
 -    },
@@ -335,12 +335,17 @@ index 3726fda..0905cfe 100644
 -      "decimals": 18,
 -      "chainId": 4,
 -      "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xc7AD46e0b8a400Bb3C915120d284AafbA8fc4735/logo.png"
--    },
--    {
++      "chainId": 22040,
++      "logoURI": "https://pbs.twimg.com/profile_images/1457755177981825026/na737aI8_400x400.jpg"
+     },
+     {
 -      "name": "Maker",
 -      "address": "0xF9bA5210F91D0474bd1e1DcDAeC4C58E359AaD85",
 -      "symbol": "MKR",
--      "decimals": 18,
++      "name": "Big Token",
++      "address": "0x8FB30d1A78d7E622CCB10376A585383Cf9dEc920",
++      "symbol": "BIG",
+       "decimals": 18,
 -      "chainId": 4,
 -      "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xF9bA5210F91D0474bd1e1DcDAeC4C58E359AaD85/logo.png"
 -    },
@@ -359,17 +364,12 @@ index 3726fda..0905cfe 100644
 -      "decimals": 18,
 -      "chainId": 4,
 -      "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xc778417E063141139Fce010982780140Aa0cD5Ab/logo.png"
-+      "chainId": 22040,
-+      "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xd0A1E359811322d97991E03f863a0C30C2cF029C/logo.png"
-     },
-     {
+-    },
+-    {
 -      "name": "Uniswap",
 -      "address": "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
 -      "symbol": "UNI",
-+      "name": "Big Token",
-+      "address": "0x8FB30d1A78d7E622CCB10376A585383Cf9dEc920",
-+      "symbol": "BIG",
-       "decimals": 18,
+-      "decimals": 18,
 -      "chainId": 5,
 -      "logoURI": "ipfs://QmXttGpZrECX5qCyXbBQiqgQNytVGeZW5Anewvh2jc4psg"
 +      "chainId": 22040,
@@ -384,12 +384,17 @@ index 3726fda..0905cfe 100644
        "decimals": 18,
 -      "chainId": 5,
 -      "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6/logo.png"
--    },
--    {
++      "chainId": 22040,
++      "logoURI": "https://dynamic-assets.coinbase.com/9a906e318cbe9315914aca3214fc636bc00d21cbcf8d477681d261c7febf73314e833d4f4f9d32246a01da43ac2f5336d71360d2276f93edc801e4dc46a9042c/asset_icons/bf16d07a541de735e552de2571b4c177bd0ad7aa053dd28f39553bdc16709b1b.png"
+     },    
+     {
 -      "name": "Dai Stablecoin",
 -      "address": "0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa",
 -      "symbol": "DAI",
--      "decimals": 18,
++      "name": "Wrapped BNB",
++      "address": "0x4798Cbd108e3D7b531ef2f3d67E7fFabdEe29867",
++      "symbol": "WBNB",
+       "decimals": 18,
 -      "chainId": 42,
 -      "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa/logo.png"
 -    },
@@ -408,19 +413,16 @@ index 3726fda..0905cfe 100644
 -      "decimals": 18,
 -      "chainId": 42,
 -      "logoURI": "ipfs://QmXttGpZrECX5qCyXbBQiqgQNytVGeZW5Anewvh2jc4psg"
-+      "chainId": 22040,
-+      "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xd0A1E359811322d97991E03f863a0C30C2cF029C/logo.png"
-     },    
-     {
+-    },
+-    {
 -      "name": "Wrapped Ether",
 -      "address": "0xd0A1E359811322d97991E03f863a0C30C2cF029C",
 -      "symbol": "WETH",
-+      "name": "Wrapped BNB",
-+      "address": "0x4798Cbd108e3D7b531ef2f3d67E7fFabdEe29867",
-+      "symbol": "WBNB",
-       "decimals": 18,
+-      "decimals": 18,
 -      "chainId": 42,
+-      "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xd0A1E359811322d97991E03f863a0C30C2cF029C/logo.png"
 +      "chainId": 22040,
-       "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xd0A1E359811322d97991E03f863a0C30C2cF029C/logo.png"
++      "logoURI": "https://dynamic-assets.coinbase.com/26308dd0e8464ccd1d5c2d262bb34d8b4f053b2a46dad93e54ec877a0b4f537a37deb16e67b5310e6b8481216ea86c1f728575672f4a84647c6d1cf604a3972b/asset_icons/c5245df71cf5532e21033c30f970fcaee3bdb924d2205dc45449e2c265473231.png"
      }
    ]
+ }
