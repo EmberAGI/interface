@@ -230,7 +230,7 @@ export default function Faucet() {
                     Your test Amb balance:
                   </Text>
                   <Text fontSize={16} fontWeight={500}>
-                    {userEthBalance?.toSignificant(4)}
+                    {userEthBalance?.toSignificant(8)}
                   </Text>
                 </FixedHeightRow>
                 <FixedHeightRow>

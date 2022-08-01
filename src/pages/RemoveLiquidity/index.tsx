@@ -574,7 +574,7 @@ export default function RemoveLiquidity({
                               currencyB === AMBER ? WETH[chainId].address : currencyIdB
                             }`}
                           >
-                            Receive WETH
+                            Receive SAMB
                           </StyledInternalLink>
                         ) : oneCurrencyIsWETH ? (
                           <StyledInternalLink
