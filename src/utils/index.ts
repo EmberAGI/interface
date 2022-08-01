@@ -22,7 +22,7 @@ const ETHERSCAN_PREFIXES: { [chainId in ChainId]: string } = {
   3: 'ropsten.',
   4: 'rinkeby.',
   5: 'goerli.',
-  22040: 'ambtest',
+  22040: 'ambrosus-test.io',
 };
 
 export function getEtherscanLink(
@@ -30,7 +30,7 @@ export function getEtherscanLink(
   data: string,
   type: 'transaction' | 'token' | 'address' | 'block'
 ): string {
-  const prefix = `https://${ETHERSCAN_PREFIXES[chainId] || ETHERSCAN_PREFIXES[1]}etherscan.io`;
+  const prefix = `https://explorer.${ETHERSCAN_PREFIXES[chainId] || ETHERSCAN_PREFIXES[1]}`;
 
   switch (type) {
     case 'transaction': {
@@ -40,11 +40,11 @@ export function getEtherscanLink(
       return `${prefix}/token/${data}`;
     }
     case 'block': {
-      return `${prefix}/block/${data}`;
+      return `${prefix}/blocks/${data}`;
     }
     case 'address':
     default: {
-      return `${prefix}/address/${data}`;
+      return `${prefix}/addresses/${data}`;
     }
   }
 }
