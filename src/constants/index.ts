@@ -4,8 +4,8 @@ import {
   // fortmatic,
   injected,
   // portis,
-  walletconnect,
-  walletlink,
+  //walletconnect,
+  //walletlink,
 } from '../connectors';
 
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
