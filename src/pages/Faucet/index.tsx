@@ -4,7 +4,7 @@ import { SwapPoolTabs } from '../../components/NavigationTabs';
 import { useETHBalances } from '../../state/wallet/hooks';
 import AppBody from '../AppBody';
 import { BigNumber, ethers } from 'ethers';
-//import { BigNumber } from '@ethersproject/bignumber';
+//import { Log } from '@ethersproject/abstract-provider/src.ts';
 //import FullPositionCard from '../../components/PositionCard';
 import { useTokenBalancesWithLoadingIndicator } from '../../state/wallet/hooks';
 import { TYPE, HideSmall } from '../../theme';
@@ -20,6 +20,7 @@ import { toV2LiquidityToken, useTrackedTokenPairs } from '../../state/user/hooks
 import { Dots } from '../../components/swap/styleds';
 import FAUCETERC20_ABI from '../../constants/abis/faucetErc20.json';
 import MetamaskIcon from '../../assets/images/metamask.png';
+//import { useTransactionAdder } from 'state/transactions/hooks';
 
 const PageWrapper = styled(AutoColumn)`
   max-width: 640px;
@@ -84,21 +85,23 @@ const EmptyProposals = styled.div`
 `;
 
 export default function Faucet() {
+  //const addTransaction = useTransactionAdder();
   const [tokenBalance, setTokenBalance] = useState({ bigToken: 0, smallToken: 0 });
   const { account } = useActiveWeb3React();
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? ''];
+  const getNewTokenBalances = async () => {
+    const bigTokenBalanceHex = await getTokenBalance(true);
+    const bigNumberDecimal = bigNumberToDecimal18(bigTokenBalanceHex);
+    const smlTokenBalanceHex = await getTokenBalance(false);
+    const smlTokenBalance = bigNumberToDecimal18(smlTokenBalanceHex);
+    setTokenBalance({
+      ...tokenBalance,
+      bigToken: bigNumberDecimal,
+      smallToken: smlTokenBalance,
+    });
+  };
   useEffect(() => {
-    (async () => {
-      const bigTokenBalanceHex = await getTokenBalance(true);
-      const bigNumberDecimal = bigNumberToDecimal18(bigTokenBalanceHex);
-      const smlTokenBalanceHex = await getTokenBalance(false);
-      const smlTokenBalance = bigNumberToDecimal18(smlTokenBalanceHex);
-      setTokenBalance({
-        ...tokenBalance,
-        bigToken: bigNumberDecimal,
-        smallToken: smlTokenBalance,
-      });
-    })();
+    getNewTokenBalances();
   }, []);
   const ethereum = window.ethereum as any;
   const theme = useContext(ThemeContext);
@@ -109,11 +112,13 @@ export default function Faucet() {
   const getTokenDrip = async (BigToken: boolean) => {
     const provider = new ethers.providers.Web3Provider(window.ethereum as any);
     await provider.send('eth_requestAccounts', []);
-    const signer = await provider.getSigner();
+    const signer = provider.getSigner();
     const faucet = BigToken
       ? new ethers.Contract('0x8FB30d1A78d7E622CCB10376A585383Cf9dEc920', FAUCETERC20_ABI, signer)
       : new ethers.Contract('0xD45f1F799097a30243605E9ba938FcB0e3f5cBC3', FAUCETERC20_ABI, signer);
-    await faucet.drip();
+    const res = await faucet.drip();
+    console.log(res, 'res');
+    await getNewTokenBalances();
   };
 
   const getTokenBalance = async (BigToken: boolean) => {

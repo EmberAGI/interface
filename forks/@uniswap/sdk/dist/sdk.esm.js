@@ -495,35 +495,35 @@ var WETH =
     ChainId.MAINNET,
     '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
     18,
-    'WETH',
+    'SAMB',
     'Synthetic Amber'
   )),
   (_WETH[ChainId.ROPSTEN] = /*#__PURE__*/ new Token(
     ChainId.ROPSTEN,
     '0xfA0a6F9d10F1f90cD8e90F0801fAed93259bd343',
     18,
-    'WETH',
+    'SAMB',
     'Synthetic Amber'
   )),
   (_WETH[ChainId.RINKEBY] = /*#__PURE__*/ new Token(
     ChainId.RINKEBY,
     '0xfA0a6F9d10F1f90cD8e90F0801fAed93259bd343',
     18,
-    'WETH',
+    'SAMB',
     'Synthetic Amber'
   )),
   (_WETH[ChainId.GÖRLI] = /*#__PURE__*/ new Token(
     ChainId.GÖRLI,
     '0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6',
     18,
-    'WETH',
+    'SAMB',
     'Synthetic Amber'
   )),
   (_WETH[ChainId.AMBTEST] = /*#__PURE__*/ new Token(
     ChainId.AMBTEST,
     '0x55C402b5F9C2c3DfE3d866B36598f0Fd53e03B89',
     18,
-    'WETH',
+    'SAMB',
     'Synthetic Amber'
   )),
   _WETH)
