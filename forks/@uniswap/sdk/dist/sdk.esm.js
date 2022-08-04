@@ -948,8 +948,8 @@ var Pair = /*#__PURE__*/ (function () {
       tokenAmounts[0].token.chainId,
       Pair.getAddress(tokenAmounts[0].token, tokenAmounts[1].token),
       18,
-      'UNI-V2',
-      'Uniswap V2'
+      'FLP',
+      'Firepot-LP'
     )
     this.tokenAmounts = tokenAmounts
   }
@@ -1783,7 +1783,7 @@ function toHex(currencyAmount) {
 
 var ZERO_HEX = '0x0'
 /**
- * Represents the Uniswap V2 Router, and has static methods for helping execute trades.
+ * Represents the Firepot-LP Router, and has static methods for helping execute trades.
  */
 
 var Router = /*#__PURE__*/ (function () {

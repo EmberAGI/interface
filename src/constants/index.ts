@@ -12,8 +12,8 @@ export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
 export const FACTORY_ADDRESS = '0xfA0a6F9d10F1f90cD8e90F0801fAed93259bd343';
 export const ROUTER_ADDRESS = '0x5495fa029eEC4d48fAd3898655e9984BB971aDEb';
 
-export const LP_TOKEN_NAME = 'Uniswap V2';
-export const LP_TOKEN_SYMBOL = 'UNI-V2';
+export const LP_TOKEN_NAME = 'Firepot-LP';
+export const LP_TOKEN_SYMBOL = 'FLP';
 // export const LP_TOKEN_NAME = 'Swap-LP-Token';
 // export const LP_TOKEN_SYMBOL = 'SWAP-LP';
 
