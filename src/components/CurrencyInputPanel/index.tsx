@@ -1,4 +1,4 @@
-import { Currency, Pair } from '@uniswap/sdk';
+import { Currency, Pair, Token } from '@uniswap/sdk';
 import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { darken } from 'polished';
@@ -10,11 +10,11 @@ import { RowBetween } from '../Row';
 import { TYPE } from '../../theme';
 import { Input as NumericalInput } from '../NumericalInput';
 import { ReactComponent as DropDown } from '../../assets/images/dropdown.svg';
-
+import MetamaskIcon from '../../assets/images/metamask.png';
 import { useActiveWeb3React } from '../../hooks';
 import { useTranslation } from 'react-i18next';
 import useTheme from '../../hooks/useTheme';
-
+import { WrappedTokenInfo } from '../../state/lists/hooks';
 const InputRow = styled.div<{ selected: boolean }>`
   ${({ theme }) => theme.flexRowNoWrap}
   align-items: center;
@@ -155,7 +155,29 @@ export default function CurrencyInputPanel({
   const { account } = useActiveWeb3React();
   const selectedCurrencyBalance = useCurrencyBalance(account ?? undefined, currency ?? undefined);
   const theme = useTheme();
-
+  const ethereum = window.ethereum as any;
+  const addTokenFunction = async (address: string, symbol: string | undefined) => {
+    try {
+      const wasAdded = await ethereum.request({
+        method: 'wallet_watchAsset',
+        params: {
+          type: 'ERC20',
+          options: {
+            address: address,
+            symbol: symbol,
+            decimals: 18,
+          },
+        },
+      });
+      if (wasAdded) {
+        console.log('Added token');
+      } else {
+        console.log('Token was not added');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const handleDismissSearch = useCallback(() => {
     setModalOpen(false);
   }, [setModalOpen]);
@@ -195,6 +217,11 @@ export default function CurrencyInputPanel({
                   onUserInput(val);
                 }}
               />
+              {currency && (currency instanceof WrappedTokenInfo || currency instanceof Token) && (
+                <StyledBalanceMax onClick={() => addTokenFunction(currency.address, currency.symbol)}>
+                  <img src={MetamaskIcon} alt={'metamask logo'} width={'16px'} height={'16px'} />
+                </StyledBalanceMax>
+              )}
               {account && currency && showMaxButton && label !== 'To' && (
                 <StyledBalanceMax onClick={onMax}>MAX</StyledBalanceMax>
               )}

@@ -56,12 +56,10 @@ export default function CommonBases({
             AMB
           </Text>
         </BaseWrapper>
-        {console.log(chainId ? SUGGESTED_BASES[chainId] : 'hi')}
         {(chainId ? SUGGESTED_BASES[chainId] : []).map((token: Token) => {
           const selected = selectedCurrency instanceof Token && selectedCurrency.address === token.address;
           return (
             <BaseWrapper onClick={() => !selected && onSelect(token)} disable={selected} key={token.address}>
-              {console.log(token.symbol, 'aa')}
               <CurrencyLogo currency={token} style={{ marginRight: 8 }} />
               <Text fontWeight={500} fontSize={16}>
                 {token.symbol}

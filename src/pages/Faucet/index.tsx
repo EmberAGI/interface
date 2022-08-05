@@ -217,7 +217,6 @@ export default function Faucet() {
                     </Text>
                   </ResponsiveButtonPrimary>
                   <IconWrapper size={16} onClick={() => addTokenFunction(true)}>
-                    +
                     <img src={MetamaskIcon} alt={'metamask logo'} />
                   </IconWrapper>
                   <ResponsiveButtonPrimary id="join-pool-button" padding="6px 10px" onClick={() => getTokenDrip(false)}>
@@ -226,7 +225,6 @@ export default function Faucet() {
                     </Text>
                   </ResponsiveButtonPrimary>
                   <IconWrapper size={16} onClick={() => addTokenFunction(false)}>
-                    +
                     <img src={MetamaskIcon} alt={'metamask logo'} />
                   </IconWrapper>
                 </ButtonRow>
