@@ -20,7 +20,7 @@ import { toV2LiquidityToken, useTrackedTokenPairs } from '../../state/user/hooks
 import { Dots } from '../../components/swap/styleds';
 import FAUCETERC20_ABI from '../../constants/abis/faucetErc20.json';
 import MetamaskIcon from '../../assets/images/metamask.png';
-//import { useTransactionAdder } from 'state/transactions/hooks';
+import { useTransactionAdder } from 'state/transactions/hooks';
 
 const PageWrapper = styled(AutoColumn)`
   max-width: 640px;
@@ -85,42 +85,16 @@ const EmptyProposals = styled.div`
 `;
 
 export default function Faucet() {
-  //const addTransaction = useTransactionAdder();
+  const addTransaction = useTransactionAdder();
   const [tokenBalance, setTokenBalance] = useState({ bigToken: 0, smallToken: 0 });
   const { account } = useActiveWeb3React();
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? ''];
-  const getNewTokenBalances = async () => {
-    const bigTokenBalanceHex = await getTokenBalance(true);
-    const bigNumberDecimal = bigNumberToDecimal18(bigTokenBalanceHex);
-    const smlTokenBalanceHex = await getTokenBalance(false);
-    const smlTokenBalance = bigNumberToDecimal18(smlTokenBalanceHex);
-    setTokenBalance({
-      ...tokenBalance,
-      bigToken: bigNumberDecimal,
-      smallToken: smlTokenBalance,
-    });
-  };
-  useEffect(() => {
-    getNewTokenBalances();
-  }, []);
   const ethereum = window.ethereum as any;
   const theme = useContext(ThemeContext);
 
   const bigNumberToDecimal18 = (bigNumber: BigNumber) => {
     return parseInt(bigNumber._hex, 16) / 10 ** 18;
   };
-  const getTokenDrip = async (BigToken: boolean) => {
-    const provider = new ethers.providers.Web3Provider(window.ethereum as any);
-    await provider.send('eth_requestAccounts', []);
-    const signer = provider.getSigner();
-    const faucet = BigToken
-      ? new ethers.Contract('0x8FB30d1A78d7E622CCB10376A585383Cf9dEc920', FAUCETERC20_ABI, signer)
-      : new ethers.Contract('0xD45f1F799097a30243605E9ba938FcB0e3f5cBC3', FAUCETERC20_ABI, signer);
-    const res = await faucet.drip();
-    console.log(res, 'res');
-    await getNewTokenBalances();
-  };
-
   const getTokenBalance = async (BigToken: boolean) => {
     const provider = new ethers.providers.Web3Provider(window.ethereum as any);
     await provider.send('eth_requestAccounts', []);
@@ -154,6 +128,37 @@ export default function Faucet() {
       console.log(error);
     }
   };
+  const getNewTokenBalances = async () => {
+    const bigTokenBalanceHex = await getTokenBalance(true);
+    const bigNumberDecimal = bigNumberToDecimal18(bigTokenBalanceHex);
+    const smlTokenBalanceHex = await getTokenBalance(false);
+    const smlTokenBalance = bigNumberToDecimal18(smlTokenBalanceHex);
+    setTokenBalance({
+      ...tokenBalance,
+      bigToken: bigNumberDecimal,
+      smallToken: smlTokenBalance,
+    });
+  };
+  const getTokenDrip = async (bigToken: boolean) => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum as any);
+    await provider.send('eth_requestAccounts', []);
+    const signer = provider.getSigner();
+    const faucet = bigToken
+      ? new ethers.Contract('0x8FB30d1A78d7E622CCB10376A585383Cf9dEc920', FAUCETERC20_ABI, signer)
+      : new ethers.Contract('0xD45f1F799097a30243605E9ba938FcB0e3f5cBC3', FAUCETERC20_ABI, signer);
+    const res = await faucet.drip();
+
+    const tokenSymbol = bigToken ? 'BIG' : 'SML';
+    const base = `Receive token drip 💧 1000 ${tokenSymbol}`;
+
+    addTransaction(res, {
+      summary: base,
+    });
+
+    console.log(res, 'res');
+    await getNewTokenBalances();
+  };
+
   // fetch the user's balances of all tracked V2 LP tokens
   const trackedTokenPairs = useTrackedTokenPairs();
   const tokenPairsWithLiquidityTokens = useMemo(
@@ -183,6 +188,10 @@ export default function Faucet() {
     fetchingV2PairBalances ||
     v2Pairs?.length < liquidityTokensWithBalances.length ||
     v2Pairs?.some((V2Pair) => !V2Pair);
+
+  useEffect(() => {
+    getNewTokenBalances();
+  }, []);
 
   return (
     <AppBody>
