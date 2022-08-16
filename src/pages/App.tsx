@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
+import Menu from '../components/Menu';
 import Header from '../components/Header';
 import Polling from '../components/Header/Polling';
 import Popups from '../components/Popups';
@@ -29,6 +30,18 @@ const AppWrapper = styled.div`
   overflow-x: hidden;
 `;
 
+const MenuWrapper = styled.div`
+  width: 100%;
+  padding: 3rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 1;
+`;
+
 const HeaderWrapper = styled.div`
   ${({ theme }) => theme.flexRowNoWrap}
   width: 100%;
@@ -52,6 +65,10 @@ export default function App() {
     <Suspense fallback={null}>
       <Route component={DarkModeQueryParamReader} />
       <AppWrapper>
+        <MenuWrapper>
+          <Menu />
+        </MenuWrapper>
+
         <HeaderWrapper>
           <Header />
         </HeaderWrapper>
