@@ -18,7 +18,7 @@ import Row, { RowFixed } from '../Row';
 import Web3Status from '../Web3Status';
 
 const HeaderFrame = styled.div`
-  width: 100vw;
+  width: 100%;
   margin: 0.8rem auto;
   padding: 0.8rem 1.6rem;
   z-index: 2;
