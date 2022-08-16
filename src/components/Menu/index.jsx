@@ -12,9 +12,11 @@ import metamask from '../../assets/svg/menu/metamask.svg';
 import copy from '../../assets/svg/menu/copy.svg';
 import logout from '../../assets/svg/menu/logout.svg';
 import { utils } from 'ethers';
+import { useActiveWeb3React } from '../../hooks';
+import Web3Status from '../Web3Status';
 import './index.scss';
 
-const ambMainNetChainId = 16718;
+/*const ambMainNetChainId = 16718;
 
 const changeChainId = async () => {
   const chainId = utils.hexValue(ambMainNetChainId);
@@ -42,32 +44,33 @@ const changeChainId = async () => {
       ],
     });
   }
-};
+};*/
 
 // eslint-disable-next-line react/prop-types
-const AddressBlock = ({ address, setAddress }) => {
-  const copyToClipboard = () => {
+const AddressBlock = ({ account, setAddress, isMobile }) => {
+  /*const copyToClipboard = () => {
     if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
       return navigator.clipboard.writeText(address);
     }
   };
 
-  const logoutUser = () => setAddress('');
+  const logoutUser = () => setAddress('');*/
 
   return (
-    <>
-      <span className="side-menu__address-block-title">Connected wallet</span>
+    <div className="address-block-wrapper">
+      {account && !isMobile && <span className="side-menu__address-block-title">Connected wallet</span>}
       <div className="address-block">
-        <img className="address-block__metamask-icon" src={metamask} alt="metamask" />
+        <Web3Status />
+        {/*<img className="address-block__metamask-icon" src={metamask} alt="metamask" />
         <span>{`${address.slice(0, 4)}...${address.slice(address.length - 4, address.length)}`}</span>
         <button onClick={copyToClipboard} type="button" className="address-block__copy">
           <img src={copy} alt="copy" />
         </button>
         <button onClick={logoutUser} type="button">
           <img src={logout} alt="log out" />
-        </button>
+        </button>*/}
       </div>
-    </>
+    </div>
   );
 };
 
@@ -75,6 +78,7 @@ const Menu = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 720);
   const [isOpen, setIsOpen] = useState(window.innerWidth > 720);
   const [address, setAddress] = useState('');
+  const { account } = useActiveWeb3React();
 
   useEffect(() => {
     const handleResize = () => {
@@ -83,16 +87,16 @@ const Menu = () => {
     };
     window.addEventListener('resize', handleResize, true);
 
-    if (window.ethereum) {
+    /*if (window.ethereum) {
       window.ethereum.on('networkChanged', (networkId) => {
         if (networkId !== ambMainNetChainId.toString()) {
           setAddress('');
         }
       });
-    }
+    }*/
   }, []);
 
-  const handleMetamask = async () => {
+  /*const handleMetamask = async () => {
     const getAddress = () => {
       window.ethereum.request({ method: 'eth_requestAccounts' }).then((accounts) => setAddress(accounts[0]));
     };
@@ -107,7 +111,7 @@ const Menu = () => {
     } else {
       window.open('https://metamask.io/download/', '_blank');
     }
-  };
+  };*/
 
   const handleOpen = () => setIsOpen((state) => !state);
 
@@ -119,13 +123,14 @@ const Menu = () => {
         ) : (
           <img className="side-menu__logo" src={logo} alt="logo" />
         )}
-        {address && !isMobile && <AddressBlock address={address} setAddress={setAddress} />}
+        <AddressBlock account={account} setAddress={setAddress} isMobile={isMobile} />
+        {/*{address && !isMobile && <AddressBlock address={address} setAddress={setAddress} />}
         {address && isMobile && !isOpen && (
           <span className="side-menu__address">
             {`${address.slice(0, 4)}...${address.slice(address.length - 4, address.length)}`}
           </span>
         )}
-        {!address && (
+        !address && (
           <button
             type="button"
             className={isMobile ? `side-menu__connect-mobile` : 'side-menu__connect-wallet'}
@@ -133,7 +138,7 @@ const Menu = () => {
           >
             Connect wallet
           </button>
-        )}
+        )*/}
         {isMobile && (
           <button
             onClick={handleOpen}

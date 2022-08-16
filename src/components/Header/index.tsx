@@ -281,8 +281,8 @@ export default function Header() {
         </StyledNavLink>
       </HeaderLinks>
 
-      <HeaderControls>
-        {/* <HeaderElement>
+      {/*<HeaderControls>
+        <HeaderElement>
           <HideSmall>
             {chainId && NETWORK_LABELS[chainId] && (
               <NetworkCard title={NETWORK_LABELS[chainId]}>{NETWORK_LABELS[chainId]}</NetworkCard>
@@ -296,13 +296,13 @@ export default function Header() {
             ) : null}
             <Web3Status />
           </AccountElement>
-        </HeaderElement> */}
+        </HeaderElement>
         <HeaderElementWrap>
           <StyledMenuButton onClick={toggleDarkMode}>
             {darkMode ? <Moon size={20} /> : <Sun size={20} />}
           </StyledMenuButton>
         </HeaderElementWrap>
-      </HeaderControls>
+      </HeaderControls>*/}
     </HeaderFrame>
   );
 }
