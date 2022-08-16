@@ -83,11 +83,6 @@ const HeaderLinks = styled(Row)`
     rgba(0, 0, 0, 0.01) 0px 24px 32px;
   background-color: ${({ theme }) => theme.bg1};
 
-  ${({ theme }) => theme.mediaWidth.upToLarge`
-    margin: 0;
-    margin-right: auto;
-  `};
-
   ${({ theme }) => theme.mediaWidth.upToSmall`
     position: fixed;
     bottom: 0;
@@ -256,12 +251,12 @@ export default function Header() {
   return (
     <HeaderFrame>
       <HeaderRow>
-        <Title href=".">
+        {/* <Title href=".">
           <Icon>
-            {/* <img width={'22px'} src={darkMode ? LogoDark : Logo} alt="logo" /> */}
+            {/* <img width={'22px'} src={darkMode ? LogoDark : Logo} alt="logo" />
             <img width={'22px'} src={LogoFP} alt="logo" />
           </Icon>
-        </Title>
+        </Title> */}
       </HeaderRow>
 
       <HeaderLinks>
@@ -287,7 +282,7 @@ export default function Header() {
       </HeaderLinks>
 
       <HeaderControls>
-        <HeaderElement>
+        {/* <HeaderElement>
           <HideSmall>
             {chainId && NETWORK_LABELS[chainId] && (
               <NetworkCard title={NETWORK_LABELS[chainId]}>{NETWORK_LABELS[chainId]}</NetworkCard>
@@ -301,7 +296,7 @@ export default function Header() {
             ) : null}
             <Web3Status />
           </AccountElement>
-        </HeaderElement>
+        </HeaderElement> */}
         <HeaderElementWrap>
           <StyledMenuButton onClick={toggleDarkMode}>
             {darkMode ? <Moon size={20} /> : <Sun size={20} />}

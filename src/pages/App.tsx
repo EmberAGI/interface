@@ -27,7 +27,6 @@ const AppWrapper = styled.div`
   flex-flow: row;
   justify-content: flex-start;
   overflow-x: hidden;
-  background: black;
 
   ${({ theme }) => theme.mediaWidth.upToSmall`
   flex-flow: column;
@@ -36,7 +35,6 @@ const AppWrapper = styled.div`
 
 const MenuWrapper = styled.div`
   display: flex;
-  background: blue;
 `;
 
 const MainWrapper = styled.div`
@@ -45,14 +43,12 @@ const MainWrapper = styled.div`
   flex-flow: column;
   align-items: center;
   justify-content: flex-start;
-  background: purple;
 `;
 
 const HeaderWrapper = styled.div`
   ${({ theme }) => theme.flexRowNoWrap}
   width: 100%;
   justify-content: space-between;
-  background: brown;
 `;
 
 const BodyWrapper = styled.div`
@@ -65,7 +61,6 @@ const BodyWrapper = styled.div`
   overflow-y: auto;
   overflow-x: hidden;
   z-index: 1;
-  background: pink;
 `;
 
 export default function App() {

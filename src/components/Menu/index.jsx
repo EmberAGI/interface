@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import logo from '../../assets/svg/menu/logo.svg';
+import logo from '../../assets/svg/menu/firepot-airdao-logo.png';
+import logoSm from '../../assets/svg/menu/firepot-airdao-logo-sm.png';
 import { ReactComponent as Twitter } from '../../assets/svg/menu/twitter.svg';
 import { ReactComponent as Telegram } from '../../assets/svg/menu/telegram.svg';
 import { ReactComponent as Reddit } from '../../assets/svg/menu/reddit.svg';
@@ -113,9 +114,12 @@ const Menu = () => {
   return (
     <div className={`side-menu${isOpen ? ' side-menu_expanded' : ''}`}>
       <div className="side-menu__mobile-wrapper">
-        <img className="side-menu__logo" src={logo} alt="logo" />
+        {isMobile ? (
+          <img className="side-menu__logo" src={logoSm} alt="logo" />
+        ) : (
+          <img className="side-menu__logo" src={logo} alt="logo" />
+        )}
         {address && !isMobile && <AddressBlock address={address} setAddress={setAddress} />}
-        {address && !isMobile && 'Address Block'}
         {address && isMobile && !isOpen && (
           <span className="side-menu__address">
             {`${address.slice(0, 4)}...${address.slice(address.length - 4, address.length)}`}
@@ -148,12 +152,7 @@ const Menu = () => {
             <ul className="side-menu__list">
               <li>
                 <a href="/">
-                  <b>Firepot</b> Swap
-                </a>
-              </li>
-              <li>
-                <a href="/">
-                  <b>Firepot</b> Pool
+                  <b>FirepotSwap</b>
                 </a>
               </li>
               <li>
