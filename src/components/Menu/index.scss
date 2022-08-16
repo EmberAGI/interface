@@ -9,6 +9,7 @@
   background: #EEEEEE;
   overflow: auto;
   box-shadow: 66px 0px 27px rgba(71, 117, 224, 0.01), 37px 0px 22px rgba(71, 117, 224, 0.05), 17px 0px 17px rgba(71, 117, 224, 0.09), 4px 0px 9px rgba(71, 117, 224, 0.1), 0px 0px 0px rgba(71, 117, 224, 0.1);
+  font-family: Inter, sans-serif;
 
   @media only screen and (max-width: 720px) {
     width: 100%;
@@ -65,6 +66,13 @@
 .side-menu__list {
   margin-top: 24px;
   padding-left: 11px;
+  list-style: none;
+
+  a {
+    color: #0E0E0E;
+    text-decoration: none;
+    font-family: Inter, sans-serif;
+  }
 
   li {
     margin-bottom: 18px;
@@ -138,6 +146,7 @@
   height: 44px;
   align-items: center;
   justify-content: center;
+  border: 0;
 }
 
 .side-menu__address-block-title {
@@ -194,6 +203,7 @@
   width: fit-content;
   margin: auto auto 0;
   color: #3568DD;
+  text-decoration: none;
 
   @media only screen and (max-width: 720px) {
     margin: 20px auto;
