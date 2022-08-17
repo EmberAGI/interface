@@ -18,7 +18,7 @@ import Row, { RowFixed } from '../Row';
 import Web3Status from '../Web3Status';
 
 const HeaderFrame = styled.div`
-  width: 100vw;
+  width: 100%;
   margin: 0.8rem auto;
   padding: 0.8rem 1.6rem;
   z-index: 2;
@@ -82,11 +82,6 @@ const HeaderLinks = styled(Row)`
   box-shadow: rgba(0, 0, 0, 0.01) 0px 0px 1px, rgba(0, 0, 0, 0.04) 0px 4px 8px, rgba(0, 0, 0, 0.04) 0px 16px 24px,
     rgba(0, 0, 0, 0.01) 0px 24px 32px;
   background-color: ${({ theme }) => theme.bg1};
-
-  ${({ theme }) => theme.mediaWidth.upToLarge`
-    margin: 0;
-    margin-right: auto;
-  `};
 
   ${({ theme }) => theme.mediaWidth.upToSmall`
     position: fixed;
@@ -256,12 +251,12 @@ export default function Header() {
   return (
     <HeaderFrame>
       <HeaderRow>
-        <Title href=".">
+        {/* <Title href=".">
           <Icon>
-            {/* <img width={'22px'} src={darkMode ? LogoDark : Logo} alt="logo" /> */}
+            {/* <img width={'22px'} src={darkMode ? LogoDark : Logo} alt="logo" />
             <img width={'22px'} src={LogoFP} alt="logo" />
           </Icon>
-        </Title>
+        </Title> */}
       </HeaderRow>
 
       <HeaderLinks>
@@ -286,7 +281,7 @@ export default function Header() {
         </StyledNavLink>
       </HeaderLinks>
 
-      <HeaderControls>
+      {/*<HeaderControls>
         <HeaderElement>
           <HideSmall>
             {chainId && NETWORK_LABELS[chainId] && (
@@ -307,7 +302,7 @@ export default function Header() {
             {darkMode ? <Moon size={20} /> : <Sun size={20} />}
           </StyledMenuButton>
         </HeaderElementWrap>
-      </HeaderControls>
+      </HeaderControls>*/}
     </HeaderFrame>
   );
 }

@@ -40,7 +40,7 @@ const IconWrapper = styled.div<{ size?: number }>`
   }
 `;
 
-const Web3StatusGeneric = styled(ButtonSecondary)`
+/*const Web3StatusGeneric = styled(ButtonSecondary)`
   ${({ theme }) => theme.flexRowNoWrap}
   width: 100%;
   align-items: center;
@@ -103,6 +103,28 @@ const Web3StatusConnected = styled(Web3StatusGeneric)<{ pending?: boolean }>`
       border: 1px solid ${({ pending, theme }) => (pending ? darken(0.1, theme.primary1) : darken(0.1, theme.bg3))};
     }
   }
+`;*/
+
+const Web3StatusGeneric = styled.div`
+  ${({ theme }) => theme.flexRowNoWrap}
+  width: 100%;
+  align-items: center;
+  border-radius: 12px;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  flex-wrap: nowrap;
+`;
+const Web3StatusError = styled(Web3StatusGeneric)`
+  color: ${({ theme }) => theme.red1};
+`;
+
+const Web3StatusConnect = styled(Web3StatusGeneric) <{ faded?: boolean }>`
+  color: ${({ theme }) => theme.primaryText1};
+`;
+
+const Web3StatusConnected = styled(Web3StatusGeneric) <{ pending?: boolean }>`
+  color: ${({ pending, theme }) => (pending ? theme.white : theme.text1)};
 `;
 
 const Text = styled.p`
@@ -112,7 +134,9 @@ const Text = styled.p`
   white-space: nowrap;
   margin: 0 0.3rem;
   width: fit-content;
-  font-weight: 500;
+  color: #3568DD;
+  font-size: 20px;
+  font-weight: 400;
 `;
 
 const NetworkIcon = styled(Activity)`
@@ -183,7 +207,7 @@ function Web3StatusInner() {
       <Web3StatusConnected id="web3-status-connected" onClick={toggleWalletModal} pending={hasPendingTransactions}>
         {hasPendingTransactions ? (
           <RowBetween>
-            <Text>{pending?.length} Pending</Text> <Loader stroke="white" />
+            <Text>{pending?.length} Pending</Text> <Loader stroke="black" />
           </RowBetween>
         ) : (
           <>
