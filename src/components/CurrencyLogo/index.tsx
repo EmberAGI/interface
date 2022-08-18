@@ -1,4 +1,4 @@
-import { Currency, ETHER, Token } from '@firepotfinance/firepotfinance-sdk';
+import { Currency, AMBER, Token } from '@firepotfinance/firepotfinance-sdk';
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
 
@@ -37,7 +37,7 @@ export default function CurrencyLogo({
   const uriLocations = useHttpLocations(currency instanceof WrappedTokenInfo ? currency.logoURI : undefined);
 
   const srcs: string[] = useMemo(() => {
-    if (currency === ETHER) return [];
+    if (currency === AMBER) return [];
 
     if (currency instanceof Token) {
       if (currency instanceof WrappedTokenInfo) {
@@ -49,7 +49,7 @@ export default function CurrencyLogo({
     return [];
   }, [currency, uriLocations]);
 
-  if (currency === ETHER) {
+  if (currency === AMBER) {
     return <StyledAmbrosusLogo src={AmbrosusLogo} size={size} style={style} />;
   }
 

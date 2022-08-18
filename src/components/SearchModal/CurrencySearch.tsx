@@ -1,4 +1,4 @@
-import { Currency, ETHER, Token } from '@firepotfinance/firepotfinance-sdk';
+import { Currency, AMBER, Token } from '@firepotfinance/firepotfinance-sdk';
 import React, { KeyboardEvent, RefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FixedSizeList } from 'react-window';
@@ -147,7 +147,7 @@ export function CurrencySearch({
       if (e.key === 'Enter') {
         const s = searchQuery.toLowerCase().trim();
         if (s === 'eth') {
-          handleCurrencySelect(ETHER);
+          handleCurrencySelect(AMBER);
         } else if (filteredSortedTokens.length > 0) {
           if (
             filteredSortedTokens[0].symbol?.toLowerCase() === searchQuery.trim().toLowerCase() ||
