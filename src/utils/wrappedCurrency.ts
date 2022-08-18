@@ -1,4 +1,4 @@
-import { ChainId, Currency, CurrencyAmount, AMBER, Token, TokenAmount, WETH } from '@uniswap/sdk';
+import { ChainId, Currency, CurrencyAmount, AMBER, Token, TokenAmount, WETH } from '@firepotfinance/firepotfinance-sdk';
 
 export function wrappedCurrency(currency: Currency | undefined, chainId: ChainId | undefined): Token | undefined {
   return chainId && currency === AMBER ? WETH[chainId] : currency instanceof Token ? currency : undefined;

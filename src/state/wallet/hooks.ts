@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, AMBER, JSBI, Token, TokenAmount } from '@uniswap/sdk';
+import { Currency, CurrencyAmount, AMBER, JSBI, Token, TokenAmount } from '@firepotfinance/firepotfinance-sdk';
 import { useMemo } from 'react';
 import ERC20_INTERFACE from '../../constants/abis/erc20';
 import { useAllTokens } from '../../hooks/Tokens';

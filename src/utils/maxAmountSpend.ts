@@ -1,4 +1,4 @@
-import { CurrencyAmount, AMBER, JSBI } from '@uniswap/sdk';
+import { CurrencyAmount, AMBER, JSBI } from '@firepotfinance/firepotfinance-sdk';
 import { MIN_ETH } from '../constants';
 
 /**

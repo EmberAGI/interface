@@ -4,6 +4,7 @@
   "license": "GPL-3.0-or-later",
   "devDependencies": {
     "@ethersproject/experimental": "5.0.1",
+    "@firepotfinance/firepotfinance-sdk": "1.0.4",
     "@popperjs/core": "2.9.2",
     "@reach/dialog": "0.15.0",
     "@reach/portal": "0.15.0",
@@ -87,10 +88,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "postinstall": "rm -r ./node_modules/@uniswap/sdk; cp -r ./forks/@uniswap/sdk ./node_modules/@uniswap/sdk; patch-package",
     "deploy": "gh-pages -d build"
   },
   "dependencies": {
+    "@firepotfinance/default-token-list": "1.0.0",
     "@uniswap/default-token-list": "2.0.0",
     "dotenv": "^10.0.0",
     "patch-package": "^6.4.7",

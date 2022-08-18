@@ -1,4 +1,4 @@
-import { Currency, AMBER, JSBI, TokenAmount } from '@uniswap/sdk';
+import { Currency, AMBER, JSBI, TokenAmount } from '@firepotfinance/firepotfinance-sdk';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Plus } from 'react-feather';
 import { Text } from 'rebass';

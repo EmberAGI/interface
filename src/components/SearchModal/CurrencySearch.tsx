@@ -1,4 +1,4 @@
-import { Currency, AMBER, Token } from '@uniswap/sdk';
+import { Currency, AMBER, Token } from '@firepotfinance/firepotfinance-sdk';
 import React, { KeyboardEvent, RefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FixedSizeList } from 'react-window';

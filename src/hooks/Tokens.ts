@@ -1,6 +1,6 @@
 import { TokenAddressMap, useDefaultTokenList } from './../state/lists/hooks';
 import { parseBytes32String } from '@ethersproject/strings';
-import { Currency, AMBER, Token, currencyEquals } from '@uniswap/sdk';
+import { Currency, AMBER, Token, currencyEquals } from '@firepotfinance/firepotfinance-sdk';
 import { useMemo } from 'react';
 import { useCombinedActiveList, useCombinedInactiveList } from '../state/lists/hooks';
 import { NEVER_RELOAD, useSingleCallResult } from '../state/multicall/hooks';

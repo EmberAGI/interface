@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, AMBER, JSBI, Pair, Percent, Price, TokenAmount } from '@uniswap/sdk';
+import { Currency, CurrencyAmount, AMBER, JSBI, Pair, Percent, Price, TokenAmount } from '@firepotfinance/firepotfinance-sdk';
 import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { PairState, usePair } from '../../data/Reserves';

@@ -1,7 +1,7 @@
 import { splitSignature } from '@ethersproject/bytes';
 import { Contract } from '@ethersproject/contracts';
 import { TransactionResponse } from '@ethersproject/providers';
-import { Currency, currencyEquals, AMBER, Percent, WETH } from '@uniswap/sdk';
+import { Currency, currencyEquals, AMBER, Percent, WETH } from '@firepotfinance/firepotfinance-sdk';
 import React, { useCallback, useContext, useMemo, useState } from 'react';
 import { ArrowDown, Plus } from 'react-feather';
 import { RouteComponentProps } from 'react-router';

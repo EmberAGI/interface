@@ -1,6 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber';
 import { TransactionResponse } from '@ethersproject/providers';
-import { Currency, AMBER, TokenAmount } from '@uniswap/sdk';
+import { Currency, AMBER, TokenAmount } from '@firepotfinance/firepotfinance-sdk';
 import React, { useCallback, useContext, useState } from 'react';
 import { Plus } from 'react-feather';
 import { RouteComponentProps } from 'react-router-dom';

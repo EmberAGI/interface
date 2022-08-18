@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, currencyEquals, AMBER, Token } from '@uniswap/sdk';
+import { Currency, CurrencyAmount, currencyEquals, AMBER, Token } from '@firepotfinance/firepotfinance-sdk';
 import React, { CSSProperties, MutableRefObject, useCallback, useMemo } from 'react';
 import { FixedSizeList } from 'react-window';
 import { Text } from 'rebass';

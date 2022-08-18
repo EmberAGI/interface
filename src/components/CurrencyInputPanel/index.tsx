@@ -1,4 +1,4 @@
-import { Currency, Pair, Token } from '@uniswap/sdk';
+import { Currency, Pair, Token } from '@firepotfinance/firepotfinance-sdk';
 import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { darken } from 'polished';

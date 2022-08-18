@@ -1,4 +1,4 @@
-import { Currency, currencyEquals, AMBER, WETH } from '@uniswap/sdk';
+import { Currency, currencyEquals, AMBER, WETH } from '@firepotfinance/firepotfinance-sdk';
 import { useMemo } from 'react';
 import { tryParseAmount } from '../state/swap/hooks';
 import { useTransactionAdder } from '../state/transactions/hooks';
