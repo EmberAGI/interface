@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, currencyEquals, AMBER, Token } from '@uniswap/sdk';
+import { Currency, CurrencyAmount, currencyEquals, ETHER, Token } from '@firepotfinance/firepotfinance-sdk';
 import React, { CSSProperties, MutableRefObject, useCallback, useMemo } from 'react';
 import { FixedSizeList } from 'react-window';
 import { Text } from 'rebass';
@@ -19,7 +19,7 @@ import ImportRow from './ImportRow';
 import { wrappedCurrency } from 'utils/wrappedCurrency';
 
 function currencyKey(currency: Currency): string {
-  return currency instanceof Token ? currency.address : currency === AMBER ? 'AMBER' : '';
+  return currency instanceof Token ? currency.address : currency === ETHER ? 'ETHER' : '';
 }
 
 const StyledBalanceText = styled(Text)`
@@ -148,7 +148,7 @@ export default function CurrencyList({
   showImportView: () => void;
   setImportToken: (token: Token) => void;
 }) {
-  const itemData = useMemo(() => (showETH ? [Currency.AMBER, ...currencies] : currencies), [currencies, showETH]);
+  const itemData = useMemo(() => (showETH ? [Currency.ETHER, ...currencies] : currencies), [currencies, showETH]);
 
   const { chainId } = useActiveWeb3React();
 

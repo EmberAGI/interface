@@ -1,6 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber';
 import { TransactionResponse } from '@ethersproject/providers';
-import { Currency, AMBER, TokenAmount } from '@uniswap/sdk';
+import { Currency, ETHER, TokenAmount } from '@firepotfinance/firepotfinance-sdk';
 import React, { useCallback, useContext, useState } from 'react';
 import { Plus } from 'react-feather';
 import { RouteComponentProps } from 'react-router-dom';
@@ -132,8 +132,8 @@ export default function AddLiquidity({
       method: (...args: any) => Promise<TransactionResponse>,
       args: Array<string | string[] | number>,
       value: BigNumber | null;
-    if (currencyA === AMBER || currencyB === AMBER) {
-      const tokenBIsETH = currencyB === AMBER;
+    if (currencyA === ETHER || currencyB === ETHER) {
+      const tokenBIsETH = currencyB === ETHER;
       estimate = router.estimateGas.addLiquidityETH;
       method = router.addLiquidityETH;
       args = [

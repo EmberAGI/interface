@@ -1,6 +1,6 @@
 import React, { useContext, useMemo } from 'react';
 import styled, { ThemeContext } from 'styled-components';
-import { Pair } from '@uniswap/sdk';
+import { Pair } from '@firepotfinance/firepotfinance-sdk';
 import { Link } from 'react-router-dom';
 import { SwapPoolTabs } from '../../components/NavigationTabs';
 import AppBody from '../AppBody';

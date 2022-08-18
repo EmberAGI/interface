@@ -1,6 +1,6 @@
 import useENS from '../../hooks/useENS';
 import { parseUnits } from '@ethersproject/units';
-import { Currency, CurrencyAmount, AMBER, JSBI, Token, TokenAmount, Trade } from '@uniswap/sdk';
+import { Currency, CurrencyAmount, ETHER, JSBI, Token, TokenAmount, Trade } from '@firepotfinance/firepotfinance-sdk';
 import { ParsedQs } from 'qs';
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -33,7 +33,7 @@ export function useSwapActionHandlers(): {
       dispatch(
         selectCurrency({
           field,
-          currencyId: currency instanceof Token ? currency.address : currency === AMBER ? 'AMB' : '',
+          currencyId: currency instanceof Token ? currency.address : currency === ETHER ? 'AMB' : '',
         })
       );
     },
