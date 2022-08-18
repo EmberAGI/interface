@@ -52,6 +52,6 @@ export const walletconnect = new WalletConnectConnector({
 // mainnet only
 export const walletlink = new WalletLinkConnector({
   url: REACT_APP_NETWORK_URL,
-  appName: 'Swap',
+  appName: 'FirepotSwap',
   // appLogoUrl: '',
 });

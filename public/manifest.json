@@ -1,6 +1,6 @@
 {
-  "short_name": "swap",
-  "name": "swap",
+  "short_name": "firepot",
+  "name": "firepotswap",
   "icons": [
     {
       "src": "./images/192x192_App_Icon.png",
