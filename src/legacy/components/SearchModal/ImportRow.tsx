@@ -1,16 +1,16 @@
 import React, { CSSProperties } from 'react';
 import { Token } from '@firepotfinance/firepotfinance-sdk';
-import { AutoRow, RowFixed } from 'components/Row';
-import { AutoColumn } from 'components/Column';
-import CurrencyLogo from 'components/CurrencyLogo';
-import { TYPE } from 'theme';
-import ListLogo from 'components/ListLogo';
-import { useActiveWeb3React } from 'hooks';
-import { useCombinedInactiveList } from 'state/lists/hooks';
-import useTheme from 'hooks/useTheme';
-import { ButtonPrimary } from 'components/Button';
+import { AutoRow, RowFixed } from '../Row';
+import { AutoColumn } from '../Column';
+import CurrencyLogo from '../CurrencyLogo';
+import { TYPE } from '../../theme';
+import ListLogo from '../ListLogo';
+import { useActiveWeb3React } from '../../hooks';
+import { useCombinedInactiveList } from '../../state/lists/hooks';
+import useTheme from '../../hooks/useTheme';
+import { ButtonPrimary } from '../Button';
 import styled from 'styled-components';
-import { useIsUserAddedToken, useIsTokenActive } from 'hooks/Tokens';
+import { useIsUserAddedToken, useIsTokenActive } from '../../hooks/Tokens';
 import { CheckCircle } from 'react-feather';
 
 const TokenSection = styled.div<{ dim?: boolean }>`

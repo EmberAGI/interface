@@ -4,17 +4,17 @@ import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
-import { NetworkContextName } from './constants';
+import { NetworkContextName } from './legacy/constants';
 import './i18n';
-import App from './pages/App';
-import store from './state';
-import ApplicationUpdater from './state/application/updater';
-import ListsUpdater from './state/lists/updater';
-import MulticallUpdater from './state/multicall/updater';
-import TransactionUpdater from './state/transactions/updater';
-import UserUpdater from './state/user/updater';
-import ThemeProvider, { FixedGlobalStyle, ThemedGlobalStyle } from './theme';
-import getLibrary from './utils/getLibrary';
+import App from './legacy/pages/App';
+import store from './legacy/state';
+import ApplicationUpdater from './legacy/state/application/updater';
+import ListsUpdater from './legacy/state/lists/updater';
+import MulticallUpdater from './legacy/state/multicall/updater';
+import TransactionUpdater from './legacy/state/transactions/updater';
+import UserUpdater from './legacy/state/user/updater';
+import ThemeProvider, { FixedGlobalStyle, ThemedGlobalStyle } from './legacy/theme';
+import getLibrary from './legacy/utils/getLibrary';
 
 const Web3ProviderNetwork = createWeb3ReactRoot(NetworkContextName);
 

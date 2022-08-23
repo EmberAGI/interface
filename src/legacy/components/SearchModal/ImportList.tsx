@@ -1,24 +1,24 @@
 import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
-import { TYPE, CloseIcon } from 'theme';
-import Card from 'components/Card';
-import { AutoColumn } from 'components/Column';
-import { RowBetween, RowFixed, AutoRow } from 'components/Row';
+import { TYPE, CloseIcon } from '../../theme';
+import Card from '../Card';
+import { AutoColumn } from '../Column';
+import { RowBetween, RowFixed, AutoRow } from '../Row';
 import { ArrowLeft, AlertTriangle } from 'react-feather';
-import useTheme from 'hooks/useTheme';
+import useTheme from '../../hooks/useTheme';
 import { transparentize } from 'polished';
-import { ButtonPrimary } from 'components/Button';
-import { SectionBreak } from 'components/swap/styleds';
+import { ButtonPrimary } from '../Button';
+import { SectionBreak } from '../swap/styleds';
 import { ExternalLink } from '../../theme/components';
-import ListLogo from 'components/ListLogo';
+import ListLogo from '../ListLogo';
 import { PaddedColumn, Checkbox, TextDot } from './styleds';
 import { TokenList } from '@uniswap/token-lists';
 import { useDispatch } from 'react-redux';
-import { AppDispatch } from 'state';
-import { useFetchListCallback } from 'hooks/useFetchListCallback';
-import { removeList, enableList } from 'state/lists/actions';
+import { AppDispatch } from '../../state';
+import { useFetchListCallback } from '../../hooks/useFetchListCallback';
+import { removeList, enableList } from '../../state/lists/actions';
 import { CurrencyModalView } from './CurrencySearchModal';
-import { useAllLists } from 'state/lists/hooks';
+import { useAllLists } from '../../state/lists/hooks';
 
 const Wrapper = styled.div`
   position: relative;

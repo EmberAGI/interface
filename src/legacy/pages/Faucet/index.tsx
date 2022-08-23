@@ -20,7 +20,7 @@ import { toV2LiquidityToken, useTrackedTokenPairs } from '../../state/user/hooks
 import { Dots } from '../../components/swap/styleds';
 import FAUCETERC20_ABI from '../../constants/abis/faucetErc20.json';
 import MetamaskIcon from '../../assets/images/metamask.png';
-import { useTransactionAdder } from 'state/transactions/hooks';
+import { useTransactionAdder } from '../../state/transactions/hooks';
 
 const PageWrapper = styled(AutoColumn)`
   max-width: 640px;

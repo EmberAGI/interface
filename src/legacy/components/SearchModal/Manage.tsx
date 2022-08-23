@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { PaddedColumn, Separator } from './styleds';
-import { RowBetween } from 'components/Row';
+import { RowBetween } from '../Row';
 import { ArrowLeft } from 'react-feather';
 import { Text } from 'rebass';
-import { CloseIcon } from 'theme';
+import { CloseIcon } from '../../theme';
 import styled from 'styled-components';
 import { Token } from '@firepotfinance/firepotfinance-sdk';
 import { ManageLists } from './ManageLists';

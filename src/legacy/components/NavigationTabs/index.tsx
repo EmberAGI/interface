@@ -9,8 +9,8 @@ import { RowBetween } from '../Row';
 // import QuestionHelper from '../QuestionHelper'
 import Settings from '../Settings';
 import { useDispatch } from 'react-redux';
-import { AppDispatch } from 'state';
-import { resetMintState } from 'state/mint/actions';
+import { AppDispatch } from '../../state';
+import { resetMintState } from '../../state/mint/actions';
 
 const Tabs = styled.div`
   ${({ theme }) => theme.flexRowNoWrap}

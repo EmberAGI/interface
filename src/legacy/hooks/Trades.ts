@@ -1,4 +1,4 @@
-import { isTradeBetter } from 'utils/trades';
+import { isTradeBetter } from '../utils/trades';
 import { Currency, CurrencyAmount, Pair, Token, Trade } from '@firepotfinance/firepotfinance-sdk';
 import flatMap from 'lodash.flatmap';
 import { useMemo } from 'react';
@@ -8,7 +8,7 @@ import { PairState, usePairs } from '../data/Reserves';
 import { wrappedCurrency } from '../utils/wrappedCurrency';
 
 import { useActiveWeb3React } from './index';
-import { useUserSingleHopOnly } from 'state/user/hooks';
+import { useUserSingleHopOnly } from '../state/user/hooks';
 
 function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): Pair[] {
   const { chainId } = useActiveWeb3React();

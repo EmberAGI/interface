@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 import { Token, Currency } from '@firepotfinance/firepotfinance-sdk';
 import styled from 'styled-components';
-import { TYPE, CloseIcon } from 'theme';
-import Card from 'components/Card';
-import { AutoColumn } from 'components/Column';
-import { RowBetween, RowFixed, AutoRow } from 'components/Row';
-import CurrencyLogo from 'components/CurrencyLogo';
+import { TYPE, CloseIcon } from '../../theme';
+import Card from '../Card';
+import { AutoColumn } from '../Column';
+import { RowBetween, RowFixed, AutoRow } from '../Row';
+import CurrencyLogo from '../CurrencyLogo';
 import { ArrowLeft, AlertTriangle } from 'react-feather';
 import { transparentize } from 'polished';
-import useTheme from 'hooks/useTheme';
-import { ButtonPrimary } from 'components/Button';
-import { SectionBreak } from 'components/swap/styleds';
-import { useAddUserToken } from 'state/user/hooks';
-import { getEtherscanLink } from 'utils';
-import { useActiveWeb3React } from 'hooks';
+import useTheme from '../../hooks/useTheme';
+import { ButtonPrimary } from '../Button';
+import { SectionBreak } from '../swap/styleds';
+import { useAddUserToken } from '../../state/user/hooks';
+import { getEtherscanLink } from '../../utils';
+import { useActiveWeb3React } from '../../hooks';
 import { ExternalLink } from '../../theme/components';
-import { useCombinedInactiveList } from 'state/lists/hooks';
-import ListLogo from 'components/ListLogo';
+import { useCombinedInactiveList } from '../../state/lists/hooks';
+import ListLogo from '../ListLogo';
 import { PaddedColumn, Checkbox } from './styleds';
 
 const Wrapper = styled.div`
@@ -24,7 +24,7 @@ const Wrapper = styled.div`
   width: 100%;
 `;
 
-const WarningWrapper = styled(Card)<{ highWarning: boolean }>`
+const WarningWrapper = styled(Card) <{ highWarning: boolean }>`
   background-color: ${({ theme, highWarning }) =>
     highWarning ? transparentize(0.8, theme.red1) : transparentize(0.8, theme.yellow2)};
   width: fit-content;

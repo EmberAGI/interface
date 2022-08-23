@@ -15,12 +15,12 @@ import { filterTokens } from './filtering';
 import { useTokenComparator } from './sorting';
 import { PaddedColumn, SearchInput, Separator } from './styleds';
 import styled from 'styled-components';
-import useToggle from 'hooks/useToggle';
-import { useOnClickOutside } from 'hooks/useOnClickOutside';
-import useTheme from 'hooks/useTheme';
+import useToggle from '../../hooks/useToggle';
+import { useOnClickOutside } from '../../hooks/useOnClickOutside';
+import useTheme from '../../hooks/useTheme';
 import ImportRow from './ImportRow';
 import { Edit } from 'react-feather';
-import { ButtonPrimary } from 'components/Button';
+import { ButtonPrimary } from '../Button';
 
 const ContentWrapper = styled(Column)`
   width: 100%;

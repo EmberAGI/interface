@@ -16,7 +16,7 @@ import { MenuItem } from './styleds';
 import Loader from '../Loader';
 import { isTokenOnList } from '../../utils';
 import ImportRow from './ImportRow';
-import { wrappedCurrency } from 'utils/wrappedCurrency';
+import { wrappedCurrency } from '../../utils/wrappedCurrency';
 
 function currencyKey(currency: Currency): string {
   return currency instanceof Token ? currency.address : currency === AMBER ? 'AMBER' : '';

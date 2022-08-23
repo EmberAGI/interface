@@ -5,7 +5,7 @@ import { Tags, TokenInfo, TokenList } from '@uniswap/token-lists';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from '../index';
-import sortByListPriority from 'utils/listSort';
+import sortByListPriority from '../../utils/listSort';
 
 type TagDetails = Tags[keyof Tags];
 export interface TagInfo extends TagDetails {

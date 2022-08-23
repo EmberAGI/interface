@@ -1,7 +1,7 @@
 import { Token } from '@firepotfinance/firepotfinance-sdk';
 import React, { useCallback } from 'react';
 import Modal from '../Modal';
-import { ImportToken } from 'components/SearchModal/ImportToken';
+import { ImportToken } from '../SearchModal/ImportToken';
 
 export default function TokenWarningModal({
   isOpen,

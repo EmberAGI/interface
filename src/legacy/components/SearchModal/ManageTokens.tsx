@@ -1,16 +1,16 @@
 import React, { useRef, RefObject, useCallback, useState, useMemo } from 'react';
-import Column from 'components/Column';
+import Column from '../Column';
 import { PaddedColumn, Separator, SearchInput } from './styleds';
-import Row, { RowBetween, RowFixed } from 'components/Row';
-import { TYPE, ExternalLinkIcon, TrashIcon, ButtonText, ExternalLink } from 'theme';
-import { useToken } from 'hooks/Tokens';
+import Row, { RowBetween, RowFixed } from '../Row';
+import { TYPE, ExternalLinkIcon, TrashIcon, ButtonText, ExternalLink } from '../../theme';
+import { useToken } from '../../hooks/Tokens';
 import styled from 'styled-components';
-import { useUserAddedTokens, useRemoveUserAddedToken } from 'state/user/hooks';
+import { useUserAddedTokens, useRemoveUserAddedToken } from '../../state/user/hooks';
 import { Token } from '@firepotfinance/firepotfinance-sdk';
-import CurrencyLogo from 'components/CurrencyLogo';
-import { getEtherscanLink, isAddress } from 'utils';
-import { useActiveWeb3React } from 'hooks';
-import Card from 'components/Card';
+import CurrencyLogo from '../CurrencyLogo';
+import { getEtherscanLink, isAddress } from '../../utils';
+import { useActiveWeb3React } from '../../hooks';
+import Card from '../Card';
 import ImportRow from './ImportRow';
 import useTheme from '../../hooks/useTheme';
 

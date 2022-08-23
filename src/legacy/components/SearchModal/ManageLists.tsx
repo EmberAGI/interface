@@ -21,10 +21,10 @@ import Column, { AutoColumn } from '../Column';
 import ListLogo from '../ListLogo';
 import Row, { RowFixed, RowBetween } from '../Row';
 import { PaddedColumn, SearchInput, Separator, SeparatorDark } from './styleds';
-import { useListColor } from 'hooks/useColor';
+import { useListColor } from '../../hooks/useColor';
 import useTheme from '../../hooks/useTheme';
 import ListToggle from '../Toggle/ListToggle';
-import Card from 'components/Card';
+import Card from '../Card';
 import { CurrencyModalView } from './CurrencySearchModal';
 
 const Wrapper = styled(Column)`
@@ -73,12 +73,12 @@ const StyledTitleText = styled.div<{ active: boolean }>`
   color: ${({ theme, active }) => (active ? theme.white : theme.text2)};
 `;
 
-const StyledListUrlText = styled(TYPE.main)<{ active: boolean }>`
+const StyledListUrlText = styled(TYPE.main) <{ active: boolean }>`
   font-size: 12px;
   color: ${({ theme, active }) => (active ? theme.white : theme.text2)};
 `;
 
-const RowWrapper = styled(Row)<{ bgColor: string; active: boolean }>`
+const RowWrapper = styled(Row) <{ bgColor: string; active: boolean }>`
   background-color: ${({ bgColor, active, theme }) => (active ? bgColor ?? 'transparent' : theme.bg2)};
   transition: 200ms;
   align-items: center;
@@ -243,8 +243,8 @@ export function ManageLists({
           return l1.name.toLowerCase() < l2.name.toLowerCase()
             ? -1
             : l1.name.toLowerCase() === l2.name.toLowerCase()
-            ? 0
-            : 1;
+              ? 0
+              : 1;
         }
         if (l1) return -1;
         if (l2) return 1;
