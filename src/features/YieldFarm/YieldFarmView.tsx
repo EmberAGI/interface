@@ -196,7 +196,7 @@ export default function YieldFarmView() {
                 <CardTextLabel>Stake</CardTextLabel>
                 <CardText>USDC-AMB LP</CardText>
                 <CardTextLabel>Earn</CardTextLabel>
-                <CardText>USDC-AMB LP</CardText>
+                <CardText>USDC- AMB LP</CardText>
               </CardTextContainer>
             </CardImageTextRow>
             <hr />
