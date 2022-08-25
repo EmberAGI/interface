@@ -1,4 +1,7 @@
 import { useState, useEffect } from 'react';
+import { ethers } from 'ethers';
+import { useActiveWeb3React } from '../../legacy/hooks';
+import farmingContractAbi from '../../legacy/constants/abis/farmingContract.json';
 
 export interface YieldFarmStats {
   tokenName: string;
@@ -14,19 +17,22 @@ export interface LpTokenUserPosition {
 }
 
 export interface YieldFarm {
-  stats: YieldFarmStats;
+  farmStats: YieldFarmStats;
   userPosition: LpTokenUserPosition;
 }
 
-export type YieldFarmViewModel = [YieldFarm] | undefined;
+export type YieldFarmViewModel = YieldFarm[] | undefined;
 
 export default function useYieldFarmViewModel() {
-  const [viewModel, setViewModel] = useState<YieldFarmViewModel>(undefined);
+  const { library } = useActiveWeb3React();
+  const [viewModel, setViewModel] = useState<YieldFarmViewModel>();
+  const [farmTokens, setFarmTokens] = useState<string[]>();
 
+  //DEBUG
   useEffect(() => {
     setViewModel([
       {
-        stats: {
+        farmStats: {
           tokenName: 'AMB-wUSDC-flp',
           tvl: '50000',
           apy: '420',
@@ -40,6 +46,25 @@ export default function useYieldFarmViewModel() {
       },
     ]);
   }, []);
+
+  useEffect(() => {
+    // Get token list from library
+    const tokenList = ['AMB-wUSDC-flp'];
+
+    setFarmTokens(tokenList);
+  }, []);
+
+  useEffect(() => {
+    farmTokens?.forEach((value) => {
+      const farmingContractAddress = '';
+      // subscribe to farm contract changes
+      const contract = new ethers.Contract(farmingContractAddress, farmingContractAbi);
+    });
+
+    return () => {
+      // unsubscribe;
+    };
+  }, [farmTokens, library?.provider]);
 
   const getLpToken = (token: string) => {
     null;

@@ -14,5 +14,6 @@
     "**/Thumbs.db": false
   },
   "search.useGlobalIgnoreFiles": false,
-  "search.useParentIgnoreFiles": true
+  "search.useParentIgnoreFiles": true,
+  "typescript.preferences.importModuleSpecifier": "relative"
 }
