@@ -19,6 +19,7 @@ import RemoveLiquidity from './RemoveLiquidity';
 import { RedirectOldRemoveLiquidityPathStructure } from './RemoveLiquidity/redirects';
 import Swap from './Swap';
 import Faucet from './Faucet';
+import YieldFarmView from 'features/YieldFarm/YieldFarmView';
 import { OpenClaimAddressModalAndRedirectToSwap, RedirectPathToSwapOnly } from './Swap/redirects';
 
 const AppWrapper = styled.div`
@@ -86,6 +87,7 @@ export default function App() {
                 <Route exact strict path="/claim" component={OpenClaimAddressModalAndRedirectToSwap} />
                 <Route exact strict path="/find" component={PoolFinder} />
                 <Route exact strict path="/pool" component={Pool} />
+                <Route exact strict path="/farm" component={YieldFarmView} />
                 <Route exact strict path="/faucet" component={Faucet} />
                 <Route exact strict path="/create" component={RedirectToAddLiquidity} />
                 <Route exact path="/add" component={AddLiquidity} />
