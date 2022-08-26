@@ -4,19 +4,18 @@ import { useActiveWeb3React } from '../../legacy/hooks';
 import farmingContractABI from '../../legacy/constants/abis/farmingContract.json';
 
 export interface YieldFarmStats {
-  tokenName: string;
   tvl: string;
-  apy: string;
+  apr: string;
   dailyROI: string;
 }
 
 export interface LpTokenUserPosition {
-  tokenName: string;
   userBalance: string;
   userDeposited: string;
 }
 
 export interface YieldFarm {
+  stakingTokenName: string;
   farmStats: YieldFarmStats;
   userPosition: LpTokenUserPosition;
 }
@@ -32,14 +31,13 @@ export default function useYieldFarmViewModel() {
   useEffect(() => {
     setViewModel([
       {
+        stakingTokenName: 'AMB-wUSDC-flp',
         farmStats: {
-          tokenName: 'AMB-wUSDC-flp',
           tvl: '50000',
-          apy: '420',
+          apr: '420',
           dailyROI: '35',
         },
         userPosition: {
-          tokenName: 'AMB-wUSDC-flp',
           userBalance: '5',
           userDeposited: '1',
         },
@@ -71,7 +69,20 @@ export default function useYieldFarmViewModel() {
         const stakeBalance = await farmContract.totalSupply();
         const apr = (annualRewards / stakeBalance) * 100;
         const stakingTokenName = await stakingTokenContract.name();
-        setViewModel();
+        const viewModelUpdate = viewModel?.map((yieldFarm) => {
+          if (yieldFarm.stakingTokenName != stakingTokenName) {
+            return yieldFarm;
+          }
+
+          return {
+            ...yieldFarm,
+            farmStats: {
+              ...yieldFarm.farmStats,
+              apr: apr.toString(),
+            },
+          };
+        });
+        setViewModel(viewModelUpdate);
       };
       await updateAPR();
       const listener = async () => {
