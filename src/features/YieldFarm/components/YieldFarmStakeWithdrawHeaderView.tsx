@@ -1,6 +1,6 @@
 import React from 'react';
-import AppBody from '../../../legacy/pages/AppBody';
 import styled from 'styled-components';
+import AppBody from '../../../legacy/pages/AppBody';
 
 export default function YieldFarmStakeWithdrawHeaderView() {
   const TitleRow = styled.div`
@@ -12,8 +12,8 @@ export default function YieldFarmStakeWithdrawHeaderView() {
   return (
     <AppBody>
       <TitleRow>
-        <div>Withdraw</div>
         <div>Stake</div>
+        <div>Withdraw</div>
       </TitleRow>
     </AppBody>
   );
