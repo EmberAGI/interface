@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import { useActiveWeb3React } from '../../legacy/hooks';
-import farmingContractAbi from '../../legacy/constants/abis/farmingContract.json';
+import farmingContractABI from '../../legacy/constants/abis/farmingContract.json';
 
 export interface YieldFarmStats {
   tokenName: string;
@@ -26,7 +26,7 @@ export type YieldFarmViewModel = YieldFarm[] | undefined;
 export default function useYieldFarmViewModel() {
   const { library } = useActiveWeb3React();
   const [viewModel, setViewModel] = useState<YieldFarmViewModel>();
-  const [farmTokens, setFarmTokens] = useState<string[]>();
+  const [farmContracts, setFarmContracts] = useState<string[]>();
 
   //DEBUG
   useEffect(() => {
@@ -48,23 +48,43 @@ export default function useYieldFarmViewModel() {
   }, []);
 
   useEffect(() => {
-    // Get token list from library
-    const tokenList = ['AMB-wUSDC-flp'];
+    // Get farm contract list from library
+    const farmList = ['0xE66240fD326ac1f263727C52c69F8dcDE6c5147B'];
 
-    setFarmTokens(tokenList);
+    setFarmContracts(farmList);
   }, []);
 
   useEffect(() => {
-    farmTokens?.forEach((value) => {
-      const farmingContractAddress = '';
-      // subscribe to farm contract changes
-      const contract = new ethers.Contract(farmingContractAddress, farmingContractAbi);
+    let unsubscribe: () => ethers.Contract | undefined;
+    farmContracts?.forEach(async (address) => {
+      const farmContract = new ethers.Contract(address, farmingContractABI);
+      const stakingTokenContract: ethers.Contract = await farmContract.stakingToken();
+      const filter = stakingTokenContract.filters.Transfer(null, address);
+      const updateAPR = async () => {
+        // DEBUG
+        console.log('calculate & update APR...');
+
+        const rewardsForDuration = await farmContract.getRewardForDuration();
+        const rewardsDuration = await farmContract.rewardsDuration();
+        const annualRewardPeriods = 365 / rewardsDuration;
+        const annualRewards = rewardsForDuration * annualRewardPeriods;
+        const stakeBalance = await farmContract.totalSupply();
+        const apr = (annualRewards / stakeBalance) * 100;
+        const stakingTokenName = await stakingTokenContract.name();
+        setViewModel();
+      };
+      await updateAPR();
+      const listener = async () => {
+        await updateAPR();
+      };
+      stakingTokenContract.on(filter, listener);
+      unsubscribe = () => stakingTokenContract.off(filter, listener);
     });
 
     return () => {
-      // unsubscribe;
+      unsubscribe();
     };
-  }, [farmTokens, library?.provider]);
+  }, [farmContracts, library?.provider]);
 
   const getLpToken = (token: string) => {
     null;
