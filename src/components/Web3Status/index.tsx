@@ -128,13 +128,13 @@ const Web3StatusConnected = styled(Web3StatusGeneric) <{ pending?: boolean }>`
 `;
 
 const Text = styled.p`
-  flex: 1 1 auto;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  margin: 0 0.3rem;
-  width: fit-content;
+  margin-top: 50px;
+  background: linear-gradient(135deg, #D5DFF3 0%, #CBD5E9 100%);
+  border: 1px solid rgba(69, 126, 255, 0.3);
   color: #3568DD;
+  width: 100%;
+  padding: 18px;
+  border-radius: 15px;
   font-size: 20px;
   font-weight: 400;
 `;
@@ -227,7 +227,7 @@ function Web3StatusInner() {
   } else {
     return (
       <Web3StatusConnect id="connect-wallet" onClick={toggleWalletModal} faded={!account}>
-        <Text>{t('Connect to a wallet')}</Text>
+        <Text>{t('Connect wallet')}</Text>
       </Web3StatusConnect>
     );
   }

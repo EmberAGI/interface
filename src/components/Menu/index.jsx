@@ -8,10 +8,10 @@ import { ReactComponent as Circles } from '../../assets/svg/menu/circles.svg';
 import link from '../../assets/svg/menu/link.svg';
 import menu from '../../assets/svg/menu/menu.svg';
 import close from '../../assets/svg/menu/close.svg';
-import metamask from '../../assets/svg/menu/metamask.svg';
-import copy from '../../assets/svg/menu/copy.svg';
-import logout from '../../assets/svg/menu/logout.svg';
-import { utils } from 'ethers';
+import house from '../../assets/svg/menu/house.svg';
+import docs from '../../assets/svg/menu/docs.svg';
+import message from '../../assets/svg/menu/message-plus.svg';
+import book from '../../assets/svg/menu/book.svg';
 import { useActiveWeb3React } from '../../hooks';
 import Web3Status from '../Web3Status';
 import './index.scss';
@@ -118,80 +118,66 @@ const Menu = () => {
   return (
     <div className={`side-menu${isOpen ? ' side-menu_expanded' : ''}`}>
       <div className="side-menu__mobile-wrapper">
-        {isMobile ? (
-          <img className="side-menu__logo" src={logoSm} alt="logo" />
-        ) : (
-          <img className="side-menu__logo" src={logo} alt="logo" />
-        )}
-        <AddressBlock account={account} setAddress={setAddress} isMobile={isMobile} />
-        {/*{address && !isMobile && <AddressBlock address={address} setAddress={setAddress} />}
-        {address && isMobile && !isOpen && (
-          <span className="side-menu__address">
-            {`${address.slice(0, 4)}...${address.slice(address.length - 4, address.length)}`}
-          </span>
-        )}
-        !address && (
-          <button
-            type="button"
-            className={isMobile ? `side-menu__connect-mobile` : 'side-menu__connect-wallet'}
-            onClick={handleMetamask}
-          >
-            Connect wallet
-          </button>
-        )*/}
-        {isMobile && (
-          <button
-            onClick={handleOpen}
-            className="side-menu__hamburger"
-            style={{ marginLeft: isOpen && address ? 'auto' : '0' }}
-          >
-            <img src={isOpen ? close : menu} alt="menu" />
-          </button>
-        )}
+        <img className="side-menu__logo" src={logo} alt="logo" />
+        <button onClick={handleOpen} className="side-menu__hamburger">
+          <img src={isOpen ? close : menu} alt="menu" />
+        </button>
       </div>
       {isOpen && (
         <>
           <div className="side-menu__content">
-            {isMobile && address && <AddressBlock address={address} setAddress={setAddress} />}
-            <span className="side-menu__title">Products</span>
+            {address ? (
+              <AddressBlock address={address} setAddress={setAddress} />
+            ) : (
+              <button
+                type="button"
+                className='side-menu__connect-wallet'
+              >
+                Connect wallet
+              </button>
+            )}
             <ul className="side-menu__list">
               <li>
-                <a href="/">
-                  <b>FirepotSwap</b>
-                </a>
+                <a href="https://airdao.io/firepot/swap">Firepot Swap</a>
               </li>
               <li>
-                <a className="side-menu__list-link" href="https://staking.ambrosus.io/">
+                <a href="https://airdao.io/firepot/pool">Firepot Pool</a>
+              </li>
+              <li>
+                <a className="side-menu__list-link" href="https://airdao.io/staking/">
                   Stake
-                  <img src={link} alt="link" />
                 </a>
               </li>
               <li>
-                <a className="side-menu__list-link" href="https://bridge.ambrosus.io/">
+                <a className="side-menu__list-link" href="https://airdao.io/bridge/">
                   Bridge
-                  <img src={link} alt="link" />
                 </a>
               </li>
               <li>
                 <a className="side-menu__list-link" href="https://explorer-beta.ambrosus.io/">
                   AMB Network Explorer
-                  <img src={link} alt="link" />
                 </a>
               </li>
               <li className="side-menu__list-vote">
-                <span>Vote</span>
+                <span>DAO Tools</span>
                 <span>Coming Soon</span>
               </li>
             </ul>
-            <span className="side-menu__title">Explore</span>
             <ul className="side-menu__list side-menu__list_small">
               <li>
+                <img src={house} alt="main"/>
+                <a href="/">AIRDAO Main</a>
+              </li>
+              <li>
+                <img src={docs} alt="docs"/>
                 <a href="/">Docs</a>
               </li>
               <li>
+                <img src={message} alt="message"/>
                 <a href="/">Feedback</a>
               </li>
               <li>
+                <img src={book} alt="book"/>
                 <a href="/">Brand materials</a>
               </li>
             </ul>
@@ -218,9 +204,6 @@ const Menu = () => {
               </li>
             </ul>
           </div>
-          <a href="/" className="side-menu__to-main">
-            ← Go back to AirDAO main
-          </a>
         </>
       )}
     </div>
