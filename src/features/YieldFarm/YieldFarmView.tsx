@@ -3,6 +3,7 @@ import AppBody from '../../legacy/pages/AppBody';
 import { Text } from 'rebass';
 import AmbrosusLogo from '../../legacy/assets/images/ambrosusLogo.png';
 import usdclogo from '../../legacy/assets/images/usdclogo.png';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { ButtonPrimary } from 'legacy/components/Button';
 import { TYPE } from 'legacy/theme';
@@ -114,7 +115,7 @@ export default function YieldFarmView() {
     justify-content: center;
   `;
 
-  const CardImage = styled.img.attrs((props) => ({
+  const CardImage = styled.img.attrs((props: { src: string }) => ({
     src: props.src,
   }))`
     object-fit: contain;
@@ -213,11 +214,24 @@ export default function YieldFarmView() {
             <CardText>TVL</CardText>
             <CardText>69</CardText>
           </CardSpaceBetweenRow>
-          <CardCenterRow>
-            <ResponsiveButtonPrimary padding="6px 10px">
+          <CardSpaceBetweenRow>
+            <ResponsiveButtonPrimary
+              padding="8px"
+              as={Link}
+              to="/stake/AMB/0xA9646A0281996fDcB88f8f6f01Af52BB0268c494"
+              width="48%"
+            >
               <Text>Manage</Text>
             </ResponsiveButtonPrimary>
-          </CardCenterRow>
+            <ResponsiveButtonPrimary
+              padding="8px"
+              as={Link}
+              to="/add/AMB/0xA9646A0281996fDcB88f8f6f01Af52BB0268c494"
+              width="48%"
+            >
+              <Text>Add Liquidity</Text>
+            </ResponsiveButtonPrimary>
+          </CardSpaceBetweenRow>
         </CardContainer>
       </PageWrapper>
     </AppBody>

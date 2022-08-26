@@ -20,6 +20,8 @@ import { RedirectOldRemoveLiquidityPathStructure } from './RemoveLiquidity/redir
 import Swap from './Swap';
 import Faucet from './Faucet';
 import YieldFarmView from 'features/YieldFarm/YieldFarmView';
+import YieldFarmStakeView from 'features/YieldFarm/YieldFarmStakeView';
+import YieldFarmWithdrawView from 'features/YieldFarm/YieldFarmWithdrawView';
 import { OpenClaimAddressModalAndRedirectToSwap, RedirectPathToSwapOnly } from './Swap/redirects';
 
 const AppWrapper = styled.div`
@@ -98,6 +100,8 @@ export default function App() {
                 <Route exact path="/create/:currencyIdA/:currencyIdB" component={RedirectDuplicateTokenIds} />
                 <Route exact strict path="/remove/:tokens" component={RedirectOldRemoveLiquidityPathStructure} />
                 <Route exact strict path="/remove/:currencyIdA/:currencyIdB" component={RemoveLiquidity} />
+                <Route exact strict path="/stake/:currencyIdA/:currencyIdB" component={YieldFarmStakeView} />
+                <Route exact strict path="/stake/:currencyIdA/:currencyIdB" component={YieldFarmWithdrawView} />
                 <Route component={RedirectPathToSwapOnly} />
               </Switch>
             </Web3ReactManager>
