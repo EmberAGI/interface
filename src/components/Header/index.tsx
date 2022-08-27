@@ -23,22 +23,16 @@ const HeaderFrame = styled.div`
   padding: 0.8rem 1.6rem;
   z-index: 2;
   display: grid;
-  grid-template-columns: 120px 1fr 120px;
-  justify-content: space-between;
+  grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
-  flex-direction: row;
 
   ${({ theme }) => theme.mediaWidth.upToLarge`
-    grid-template-columns: 60px 1fr 120px;
+    grid-template-columns: auto auto;
   `};
 
-  ${({ theme }) => theme.mediaWidth.upToSmall`
-    grid-template-columns: 60px 1fr;
+  ${({ theme }) => theme.mediaWidth.upToMedium`
+    grid-template-columns: auto;
   `};
-
-  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-    padding: 0.5rem 1rem;
-  `}
 `;
 
 const HeaderControls = styled.div`
@@ -74,6 +68,7 @@ const HeaderRow = styled(RowFixed)`
 `;
 
 const HeaderLinks = styled(Row)`
+  grid-column-start: 2;
   width: auto;
   margin: 0 auto;
   padding: 0.3rem;
@@ -83,7 +78,11 @@ const HeaderLinks = styled(Row)`
     rgba(0, 0, 0, 0.01) 0px 24px 32px;
   background-color: ${({ theme }) => theme.bg1};
 
-  ${({ theme }) => theme.mediaWidth.upToSmall`
+  ${({ theme }) => theme.mediaWidth.upToLarge`
+    grid-column-start: 1;
+  `};
+
+  ${({ theme }) => theme.mediaWidth.upToMedium`
     position: fixed;
     bottom: 0;
     padding: .5rem;
@@ -99,13 +98,11 @@ const AccountElement = styled.div<{ active: boolean }>`
   display: flex;
   flex-direction: row;
   align-items: center;
-  background-color: ${({ theme, active }) => (!active ? theme.bg1 : theme.bg3)};
+  background: none;
   border-radius: 0.8rem;
   white-space: nowrap;
   width: 100%;
   cursor: pointer;
-  box-shadow: rgba(0, 0, 0, 0.01) 0px 0px 1px, rgba(0, 0, 0, 0.04) 0px 4px 8px, rgba(0, 0, 0, 0.04) 0px 16px 24px,
-    rgba(0, 0, 0, 0.01) 0px 24px 32px;
 
   :focus {
     border: 1px solid blue;
@@ -250,14 +247,14 @@ export default function Header() {
 
   return (
     <HeaderFrame>
-      <HeaderRow>
-        {/* <Title href=".">
+      {/* <HeaderRow>
+        <Title href=".">
           <Icon>
             {/* <img width={'22px'} src={darkMode ? LogoDark : Logo} alt="logo" />
             <img width={'22px'} src={LogoFP} alt="logo" />
           </Icon>
-        </Title> */}
-      </HeaderRow>
+        </Title>
+      </HeaderRow> */}
 
       <HeaderLinks>
         <StyledNavLink id={`swap-nav-link`} to={'/swap'}>
@@ -281,7 +278,7 @@ export default function Header() {
         </StyledNavLink>
       </HeaderLinks>
 
-      {/*<HeaderControls>
+      <HeaderControls>
         <HeaderElement>
           <HideSmall>
             {chainId && NETWORK_LABELS[chainId] && (
@@ -297,12 +294,12 @@ export default function Header() {
             <Web3Status />
           </AccountElement>
         </HeaderElement>
-        <HeaderElementWrap>
+        {/*<HeaderElementWrap>
           <StyledMenuButton onClick={toggleDarkMode}>
             {darkMode ? <Moon size={20} /> : <Sun size={20} />}
           </StyledMenuButton>
-        </HeaderElementWrap>
-      </HeaderControls>*/}
+        </HeaderElementWrap>*/}
+      </HeaderControls>
     </HeaderFrame>
   );
 }

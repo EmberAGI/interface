@@ -24,6 +24,7 @@ import { ApprovalState, useApproveCallbackFromTrade } from '../../hooks/useAppro
 import { useSwapCallback } from '../../hooks/useSwapCallback';
 import useWrapCallback, { WrapType } from '../../hooks/useWrapCallback';
 import { useToggleSettingsMenu, useWalletModalToggle } from '../../state/application/hooks';
+import useAuthorization from '../../hooks/useAuthorization';
 import { Field } from '../../state/swap/actions';
 import {
   useDefaultsFromURLSearch,
@@ -68,7 +69,8 @@ export default function Swap() {
   const theme = useContext(ThemeContext);
 
   // toggle wallet when disconnected
-  const toggleWalletModal = useWalletModalToggle();
+  //const toggleWalletModal = useWalletModalToggle();
+  const { loginMetamask } = useAuthorization();
 
   // for expert mode
   const toggleSettings = useToggleSettingsMenu();
@@ -91,13 +93,13 @@ export default function Swap() {
 
   const parsedAmounts = showWrap
     ? {
-        [Field.INPUT]: parsedAmount,
-        [Field.OUTPUT]: parsedAmount,
-      }
+      [Field.INPUT]: parsedAmount,
+      [Field.OUTPUT]: parsedAmount,
+    }
     : {
-        [Field.INPUT]: independentField === Field.INPUT ? parsedAmount : trade?.inputAmount,
-        [Field.OUTPUT]: independentField === Field.OUTPUT ? parsedAmount : trade?.outputAmount,
-      };
+      [Field.INPUT]: independentField === Field.INPUT ? parsedAmount : trade?.inputAmount,
+      [Field.OUTPUT]: independentField === Field.OUTPUT ? parsedAmount : trade?.outputAmount,
+    };
 
   const { onSwitchTokens, onCurrencySelection, onUserInput, onChangeRecipient } = useSwapActionHandlers();
   const isValid = !swapInputError;
@@ -345,7 +347,7 @@ export default function Swap() {
 
           <BottomGrouping>
             {!account ? (
-              <ButtonPrimary onClick={toggleWalletModal}>Connect Wallet</ButtonPrimary>
+              <ButtonPrimary onClick={loginMetamask}>Connect Wallet</ButtonPrimary>
             ) : showWrap ? (
               <ButtonPrimary disabled={Boolean(wrapInputError)} onClick={onWrap}>
                 {wrapInputError ??
@@ -426,8 +428,8 @@ export default function Swap() {
                   {swapInputError
                     ? swapInputError
                     : priceImpactSeverity > 3 && !isExpertMode
-                    ? `Price Impact Too High`
-                    : `Swap${priceImpactSeverity > 2 ? ' Anyway' : ''}`}
+                      ? `Price Impact Too High`
+                      : `Swap${priceImpactSeverity > 2 ? ' Anyway' : ''}`}
                 </Text>
               </ButtonError>
             )}
