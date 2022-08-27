@@ -5,121 +5,66 @@ import { ReactComponent as Twitter } from '../../assets/svg/menu/twitter.svg';
 import { ReactComponent as Telegram } from '../../assets/svg/menu/telegram.svg';
 import { ReactComponent as Reddit } from '../../assets/svg/menu/reddit.svg';
 import { ReactComponent as Circles } from '../../assets/svg/menu/circles.svg';
-import link from '../../assets/svg/menu/link.svg';
 import menu from '../../assets/svg/menu/menu.svg';
 import close from '../../assets/svg/menu/close.svg';
+import metamask from '../../assets/svg/menu/metamask.svg';
+import copy from '../../assets/svg/menu/copy.svg';
+import logoutIcon from '../../assets/svg/menu/logout.svg';
 import house from '../../assets/svg/menu/house.svg';
 import docs from '../../assets/svg/menu/docs.svg';
 import message from '../../assets/svg/menu/message-plus.svg';
 import book from '../../assets/svg/menu/book.svg';
-import { useActiveWeb3React } from '../../hooks';
-import Web3Status from '../Web3Status';
+import useAuthorization from '../../hooks/useAuthorization';
+import { useWeb3React } from '@web3-react/core';
 import './index.scss';
 
-/*const ambMainNetChainId = 16718;
-
-const changeChainId = async () => {
-  const chainId = utils.hexValue(ambMainNetChainId);
-
-  try {
-    await window.ethereum.request({
-      method: 'wallet_switchEthereumChain',
-      params: [{ chainId }],
-    });
-  } catch (switchError) {
-    await window.ethereum.request({
-      method: 'wallet_addEthereumChain',
-      params: [
-        {
-          chainId,
-          chainName: 'Ambrosus',
-          nativeCurrency: {
-            name: 'Amber',
-            symbol: 'AMB',
-            decimals: 18,
-          },
-          rpcUrls: ['https://network.ambrosus.io/'],
-          blockExplorerUrls: ['https://explorer.ambrosus.io/'],
-        },
-      ],
-    });
-  }
-};*/
-
 // eslint-disable-next-line react/prop-types
-const AddressBlock = ({ account, setAddress, isMobile }) => {
-  /*const copyToClipboard = () => {
+const AddressBlock = ({ address = '' }) => {
+  const copyToClipboard = () => {
     if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
       return navigator.clipboard.writeText(address);
     }
+    return null;
   };
-
-  const logoutUser = () => setAddress('');*/
+  const { logout } = useAuthorization();
 
   return (
-    <div className="address-block-wrapper">
-      {account && !isMobile && <span className="side-menu__address-block-title">Connected wallet</span>}
-      <div className="address-block">
-        <Web3Status />
-        {/*<img className="address-block__metamask-icon" src={metamask} alt="metamask" />
-        <span>{`${address.slice(0, 4)}...${address.slice(address.length - 4, address.length)}`}</span>
-        <button onClick={copyToClipboard} type="button" className="address-block__copy">
-          <img src={copy} alt="copy" />
-        </button>
-        <button onClick={logoutUser} type="button">
-          <img src={logout} alt="log out" />
-        </button>*/}
-      </div>
+    <div className="address-block">
+      <img className="address-block__metamask-icon" src={metamask} alt="metamask" />
+      <span>{`${address.slice(0, 4)}...${address.slice(address.length - 4, address.length)}`}</span>
+      <button onClick={logout} type="button">
+        <img src={logoutIcon} alt="log out" />
+      </button>
+      <button onClick={copyToClipboard} type="button" className="address-block__copy">
+        <img src={copy} alt="copy" />
+      </button>
     </div>
   );
 };
 
 const Menu = () => {
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 720);
   const [isOpen, setIsOpen] = useState(window.innerWidth > 720);
-  const [address, setAddress] = useState('');
-  const { account } = useActiveWeb3React();
+  const { loginMetamask } = useAuthorization();
+  const { account: address } = useWeb3React();
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 720);
       setIsOpen(window.innerWidth > 720);
     };
     window.addEventListener('resize', handleResize, true);
-
-    /*if (window.ethereum) {
-      window.ethereum.on('networkChanged', (networkId) => {
-        if (networkId !== ambMainNetChainId.toString()) {
-          setAddress('');
-        }
-      });
-    }*/
   }, []);
-
-  /*const handleMetamask = async () => {
-    const getAddress = () => {
-      window.ethereum.request({ method: 'eth_requestAccounts' }).then((accounts) => setAddress(accounts[0]));
-    };
-
-    if (typeof window.ethereum !== 'undefined') {
-      if (window.ethereum.networkVersion === ambMainNetChainId.toString()) {
-        getAddress();
-      } else {
-        await changeChainId();
-        getAddress();
-      }
-    } else {
-      window.open('https://metamask.io/download/', '_blank');
-    }
-  };*/
 
   const handleOpen = () => setIsOpen((state) => !state);
 
   return (
     <div className={`side-menu${isOpen ? ' side-menu_expanded' : ''}`}>
       <div className="side-menu__mobile-wrapper">
-        <img className="side-menu__logo" src={logo} alt="logo" />
-        <button onClick={handleOpen} className="side-menu__hamburger">
+        {isOpen ? (
+          <img className="side-menu__logo" src={logo} alt="logo" />
+        ) : (
+          <img className="side-menu__logo" src={logoSm} alt="logo" />
+        )}
+        <button type="button" onClick={handleOpen} className="side-menu__hamburger">
           <img src={isOpen ? close : menu} alt="menu" />
         </button>
       </div>
@@ -127,29 +72,25 @@ const Menu = () => {
         <>
           <div className="side-menu__content">
             {address ? (
-              <AddressBlock address={address} setAddress={setAddress} />
+              <AddressBlock address={address} />
             ) : (
-              <button
-                type="button"
-                className='side-menu__connect-wallet'
-              >
+              <button type="button" className="side-menu__connect-wallet" onClick={loginMetamask}>
                 Connect wallet
               </button>
             )}
             <ul className="side-menu__list">
               <li>
-                <a href="https://airdao.io/firepot/swap">Firepot Swap</a>
+                <a style={{ color: '#457EFF' }} href="/firepot/swap">
+                  FirepotSwap
+                </a>
               </li>
               <li>
-                <a href="https://airdao.io/firepot/pool">Firepot Pool</a>
-              </li>
-              <li>
-                <a className="side-menu__list-link" href="https://airdao.io/staking/">
+                <a className="side-menu__list-link" href="/staking">
                   Stake
                 </a>
               </li>
               <li>
-                <a className="side-menu__list-link" href="https://airdao.io/bridge/">
+                <a className="side-menu__list-link" href="/bridge">
                   Bridge
                 </a>
               </li>
@@ -165,19 +106,19 @@ const Menu = () => {
             </ul>
             <ul className="side-menu__list side-menu__list_small">
               <li>
-                <img src={house} alt="main"/>
+                <img src={house} alt="main" />
                 <a href="/">AIRDAO Main</a>
               </li>
               <li>
-                <img src={docs} alt="docs"/>
+                <img src={docs} alt="docs" />
                 <a href="/">Docs</a>
               </li>
               <li>
-                <img src={message} alt="message"/>
+                <img src={message} alt="message" />
                 <a href="/">Feedback</a>
               </li>
               <li>
-                <img src={book} alt="book"/>
+                <img src={book} alt="book" />
                 <a href="/">Brand materials</a>
               </li>
             </ul>
