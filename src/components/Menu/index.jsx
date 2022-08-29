@@ -7,13 +7,13 @@ import { ReactComponent as Reddit } from '../../assets/svg/menu/reddit.svg';
 import { ReactComponent as Circles } from '../../assets/svg/menu/circles.svg';
 import menu from '../../assets/svg/menu/menu.svg';
 import close from '../../assets/svg/menu/close.svg';
-import metamask from '../../assets/svg/menu/metamask.svg';
-import copy from '../../assets/svg/menu/copy.svg';
-import logoutIcon from '../../assets/svg/menu/logout.svg';
-import house from '../../assets/svg/menu/house.svg';
-import docs from '../../assets/svg/menu/docs.svg';
-import message from '../../assets/svg/menu/message-plus.svg';
-import book from '../../assets/svg/menu/book.svg';
+import { ReactComponent as Metamask } from '../../assets/svg/menu/metamask.svg';
+import { ReactComponent as Copy } from '../../assets/svg/menu/copy.svg';
+import { ReactComponent as LogoutIcon } from '../../assets/svg/menu/logout.svg';
+import { ReactComponent as House } from '../../assets/svg/menu/house.svg';
+import { ReactComponent as Docs } from '../../assets/svg/menu/docs.svg';
+import { ReactComponent as Message } from '../../assets/svg/menu/message-plus.svg';
+import { ReactComponent as Book } from '../../assets/svg/menu/book.svg';
 import useAuthorization from '../../hooks/useAuthorization';
 import { useWeb3React } from '@web3-react/core';
 import './index.scss';
@@ -30,26 +30,28 @@ const AddressBlock = ({ address = '' }) => {
 
   return (
     <div className="address-block">
-      <img className="address-block__metamask-icon" src={metamask} alt="metamask" />
+      <div className="address-block__metamask-icon">
+        <Metamask />
+      </div>
       <span>{`${address.slice(0, 4)}...${address.slice(address.length - 4, address.length)}`}</span>
-      <button onClick={logout} type="button">
-        <img src={logoutIcon} alt="log out" />
+      <button onClick={logout} type="button" style={{ marginLeft: 'auto' }}>
+        <LogoutIcon />
       </button>
       <button onClick={copyToClipboard} type="button" className="address-block__copy">
-        <img src={copy} alt="copy" />
+        <Copy />
       </button>
     </div>
   );
 };
 
 const Menu = () => {
-  const [isOpen, setIsOpen] = useState(window.innerWidth > 720);
+  const [isOpen, setIsOpen] = useState(window.innerWidth > 1050);
   const { loginMetamask } = useAuthorization();
   const { account: address } = useWeb3React();
 
   useEffect(() => {
     const handleResize = () => {
-      setIsOpen(window.innerWidth > 720);
+      setIsOpen(window.innerWidth > 1050);
     };
     window.addEventListener('resize', handleResize, true);
   }, []);
@@ -80,13 +82,13 @@ const Menu = () => {
             )}
             <ul className="side-menu__list">
               <li>
-                <a style={{ color: '#457EFF' }} href="/firepot/swap">
+                <a href="/firepot/swap" style={{ color: '#457EFF' }}>
                   FirepotSwap
                 </a>
               </li>
               <li>
                 <a className="side-menu__list-link" href="/staking">
-                  Stake
+                  Staking
                 </a>
               </li>
               <li>
@@ -96,7 +98,7 @@ const Menu = () => {
               </li>
               <li>
                 <a className="side-menu__list-link" href="https://explorer-beta.ambrosus.io/">
-                  AMB Network Explorer
+                  Network Explorer
                 </a>
               </li>
               <li className="side-menu__list-vote">
@@ -106,19 +108,19 @@ const Menu = () => {
             </ul>
             <ul className="side-menu__list side-menu__list_small">
               <li>
-                <img src={house} alt="main" />
+                <House />
                 <a href="/">AIRDAO Main</a>
               </li>
               <li>
-                <img src={docs} alt="docs" />
+                <Docs />
                 <a href="/">Docs</a>
               </li>
               <li>
-                <img src={message} alt="message" />
-                <a href="/">Feedback</a>
+                <Message />
+                <a href="mailto:support@airdao.io ">Feedback</a>
               </li>
               <li>
-                <img src={book} alt="book" />
+                <Book />
                 <a href="/">Brand materials</a>
               </li>
             </ul>
