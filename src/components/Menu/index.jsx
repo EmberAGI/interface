@@ -45,13 +45,13 @@ const AddressBlock = ({ address = '' }) => {
 };
 
 const Menu = () => {
-  const [isOpen, setIsOpen] = useState(window.innerWidth > 1050);
+  const [isOpen, setIsOpen] = useState(window.innerWidth > 720);
   const { loginMetamask } = useAuthorization();
   const { account: address } = useWeb3React();
 
   useEffect(() => {
     const handleResize = () => {
-      setIsOpen(window.innerWidth > 1050);
+      setIsOpen(window.innerWidth > 720);
     };
     window.addEventListener('resize', handleResize, true);
   }, []);
