@@ -22,6 +22,7 @@ import { useCurrency } from '../../hooks/Tokens';
 import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallback';
 import useTransactionDeadline from '../../hooks/useTransactionDeadline';
 import { useWalletModalToggle } from '../../state/application/hooks';
+import useAuthorization from '../../hooks/useAuthorization';
 import { Field } from '../../state/mint/actions';
 import { useDerivedMintInfo, useMintActionHandlers, useMintState } from '../../state/mint/hooks';
 
@@ -49,7 +50,8 @@ export default function AddLiquidity({
   const currencyA = useCurrency(currencyIdA);
   const currencyB = useCurrency(currencyIdB);
 
-  const toggleWalletModal = useWalletModalToggle(); // toggle wallet when disconnected
+  //const toggleWalletModal = useWalletModalToggle(); // toggle wallet when disconnected
+  const { loginMetamask } = useAuthorization();
 
   const expertMode = useIsExpertMode();
 
@@ -228,9 +230,8 @@ export default function AddLiquidity({
           </Text>
         </Row>
         <TYPE.italic fontSize={12} textAlign="left" padding={'8px 0 0 0 '}>
-          {`Output is estimated. If the price changes by more than ${
-            allowedSlippage / 100
-          }% your transaction will revert.`}
+          {`Output is estimated. If the price changes by more than ${allowedSlippage / 100
+            }% your transaction will revert.`}
         </TYPE.italic>
       </AutoColumn>
     );
@@ -249,9 +250,8 @@ export default function AddLiquidity({
     );
   };
 
-  const pendingText = `Supplying ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)} ${
-    currencies[Field.CURRENCY_A]?.symbol
-  } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(6)} ${currencies[Field.CURRENCY_B]?.symbol}`;
+  const pendingText = `Supplying ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)} ${currencies[Field.CURRENCY_A]?.symbol
+    } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(6)} ${currencies[Field.CURRENCY_B]?.symbol}`;
 
   const handleCurrencyASelect = useCallback(
     (currencyA: Currency) => {
@@ -390,7 +390,7 @@ export default function AddLiquidity({
             )}
 
             {!account ? (
-              <ButtonPrimary onClick={toggleWalletModal}>Connect Wallet</ButtonPrimary>
+              <ButtonPrimary onClick={loginMetamask}>Connect Wallet</ButtonPrimary>
             ) : (
               <AutoColumn gap={'md'}>
                 {(approvalA === ApprovalState.NOT_APPROVED ||

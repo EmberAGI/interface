@@ -14,5 +14,11 @@
     "**/Thumbs.db": false
   },
   "search.useGlobalIgnoreFiles": false,
-  "search.useParentIgnoreFiles": true
+  "search.useParentIgnoreFiles": true,
+  "[javascript]": {
+    "editor.tabSize": 2
+  },
+  "[typescript]": {
+    "editor.tabSize": 4
+  }
 }

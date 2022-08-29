@@ -20,6 +20,7 @@ import { RedirectOldRemoveLiquidityPathStructure } from './RemoveLiquidity/redir
 import Swap from './Swap';
 import Faucet from './Faucet';
 import { OpenClaimAddressModalAndRedirectToSwap, RedirectPathToSwapOnly } from './Swap/redirects';
+import useAutoLogin from '../hooks/useAutoLogin';
 
 const AppWrapper = styled.div`
   min-height: 100vh;
@@ -64,7 +65,8 @@ const BodyWrapper = styled.div`
 `;
 
 export default function App() {
-  return (
+  const isLoaded = useAutoLogin();
+  return !isLoaded ? null : (
     <Suspense fallback={null}>
       <Route component={DarkModeQueryParamReader} />
       <AppWrapper>

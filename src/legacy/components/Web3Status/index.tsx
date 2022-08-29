@@ -115,35 +115,20 @@ const Web3StatusGeneric = styled.div`
   display: flex;
   flex-wrap: nowrap;
 `;
-const Web3StatusError = styled(Web3StatusGeneric)`
-  color: ${({ theme }) => theme.red1};
-`;
-
-const Web3StatusConnect = styled(Web3StatusGeneric) <{ faded?: boolean }>`
-  color: ${({ theme }) => theme.primaryText1};
-`;
 
 const Web3StatusConnected = styled(Web3StatusGeneric) <{ pending?: boolean }>`
   color: ${({ pending, theme }) => (pending ? theme.white : theme.text1)};
 `;
 
 const Text = styled.p`
-  flex: 1 1 auto;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  margin: 0 0.3rem;
-  width: fit-content;
-  color: #3568DD;
-  font-size: 20px;
+  background: linear-gradient(135deg, #d5dff3 0%, #cbd5e9 100%);
+  border: 1px solid rgba(69, 126, 255, 0.3);
+  color: #3568dd;
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 15px;
+  font-size: 18px;
   font-weight: 400;
-`;
-
-const NetworkIcon = styled(Activity)`
-  margin-left: 0.25rem;
-  margin-right: 0.5rem;
-  width: 16px;
-  height: 16px;
 `;
 
 // we want the latest one to come first, so return negative if a is after b
@@ -206,30 +191,14 @@ function Web3StatusInner() {
     return (
       <Web3StatusConnected id="web3-status-connected" onClick={toggleWalletModal} pending={hasPendingTransactions}>
         {hasPendingTransactions ? (
-          <RowBetween>
-            <Text>{pending?.length} Pending</Text> <Loader stroke="black" />
-          </RowBetween>
-        ) : (
-          <>
-            <Text>{ENSName || shortenAddress(account)}</Text>
-          </>
-        )}
-        {!hasPendingTransactions && connector && <StatusIcon connector={connector} />}
+          <Text>
+            {pending?.length} Pending <Loader stroke="black" />
+          </Text>
+        ) : null}
       </Web3StatusConnected>
     );
-  } else if (error) {
-    return (
-      <Web3StatusError onClick={toggleWalletModal}>
-        <NetworkIcon />
-        <Text>{error instanceof UnsupportedChainIdError ? 'Wrong Network' : 'Error'}</Text>
-      </Web3StatusError>
-    );
   } else {
-    return (
-      <Web3StatusConnect id="connect-wallet" onClick={toggleWalletModal} faded={!account}>
-        <Text>{t('Connect to a wallet')}</Text>
-      </Web3StatusConnect>
-    );
+    return null;
   }
 }
 
