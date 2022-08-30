@@ -10,6 +10,9 @@ interface CardRowProps {
   justify?: string;
 }
 export default function YieldFarmWithdrawView() {
+  const Container = styled.div`
+    padding: 1rem;
+  `;
   const InputAmount = styled.input`
     font-size: 18px;
     width: 100%;
@@ -50,16 +53,18 @@ export default function YieldFarmWithdrawView() {
   return (
     <AppBody>
       <YieldFarmStakeWithdrawHeaderView />
-      <YieldFarmCardImageTextView />
-      <YieldFarmCardStatsView />
-      <CardRow justify="space-between">
-        <CardText>Deposited:</CardText>
-        <CardText>69 USDC-AMB</CardText>
-      </CardRow>
-      <InputAmount />
-      <CardRowCenter>
-        <StakeAction>Withdraw</StakeAction>
-      </CardRowCenter>
+      <Container>
+        <YieldFarmCardImageTextView />
+        <YieldFarmCardStatsView />
+        <CardRow justify="space-between">
+          <CardText>Deposited:</CardText>
+          <CardText>69 USDC-AMB</CardText>
+        </CardRow>
+        <InputAmount />
+        <CardRowCenter>
+          <StakeAction>Withdraw</StakeAction>
+        </CardRowCenter>
+      </Container>
     </AppBody>
   );
 }

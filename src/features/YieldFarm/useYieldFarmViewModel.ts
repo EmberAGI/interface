@@ -98,23 +98,23 @@ export default function useYieldFarmViewModel() {
   }, [farmContracts, library?.provider]);
 
   const getLpToken = (token: string) => {
-    null;
+    console.log('hi');
   };
 
   const manageLpToken = (token: string) => {
-    null;
+    console.log('hi');
   };
 
   const approveLpToken = (token: string) => {
-    null;
+    console.log('hi');
   };
 
   const depositLpToken = (token: string, amount: string) => {
-    null;
+    console.log('hi');
   };
 
   const withdrawLpToken = (token: string, amount: string) => {
-    null;
+    console.log('hi');
   };
 
   return {

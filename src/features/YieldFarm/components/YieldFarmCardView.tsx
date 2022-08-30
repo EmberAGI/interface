@@ -11,7 +11,7 @@ export default function YieldFarmCardView() {
     display: flex;
     padding: 30px;
     overflow: hidden;
-    box-shadow: 10px 22px 33px 0px rgb(0 0 0 / 90%);
+    box-shadow: 5px -4px 10px 0px rgb(151 197 194 / 81%);
     border-radius: 15px;
     flex-direction: column;
     backdrop-filter: blur(10px);

@@ -12,7 +12,6 @@ interface CardRowProps {
 export default function YieldFarmStakeView() {
   const Container = styled.div`
     padding: 1rem;
-    background-color: white;
   `;
 
   const CardText = styled.p`
