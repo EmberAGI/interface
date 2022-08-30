@@ -53,8 +53,13 @@ export default function useYieldFarmViewModel() {
   }, []);
 
   useEffect(() => {
-    let unsubscribe: () => ethers.Contract | undefined;
+    let isSubscribed = true;
+    const unsubscribeFunctions: (() => ethers.Contract)[] = [];
     farmContracts?.forEach(async (address) => {
+      if (!isSubscribed) {
+        return;
+      }
+
       const farmContract = new ethers.Contract(address, farmingContractABI);
       const stakingTokenContract: ethers.Contract = await farmContract.stakingToken();
       const filter = stakingTokenContract.filters.Transfer(null, address);
@@ -85,17 +90,23 @@ export default function useYieldFarmViewModel() {
         setViewModel(viewModelUpdate);
       };
       await updateAPR();
+
+      if (!isSubscribed) {
+        return;
+      }
+
       const listener = async () => {
         await updateAPR();
       };
       stakingTokenContract.on(filter, listener);
-      unsubscribe = () => stakingTokenContract.off(filter, listener);
+      unsubscribeFunctions.push(() => stakingTokenContract.off(filter, listener));
     });
 
     return () => {
-      unsubscribe();
+      isSubscribed = false;
+      unsubscribeFunctions.forEach((unsubscribe) => unsubscribe());
     };
-  }, [farmContracts, library?.provider]);
+  }, [farmContracts, library?.provider, viewModel]);
 
   const getLpToken = (token: string) => {
     console.log('hi');
