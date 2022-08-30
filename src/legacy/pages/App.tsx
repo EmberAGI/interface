@@ -101,7 +101,7 @@ export default function App() {
                 <Route exact strict path="/remove/:tokens" component={RedirectOldRemoveLiquidityPathStructure} />
                 <Route exact strict path="/remove/:currencyIdA/:currencyIdB" component={RemoveLiquidity} />
                 <Route exact strict path="/stake/:currencyIdA/:currencyIdB" component={YieldFarmStakeView} />
-                <Route exact strict path="/stake/:currencyIdA/:currencyIdB" component={YieldFarmWithdrawView} />
+                <Route exact strict path="/withdraw/:currencyIdA/:currencyIdB" component={YieldFarmWithdrawView} />
                 <Route component={RedirectPathToSwapOnly} />
               </Switch>
             </Web3ReactManager>
