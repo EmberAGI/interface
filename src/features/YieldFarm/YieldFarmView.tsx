@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import AppBody from '../../legacy/pages/AppBody';
 import styled from 'styled-components';
 import { TYPE } from 'legacy/theme';
@@ -21,7 +21,6 @@ const TitleRow = styled.div`
   margin-bottom: 0.4rem;
 `;
 export default function YieldFarmView() {
-  const { viewModel } = useYieldFarmViewModel();
   return (
     <AppBody>
       <SwapPoolTabs active={'farm'} />
