@@ -28,9 +28,14 @@ export default function YieldFarmView() {
       <TitleRow>
         <TYPE.black fontWeight={500}>Farm</TYPE.black>
       </TitleRow>
-      <PageWrapper>
-        <YieldFarmCardView />
-      </PageWrapper>
+      {viewModel.yieldFarms.map((yieldFarm) => (
+        <TYPE.black key={yieldFarm.stakingTokenName} fontWeight={500}>
+          APR: {yieldFarm.farmStats.apr}
+        </TYPE.black>
+        /*<PageWrapper key={yieldFarm.stakingTokenName}>
+          <YieldFarmCardView />
+        </PageWrapper>*/
+      ))}
     </AppBody>
   );
 }
