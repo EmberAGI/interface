@@ -21,6 +21,8 @@ const TitleRow = styled.div`
   margin-bottom: 0.4rem;
 `;
 export default function YieldFarmView() {
+  const { viewModel } = useYieldFarmViewModel();
+
   return (
     <AppBody>
       <SwapPoolTabs active={'farm'} />
