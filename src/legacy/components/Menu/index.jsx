@@ -97,7 +97,7 @@ const Menu = () => {
                 </a>
               </li>
               <li>
-                <a className="side-menu__list-link" href="https://explorer-beta.ambrosus.io/">
+                <a className="side-menu__list-link" href="/explorer">
                   Network Explorer
                 </a>
               </li>
