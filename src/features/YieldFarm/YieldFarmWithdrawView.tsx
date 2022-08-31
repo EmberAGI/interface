@@ -1,10 +1,10 @@
 import React from 'react';
 import AppBody from '../../legacy/pages/AppBody';
 import styled from 'styled-components';
-import YieldFarmStakeWithdrawHeaderView from './components/YieldFarmStakeWithdrawHeaderView';
-import YieldFarmCardImageTextView from './components/YieldFarmCardImageTextView';
+import YieldFarmStakeWithdrawHeaderView from './components/YieldFarmStakeWithdrawHeader';
+import YieldFarmCardImageTextView from './components/YieldFarmCardImageText';
 import { ButtonSecondary } from 'legacy/components/Button';
-import YieldFarmCardStatsView from './components/YieldFarmCardStatsView';
+import YieldFarmCardStats from './components/YieldFarmCardStats';
 
 interface CardRowProps {
   justify?: string;
@@ -55,7 +55,7 @@ export default function YieldFarmWithdrawView() {
       <YieldFarmStakeWithdrawHeaderView />
       <Container>
         <YieldFarmCardImageTextView />
-        <YieldFarmCardStatsView />
+        <YieldFarmCardStats />
         <CardRow justify="space-between">
           <CardText>Deposited:</CardText>
           <CardText>69 USDC-AMB</CardText>

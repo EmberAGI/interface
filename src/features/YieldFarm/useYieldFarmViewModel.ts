@@ -4,12 +4,7 @@ import { useActiveWeb3React } from '../../legacy/hooks';
 import farmingContractABI from '../../legacy/constants/abis/farmingContract.json';
 import { ERC20_ABI } from '../../legacy/constants/abis/erc20';
 import { formatUnits } from 'ethers/lib/utils';
-
-export interface YieldFarmStats {
-  tvl: string;
-  apr: string;
-  dailyROI: string;
-}
+import { YieldFarmStats } from './useYieldFarmStats';
 
 export interface LpTokenUserPosition {
   userBalance: string;
@@ -17,9 +12,10 @@ export interface LpTokenUserPosition {
 }
 
 export interface YieldFarm {
-  stakingTokenName: string;
-  farmStats: YieldFarmStats;
-  userPosition: LpTokenUserPosition;
+  contractAddress: string;
+  //stakingTokenName: string;
+  //farmStats: YieldFarmStats;
+  //userPosition: LpTokenUserPosition;
 }
 
 export interface YieldFarmViewModel {
@@ -29,8 +25,8 @@ export interface YieldFarmViewModel {
 const initialViewModel = {
   yieldFarms: [
     {
-      //stakingTokenName: 'AMB-wUSDC-flp'
-      stakingTokenName: 'Firepot-LP',
+      contractAddress: '0xE66240fD326ac1f263727C52c69F8dcDE6c5147B',
+      /*stakingTokenName: 'AMB-wUSDC-flp',
       farmStats: {
         tvl: '50000',
         apr: '420',
@@ -39,7 +35,7 @@ const initialViewModel = {
       userPosition: {
         userBalance: '5',
         userDeposited: '1',
-      },
+      },*/
     },
   ],
 };
@@ -54,12 +50,43 @@ export default function useYieldFarmViewModel() {
     const farmList = ['0xE66240fD326ac1f263727C52c69F8dcDE6c5147B'];
 
     setFarmContracts(farmList);
+    setViewModel({
+      yieldFarms: [{ contractAddress: '0xE66240fD326ac1f263727C52c69F8dcDE6c5147B' }],
+    });
   }, []);
 
-  useEffect(() => {
+  /*useEffect(() => {
     let isSubscribed = true;
     const unsubscribeFunctions: (() => ethers.Contract)[] = [];
     farmContracts?.forEach(async (address) => {
+      if (!isSubscribed) {
+        return;
+      }
+
+      setViewModel((viewModel) => {
+        console.log(`viewModel: ${JSON.stringify(viewModel)}`);
+        const viewModelUpdate = {
+          ...viewModel,
+          yieldFarms: viewModel.yieldFarms.map((yieldFarm) => {
+            if (yieldFarm.stakingTokenName != stakingTokenName) {
+              return yieldFarm;
+            }
+
+            return {
+              ...yieldFarm,
+              farmStats: {
+                tvl: formatUnits(stakeBalance, stakingTokenDecimals).toString(),
+                apr: newAPR.toString(),
+                dailyROI: (newAPR / daysPerYear).toString(),
+              },
+            };
+          }),
+        };
+        console.log(`viewModelUpdate: ${JSON.stringify(viewModelUpdate)}`);
+        return viewModelUpdate;
+      });
+
+      /*
       // DEBUG
       console.log(`farmContracts?.forEach(${address} => ... )`);
 
@@ -154,16 +181,14 @@ export default function useYieldFarmViewModel() {
       console.log(`filter: ${fromStakingTokenFilter}`);
       stakingTokenContract.on(fromStakingTokenFilter, listener);
       unsubscribeFunctions.push(() => stakingTokenContract.off(fromStakingTokenFilter, listener));
+      
     });
 
     return () => {
-      // DEBUG
-      console.log('useEffect cleanup...');
-
       isSubscribed = false;
       unsubscribeFunctions.forEach((unsubscribe) => unsubscribe());
     };
-  }, [farmContracts, library]);
+  }, [farmContracts, library]);*/
 
   const getLpToken = (token: string) => {
     console.log('getLpToken');

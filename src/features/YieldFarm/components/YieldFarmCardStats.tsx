@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import useYieldFarmStats from '../useYieldFarmStats';
 
 const CardText = styled.p`
   text-align: right;
@@ -14,26 +15,28 @@ const CardSpaceBetweenRow = styled.div`
   justify-content: space-between;
   height: 40px;
 `;
-interface YieldFarmStats {
-  TVL: string;
-  APR: any;
-  DROI: string;
+
+interface YieldFarmCardStatsProps {
+  farmContractAddress: string;
 }
-export default function YieldFarmCardStatsView(prop: YieldFarmStats) {
-  const { TVL, APR, DROI } = prop;
+
+export default function YieldFarmCardStats(props: YieldFarmCardStatsProps) {
+  const { farmContractAddress } = props;
+  const stats = useYieldFarmStats(farmContractAddress);
+
   return (
     <>
       <CardSpaceBetweenRow>
         <CardText>APR</CardText>
-        <CardText>{APR}</CardText>
+        <CardText>{stats.apr}</CardText>
       </CardSpaceBetweenRow>
       <CardSpaceBetweenRow>
         <CardText>Daily ROI</CardText>
-        <CardText>{DROI}</CardText>
+        <CardText>{stats.dailyROI}</CardText>
       </CardSpaceBetweenRow>
       <CardSpaceBetweenRow>
         <CardText>TVL</CardText>
-        <CardText>{TVL}</CardText>
+        <CardText>{stats.tvl}</CardText>
       </CardSpaceBetweenRow>
     </>
   );

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import AppBody from '../../legacy/pages/AppBody';
 import styled from 'styled-components';
 import { TYPE } from 'legacy/theme';
-import YieldFarmCardView from './components/YieldFarmCardView';
+import YieldFarmCard from './components/YieldFarmCard';
 import { SwapPoolTabs } from 'legacy/components/NavigationTabs';
 import useYieldFarmViewModel from './useYieldFarmViewModel';
 
@@ -27,19 +27,12 @@ export default function YieldFarmView() {
     <AppBody>
       <SwapPoolTabs active={'farm'} />
       <TitleRow>
-        <TYPE.black fontWeight={500}>Farm</TYPE.black>
+        <TYPE.black fontWeight={500}>Yield Farm</TYPE.black>
       </TitleRow>
       {viewModel.yieldFarms.map((yieldFarm) => (
-        <TitleRow key={yieldFarm.stakingTokenName}>
-          <TYPE.black fontWeight={500}>TVL: {yieldFarm.farmStats.tvl}</TYPE.black>
-          <TYPE.black fontWeight={500}>APR: {yieldFarm.farmStats.apr}</TYPE.black>
-          <TYPE.black fontWeight={500}>Daily ROI: {yieldFarm.farmStats.dailyROI}</TYPE.black>
-          <PageWrapper key={yieldFarm.stakingTokenName}>
-            <YieldFarmCardView
-              TVL={yieldFarm.farmStats.tvl}
-              APR={yieldFarm.farmStats.apr}
-              DROI={yieldFarm.farmStats.dailyROI}
-            />
+        <TitleRow key={yieldFarm.contractAddress}>
+          <PageWrapper>
+            <YieldFarmCard farmContractAddress={yieldFarm.contractAddress} />
           </PageWrapper>
         </TitleRow>
       ))}

@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import YieldFarmCardImageTextView from './YieldFarmCardImageTextView';
+import YieldFarmCardImageTextView from './YieldFarmCardImageText';
 import { ButtonPrimary } from 'legacy/components/Button';
 import { Text } from 'rebass';
 import { Link } from 'react-router-dom';
-import YieldFarmCardStatsView from './YieldFarmCardStatsView';
+import YieldFarmCardStats from './YieldFarmCardStats';
 
 const CardContainer = styled.div`
   display: flex;
@@ -31,25 +31,18 @@ width: 48%;
 `};
 `;
 
-interface YieldFarmStats {
-  TVL: string;
-  APR: any;
-  DROI: string;
+interface YieldFarmCardProps {
+  farmContractAddress: string;
 }
 
-export default function YieldFarmCardView(prop: YieldFarmStats) {
-  const { TVL, APR, DROI } = prop;
+export default function YieldFarmCard(props: YieldFarmCardProps) {
+  const { farmContractAddress } = props;
   return (
     <CardContainer>
       <YieldFarmCardImageTextView />
-      <YieldFarmCardStatsView TVL={TVL} APR={APR} DROI={DROI} />
+      <YieldFarmCardStats farmContractAddress={farmContractAddress} />
       <CardSpaceBetweenRow>
-        <ResponsiveButtonPrimary
-          padding="8px"
-          as={Link}
-          to="/stake/AMB/0xA9646A0281996fDcB88f8f6f01Af52BB0268c494"
-          width="48%"
-        >
+        <ResponsiveButtonPrimary padding="8px" as={Link} to={`/stake/AMB/${farmContractAddress}`} width="48%">
           <Text>Manage</Text>
         </ResponsiveButtonPrimary>
         <ResponsiveButtonPrimary

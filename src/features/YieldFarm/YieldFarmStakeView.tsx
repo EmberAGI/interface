@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import AppBody from '../../legacy/pages/AppBody';
-import YieldFarmStakeWithdrawHeaderView from './components/YieldFarmStakeWithdrawHeaderView';
-import YieldFarmCardImageTextView from './components/YieldFarmCardImageTextView';
-import YieldFarmCardStatsView from './components/YieldFarmCardStatsView';
+import YieldFarmStakeWithdrawHeaderView from './components/YieldFarmStakeWithdrawHeader';
+import YieldFarmCardImageTextView from './components/YieldFarmCardImageText';
+import YieldFarmCardStats from './components/YieldFarmCardStats';
 import { ButtonSecondary } from 'legacy/components/Button';
+import { useParams } from 'react-router-dom';
 
 interface CardRowProps {
   justify?: string;
@@ -53,12 +54,14 @@ const StakeAction = styled(ButtonSecondary)`
   }
 `;
 export default function YieldFarmStakeView() {
+  const { stakingTokenAddress } = useParams<{ stakingTokenAddress: string }>();
+
   return (
     <AppBody>
       <YieldFarmStakeWithdrawHeaderView />
       <Container>
         <YieldFarmCardImageTextView />
-        <YieldFarmCardStatsView />
+        <YieldFarmCardStats stakingTokenAddress={stakingTokenAddress} />
         <CardRow justify="space-between">
           <CardText>Balance:</CardText>
           <CardText>69 USDC-AMB</CardText>
