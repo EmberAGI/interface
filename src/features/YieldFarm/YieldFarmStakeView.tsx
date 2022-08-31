@@ -58,10 +58,10 @@ export default function YieldFarmStakeView() {
 
   return (
     <AppBody>
-      <YieldFarmStakeWithdrawHeaderView />
+      <YieldFarmStakeWithdrawHeaderView farmContractAddress={stakingTokenAddress} />
       <Container>
         <YieldFarmCardImageTextView />
-        <YieldFarmCardStats stakingTokenAddress={stakingTokenAddress} />
+        <YieldFarmCardStats farmContractAddress={stakingTokenAddress} />
         <CardRow justify="space-between">
           <CardText>Balance:</CardText>
           <CardText>69 USDC-AMB</CardText>

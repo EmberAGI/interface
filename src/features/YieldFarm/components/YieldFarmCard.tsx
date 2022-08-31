@@ -42,7 +42,7 @@ export default function YieldFarmCard(props: YieldFarmCardProps) {
       <YieldFarmCardImageTextView />
       <YieldFarmCardStats farmContractAddress={farmContractAddress} />
       <CardSpaceBetweenRow>
-        <ResponsiveButtonPrimary padding="8px" as={Link} to={`/stake/AMB/${farmContractAddress}`} width="48%">
+        <ResponsiveButtonPrimary padding="8px" as={Link} to={`/stake/${farmContractAddress}`} width="48%">
           <Text>Manage</Text>
         </ResponsiveButtonPrimary>
         <ResponsiveButtonPrimary
