@@ -16,15 +16,12 @@
   "search.useGlobalIgnoreFiles": false,
   "search.useParentIgnoreFiles": true,
   "typescript.preferences.importModuleSpecifier": "relative",
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true,
   },
   "[html]": {
     "editor.defaultFormatter": "vscode.html-language-features"
-  },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
   },
   "git.enableSmartCommit": true,
   "eslint.validate": [
