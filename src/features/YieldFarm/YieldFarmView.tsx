@@ -34,10 +34,14 @@ export default function YieldFarmView() {
           <TYPE.black fontWeight={500}>TVL: {yieldFarm.farmStats.tvl}</TYPE.black>
           <TYPE.black fontWeight={500}>APR: {yieldFarm.farmStats.apr}</TYPE.black>
           <TYPE.black fontWeight={500}>Daily ROI: {yieldFarm.farmStats.dailyROI}</TYPE.black>
+          <PageWrapper key={yieldFarm.stakingTokenName}>
+            <YieldFarmCardView
+              TVL={yieldFarm.farmStats.tvl}
+              APR={yieldFarm.farmStats.apr}
+              DROI={yieldFarm.farmStats.dailyROI}
+            />
+          </PageWrapper>
         </TitleRow>
-        /*<PageWrapper key={yieldFarm.stakingTokenName}>
-          <YieldFarmCardView />
-        </PageWrapper>*/
       ))}
     </AppBody>
   );
