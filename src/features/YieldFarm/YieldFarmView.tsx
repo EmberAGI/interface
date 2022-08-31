@@ -30,9 +30,11 @@ export default function YieldFarmView() {
         <TYPE.black fontWeight={500}>Farm</TYPE.black>
       </TitleRow>
       {viewModel.yieldFarms.map((yieldFarm) => (
-        <TYPE.black key={yieldFarm.stakingTokenName} fontWeight={500}>
-          APR: {yieldFarm.farmStats.apr}
-        </TYPE.black>
+        <TitleRow key={yieldFarm.stakingTokenName}>
+          <TYPE.black fontWeight={500}>TVL: {yieldFarm.farmStats.tvl}</TYPE.black>
+          <TYPE.black fontWeight={500}>APR: {yieldFarm.farmStats.apr}</TYPE.black>
+          <TYPE.black fontWeight={500}>Daily ROI: {yieldFarm.farmStats.dailyROI}</TYPE.black>
+        </TitleRow>
         /*<PageWrapper key={yieldFarm.stakingTokenName}>
           <YieldFarmCardView />
         </PageWrapper>*/

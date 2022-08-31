@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import { ethers } from 'ethers';
+import { ethers, BigNumber } from 'ethers';
 import { useActiveWeb3React } from '../../legacy/hooks';
 import farmingContractABI from '../../legacy/constants/abis/farmingContract.json';
 import { ERC20_ABI } from '../../legacy/constants/abis/erc20';
+import { formatUnits } from 'ethers/lib/utils';
 
 export interface YieldFarmStats {
   tvl: string;
@@ -28,7 +29,8 @@ export interface YieldFarmViewModel {
 const initialViewModel = {
   yieldFarms: [
     {
-      stakingTokenName: 'AMB-wUSDC-flp',
+      //stakingTokenName: 'AMB-wUSDC-flp'
+      stakingTokenName: 'Firepot-LP',
       farmStats: {
         tvl: '50000',
         apr: '420',
@@ -74,44 +76,45 @@ export default function useYieldFarmViewModel() {
       const stakingTokenContract: ethers.Contract = new ethers.Contract(stakingTokenAddress, ERC20_ABI, library);
       // DEBUG
       console.log(`stakingTokenContract: ${stakingTokenContract}`);
-      const filter = stakingTokenContract.filters.Transfer(null, address);
-      // DEBUG
-      console.log(`filter: ${filter}`);
-      const updateAPR = async () => {
-        // DEBUG
-        console.log('calculate & update APR...');
-
-        const rewardsForDuration = await farmContract.getRewardForDuration();
-        const rewardsDuration = await farmContract.rewardsDuration();
-        const annualRewardPeriods = 365 / rewardsDuration;
-        const annualRewards = rewardsForDuration * annualRewardPeriods;
+      const daysPerYear = 365;
+      const calculateAPR = (
+        rewardsDurationSeconds: BigNumber,
+        rewardsForDuration: BigNumber,
+        stakeBalance: BigNumber
+      ) => {
+        const secondsPerDay = BigNumber.from(86400);
+        const secondsPerYear = secondsPerDay.mul(daysPerYear);
+        const annualRewardPeriods = BigNumber.from(secondsPerYear).div(rewardsDurationSeconds);
+        const annualRewards = rewardsForDuration.mul(annualRewardPeriods);
         // DEBUG
         console.log(`annualRewards: ${annualRewards}`);
-        const stakeBalance = await farmContract.totalSupply();
-        const apr = (annualRewards / stakeBalance) * 100;
+        const apr = annualRewards.div(stakeBalance).mul(100).toNumber();
+        return apr;
+      };
+      const updateFarmStats = async () => {
+        const rewardsDuration: BigNumber = await farmContract
+          .rewardsDuration()
+          .then((value: number) => BigNumber.from(value));
         // DEBUG
-        console.log(`apr: ${apr}`);
+        console.log(`rewardsDuration: ${rewardsDuration}`);
+        const rewardsForDuration: BigNumber = await farmContract
+          .getRewardForDuration()
+          .then((value: number) => BigNumber.from(value));
+        // DEBUG
+        console.log(`rewardsForDuration: ${rewardsForDuration}`);
+        const stakeBalance: BigNumber = await farmContract.totalSupply().then((value: number) => BigNumber.from(value));
+        const newAPR = calculateAPR(rewardsDuration, rewardsForDuration, stakeBalance);
+
         const stakingTokenName = await stakingTokenContract.name();
         // DEBUG
         console.log(`stakingTokenName: ${stakingTokenName}`);
-        setViewModel({
-          yieldFarms: [
-            {
-              stakingTokenName: 'AMB-wUSDC-flp',
-              farmStats: {
-                tvl: '50000',
-                apr: apr.toString(),
-                dailyROI: '35',
-              },
-              userPosition: {
-                userBalance: '5',
-                userDeposited: '1',
-              },
-            },
-          ],
-        });
-        /*setViewModel((viewModel) => {
-          return {
+        const stakingTokenDecimals = await stakingTokenContract.decimals();
+        // DEBUG
+        console.log(`stakingTokenDecimals: ${stakingTokenDecimals}`);
+
+        setViewModel((viewModel) => {
+          console.log(`viewModel: ${JSON.stringify(viewModel)}`);
+          const viewModelUpdate = {
             ...viewModel,
             yieldFarms: viewModel.yieldFarms.map((yieldFarm) => {
               if (yieldFarm.stakingTokenName != stakingTokenName) {
@@ -121,25 +124,36 @@ export default function useYieldFarmViewModel() {
               return {
                 ...yieldFarm,
                 farmStats: {
-                  ...yieldFarm.farmStats,
-                  apr: apr.toString(),
+                  tvl: formatUnits(stakeBalance, stakingTokenDecimals).toString(),
+                  apr: newAPR.toString(),
+                  dailyROI: (newAPR / daysPerYear).toString(),
                 },
               };
             }),
           };
-        });*/
+          console.log(`viewModelUpdate: ${JSON.stringify(viewModelUpdate)}`);
+          return viewModelUpdate;
+        });
       };
-      await updateAPR();
+      await updateFarmStats();
 
       if (!isSubscribed) {
         return;
       }
 
       const listener = async () => {
-        await updateAPR();
+        await updateFarmStats();
       };
-      stakingTokenContract.on(filter, listener);
-      unsubscribeFunctions.push(() => stakingTokenContract.off(filter, listener));
+      const toStakingTokenFilter = stakingTokenContract.filters.Transfer(null, address);
+      // DEBUG
+      console.log(`filter: ${toStakingTokenFilter}`);
+      stakingTokenContract.on(toStakingTokenFilter, listener);
+      unsubscribeFunctions.push(() => stakingTokenContract.off(toStakingTokenFilter, listener));
+      const fromStakingTokenFilter = stakingTokenContract.filters.Transfer(address);
+      // DEBUG
+      console.log(`filter: ${fromStakingTokenFilter}`);
+      stakingTokenContract.on(fromStakingTokenFilter, listener);
+      unsubscribeFunctions.push(() => stakingTokenContract.off(fromStakingTokenFilter, listener));
     });
 
     return () => {
