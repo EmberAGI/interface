@@ -34,7 +34,7 @@ export function getEtherscanLink(
 
   switch (type) {
     case 'transaction': {
-      return `${prefix}/tx/${data}`;
+      return `${prefix}/transactions/${data}`;
     }
     case 'token': {
       return `${prefix}/token/${data}`;
