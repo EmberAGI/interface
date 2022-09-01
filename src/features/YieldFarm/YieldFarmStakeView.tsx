@@ -6,6 +6,7 @@ import YieldFarmCardImageTextView from './components/YieldFarmCardImageText';
 import YieldFarmCardStats from './components/YieldFarmCardStats';
 import { ButtonSecondary } from 'legacy/components/Button';
 import { useParams } from 'react-router-dom';
+import { useActiveWeb3React } from 'legacy/hooks';
 
 interface CardRowProps {
   justify?: string;
@@ -55,6 +56,7 @@ const StakeAction = styled(ButtonSecondary)`
 `;
 export default function YieldFarmStakeView() {
   const { stakingTokenAddress } = useParams<{ stakingTokenAddress: string }>();
+  const { library } = useActiveWeb3React();
 
   return (
     <AppBody>
