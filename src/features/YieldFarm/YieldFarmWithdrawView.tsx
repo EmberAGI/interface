@@ -74,6 +74,9 @@ export default function YieldFarmWithdrawView() {
         <CardRowCenter>
           <StakeAction>Claim Rewards</StakeAction>
         </CardRowCenter>
+        <CardRowCenter>
+          <StakeAction>Exit Position</StakeAction>
+        </CardRowCenter>
       </Container>
     </AppBody>
   );
