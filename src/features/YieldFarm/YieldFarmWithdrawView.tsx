@@ -62,13 +62,17 @@ export default function YieldFarmWithdrawView() {
           <CardText>Deposited:</CardText>
           <CardText>69 USDC-AMB</CardText>
         </CardRow>
+        <InputAmount />
+        <CardRowCenter>
+          <StakeAction>Withdraw</StakeAction>
+          <StakeAction>Withdraw All</StakeAction>
+        </CardRowCenter>
         <CardRow justify="space-between">
           <CardText>Earned:</CardText>
           <CardText>69 USDC-AMB</CardText>
         </CardRow>
-        <InputAmount />
         <CardRowCenter>
-          <StakeAction>Withdraw</StakeAction>
+          <StakeAction>Claim Rewards</StakeAction>
         </CardRowCenter>
       </Container>
     </AppBody>
