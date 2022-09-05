@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { ethers, BigNumber } from 'ethers';
-import { useActiveWeb3React } from '../../legacy/hooks';
-import farmingContractABI from '../../legacy/constants/abis/farmingContract.json';
-import { ERC20_ABI } from '../../legacy/constants/abis/erc20';
+import { useActiveWeb3React } from '../../../legacy/hooks';
+import farmingContractABI from '../../../legacy/constants/abis/farmingContract.json';
+import { ERC20_ABI } from '../../../legacy/constants/abis/erc20';
 import { formatUnits } from 'ethers/lib/utils';
-import { YieldFarmStats } from './useYieldFarmStats';
+import { YieldFarmStats } from '../components/useYieldFarmStatsViewModel';
 
 export interface LpTokenUserPosition {
   userBalance: string;

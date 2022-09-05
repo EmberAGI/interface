@@ -1,10 +1,10 @@
 import { BigNumber, ethers } from 'ethers';
 import { formatUnits } from 'ethers/lib/utils';
 import { useState, useEffect } from 'react';
-import { ERC20_ABI } from '../../legacy/constants/abis/erc20';
-import farmingContractABI from '../../legacy/constants/abis/farmingContract.json';
-import { useActiveWeb3React } from '../../legacy/hooks';
-import { ApprovalState, useApproveCallback } from '../../legacy/hooks/useApproveCallback';
+import { ERC20_ABI } from '../../../legacy/constants/abis/erc20';
+import farmingContractABI from '../../../legacy/constants/abis/farmingContract.json';
+import { useActiveWeb3React } from '../../../legacy/hooks';
+import { ApprovalState, useApproveCallback } from '../../../legacy/hooks/useApproveCallback';
 
 export interface UserApprovedAmount {
   approvedAmount: string;

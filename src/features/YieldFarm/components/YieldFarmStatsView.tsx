@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import useYieldFarmStats from '../useYieldFarmStats';
+import useYieldFarmStatsViewModel from './useYieldFarmStatsViewModel';
 
 const CardText = styled.p`
   text-align: right;
@@ -16,13 +16,13 @@ const CardSpaceBetweenRow = styled.div`
   height: 40px;
 `;
 
-interface YieldFarmCardStatsProps {
+interface YieldFarmStatsProps {
   farmContractAddress: string;
 }
 
-export default function YieldFarmCardStats(props: YieldFarmCardStatsProps) {
+export default function YieldFarmStats(props: YieldFarmStatsProps) {
   const { farmContractAddress } = props;
-  const stats = useYieldFarmStats(farmContractAddress);
+  const stats = useYieldFarmStatsViewModel(farmContractAddress);
 
   return (
     <>

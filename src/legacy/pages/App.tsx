@@ -19,9 +19,9 @@ import RemoveLiquidity from './RemoveLiquidity';
 import { RedirectOldRemoveLiquidityPathStructure } from './RemoveLiquidity/redirects';
 import Swap from './Swap';
 import Faucet from './Faucet';
-import YieldFarmView from 'features/YieldFarm/YieldFarmView';
-import YieldFarmStakeView from 'features/YieldFarm/YieldFarmStakeView';
-import YieldFarmWithdrawView from 'features/YieldFarm/YieldFarmWithdrawView';
+import YieldFarmView from 'features/YieldFarm/screens/YieldFarmView';
+import YieldFarmStakeView from 'features/YieldFarm/screens/YieldFarmStakeView';
+import YieldFarmWithdrawView from 'features/YieldFarm/screens/YieldFarmWithdrawView';
 import { OpenClaimAddressModalAndRedirectToSwap, RedirectPathToSwapOnly } from './Swap/redirects';
 import useAutoLogin from '../hooks/useAutoLogin';
 

@@ -36,7 +36,8 @@ function useContract(address: string | undefined, ABI: any, withSignerIfPossible
 export function useTokenContract(tokenAddress?: string, withSignerIfPossible?: boolean): Contract | null {
   return useContract(tokenAddress, ERC20_ABI, withSignerIfPossible);
 }
-export function useSRContract(tokenAddress?: string, withSignerIfPossible?: boolean): Contract | null {
+
+export function useYieldFarmContract(tokenAddress?: string, withSignerIfPossible?: boolean): Contract | null {
   return useContract(tokenAddress, FARMINGCONTRACT_ABI, withSignerIfPossible);
 }
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import AppBody from '../../legacy/pages/AppBody';
-import YieldFarmStakeWithdrawHeaderView from './components/YieldFarmStakeWithdrawHeader';
-import YieldFarmCardImageTextView from './components/YieldFarmCardImageText';
-import YieldFarmCardStats from './components/YieldFarmCardStats';
+import AppBody from '../../../legacy/pages/AppBody';
+import YieldFarmStakeWithdrawHeaderView from '../components/YieldFarmStakeWithdrawHeader';
+import YieldFarmCardImageTextView from '../components/YieldFarmCardImageText';
+import YieldFarmStats from '../components/YieldFarmStatsView';
 import { ButtonSecondary } from 'legacy/components/Button';
 import { useParams } from 'react-router-dom';
 import { useActiveWeb3React } from 'legacy/hooks';
@@ -63,7 +63,7 @@ export default function YieldFarmStakeView() {
       <YieldFarmStakeWithdrawHeaderView farmContractAddress={stakingTokenAddress} />
       <Container>
         <YieldFarmCardImageTextView />
-        <YieldFarmCardStats farmContractAddress={stakingTokenAddress} />
+        <YieldFarmStats farmContractAddress={stakingTokenAddress} />
         <CardRow justify="space-between">
           <CardText>Balance:</CardText>
           <CardText>69 USDC-AMB</CardText>
