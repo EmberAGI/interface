@@ -23,7 +23,7 @@ const InputAmount = styled.input`
   border-radius: 10px;
 `;
 
-const StakeAction = styled(ButtonSecondary)`
+const ActionButton = styled(ButtonSecondary)`
   width: fit-content;
   font-weight: 400;
   margin-left: 8px;
@@ -53,7 +53,7 @@ const CardRowCenter = styled(CardRow)`
 `;
 export default function YieldFarmWithdrawView() {
   const { stakingTokenAddress } = useParams<{ stakingTokenAddress: string }>();
-  const { userEarnedRewards } = useYieldFarmUserPostion(stakingTokenAddress);
+  const { userEarnedRewards, claim, withdrawAndClaim } = useYieldFarmUserPostion(stakingTokenAddress);
   return (
     <AppBody>
       <YieldFarmStakeWithdrawHeaderView farmContractAddress={stakingTokenAddress} />
@@ -66,17 +66,17 @@ export default function YieldFarmWithdrawView() {
         </CardRow>
         <InputAmount />
         <CardRowCenter>
-          <StakeAction>Withdraw</StakeAction>
+          <ActionButton>Withdraw</ActionButton>
         </CardRowCenter>
         <CardRow justify="space-between">
           <CardText>Earned:</CardText>
           <CardText>{userEarnedRewards}</CardText>
         </CardRow>
         <CardRowCenter>
-          <StakeAction>Claim Rewards</StakeAction>
+          <ActionButton onClick={() => claim()}>Claim Rewards</ActionButton>
         </CardRowCenter>
         <CardRowCenter>
-          <StakeAction>Exit Position</StakeAction>
+          <ActionButton onClick={() => withdrawAndClaim()}>Exit Position</ActionButton>
         </CardRowCenter>
       </Container>
     </AppBody>
