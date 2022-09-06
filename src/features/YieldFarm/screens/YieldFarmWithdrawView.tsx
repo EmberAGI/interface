@@ -53,7 +53,7 @@ const CardRowCenter = styled(CardRow)`
 `;
 export default function YieldFarmWithdrawView() {
   const { stakingTokenAddress } = useParams<{ stakingTokenAddress: string }>();
-  const { userEarnedRewards, claim, withdrawAndClaim } = useYieldFarmUserPostion(stakingTokenAddress);
+  const { userStakeBalance, userEarnedRewards, claim, withdrawAndClaim } = useYieldFarmUserPostion(stakingTokenAddress);
   return (
     <AppBody>
       <YieldFarmStakeWithdrawHeaderView farmContractAddress={stakingTokenAddress} />
@@ -62,7 +62,7 @@ export default function YieldFarmWithdrawView() {
         <YieldFarmCardStats farmContractAddress={stakingTokenAddress} />
         <CardRow justify="space-between">
           <CardText>Deposited:</CardText>
-          <CardText>69 USDC-AMB</CardText>
+          <CardText>{userStakeBalance}</CardText>
         </CardRow>
         <InputAmount />
         <CardRowCenter>
