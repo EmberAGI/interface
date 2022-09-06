@@ -48,6 +48,7 @@ export default function YieldFarmCard(props: YieldFarmCardProps) {
         <ResponsiveButtonPrimary
           padding="8px"
           as={Link}
+          // REFACTOR - Must populate LP pair dynamically
           to="/add/AMB/0xA9646A0281996fDcB88f8f6f01Af52BB0268c494"
           width="48%"
         >

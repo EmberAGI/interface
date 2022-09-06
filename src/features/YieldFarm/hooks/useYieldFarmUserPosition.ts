@@ -5,27 +5,27 @@ import { useTransactionAdder } from '../../../legacy/state/transactions/hooks';
 import { useYieldFarmContract } from '../../../legacy/hooks/useContract';
 import { useEffect, useState } from 'react';
 
-export default function useYieldFarmUserPosition(stakingRewardContractAddress: string) {
+export default function useYieldFarmUserPosition(yieldFarmContractAddress: string) {
   const { library, account } = useActiveWeb3React();
   const addTransaction = useTransactionAdder();
-  const stakingRewardsContract = useYieldFarmContract(stakingRewardContractAddress);
+  const yieldFarmContract = useYieldFarmContract(yieldFarmContractAddress);
   const [userStakeBalance, setUserStakeBalance] = useState(0);
   const [userEarnedRewards, setUserEarnedRewards] = useState(0);
 
   const stakingTokenDecimals = 18;
 
-  const deposit = (depositAmount: string) => {
-    stakingRewardsContract
-      ?.stake(parseUnits(depositAmount, stakingTokenDecimals))
+  const stake = (stakeAmount: string) => {
+    yieldFarmContract
+      ?.stake(parseUnits(stakeAmount, stakingTokenDecimals))
       .then((txResponse: TransactionResponse) => {
-        addTransaction(txResponse, { summary: `Staked ${depositAmount} LP tokens` });
+        addTransaction(txResponse, { summary: `Staked ${stakeAmount} LP tokens` });
         return txResponse.wait();
       })
       .catch((error: any) => console.error('Could not stake funds', error));
   };
 
   const claim = () => {
-    stakingRewardsContract
+    yieldFarmContract
       ?.getReward()
       .then((txResponse: TransactionResponse) => {
         addTransaction(txResponse, { summary: `Claimed rewards tokens` });
@@ -35,7 +35,7 @@ export default function useYieldFarmUserPosition(stakingRewardContractAddress: s
   };
 
   const withdraw = (withdrawAmount: string) => {
-    stakingRewardsContract
+    yieldFarmContract
       ?.withdraw(parseUnits(withdrawAmount, stakingTokenDecimals))
       .then((txResponse: TransactionResponse) => {
         addTransaction(txResponse, { summary: `Withdrew ${withdrawAmount} LP tokens` });
@@ -45,7 +45,7 @@ export default function useYieldFarmUserPosition(stakingRewardContractAddress: s
   };
 
   const withdrawAndClaim = () => {
-    stakingRewardsContract
+    yieldFarmContract
       ?.exit()
       .then((txResponse: TransactionResponse) => {
         addTransaction(txResponse, { summary: `Claimed rewards + exited staking position` });
@@ -60,7 +60,7 @@ export default function useYieldFarmUserPosition(stakingRewardContractAddress: s
     }
     const listener = async () => {
       try {
-        const earned = await stakingRewardsContract?.earned(account);
+        const earned = await yieldFarmContract?.earned(account);
         setUserEarnedRewards(earned);
       } catch (error) {
         console.error('Could not view earned amount of user', error);
@@ -72,7 +72,7 @@ export default function useYieldFarmUserPosition(stakingRewardContractAddress: s
     return () => {
       library?.off(eventName, listener);
     };
-  }, [account, library, stakingRewardsContract]);
+  }, [account, library, yieldFarmContract]);
 
   useEffect(() => {
     if (account == undefined) {
@@ -80,7 +80,7 @@ export default function useYieldFarmUserPosition(stakingRewardContractAddress: s
     }
     const listener = async () => {
       try {
-        const balance = await stakingRewardsContract?.balanceOf(account);
+        const balance = await yieldFarmContract?.balanceOf(account);
         setUserStakeBalance(balance);
       } catch (error) {
         console.error('Could not view balance of user', error);
@@ -96,12 +96,12 @@ export default function useYieldFarmUserPosition(stakingRewardContractAddress: s
       library?.off(stakedEvent, listener);
       library?.off(withdrawnEvent, listener);
     };
-  }, [account, library, stakingRewardsContract]);
+  }, [account, library, yieldFarmContract]);
 
   return {
     userStakeBalance: userStakeBalance,
     userEarnedRewards: userEarnedRewards,
-    deposit: deposit,
+    stake: stake,
     withdraw: withdraw,
     claim: claim,
     withdrawAndClaim: withdrawAndClaim,
