@@ -57,7 +57,7 @@ const StakeAction = styled(ButtonSecondary)`
 `;
 export default function YieldFarmStakeView() {
   const { stakingTokenAddress } = useParams<{ stakingTokenAddress: string }>();
-  const { viewModel, stake } = useYieldFarmStatsViewModel(stakingTokenAddress);
+  //const { viewModel, stake } = useYieldFarmStatsViewModel(stakingTokenAddress);
 
   return (
     <AppBody>

@@ -1,5 +1,6 @@
 import { useActiveWeb3React } from 'legacy/hooks';
-import { parseUnits } from 'ethers/lib/utils';
+import { parseUnits, formatUnits } from 'ethers/lib/utils';
+import { BigNumber } from 'ethers';
 import { TransactionResponse } from '@ethersproject/providers';
 import { useTransactionAdder } from '../../../legacy/state/transactions/hooks';
 import { useYieldFarmContract } from '../../../legacy/hooks/useContract';
@@ -10,7 +11,7 @@ export default function useYieldFarmUserPosition(yieldFarmContractAddress: strin
   const addTransaction = useTransactionAdder();
   const yieldFarmContract = useYieldFarmContract(yieldFarmContractAddress);
   const [userStakeBalance, setUserStakeBalance] = useState(0);
-  const [userEarnedRewards, setUserEarnedRewards] = useState(0);
+  const [userEarnedRewards, setUserEarnedRewards] = useState('0');
 
   const stakingTokenDecimals = 18;
 
@@ -61,7 +62,7 @@ export default function useYieldFarmUserPosition(yieldFarmContractAddress: strin
     const listener = async () => {
       try {
         const earned = await yieldFarmContract?.earned(account);
-        setUserEarnedRewards(earned);
+        setUserEarnedRewards(formatUnits(earned, 18));
       } catch (error) {
         console.error('Could not view earned amount of user', error);
       }

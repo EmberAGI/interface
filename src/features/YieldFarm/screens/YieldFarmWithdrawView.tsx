@@ -1,10 +1,11 @@
 import React from 'react';
-import AppBody from '../../legacy/pages/AppBody';
+import AppBody from '../../../legacy/pages/AppBody';
 import styled from 'styled-components';
-import YieldFarmStakeWithdrawHeaderView from './components/YieldFarmStakeWithdrawHeader';
-import YieldFarmCardImageTextView from './components/YieldFarmCardImageText';
+import YieldFarmStakeWithdrawHeaderView from '../components/YieldFarmStakeWithdrawHeader';
+import YieldFarmCardImageTextView from '../components/YieldFarmCardImageText';
 import { ButtonSecondary } from 'legacy/components/Button';
-import YieldFarmCardStats from './components/YieldFarmCardStats';
+import YieldFarmCardStats from '../components/YieldFarmStatsView';
+import useYieldFarmUserPostion from '../hooks/useYieldFarmUserPosition';
 import { useParams } from 'react-router-dom';
 
 interface CardRowProps {
@@ -52,6 +53,7 @@ const CardRowCenter = styled(CardRow)`
 `;
 export default function YieldFarmWithdrawView() {
   const { stakingTokenAddress } = useParams<{ stakingTokenAddress: string }>();
+  const { userEarnedRewards } = useYieldFarmUserPostion(stakingTokenAddress);
   return (
     <AppBody>
       <YieldFarmStakeWithdrawHeaderView farmContractAddress={stakingTokenAddress} />
@@ -68,7 +70,7 @@ export default function YieldFarmWithdrawView() {
         </CardRowCenter>
         <CardRow justify="space-between">
           <CardText>Earned:</CardText>
-          <CardText>69 USDC-AMB</CardText>
+          <CardText>{userEarnedRewards}</CardText>
         </CardRow>
         <CardRowCenter>
           <StakeAction>Claim Rewards</StakeAction>
