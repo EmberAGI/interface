@@ -1,13 +1,9 @@
 import { useState, useEffect } from 'react';
-import { ethers, BigNumber } from 'ethers';
-import { useActiveWeb3React } from '../../../legacy/hooks';
-import farmingContractABI from '../../../legacy/constants/abis/farmingContract.json';
-import { ERC20_ABI } from '../../../legacy/constants/abis/erc20';
-import { formatUnits } from 'ethers/lib/utils';
-import { YieldFarmStats } from '../components/useYieldFarmStatsViewModel';
+import useERC20Token from '../hooks/useERC20Token';
+import useYieldFarmState from '../hooks/useYieldFarmState';
 import useYieldFarmUserPosition from '../hooks/useYieldFarmUserPosition';
 
-export interface YieldFarmViewModel {
+export interface YieldFarmStakeViewModel {
   unstakedTokens: string;
   stakedTokens: string;
 }
@@ -17,16 +13,19 @@ const initialViewModel = {
   stakedTokens: '0',
 };
 
-export default function useYieldFarmViewModel(yieldFarmContractAddress: string) {
-  const [viewModel, setViewModel] = useState<YieldFarmViewModel>(initialViewModel);
+export default function useYieldFarmStakeViewModel(yieldFarmContractAddress: string) {
+  const [viewModel, setViewModel] = useState<YieldFarmStakeViewModel>(initialViewModel);
   const { userStakeBalance, stake } = useYieldFarmUserPosition(yieldFarmContractAddress);
+  const { stakingTokenAddress } = useYieldFarmState(yieldFarmContractAddress);
+  const { userBalance } = useERC20Token(stakingTokenAddress);
 
   useEffect(() => {
     setViewModel((viewModel) => ({
       ...viewModel,
+      unstakedTokens: userBalance.toString(),
       stakedTokens: userStakeBalance.toString(),
     }));
-  }, [userStakeBalance]);
+  }, [userBalance, userStakeBalance]);
 
   return {
     viewModel,

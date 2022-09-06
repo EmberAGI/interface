@@ -1,6 +1,5 @@
 import { useActiveWeb3React } from 'legacy/hooks';
 import { parseUnits, formatUnits } from 'ethers/lib/utils';
-import { BigNumber } from 'ethers';
 import { TransactionResponse } from '@ethersproject/providers';
 import { useTransactionAdder } from '../../../legacy/state/transactions/hooks';
 import { useYieldFarmContract } from '../../../legacy/hooks/useContract';
@@ -10,7 +9,7 @@ export default function useYieldFarmUserPosition(yieldFarmContractAddress: strin
   const { library, account } = useActiveWeb3React();
   const addTransaction = useTransactionAdder();
   const yieldFarmContract = useYieldFarmContract(yieldFarmContractAddress);
-  const [userStakeBalance, setUserStakeBalance] = useState(0);
+  const [userStakeBalance, setUserStakeBalance] = useState('0');
   const [userEarnedRewards, setUserEarnedRewards] = useState('0');
 
   const stakingTokenDecimals = 18;
@@ -62,7 +61,7 @@ export default function useYieldFarmUserPosition(yieldFarmContractAddress: strin
     const listener = async () => {
       try {
         const earned = await yieldFarmContract?.earned(account);
-        setUserEarnedRewards(formatUnits(earned, 18));
+        setUserEarnedRewards(formatUnits(earned, stakingTokenDecimals));
       } catch (error) {
         console.error('Could not view earned amount of user', error);
       }
@@ -82,22 +81,22 @@ export default function useYieldFarmUserPosition(yieldFarmContractAddress: strin
     const listener = async () => {
       try {
         const balance = await yieldFarmContract?.balanceOf(account);
-        setUserStakeBalance(balance);
+        setUserStakeBalance(formatUnits(balance, stakingTokenDecimals));
       } catch (error) {
         console.error('Could not view balance of user', error);
       }
     };
     const stakedEvent = 'Staked';
-    library?.on(stakedEvent, listener);
+    yieldFarmContract?.on(stakedEvent, listener);
 
     const withdrawnEvent = 'Withdrawn';
-    library?.on(withdrawnEvent, listener);
+    yieldFarmContract?.on(withdrawnEvent, listener);
 
     return () => {
-      library?.off(stakedEvent, listener);
-      library?.off(withdrawnEvent, listener);
+      yieldFarmContract?.off(stakedEvent, listener);
+      yieldFarmContract?.off(withdrawnEvent, listener);
     };
-  }, [account, library, yieldFarmContract]);
+  }, [account, yieldFarmContract]);
 
   return {
     userStakeBalance: userStakeBalance,
@@ -108,17 +107,3 @@ export default function useYieldFarmUserPosition(yieldFarmContractAddress: strin
     withdrawAndClaim: withdrawAndClaim,
   };
 }
-
-//This function is to access the ERC20 contract that is being staked
-// Missing returning the staking contract so we can handle it
-
-/*
-function useStakingContract(stakingRewardContractAdress: string) {
-  const { account } = useActiveWeb3React();
-  const SRContract = useStakingRewardContract(stakingRewardContractAdress);
-  const stakingAddress = async () => {
-    const address = await SRContract.stakingToken();
-    return address;
-  };
-}
-*/
