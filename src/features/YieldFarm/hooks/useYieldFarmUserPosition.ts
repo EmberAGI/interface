@@ -10,7 +10,7 @@ export default function useYieldFarmUserPosition(yieldFarmContractAddress: strin
   const { library, account } = useActiveWeb3React();
   const addTransaction = useTransactionAdder();
   const yieldFarmContract = useYieldFarmContract(yieldFarmContractAddress);
-  const [userStakeBalance, setUserStakeBalance] = useState(0);
+  const [userStakeBalance, setUserStakeBalance] = useState('0');
   const [userEarnedRewards, setUserEarnedRewards] = useState('0');
 
   const stakingTokenDecimals = 18;
@@ -62,6 +62,7 @@ export default function useYieldFarmUserPosition(yieldFarmContractAddress: strin
     const listener = async () => {
       try {
         const earned = await yieldFarmContract?.earned(account);
+        console.log(earned, 'earned');
         setUserEarnedRewards(formatUnits(earned, 18));
       } catch (error) {
         console.error('Could not view earned amount of user', error);
@@ -82,14 +83,15 @@ export default function useYieldFarmUserPosition(yieldFarmContractAddress: strin
     const listener = async () => {
       try {
         const balance = await yieldFarmContract?.balanceOf(account);
-        setUserStakeBalance(balance);
+        console.log(balance, 'balance');
+        console.log(formatUnits(balance, 18), 'balanceformatted');
+        setUserStakeBalance(formatUnits(balance, 18));
       } catch (error) {
         console.error('Could not view balance of user', error);
       }
     };
     const stakedEvent = 'Staked';
     library?.on(stakedEvent, listener);
-
     const withdrawnEvent = 'Withdrawn';
     library?.on(withdrawnEvent, listener);
 
