@@ -5,10 +5,10 @@ import { BigNumber } from 'ethers';
 export default function useYieldFarmUserPosition(yieldFarmContractAddress: string) {
   //const { library, account } = useActiveWeb3React();
   const yieldFarmContract = useYieldFarmContract(yieldFarmContractAddress);
-  const [stakingTokenAddress, setStakingTokenAddress] = useState('');
-  const [stakeBalance, setStakeBalance] = useState(BigNumber.from(0));
-  const [rewardsDuration, setRewardsDuration] = useState(BigNumber.from(0));
-  const [rewardsForDuration, setRewardsForDuration] = useState(BigNumber.from(0));
+  const [stakingTokenAddress, setStakingTokenAddress] = useState<string | undefined>();
+  const [stakeBalance, setStakeBalance] = useState<BigNumber | undefined>();
+  const [rewardsDuration, setRewardsDuration] = useState<BigNumber | undefined>();
+  const [rewardsForDuration, setRewardsForDuration] = useState<BigNumber | undefined>();
 
   useEffect(() => {
     if (yieldFarmContract == undefined) {
@@ -26,10 +26,27 @@ export default function useYieldFarmUserPosition(yieldFarmContractAddress: strin
     if (yieldFarmContract == undefined) {
       return;
     }
-    yieldFarmContract
-      .totalSupply()
-      .then((value: number) => setStakeBalance(BigNumber.from(value)))
-      .catch((error: any) => console.error(error));
+
+    const listener = async () => {
+      try {
+        const balance = await yieldFarmContract.totalSupply();
+        setStakeBalance(BigNumber.from(balance));
+      } catch (error) {
+        console.error('Could not view balance of user', error);
+      }
+    };
+    listener();
+
+    const stakedEvent = 'Staked';
+    yieldFarmContract?.on(stakedEvent, listener);
+
+    const withdrawnEvent = 'Withdrawn';
+    yieldFarmContract?.on(withdrawnEvent, listener);
+
+    return () => {
+      yieldFarmContract?.off(stakedEvent, listener);
+      yieldFarmContract?.off(withdrawnEvent, listener);
+    };
   }, [yieldFarmContract]);
 
   useEffect(() => {

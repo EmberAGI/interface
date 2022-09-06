@@ -22,7 +22,7 @@ export default function useYieldFarmStakeViewModel(yieldFarmContractAddress: str
   useEffect(() => {
     setViewModel((viewModel) => ({
       ...viewModel,
-      unstakedTokens: userBalance.toString(),
+      unstakedTokens: userBalance ? userBalance.toString() : '0',
       stakedTokens: userStakeBalance.toString(),
     }));
   }, [userBalance, userStakeBalance]);

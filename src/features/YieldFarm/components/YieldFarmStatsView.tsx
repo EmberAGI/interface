@@ -22,21 +22,21 @@ interface YieldFarmStatsProps {
 
 export default function YieldFarmStats(props: YieldFarmStatsProps) {
   const { farmContractAddress } = props;
-  const stats = useYieldFarmStatsViewModel(farmContractAddress);
+  const { viewModel } = useYieldFarmStatsViewModel(farmContractAddress);
 
   return (
     <>
       <CardSpaceBetweenRow>
         <CardText>APR</CardText>
-        <CardText>{stats.apr}</CardText>
+        <CardText>{viewModel.apr}</CardText>
       </CardSpaceBetweenRow>
       <CardSpaceBetweenRow>
         <CardText>Daily ROI</CardText>
-        <CardText>{stats.dailyROI}</CardText>
+        <CardText>{viewModel.dailyROI}</CardText>
       </CardSpaceBetweenRow>
       <CardSpaceBetweenRow>
         <CardText>TVL</CardText>
-        <CardText>{stats.tvl}</CardText>
+        <CardText>{viewModel.tvl}</CardText>
       </CardSpaceBetweenRow>
     </>
   );

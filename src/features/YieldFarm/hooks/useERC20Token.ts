@@ -3,11 +3,11 @@ import { useEffect, useState } from 'react';
 import { useActiveWeb3React } from '../../../legacy/hooks';
 import { useTokenContract } from '../../../legacy/hooks/useContract';
 
-export default function useERC20Token(tokenAddress: string) {
+export default function useERC20Token(tokenAddress?: string) {
   const { account } = useActiveWeb3React();
   const tokenContract = useTokenContract(tokenAddress);
-  const [userBalance, setUserBalance] = useState(BigNumber.from(0));
-  const [decimals, setDecimals] = useState(0);
+  const [userBalance, setUserBalance] = useState<BigNumber | undefined>();
+  const [decimals, setDecimals] = useState<number | undefined>();
 
   useEffect(() => {
     if (tokenContract == undefined || account == undefined) {
@@ -42,11 +42,14 @@ export default function useERC20Token(tokenAddress: string) {
     tokenContract
       .decimals()
       .then((decimals: number) => setDecimals(decimals))
-      .catch((error: any) => console.error('Could not get decimals of token', error));
+      .catch((error: any) => {
+        setDecimals(18);
+        console.error('Could not get decimals of token', error);
+      });
   }, [tokenContract]);
 
   return {
-    contract: tokenContract,
+    contract: tokenContract ?? undefined,
     userBalance,
     decimals,
   };

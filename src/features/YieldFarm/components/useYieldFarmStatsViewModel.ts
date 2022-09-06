@@ -28,6 +28,9 @@ export default function useYieldFarmStatsViewModel(contractAddress: string) {
   } = useERC20Token(stakingTokenAddress);
 
   useEffect(() => {
+    if (rewardsDuration == undefined || rewardsForDuration == undefined || stakeBalance == undefined) {
+      return;
+    }
     const daysPerYear = 365;
     const calculateAPR = (
       rewardsDurationSeconds: BigNumber,
@@ -49,15 +52,7 @@ export default function useYieldFarmStatsViewModel(contractAddress: string) {
       apr: newAPR.toString(),
       dailyROI: (newAPR / daysPerYear).toString(),
     });
-  }, [
-    contractAddress,
-    library,
-    rewardsDuration,
-    rewardsForDuration,
-    stakeBalance,
-    stakingTokenContract,
-    stakingTokenDecimals,
-  ]);
+  }, [rewardsDuration, rewardsForDuration, stakeBalance, stakingTokenDecimals]);
 
   return { viewModel };
 }
