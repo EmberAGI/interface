@@ -3,6 +3,7 @@ import AppBody from '../../../legacy/pages/AppBody';
 import styled from 'styled-components';
 import YieldFarmStakeWithdrawHeaderView from '../components/YieldFarmStakeWithdrawHeader';
 import YieldFarmCardImageTextView from '../components/YieldFarmCardImageText';
+import useYieldFarmWithdrawViewModel from './useYieldFarmWithdrawViewModel';
 import { ButtonSecondary } from 'legacy/components/Button';
 import YieldFarmCardStats from '../components/YieldFarmStatsView';
 import useYieldFarmUserPostion from '../hooks/useYieldFarmUserPosition';
@@ -53,7 +54,8 @@ const CardRowCenter = styled(CardRow)`
 `;
 export default function YieldFarmWithdrawView() {
   const { stakingTokenAddress } = useParams<{ stakingTokenAddress: string }>();
-  const { userStakeBalance, userEarnedRewards, claim, withdrawAndClaim } = useYieldFarmUserPostion(stakingTokenAddress);
+  const { viewModel, claim, withdrawAndClaim, withdraw } = useYieldFarmWithdrawViewModel(stakingTokenAddress);
+  //const { userStakeBalance, userEarnedRewards, claim, withdrawAndClaim } = useYieldFarmUserPostion(stakingTokenAddress);
   return (
     <AppBody>
       <YieldFarmStakeWithdrawHeaderView farmContractAddress={stakingTokenAddress} />
@@ -62,7 +64,7 @@ export default function YieldFarmWithdrawView() {
         <YieldFarmCardStats farmContractAddress={stakingTokenAddress} />
         <CardRow justify="space-between">
           <CardText>Deposited:</CardText>
-          <CardText>{userStakeBalance}</CardText>
+          <CardText>{viewModel.stakedTokens}</CardText>
         </CardRow>
         <InputAmount />
         <CardRowCenter>
@@ -70,7 +72,7 @@ export default function YieldFarmWithdrawView() {
         </CardRowCenter>
         <CardRow justify="space-between">
           <CardText>Earned:</CardText>
-          <CardText>{userEarnedRewards}</CardText>
+          <CardText>{viewModel.earnedTokens}</CardText>
         </CardRow>
         <CardRowCenter>
           <ActionButton onClick={() => claim()}>Claim Rewards</ActionButton>
