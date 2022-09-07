@@ -5,8 +5,8 @@ import { ApprovalState, useApproveCallback } from '../../../legacy/hooks/useAppr
 import { tryParseAmount } from '../../../legacy/state/swap/hooks';
 
 export default function useTokenApproval(
-  spendableTokenAmount: string,
-  spendableTokenAddress: string,
+  spendableTokenAmount?: string,
+  spendableTokenAddress?: string,
   spenderAddress: string = ROUTER_ADDRESS
 ) {
   const currency = useCurrency(spendableTokenAddress) ?? undefined;
