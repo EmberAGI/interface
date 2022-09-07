@@ -22,6 +22,7 @@ export default function useERC20Token(tokenAddress?: string) {
         console.error('Could not view balance of user', error);
       }
     };
+    listener();
     const tokenToAccountFilter = tokenContract.filters.Transfer(null, account);
     tokenContract.on(tokenToAccountFilter, listener);
 

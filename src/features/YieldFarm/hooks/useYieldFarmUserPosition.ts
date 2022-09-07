@@ -86,6 +86,7 @@ export default function useYieldFarmUserPosition(yieldFarmContractAddress: strin
         console.error('Could not view balance of user', error);
       }
     };
+    listener();
     const stakedEvent = 'Staked';
     yieldFarmContract?.on(stakedEvent, listener);
 

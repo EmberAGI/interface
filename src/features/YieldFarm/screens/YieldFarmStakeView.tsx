@@ -7,7 +7,7 @@ import YieldFarmStats from '../components/YieldFarmStatsView';
 import { ButtonSecondary } from 'legacy/components/Button';
 import { useParams } from 'react-router-dom';
 import { useActiveWeb3React } from 'legacy/hooks';
-import useYieldFarmStatsViewModel from '../components/useYieldFarmStatsViewModel';
+import useYieldFarmStakeViewModel from './useYieldFarmStakeViewModel';
 
 interface CardRowProps {
   justify?: string;
@@ -57,7 +57,7 @@ const StakeAction = styled(ButtonSecondary)`
 `;
 export default function YieldFarmStakeView() {
   const { stakingTokenAddress } = useParams<{ stakingTokenAddress: string }>();
-  //const { viewModel, stake } = useYieldFarmStatsViewModel(stakingTokenAddress);
+  const { viewModel, stake } = useYieldFarmStakeViewModel(stakingTokenAddress);
 
   return (
     <AppBody>
@@ -66,7 +66,7 @@ export default function YieldFarmStakeView() {
         <YieldFarmCardImageTextView />
         <YieldFarmStats farmContractAddress={stakingTokenAddress} />
         <CardRow justify="space-between">
-          <CardText>Balance:</CardText>
+          <CardText>Available:</CardText>
           <CardText>69 USDC-AMB</CardText>
         </CardRow>
         <InputAmount />
