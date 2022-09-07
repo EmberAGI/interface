@@ -1,27 +1,17 @@
-import { BigNumber, ethers } from 'ethers';
-import { formatUnits } from 'ethers/lib/utils';
 import { useState, useEffect } from 'react';
 import { ROUTER_ADDRESS } from '../../../legacy/constants';
-import { ERC20_ABI } from '../../../legacy/constants/abis/erc20';
-import farmingContractABI from '../../../legacy/constants/abis/farmingContract.json';
-import { useActiveWeb3React } from '../../../legacy/hooks';
+import { useCurrency } from '../../../legacy/hooks/Tokens';
 import { ApprovalState, useApproveCallback } from '../../../legacy/hooks/useApproveCallback';
-
-export interface UserApprovedAmount {
-  approvedAmount: string;
-}
-
-const initialFarmStats = {
-  approvedAmount: '10',
-};
+import { tryParseAmount } from '../../../legacy/state/swap/hooks';
 
 export default function useTokenApproval(
-  spendableTokenAmount: number,
+  spendableTokenAmount: string,
   spendableTokenAddress: string,
-  spenderAddress: string
+  spenderAddress: string = ROUTER_ADDRESS
 ) {
-  const { library, account } = useActiveWeb3React();
-  const [approvalState, approvalStateCallback] = useApproveCallback(parsedAmounts[Field.CURRENCY_A], ROUTER_ADDRESS);
+  const currency = useCurrency(spendableTokenAddress) ?? undefined;
+  const currencyAmount = tryParseAmount(spendableTokenAmount, currency);
+  const [approvalState, approveCallback] = useApproveCallback(currencyAmount, spenderAddress);
   const [isApproved, setIsApproved] = useState(true);
   const [pendingApproval, setPendingApproval] = useState(false);
 
@@ -43,7 +33,9 @@ export default function useTokenApproval(
     }
   }, [approvalState]);
 
-  const approve = () => {};
+  const approve = () => {
+    approveCallback();
+  };
 
   return {
     isApproved,
