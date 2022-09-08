@@ -1,0 +1,13 @@
+.side-menu {
+    position: relative;
+}
+
+.address-block button {
+    background: transparent;
+    border: 0;
+    padding: 0;
+}
+
+.side-menu a, .side-menu span {
+    font-size: 16px;
+}

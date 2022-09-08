@@ -1,7 +1,9 @@
 import React, { Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
-import Menu from '../components/Menu';
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
+import Menu from 'airdao-menu/build';
 import Header from '../components/Header';
 import Polling from '../components/Header/Polling';
 import Popups from '../components/Popups';
@@ -21,6 +23,9 @@ import Swap from './Swap';
 import Faucet from './Faucet';
 import { OpenClaimAddressModalAndRedirectToSwap, RedirectPathToSwapOnly } from './Swap/redirects';
 import useAutoLogin from '../hooks/useAutoLogin';
+import { useWeb3React } from '@web3-react/core';
+import useAuthorization from '../hooks/useAuthorization';
+import './side-menu-overrides.css';
 
 const AppWrapper = styled.div`
   min-height: 100vh;
@@ -66,12 +71,15 @@ const BodyWrapper = styled.div`
 
 export default function App() {
   const isLoaded = useAutoLogin();
+  const { account: address } = useWeb3React();
+  const { loginMetamask, logout } = useAuthorization();
+
   return !isLoaded ? null : (
     <Suspense fallback={null}>
       <Route component={DarkModeQueryParamReader} />
       <AppWrapper>
         <MenuWrapper>
-          <Menu />
+          <Menu address={address} login={loginMetamask} logout={logout} />
         </MenuWrapper>
 
         <MainWrapper>
