@@ -58,7 +58,7 @@ export default function YieldFarmWithdrawView() {
   //const { userStakeBalance, userEarnedRewards, claim, withdrawAndClaim } = useYieldFarmUserPostion(stakingTokenAddress);
   return (
     <AppBody>
-      <YieldFarmStakeWithdrawHeaderView farmContractAddress={stakingTokenAddress} />
+      <YieldFarmStakeWithdrawHeaderView page="withdraw" farmContractAddress={stakingTokenAddress} />
       <Container>
         <YieldFarmCardImageTextView />
         <YieldFarmCardStats farmContractAddress={stakingTokenAddress} />

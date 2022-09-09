@@ -12,13 +12,21 @@ export default function useTokenApproval(
   const currency = useCurrency(spendableTokenAddress) ?? undefined;
   const currencyAmount = tryParseAmount(spendableTokenAmount, currency);
   const [approvalState, approveCallback] = useApproveCallback(currencyAmount, spenderAddress);
-  const [isApproved, setIsApproved] = useState(true);
+  const [approvalRequired, setApprovalRequired] = useState(false);
+  const [isApproved, setIsApproved] = useState(false);
   const [pendingApproval, setPendingApproval] = useState(false);
 
   useEffect(() => {
+    //DEBUG
+    console.log(`approvalState: ${approvalState}`);
     switch (approvalState) {
       case ApprovalState.UNKNOWN:
+        setApprovalRequired(false);
+        setIsApproved(false);
+        setPendingApproval(false);
+        return;
       case ApprovalState.NOT_APPROVED:
+        setApprovalRequired(true);
         setIsApproved(false);
         setPendingApproval(false);
         return;
@@ -38,6 +46,7 @@ export default function useTokenApproval(
   };
 
   return {
+    approvalRequired,
     isApproved,
     pendingApproval,
     approve,

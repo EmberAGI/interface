@@ -1,4 +1,6 @@
+import { formatUnits } from 'ethers/lib/utils';
 import { useState, useEffect } from 'react';
+import useAuthorization from '../../../legacy/hooks/useAuthorization';
 import useERC20Token from '../hooks/useERC20Token';
 import useTokenApproval from '../hooks/useTokenApproval';
 import useYieldFarmState from '../hooks/useYieldFarmState';
@@ -7,6 +9,7 @@ import useYieldFarmUserPosition from '../hooks/useYieldFarmUserPosition';
 export interface YieldFarmStakeViewModel {
   unstakedTokens: string;
   stakedTokens: string;
+  showApproval: boolean;
   isApproved: boolean;
   pendingApproval: boolean;
 }
@@ -14,35 +17,52 @@ export interface YieldFarmStakeViewModel {
 const initialViewModel = {
   unstakedTokens: '0',
   stakedTokens: '0',
-  isApproved: true,
+  showApproval: false,
+  isApproved: false,
   pendingApproval: false,
 };
 
 export default function useYieldFarmStakeViewModel(yieldFarmContractAddress: string) {
+  const { loginMetamask } = useAuthorization();
   const [viewModel, setViewModel] = useState<YieldFarmStakeViewModel>(initialViewModel);
   const { userStakeBalance, stake } = useYieldFarmUserPosition(yieldFarmContractAddress);
   const { stakingTokenAddress } = useYieldFarmState(yieldFarmContractAddress);
-  const { userBalance } = useERC20Token(stakingTokenAddress);
+  const { userBalance: stakingTokenUserBalance, decimals: stakingTokenDecimals } = useERC20Token(stakingTokenAddress);
   const [stakeAmount, setStakeAmount] = useState<string | undefined>();
-  const { isApproved, pendingApproval, approve } = useTokenApproval(
+  const { approvalRequired, isApproved, pendingApproval, approve } = useTokenApproval(
     stakeAmount,
     stakingTokenAddress,
     yieldFarmContractAddress
   );
 
-  useEffect(() => {
-    setViewModel((viewModel) => ({
-      ...viewModel,
-      unstakedTokens: userBalance ? userBalance.toString() : '0',
-    }));
-  }, [userBalance]);
+  const confirmStake = () => {
+    if (stakeAmount != undefined) {
+      stake(stakeAmount);
+    }
+  };
 
   useEffect(() => {
     setViewModel((viewModel) => ({
       ...viewModel,
-      stakedTokens: userStakeBalance.toString(),
+      unstakedTokens: stakingTokenUserBalance
+        ? Number(formatUnits(stakingTokenUserBalance, stakingTokenDecimals)).toFixed(8).toString()
+        : '0',
+    }));
+  }, [stakingTokenDecimals, stakingTokenUserBalance]);
+
+  useEffect(() => {
+    setViewModel((viewModel) => ({
+      ...viewModel,
+      stakedTokens: Number(userStakeBalance).toFixed(8).toString(),
     }));
   }, [userStakeBalance]);
+
+  useEffect(() => {
+    setViewModel((viewModel) => ({
+      ...viewModel,
+      showApproval: approvalRequired,
+    }));
+  }, [approvalRequired]);
 
   useEffect(() => {
     setViewModel((viewModel) => ({
@@ -60,8 +80,9 @@ export default function useYieldFarmStakeViewModel(yieldFarmContractAddress: str
 
   return {
     viewModel,
+    login: loginMetamask,
     setStakeAmount,
     approve,
-    stake,
+    stake: confirmStake,
   };
 }
