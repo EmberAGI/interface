@@ -15,8 +15,20 @@ const initialViewModel = {
 
 export default function useYieldFarmWithdrawViewModel(yieldFarmContractAddress: string) {
   const [viewModel, setViewModel] = useState<YieldFarmStakeViewModel>(initialViewModel);
+  const [withdrawAmount, setWithdrawAmount] = useState<string | undefined>();
+  const [typedValue, setTypedValue] = useState('');
   const { userStakeBalance, userEarnedRewards, withdraw, claim, withdrawAndClaim } =
     useYieldFarmUserPosition(yieldFarmContractAddress);
+
+  const onUserInput = (value: string) => {
+    setWithdrawAmount(value);
+    setTypedValue(value);
+  };
+  const confirmWithdraw = () => {
+    if (withdrawAmount != undefined) {
+      withdraw(withdrawAmount);
+    }
+  };
 
   useEffect(() => {
     setViewModel((viewModel) => ({
@@ -28,8 +40,10 @@ export default function useYieldFarmWithdrawViewModel(yieldFarmContractAddress: 
 
   return {
     viewModel,
-    withdraw,
+    withdraw: confirmWithdraw,
     claim,
     withdrawAndClaim,
+    onUserInput,
+    typedValue,
   };
 }

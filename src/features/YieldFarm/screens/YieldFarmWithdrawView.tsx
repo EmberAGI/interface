@@ -4,9 +4,12 @@ import styled from 'styled-components';
 import YieldFarmStakeWithdrawHeaderView from '../components/YieldFarmStakeWithdrawHeader';
 import YieldFarmCardImageTextView from '../components/YieldFarmCardImageText';
 import useYieldFarmWithdrawViewModel from './useYieldFarmWithdrawViewModel';
-import { ButtonSecondary } from 'legacy/components/Button';
 import YieldFarmCardStats from '../components/YieldFarmStatsView';
-import useYieldFarmUserPostion from '../hooks/useYieldFarmUserPosition';
+import CurrencyInputPanel from '../../../libraries/components/CurrencyInputPanel';
+import { RowBetween } from '../../../legacy/components/Row';
+import { ButtonConfirmed, ButtonError, ButtonPrimary, ButtonSecondary } from 'legacy/components/Button';
+import { Text } from 'rebass';
+import { BottomGrouping } from '../../../legacy/components/swap/styleds';
 import { useParams } from 'react-router-dom';
 
 interface CardRowProps {
@@ -54,7 +57,8 @@ const CardRowCenter = styled(CardRow)`
 `;
 export default function YieldFarmWithdrawView() {
   const { stakingTokenAddress } = useParams<{ stakingTokenAddress: string }>();
-  const { viewModel, claim, withdrawAndClaim, withdraw } = useYieldFarmWithdrawViewModel(stakingTokenAddress);
+  const { viewModel, claim, withdrawAndClaim, withdraw, onUserInput, typedValue } =
+    useYieldFarmWithdrawViewModel(stakingTokenAddress);
   //const { userStakeBalance, userEarnedRewards, claim, withdrawAndClaim } = useYieldFarmUserPostion(stakingTokenAddress);
   return (
     <AppBody>
@@ -66,10 +70,28 @@ export default function YieldFarmWithdrawView() {
           <CardText>Deposited:</CardText>
           <CardText>{viewModel.stakedTokens}</CardText>
         </CardRow>
-        <InputAmount />
-        <CardRowCenter>
-          <ActionButton>Withdraw</ActionButton>
-        </CardRowCenter>
+        <CurrencyInputPanel
+          value={typedValue}
+          onUserInput={onUserInput}
+          label={'Amount'}
+          showMaxButton={false}
+          tokenAddress={stakingTokenAddress}
+          tokenName={'AMB-wUSDC-flp'}
+          balance={viewModel.stakedTokens}
+          id="swap-currency-output"
+        />{' '}
+        <BottomGrouping>
+          <RowBetween>
+            <ButtonError
+              onClick={withdraw}
+              //error={!isValid && !!parsedAmounts[Field.CURRENCY_A] && !!parsedAmounts[Field.CURRENCY_B]}
+            >
+              <Text fontSize={16} fontWeight={500}>
+                Withdraw
+              </Text>
+            </ButtonError>
+          </RowBetween>
+        </BottomGrouping>
         <CardRow justify="space-between">
           <CardText>Earned:</CardText>
           <CardText>{viewModel.earnedTokens}</CardText>
