@@ -90,7 +90,7 @@
   },
   "dependencies": {
     "@firepotfinance/default-token-list": "1.0.0",
-    "airdao-menu": "^2.1.1",
+    "airdao-menu": "^2.1.4",
     "dotenv": "^10.0.0",
     "sass": "^1.54.4",
     "swr": "^1.3.0",
