@@ -1,6 +1,5 @@
 import { formatUnits } from 'ethers/lib/utils';
 import { useState, useEffect } from 'react';
-import useAuthorization from '../../../legacy/hooks/useAuthorization';
 import useERC20Token from '../hooks/useERC20Token';
 import useTokenApproval from '../hooks/useTokenApproval';
 import useYieldFarmState from '../hooks/useYieldFarmState';
@@ -23,7 +22,6 @@ const initialViewModel = {
 };
 
 export default function useYieldFarmStakeViewModel(yieldFarmContractAddress: string) {
-  const { loginMetamask } = useAuthorization();
   const [viewModel, setViewModel] = useState<YieldFarmStakeViewModel>(initialViewModel);
   const { userStakeBalance, stake } = useYieldFarmUserPosition(yieldFarmContractAddress);
   const { stakingTokenAddress } = useYieldFarmState(yieldFarmContractAddress);
@@ -80,7 +78,6 @@ export default function useYieldFarmStakeViewModel(yieldFarmContractAddress: str
 
   return {
     viewModel,
-    login: loginMetamask,
     setStakeAmount,
     approve,
     stake: confirmStake,

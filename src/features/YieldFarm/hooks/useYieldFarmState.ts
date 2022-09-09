@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { BigNumber } from 'ethers';
 
 export default function useYieldFarmUserPosition(yieldFarmContractAddress: string) {
-  //const { library, account } = useActiveWeb3React();
   const yieldFarmContract = useYieldFarmContract(yieldFarmContractAddress);
   const [stakingTokenAddress, setStakingTokenAddress] = useState<string | undefined>();
   const [stakeBalance, setStakeBalance] = useState<BigNumber | undefined>();

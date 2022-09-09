@@ -7,7 +7,7 @@ import useYieldFarmWithdrawViewModel from './useYieldFarmWithdrawViewModel';
 import YieldFarmCardStats from '../components/YieldFarmStatsView';
 import CurrencyInputPanel from '../../../libraries/components/CurrencyInputPanel';
 import { RowBetween } from '../../../legacy/components/Row';
-import { ButtonConfirmed, ButtonError, ButtonPrimary, ButtonSecondary } from 'legacy/components/Button';
+import { ButtonError, ButtonSecondary } from 'legacy/components/Button';
 import { Text } from 'rebass';
 import { BottomGrouping } from '../../../legacy/components/swap/styleds';
 import { useParams } from 'react-router-dom';
@@ -17,14 +17,6 @@ interface CardRowProps {
 }
 const Container = styled.div`
   padding: 1rem;
-`;
-const InputAmount = styled.input`
-  font-size: 18px;
-  width: 100%;
-  padding: 10px;
-  background: papayawhip;
-  border: solid;
-  border-radius: 10px;
 `;
 
 const ActionButton = styled(ButtonSecondary)`
@@ -59,7 +51,7 @@ export default function YieldFarmWithdrawView() {
   const { stakingTokenAddress } = useParams<{ stakingTokenAddress: string }>();
   const { viewModel, claim, withdrawAndClaim, withdraw, onUserInput, typedValue } =
     useYieldFarmWithdrawViewModel(stakingTokenAddress);
-  //const { userStakeBalance, userEarnedRewards, claim, withdrawAndClaim } = useYieldFarmUserPostion(stakingTokenAddress);
+
   return (
     <AppBody>
       <YieldFarmStakeWithdrawHeaderView page="withdraw" farmContractAddress={stakingTokenAddress} />
