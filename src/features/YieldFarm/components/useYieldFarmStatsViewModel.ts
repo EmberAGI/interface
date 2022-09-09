@@ -1,7 +1,6 @@
 import { BigNumber } from 'ethers';
 import { formatUnits } from 'ethers/lib/utils';
 import { useState, useEffect } from 'react';
-import { useActiveWeb3React } from '../../../legacy/hooks';
 import useERC20Token from '../hooks/useERC20Token';
 import useYieldFarmState from '../hooks/useYieldFarmState';
 
@@ -18,17 +17,15 @@ const initialFarmViewModel = {
 };
 
 export default function useYieldFarmStatsViewModel(contractAddress: string) {
-  const { library } = useActiveWeb3React();
   const [viewModel, setViewModel] = useState<YieldFarmStatsViewModel>(initialFarmViewModel);
   const { stakingTokenAddress, stakeBalance, rewardsDuration, rewardsForDuration } = useYieldFarmState(contractAddress);
-  const {
-    contract: stakingTokenContract,
-    userBalance,
-    decimals: stakingTokenDecimals,
-  } = useERC20Token(stakingTokenAddress);
+  const { decimals: stakingTokenDecimals } = useERC20Token(stakingTokenAddress);
 
   useEffect(() => {
-    if (rewardsDuration == undefined || rewardsForDuration == undefined || stakeBalance == undefined) {
+    const isAprVariableUndefined =
+      rewardsDuration == undefined || rewardsForDuration == undefined || stakeBalance == undefined;
+    const isDenominatorZero = rewardsDuration?.isZero() || stakeBalance?.isZero();
+    if (isAprVariableUndefined || isDenominatorZero) {
       return;
     }
     const daysPerYear = 365;
