@@ -190,7 +190,7 @@ export default function CurrencyInputPanel({
                 style={{ display: 'inline', cursor: 'pointer' }}
               >
                 {/*!hideBalance && !!currency && balance ? (customBalanceText ?? 'Balance: ') + balance : ' -'*/}
-                {!hideBalance && balance ? (customBalanceText ?? 'Balance: ') + balance : ' -'}
+                {!hideBalance && balance ? (customBalanceText ?? 'Balance') + `: ${balance}` : ' -'}
               </TYPE.body>
             </RowBetween>
           </LabelRow>
@@ -210,9 +210,7 @@ export default function CurrencyInputPanel({
                   <img src={MetamaskIcon} alt={'metamask logo'} width={'16px'} height={'16px'} />
                 </StyledBalanceMax>
               )*/}
-              {/*account && currency && showMaxButton && label !== 'To' && (
-                <StyledBalanceMax onClick={onMax}>MAX</StyledBalanceMax>
-              )*/}
+              {showMaxButton && <StyledBalanceMax onClick={onMax}>MAX</StyledBalanceMax>}
             </>
           )}
           <Aligner>

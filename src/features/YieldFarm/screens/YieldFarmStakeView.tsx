@@ -74,7 +74,7 @@ export default function YieldFarmStakeView() {
           label={'Amount'}
           showMaxButton={false}
           tokenAddress={stakingTokenAddress}
-          tokenName={'AMB-wUSDC-flp'}
+          tokenName={'AMB-USDC-flp'}
           balance={viewModel.unstakedTokens}
           id="swap-currency-output"
         />
