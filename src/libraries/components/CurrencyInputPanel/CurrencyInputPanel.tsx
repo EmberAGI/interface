@@ -15,10 +15,16 @@ import { WrappedTokenInfo } from '../../../legacy/state/lists/hooks';
 import DoubleCurrencyLogo from '../../../legacy/components/DoubleLogo';
 import CurrencyLogo from '../../../legacy/components/CurrencyLogo';
 import { useCurrency } from '../../../legacy/hooks/Tokens';
+import useMediaWidth from '../../hooks/useMediaWidth';
+
 const InputRow = styled.div<{ selected: boolean }>`
   ${({ theme }) => theme.flexRowNoWrap}
   align-items: center;
   padding: ${({ selected }) => (selected ? '0.8rem 0.6rem 0.8rem 1.1rem' : '0.8rem 0.8rem 0.8rem 1.1rem')};
+
+  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
+    padding: 8px 12px;
+  `};
 `;
 
 const CurrencySelect = styled.button`
@@ -54,6 +60,10 @@ const LabelRow = styled.div`
     cursor: pointer;
     color: ${({ theme }) => darken(0.2, theme.text2)};
   }
+
+  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
+    padding: 8px 12px 0 12px;
+  `};
 `;
 
 const Aligner = styled.span`
@@ -88,6 +98,12 @@ const Container = styled.div<{ hideInput: boolean }>`
 const StyledTokenName = styled.span<{ active?: boolean }>`
   ${({ active }) => (active ? '  margin: 0 0.25rem 0 0.75rem;' : '  margin: 0 0.25rem 0 0.25rem;')}
   font-size:  ${({ active }) => (active ? '20px' : '16px')};
+
+  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
+    font-weight: 500;
+    margin-right: 0;
+    font-size: 0.7rem;
+  `};
 `;
 
 const StyledBalanceMax = styled.button`
@@ -111,7 +127,8 @@ const StyledBalanceMax = styled.button`
   }
 
   ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-    margin-right: 0.5rem;
+    margin-right: 4px;
+    font-size: 0.5rem;
   `};
 `;
 
@@ -148,6 +165,7 @@ export default function CurrencyInputPanel({
 }: CurrencyInputPanelProps) {
   const { t } = useTranslation();
   const theme = useTheme();
+  const mediaWidth = useMediaWidth();
   /*const ethereum = window.ethereum as any;
 
   const addTokenFunction = async (address: string, symbol: string | undefined) => {
@@ -204,6 +222,7 @@ export default function CurrencyInputPanel({
                 onUserInput={(val) => {
                   onUserInput(val);
                 }}
+                fontSize={mediaWidth == 'ExtraSmall' ? '1rem' : undefined}
               />
               {/*currency && (currency instanceof WrappedTokenInfo || currency instanceof Token) && (
                 <StyledBalanceMax onClick={() => addTokenFunction(currency.address, currency.symbol)}>

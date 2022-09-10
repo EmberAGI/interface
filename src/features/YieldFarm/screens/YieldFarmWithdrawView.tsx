@@ -1,7 +1,7 @@
 import React from 'react';
 import AppBody from '../../../legacy/pages/AppBody';
 import styled from 'styled-components';
-import YieldFarmStakeWithdrawHeaderView from '../components/YieldFarmStakeWithdrawHeader';
+import YieldFarmManageHeader from '../components/YieldFarmManageHeader';
 import YieldFarmCardImageTextView from '../components/YieldFarmCardImageText';
 import useYieldFarmWithdrawViewModel from './useYieldFarmWithdrawViewModel';
 import CurrencyInputPanel from '../../../libraries/components/CurrencyInputPanel';
@@ -10,17 +10,10 @@ import { ButtonError, ButtonSecondary } from 'legacy/components/Button';
 import { Text } from 'rebass';
 import { BottomGrouping } from '../../../legacy/components/swap/styleds';
 import { useParams } from 'react-router-dom';
+import { TYPE } from '../../../legacy/theme';
 
 const Container = styled.div`
   padding: 1rem;
-`;
-
-const CardText = styled.p`
-  text-align: right;
-  color: black;
-  font-size: 18px;
-  font-weight: bold;
-  line-height: 0px;
 `;
 
 const CardRowCenter = styled.div`
@@ -41,11 +34,14 @@ export default function YieldFarmWithdrawView() {
 
   return (
     <AppBody>
-      <YieldFarmStakeWithdrawHeaderView page="withdraw" farmContractAddress={stakingTokenAddress} />
+      <YieldFarmManageHeader page="withdraw" farmContractAddress={stakingTokenAddress} />
       <Container>
         <YieldFarmCardImageTextView />
         <CardRowCenter>
-          <CardText>Earned {viewModel.earnedTokens}</CardText>
+          <TYPE.black fontWeight={500}>
+            Earned <b>{viewModel.earnedTokens}</b>
+          </TYPE.black>
+
           <ButtonSecondary onClick={claim} style={{ width: 'fit-content' }}>
             Claim
           </ButtonSecondary>

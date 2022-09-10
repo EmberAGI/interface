@@ -28,11 +28,11 @@ export default function YieldFarmStats(props: YieldFarmStatsProps) {
     <>
       <CardSpaceBetweenRow>
         <CardText>APR</CardText>
-        <CardText>{viewModel.apr}</CardText>
+        <CardText>{viewModel.apr}%</CardText>
       </CardSpaceBetweenRow>
       <CardSpaceBetweenRow>
         <CardText>Daily ROI</CardText>
-        <CardText>{viewModel.dailyROI}</CardText>
+        <CardText>{viewModel.dailyROI}%</CardText>
       </CardSpaceBetweenRow>
       <CardSpaceBetweenRow>
         <CardText>TVL</CardText>

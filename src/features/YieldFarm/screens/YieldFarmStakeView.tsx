@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import AppBody from '../../../legacy/pages/AppBody';
-import YieldFarmStakeWithdrawHeaderView from '../components/YieldFarmStakeWithdrawHeader';
+import YieldFarmManageHeader from '../components/YieldFarmManageHeader';
 import YieldFarmCardImageTextView from '../components/YieldFarmCardImageText';
 import YieldFarmStats from '../components/YieldFarmStatsView';
 import { ButtonConfirmed, ButtonError } from 'legacy/components/Button';
@@ -56,7 +56,7 @@ export default function YieldFarmStakeView() {
 
   return (
     <AppBody>
-      <YieldFarmStakeWithdrawHeaderView page="stake" farmContractAddress={stakingTokenAddress} />
+      <YieldFarmManageHeader page="stake" farmContractAddress={stakingTokenAddress} />
       <Container>
         <TitleRow style={{ marginBottom: '1rem' }}>
           <TYPE.black fontWeight={500}>Yield Farm</TYPE.black>

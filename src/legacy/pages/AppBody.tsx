@@ -12,7 +12,8 @@ export const BodyWrapper = styled.div`
   background: ${({ theme }) => theme.bg1};
 
   ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-    width: 90%;
+    width: 100%;
+    padding: 0rem;
   `}
 `;
 

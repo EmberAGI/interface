@@ -19,11 +19,11 @@ const StyledArrowLeft = styled(ArrowLeft)`
 `;
 
 const TitleRow = styled(RowBetween)`
+  padding: 8px 16px;
+
   ${({ theme }) => theme.mediaWidth.upToSmall`
     flex-wrap: wrap;
-    gap: 12px;
     width: 100%;
-    flex-direction: column-reverse;
   `};
 `;
 
@@ -39,9 +39,6 @@ const ButtonRow = styled(RowFixed)`
 
 const ResponsiveButtonPrimary = styled(ButtonPrimary)`
   width: fit-content;
-  ${({ theme }) => theme.mediaWidth.upToSmall`
-    width: 48%;
-  `};
 `;
 
 const EdgeWrapper = styled.div`
@@ -50,11 +47,11 @@ const EdgeWrapper = styled.div`
   min-width: -webkit-min-content;
 `;
 
-interface YieldFarmStakeWithdrawHeaderViewProps {
+interface YieldFarmManageHeaderProps {
   page: 'stake' | 'withdraw';
   farmContractAddress: string;
 }
-export default function YieldFarmStakeWithdrawHeaderView(props: YieldFarmStakeWithdrawHeaderViewProps) {
+export default function YieldFarmManageHeader(props: YieldFarmManageHeaderProps) {
   const { farmContractAddress } = props;
   return (
     <AppBody>
