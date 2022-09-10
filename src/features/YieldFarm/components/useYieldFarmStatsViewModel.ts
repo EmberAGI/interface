@@ -22,10 +22,10 @@ export default function useYieldFarmStatsViewModel(contractAddress: string) {
   const { decimals: stakingTokenDecimals } = useERC20Token(stakingTokenAddress);
 
   useEffect(() => {
-    const isAprVariableUndefined =
-      rewardsDuration == undefined || rewardsForDuration == undefined || stakeBalance == undefined;
-    const isDenominatorZero = rewardsDuration?.isZero() || stakeBalance?.isZero();
-    if (isAprVariableUndefined || isDenominatorZero) {
+    if (rewardsDuration == undefined || rewardsForDuration == undefined || stakeBalance == undefined) {
+      return;
+    }
+    if (rewardsDuration.isZero() || stakeBalance.isZero()) {
       return;
     }
     const daysPerYear = 365;
