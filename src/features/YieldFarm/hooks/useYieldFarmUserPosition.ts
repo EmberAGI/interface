@@ -4,14 +4,16 @@ import { TransactionResponse } from '@ethersproject/providers';
 import { useTransactionAdder } from '../../../legacy/state/transactions/hooks';
 import { useYieldFarmContract } from '../../../legacy/hooks/useContract';
 import { useEffect, useState } from 'react';
+import { BigNumber } from 'ethers';
 
 export default function useYieldFarmUserPosition(yieldFarmContractAddress: string) {
   const { library, account } = useActiveWeb3React();
   const addTransaction = useTransactionAdder();
   const yieldFarmContract = useYieldFarmContract(yieldFarmContractAddress);
-  const [userStakeBalance, setUserStakeBalance] = useState('0');
-  const [userEarnedRewards, setUserEarnedRewards] = useState('0');
+  const [userStakeBalance, setUserStakeBalance] = useState(BigNumber.from('0'));
+  const [userEarnedRewards, setUserEarnedRewards] = useState(BigNumber.from('0'));
 
+  // REFACTOR: Get this dynamically
   const stakingTokenDecimals = 18;
 
   const stake = (stakeAmount: string) => {
@@ -61,7 +63,7 @@ export default function useYieldFarmUserPosition(yieldFarmContractAddress: strin
     const listener = async () => {
       try {
         const earned = await yieldFarmContract?.earned(account);
-        setUserEarnedRewards(formatUnits(earned, stakingTokenDecimals));
+        setUserEarnedRewards(earned);
       } catch (error) {
         console.error('Could not view earned amount of user', error);
       }
@@ -81,7 +83,7 @@ export default function useYieldFarmUserPosition(yieldFarmContractAddress: strin
     const listener = async () => {
       try {
         const balance = await yieldFarmContract?.balanceOf(account);
-        setUserStakeBalance(formatUnits(balance, stakingTokenDecimals));
+        setUserStakeBalance(balance);
       } catch (error) {
         console.error('Could not view balance of user', error);
       }

@@ -19,7 +19,7 @@ const StyledArrowLeft = styled(ArrowLeft)`
 `;
 
 const TitleRow = styled(RowBetween)`
-  padding: 8px 16px;
+  padding: 1rem 1rem 0 1rem;
 
   ${({ theme }) => theme.mediaWidth.upToSmall`
     flex-wrap: wrap;
@@ -39,12 +39,25 @@ const ButtonRow = styled(RowFixed)`
 
 const ResponsiveButtonPrimary = styled(ButtonPrimary)`
   width: fit-content;
+  font-size: 0.8rem;
+  padding: 6px 10px;
+
+  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
+    font-size: 0.75rem;
+  `};
 `;
 
 const EdgeWrapper = styled.div`
   flex: 1;
   display: flex;
   min-width: -webkit-min-content;
+`;
+
+const Tabs = styled.div`
+  ${({ theme }) => theme.flexRowNoWrap}
+  align-items: center;
+  border-radius: 3rem;
+  justify-content: space-evenly;
 `;
 
 interface YieldFarmManageHeaderProps {
@@ -54,20 +67,20 @@ interface YieldFarmManageHeaderProps {
 export default function YieldFarmManageHeader(props: YieldFarmManageHeaderProps) {
   const { farmContractAddress } = props;
   return (
-    <AppBody>
-      <TitleRow style={{ margin: '0rem' }} padding={'0.4rem'}>
+    <Tabs>
+      <TitleRow style={{ margin: '0rem' }}>
         <EdgeWrapper>
           <Link to="/farm">
             <StyledArrowLeft />
           </Link>
         </EdgeWrapper>
-        <TYPE.black fontWeight={500}>{props.page == 'stake' ? 'Stake' : 'Withdraw'}</TYPE.black>
+        <TYPE.black fontWeight={500} fontSize={20}>
+          {props.page == 'stake' ? 'Stake' : 'Withdraw'}
+        </TYPE.black>
         <EdgeWrapper style={{ justifyContent: 'flex-end' }}>
           {props.page != 'stake' && (
-            <ResponsiveButtonPrimary as={Link} padding="6px 10px" to={`/stake/${farmContractAddress}`}>
-              <Text fontWeight={500} fontSize={16}>
-                Stake
-              </Text>
+            <ResponsiveButtonPrimary as={Link} to={`/stake/${farmContractAddress}`}>
+              Stake
             </ResponsiveButtonPrimary>
           )}
           {props.page != 'withdraw' && (
@@ -77,13 +90,11 @@ export default function YieldFarmManageHeader(props: YieldFarmManageHeaderProps)
               padding="6px 10px"
               to={`/withdraw/${farmContractAddress}`}
             >
-              <Text fontWeight={500} fontSize={16}>
-                Withdraw
-              </Text>
+              Withdraw
             </ResponsiveButtonPrimary>
           )}
         </EdgeWrapper>
       </TitleRow>
-    </AppBody>
+    </Tabs>
   );
 }

@@ -53,14 +53,15 @@ export default function YieldFarmStakeView() {
     setStakeAmount(value);
     setTypedValue(value);
   };
+  const onMax = () => {
+    setStakeAmount('max');
+    setTypedValue(viewModel.unstakedTokens);
+  };
 
   return (
     <AppBody>
       <YieldFarmManageHeader page="stake" farmContractAddress={stakingTokenAddress} />
       <Container>
-        <TitleRow style={{ marginBottom: '1rem' }}>
-          <TYPE.black fontWeight={500}>Yield Farm</TYPE.black>
-        </TitleRow>
         <YieldFarmCardImageTextView />
         <YieldFarmStats farmContractAddress={stakingTokenAddress} />
         <hr />
@@ -72,7 +73,8 @@ export default function YieldFarmStakeView() {
           value={typedValue}
           onUserInput={onUserInput}
           label={'Amount'}
-          showMaxButton={false}
+          showMaxButton={true}
+          onMax={onMax}
           tokenAddress={stakingTokenAddress}
           tokenName={'AMB-USDC-flp'}
           balance={viewModel.unstakedTokens}
@@ -92,13 +94,9 @@ export default function YieldFarmStakeView() {
                 {viewModel.pendingApproval ? <Dots>Approving</Dots> : viewModel.isApproved ? 'Approved' : 'Approve'}
               </ButtonConfirmed>
             )}
-            <ButtonError
-              onClick={stake}
-              disabled={!viewModel.isApproved}
-              //error={!isValid && !!parsedAmounts[Field.CURRENCY_A] && !!parsedAmounts[Field.CURRENCY_B]}
-            >
-              <Text fontSize={16} fontWeight={500}>
-                Stake
+            <ButtonError onClick={stake} disabled={!viewModel.isApproved} error={viewModel.showAboveBalanceError}>
+              <Text fontSize={viewModel.showAboveBalanceError ? 16 : 20} fontWeight={500}>
+                {viewModel.showAboveBalanceError ? 'Cannot stake more than your balance' : 'Stake'}
               </Text>
             </ButtonError>
           </RowBetween>

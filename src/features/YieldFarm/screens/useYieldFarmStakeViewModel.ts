@@ -1,4 +1,5 @@
-import { formatUnits } from 'ethers/lib/utils';
+import { BigNumber } from 'ethers';
+import { formatUnits, parseUnits } from 'ethers/lib/utils';
 import { useState, useEffect } from 'react';
 import useERC20Token from '../hooks/useERC20Token';
 import useTokenApproval from '../hooks/useTokenApproval';
@@ -11,6 +12,7 @@ export interface YieldFarmStakeViewModel {
   showApproval: boolean;
   isApproved: boolean;
   pendingApproval: boolean;
+  showAboveBalanceError: boolean;
 }
 
 const initialViewModel = {
@@ -19,6 +21,7 @@ const initialViewModel = {
   showApproval: false,
   isApproved: false,
   pendingApproval: false,
+  showAboveBalanceError: false,
 };
 
 export default function useYieldFarmStakeViewModel(yieldFarmContractAddress: string) {
@@ -39,6 +42,14 @@ export default function useYieldFarmStakeViewModel(yieldFarmContractAddress: str
     }
   };
 
+  const updateStakeAmount = (amount: string | 'max') => {
+    if (amount === 'max' && stakingTokenUserBalance != undefined) {
+      setStakeAmount(formatUnits(stakingTokenUserBalance, stakingTokenDecimals));
+    } else {
+      setStakeAmount(amount);
+    }
+  };
+
   useEffect(() => {
     setViewModel((viewModel) => ({
       ...viewModel,
@@ -51,9 +62,9 @@ export default function useYieldFarmStakeViewModel(yieldFarmContractAddress: str
   useEffect(() => {
     setViewModel((viewModel) => ({
       ...viewModel,
-      stakedTokens: Number(userStakeBalance).toFixed(8).toString(),
+      stakedTokens: Number(formatUnits(userStakeBalance, stakingTokenDecimals)).toFixed(8).toString(),
     }));
-  }, [userStakeBalance]);
+  }, [stakingTokenDecimals, userStakeBalance]);
 
   useEffect(() => {
     setViewModel((viewModel) => ({
@@ -76,9 +87,27 @@ export default function useYieldFarmStakeViewModel(yieldFarmContractAddress: str
     }));
   }, [pendingApproval]);
 
+  useEffect(() => {
+    if (stakeAmount == undefined || stakingTokenUserBalance == undefined) {
+      return;
+    }
+    let isStakeAboveBalance = false;
+    try {
+      const stakeAmountBN = parseUnits(stakeAmount);
+      isStakeAboveBalance = stakeAmountBN.gt(stakingTokenUserBalance);
+    } catch (error) {
+      console.warn(error);
+    } finally {
+      setViewModel((viewModel) => ({
+        ...viewModel,
+        showAboveBalanceError: isStakeAboveBalance,
+      }));
+    }
+  }, [stakingTokenUserBalance, stakeAmount]);
+
   return {
     viewModel,
-    setStakeAmount,
+    setStakeAmount: updateStakeAmount,
     approve,
     stake: confirmStake,
   };

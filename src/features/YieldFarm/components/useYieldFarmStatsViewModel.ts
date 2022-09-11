@@ -43,11 +43,10 @@ export default function useYieldFarmStatsViewModel(contractAddress: string) {
     };
 
     const newAPR = calculateAPR(rewardsDuration, rewardsForDuration, stakeBalance);
-
     setViewModel({
-      tvl: formatUnits(stakeBalance, stakingTokenDecimals).toString(),
-      apr: newAPR.toString(),
-      dailyROI: (newAPR / daysPerYear).toString(),
+      tvl: Number(formatUnits(stakeBalance, stakingTokenDecimals)).toFixed(8).toString(),
+      apr: newAPR.toFixed(2).toString(),
+      dailyROI: (newAPR / daysPerYear).toFixed(2).toString(),
     });
   }, [rewardsDuration, rewardsForDuration, stakeBalance, stakingTokenDecimals]);
 

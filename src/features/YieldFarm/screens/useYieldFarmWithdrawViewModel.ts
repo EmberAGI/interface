@@ -1,6 +1,8 @@
 import { BigNumber } from 'ethers';
-import { parseUnits } from 'ethers/lib/utils';
+import { formatUnits, parseUnits } from 'ethers/lib/utils';
 import { useState, useEffect } from 'react';
+import useERC20Token from '../hooks/useERC20Token';
+import useYieldFarmState from '../hooks/useYieldFarmState';
 import useYieldFarmUserPosition from '../hooks/useYieldFarmUserPosition';
 
 export interface YieldFarmWithdrawViewModel {
@@ -17,6 +19,8 @@ const initialViewModel = {
 
 export default function useYieldFarmWithdrawViewModel(yieldFarmContractAddress: string) {
   const [viewModel, setViewModel] = useState<YieldFarmWithdrawViewModel>(initialViewModel);
+  const { stakingTokenAddress } = useYieldFarmState(yieldFarmContractAddress);
+  const { decimals: stakingTokenDecimals } = useERC20Token(stakingTokenAddress);
   const [withdrawAmount, setWithdrawAmount] = useState<string | undefined>();
   const [typedValue, setTypedValue] = useState('');
   const { userStakeBalance, userEarnedRewards, withdraw, claim, withdrawAndClaim } =
@@ -35,10 +39,16 @@ export default function useYieldFarmWithdrawViewModel(yieldFarmContractAddress: 
   useEffect(() => {
     setViewModel((viewModel) => ({
       ...viewModel,
-      earnedTokens: userEarnedRewards ? userEarnedRewards.toString() : '0',
-      stakedTokens: userStakeBalance.toString(),
+      earnedTokens: Number(formatUnits(userEarnedRewards, stakingTokenDecimals)).toFixed(8).toString(),
     }));
-  }, [userEarnedRewards, userStakeBalance]);
+  }, [stakingTokenDecimals, userEarnedRewards]);
+
+  useEffect(() => {
+    setViewModel((viewModel) => ({
+      ...viewModel,
+      stakedTokens: Number(formatUnits(userStakeBalance, stakingTokenDecimals)).toFixed(8).toString(),
+    }));
+  }, [stakingTokenDecimals, userStakeBalance]);
 
   useEffect(() => {
     if (withdrawAmount == undefined) {
@@ -47,8 +57,7 @@ export default function useYieldFarmWithdrawViewModel(yieldFarmContractAddress: 
     let isWithdrawAboveStake = false;
     try {
       const withdrawAmountBN = parseUnits(withdrawAmount);
-      const userStakeBalanceBN = parseUnits(userStakeBalance);
-      isWithdrawAboveStake = withdrawAmountBN.gt(userStakeBalanceBN);
+      isWithdrawAboveStake = withdrawAmountBN.gt(userStakeBalance);
     } catch (error) {
       console.warn(error);
     } finally {
