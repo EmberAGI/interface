@@ -19,6 +19,9 @@ import RemoveLiquidity from './RemoveLiquidity';
 import { RedirectOldRemoveLiquidityPathStructure } from './RemoveLiquidity/redirects';
 import Swap from './Swap';
 import Faucet from './Faucet';
+import YieldFarmView from 'features/YieldFarm/screens/YieldFarmView';
+import YieldFarmStakeView from 'features/YieldFarm/screens/YieldFarmStakeView';
+import YieldFarmWithdrawView from 'features/YieldFarm/screens/YieldFarmWithdrawView';
 import { OpenClaimAddressModalAndRedirectToSwap, RedirectPathToSwapOnly } from './Swap/redirects';
 import useAutoLogin from '../hooks/useAutoLogin';
 
@@ -62,6 +65,10 @@ const BodyWrapper = styled.div`
   overflow-y: auto;
   overflow-x: hidden;
   z-index: 1;
+
+  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
+    padding: 0rem 12px;
+  `}
 `;
 
 export default function App() {
@@ -88,6 +95,7 @@ export default function App() {
                 <Route exact strict path="/claim" component={OpenClaimAddressModalAndRedirectToSwap} />
                 <Route exact strict path="/find" component={PoolFinder} />
                 <Route exact strict path="/pool" component={Pool} />
+                <Route exact strict path="/farm" component={YieldFarmView} />
                 <Route exact strict path="/faucet" component={Faucet} />
                 <Route exact strict path="/create" component={RedirectToAddLiquidity} />
                 <Route exact path="/add" component={AddLiquidity} />
@@ -98,6 +106,8 @@ export default function App() {
                 <Route exact path="/create/:currencyIdA/:currencyIdB" component={RedirectDuplicateTokenIds} />
                 <Route exact strict path="/remove/:tokens" component={RedirectOldRemoveLiquidityPathStructure} />
                 <Route exact strict path="/remove/:currencyIdA/:currencyIdB" component={RemoveLiquidity} />
+                <Route exact strict path="/stake/:stakingTokenAddress" component={YieldFarmStakeView} />
+                <Route exact strict path="/withdraw/:stakingTokenAddress" component={YieldFarmWithdrawView} />
                 <Route component={RedirectPathToSwapOnly} />
               </Switch>
             </Web3ReactManager>

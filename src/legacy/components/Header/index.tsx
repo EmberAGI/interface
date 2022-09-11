@@ -190,7 +190,7 @@ const StyledNavLink = styled(NavLink).attrs({
     color: ${({ theme }) => darken(0.1, theme.text1)};
   }
 
-  ${({ theme }) => theme.mediaWidth.upToSmall`
+  ${({ theme }) => theme.mediaWidth.upToMedium`
     border-radius: 8px;
     padding: 0.3rem 7%;
     border: 1px solid ${({ theme }) => theme.bg3};
@@ -198,6 +198,11 @@ const StyledNavLink = styled(NavLink).attrs({
     &:not(:last-child) {
       margin-right: 2%;
     }
+  `};
+
+  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
+    font-size: 0.8rem;
+    padding: 0.3rem 5%;
   `};
 `;
 
@@ -272,6 +277,9 @@ export default function Header() {
           }
         >
           {t('pool')}
+        </StyledNavLink>
+        <StyledNavLink id={`farm-nav-link`} to={'/farm'}>
+          {t('Farm')}
         </StyledNavLink>
         <StyledNavLink id={`faucet-nav-link`} to={'/faucet'}>
           {t('Faucet')}

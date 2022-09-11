@@ -15,10 +15,20 @@
   },
   "search.useGlobalIgnoreFiles": false,
   "search.useParentIgnoreFiles": true,
-  "[javascript]": {
-    "editor.tabSize": 2
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
   },
-  "[typescript]": {
-    "editor.tabSize": 4
-  }
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "git.enableSmartCommit": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "eslint.codeActionsOnSave.rules": null
 }
