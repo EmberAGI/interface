@@ -29,7 +29,8 @@ export default function useYieldFarmUserPosition(yieldFarmContractAddress: strin
     const listener = async () => {
       try {
         const balance = await yieldFarmContract.totalSupply();
-        setStakeBalance(BigNumber.from(balance));
+        console.log(`totalSupply: ${JSON.stringify(balance)}`);
+        setStakeBalance(balance);
       } catch (error) {
         console.error('Could not view balance of user', error);
       }
@@ -54,7 +55,10 @@ export default function useYieldFarmUserPosition(yieldFarmContractAddress: strin
     }
     yieldFarmContract
       .rewardsDuration()
-      .then((value: number) => setRewardsDuration(BigNumber.from(value)))
+      .then((value: BigNumber) => {
+        console.log(`rewardsDuration: ${JSON.stringify(value)}`);
+        setRewardsDuration(value);
+      })
       .catch((error: any) => console.error(error));
   }, [yieldFarmContract]);
 
@@ -64,7 +68,10 @@ export default function useYieldFarmUserPosition(yieldFarmContractAddress: strin
     }
     yieldFarmContract
       .getRewardForDuration()
-      .then((value: number) => setRewardsForDuration(BigNumber.from(value)))
+      .then((value: BigNumber) => {
+        console.log(`getRewardForDuration: ${JSON.stringify(value)}`);
+        setRewardsForDuration(value);
+      })
       .catch((error: any) => console.error(error));
   }, [yieldFarmContract]);
 

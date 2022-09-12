@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import AppBody from '../../../legacy/pages/AppBody';
 import YieldFarmManageHeader from '../components/YieldFarmManageHeader';
 import YieldFarmCardImageTextView from '../components/YieldFarmCardImageText';
-import YieldFarmStats from '../components/YieldFarmStatsView';
+import YieldFarmStatsView from '../components/YieldFarmStatsView';
 import { ButtonConfirmed, ButtonError } from 'legacy/components/Button';
 import { useParams } from 'react-router-dom';
 import useYieldFarmStakeViewModel from './useYieldFarmStakeViewModel';
@@ -63,7 +63,7 @@ export default function YieldFarmStakeView() {
       <YieldFarmManageHeader page="stake" farmContractAddress={stakingTokenAddress} />
       <Container>
         <YieldFarmCardImageTextView />
-        <YieldFarmStats farmContractAddress={stakingTokenAddress} />
+        <YieldFarmStatsView farmContractAddress={stakingTokenAddress} />
         <hr />
         <CardRow justify="space-between">
           <CardText>Staked</CardText>

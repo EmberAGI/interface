@@ -16,11 +16,11 @@ const CardSpaceBetweenRow = styled.div`
   height: 40px;
 `;
 
-interface YieldFarmStatsProps {
+interface YieldFarmStatsViewProps {
   farmContractAddress: string;
 }
 
-export default function YieldFarmStats(props: YieldFarmStatsProps) {
+export default function YieldFarmStatsView(props: YieldFarmStatsViewProps) {
   const { farmContractAddress } = props;
   const { viewModel } = useYieldFarmStatsViewModel(farmContractAddress);
 

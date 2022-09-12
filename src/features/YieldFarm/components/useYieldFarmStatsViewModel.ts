@@ -38,7 +38,9 @@ export default function useYieldFarmStatsViewModel(contractAddress: string) {
       const secondsPerYear = secondsPerDay.mul(daysPerYear);
       const annualRewardPeriods = BigNumber.from(secondsPerYear).div(rewardsDurationSeconds);
       const annualRewards = rewardsForDuration.mul(annualRewardPeriods);
-      const apr = annualRewards.div(stakeBalance).mul(100).toNumber();
+      const precisionMultiplier = 10000;
+      const percentageDivider = 100;
+      const apr = annualRewards.mul(precisionMultiplier).div(stakeBalance).toNumber() / percentageDivider;
       return apr;
     };
 

@@ -4,7 +4,7 @@ import YieldFarmCardImageTextView from './YieldFarmCardImageText';
 import { ButtonPrimary, ButtonSecondary } from 'legacy/components/Button';
 import { Text } from 'rebass';
 import { Link } from 'react-router-dom';
-import YieldFarmStats from './YieldFarmStatsView';
+import YieldFarmStatsView from './YieldFarmStatsView';
 import { LightCard } from '../../../legacy/components/Card';
 
 const CardContainer = styled.div`
@@ -74,7 +74,7 @@ export default function YieldFarmCard(props: YieldFarmCardProps) {
   return (
     <StyledPositionCard>
       <YieldFarmCardImageTextView />
-      <YieldFarmStats farmContractAddress={farmContractAddress} />
+      <YieldFarmStatsView farmContractAddress={farmContractAddress} />
       <CardSpaceBetweenRow>
         <ResponsiveButtonPrimary as={Link} to={`/stake/${farmContractAddress}`} width="48%">
           <Text>Manage</Text>
