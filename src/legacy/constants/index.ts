@@ -9,8 +9,8 @@ import {
 } from '../connectors';
 
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
-export const FACTORY_ADDRESS = '0xfA0a6F9d10F1f90cD8e90F0801fAed93259bd343';
-export const ROUTER_ADDRESS = '0x5495fa029eEC4d48fAd3898655e9984BB971aDEb';
+export const FACTORY_ADDRESS = '0xe63Cf585Dae8273A5e37AfF6da2f823FBf3Eb5BE';
+export const ROUTER_ADDRESS = '0xAa9ADAffdfFDDd64B9174F7EB451F0F1332245B2';
 
 export const LP_TOKEN_NAME = 'Firepot-LP-Token';
 export const LP_TOKEN_SYMBOL = 'FLP';
@@ -29,7 +29,8 @@ export const DAI = new Token(
   'DAI',
   'Dai Stablecoin'
 );
-export const USDC = new Token(ChainId.MAINNET, '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', 6, 'USDC', 'USD//C');
+
+export const USDC = new Token(ChainId.AMBTEST, '0x1242BDB8DD53f8ca7126d46271Dc59FD7C71C856', 6, 'USDC', 'USD//C');
 export const USDT = new Token(ChainId.MAINNET, '0xdAC17F958D2ee523a2206206994597C13D831ec7', 6, 'USDT', 'Tether USD');
 export const COMP = new Token(ChainId.MAINNET, '0xc00e94Cb662C3520282E6f5717214004A7f26888', 18, 'COMP', 'Compound');
 export const MKR = new Token(ChainId.MAINNET, '0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2', 18, 'MKR', 'Maker');
@@ -39,12 +40,12 @@ export const BIG = new Token(ChainId.AMBTEST, '0x8FB30d1A78d7E622CCB10376A585383
 export const SML = new Token(ChainId.AMBTEST, '0xD45f1F799097a30243605E9ba938FcB0e3f5cBC3', 18, 'SML', 'Small Token');
 export const wETH = new Token(
   ChainId.AMBTEST,
-  '0xA9646A0281996fDcB88f8f6f01Af52BB0268c494',
+  '0x608EDeEfA8C63823519B89bAb865E83773FAA46d',
   18,
   'wETH',
   'Wrapped Ethereum'
 );
-export const wBNB = new Token(ChainId.AMBTEST, '0x4798Cbd108e3D7b531ef2f3d67E7fFabdEe29867', 18, 'wBNB', 'Wrapped BNB');
+export const wBNB = new Token(ChainId.AMBTEST, '0x1Cc332c401fD2777C2c6bAE25097A910dFB0BC80', 18, 'wBNB', 'Wrapped BNB');
 // Block time here is slightly higher (~1s) than average in order to avoid ongoing proposals past the displayed time
 export const AVERAGE_BLOCK_TIME_IN_SECS = 13;
 export const PROPOSAL_LENGTH_IN_BLOCKS = 40_320;
