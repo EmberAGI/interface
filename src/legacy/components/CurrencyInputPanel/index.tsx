@@ -156,7 +156,7 @@ export default function CurrencyInputPanel({
   const selectedCurrencyBalance = useCurrencyBalance(account ?? undefined, currency ?? undefined);
   const theme = useTheme();
   const ethereum = window.ethereum as any;
-  const addTokenFunction = async (address: string, symbol: string | undefined) => {
+  const addTokenFunction = async (address: string, symbol: string | undefined, decimals: number) => {
     try {
       const wasAdded = await ethereum.request({
         method: 'wallet_watchAsset',
@@ -165,7 +165,7 @@ export default function CurrencyInputPanel({
           options: {
             address: address,
             symbol: symbol,
-            decimals: 18,
+            decimals: decimals,
           },
         },
       });
@@ -218,7 +218,9 @@ export default function CurrencyInputPanel({
                 }}
               />
               {currency && (currency instanceof WrappedTokenInfo || currency instanceof Token) && (
-                <StyledBalanceMax onClick={() => addTokenFunction(currency.address, currency.symbol)}>
+                <StyledBalanceMax
+                  onClick={() => addTokenFunction(currency.address, currency.symbol, currency.decimals)}
+                >
                   <img src={MetamaskIcon} alt={'metamask logo'} width={'16px'} height={'16px'} />
                 </StyledBalanceMax>
               )}

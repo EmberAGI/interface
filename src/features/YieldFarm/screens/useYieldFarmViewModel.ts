@@ -25,7 +25,7 @@ export interface YieldFarmViewModel {
 const initialViewModel = {
   yieldFarms: [
     {
-      contractAddress: '0xE66240fD326ac1f263727C52c69F8dcDE6c5147B',
+      contractAddress: '0xb9aBf895793Ed5009c81ff2748af5C8170846e52',
       /*stakingTokenName: 'AMB-wUSDC-flp',
       farmStats: {
         tvl: '50000',
@@ -47,11 +47,10 @@ export default function useYieldFarmViewModel() {
 
   useEffect(() => {
     // Get farm contract list from library
-    const farmList = ['0xE66240fD326ac1f263727C52c69F8dcDE6c5147B'];
-
+    const farmList = ['0xb9aBf895793Ed5009c81ff2748af5C8170846e52'];
     setFarmContracts(farmList);
     setViewModel({
-      yieldFarms: [{ contractAddress: '0xE66240fD326ac1f263727C52c69F8dcDE6c5147B' }],
+      yieldFarms: [{ contractAddress: '0xb9aBf895793Ed5009c81ff2748af5C8170846e52' }],
     });
   }, []);
 

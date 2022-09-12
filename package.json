@@ -4,7 +4,7 @@
   "license": "GPL-3.0-or-later",
   "devDependencies": {
     "@ethersproject/experimental": "5.0.1",
-    "@firepotfinance/firepotfinance-sdk": "1.0.6",
+    "@firepotfinance/firepotfinance-sdk": "1.0.7",
     "@popperjs/core": "2.9.2",
     "@reach/dialog": "0.15.0",
     "@reach/portal": "0.15.0",

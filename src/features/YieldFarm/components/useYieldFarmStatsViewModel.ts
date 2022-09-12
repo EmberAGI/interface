@@ -11,9 +11,9 @@ export interface YieldFarmStatsViewModel {
 }
 
 const initialFarmViewModel = {
-  tvl: '50000',
-  apr: '420',
-  dailyROI: '35',
+  tvl: '0',
+  apr: '0',
+  dailyROI: '0',
 };
 
 export default function useYieldFarmStatsViewModel(contractAddress: string) {
