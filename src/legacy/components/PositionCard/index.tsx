@@ -260,7 +260,7 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
               {showMore ? (
                 <>
                   Manage
-                  <ChevronUp size="52" style={{ marginLeft: '0.5rem', marginTop: '0.2rem' }} />
+                  <ChevronUp size="52" style={{ marginLeft: '0.4rem', marginTop: '0.2rem' }} />
                 </>
               ) : (
                 <>
