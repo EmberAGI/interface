@@ -30,6 +30,10 @@ const HeaderFrame = styled.div`
     grid-template-columns: auto auto;
   `};
 
+  @media screen and (max-width: 1050px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
   ${({ theme }) => theme.mediaWidth.upToMedium`
     grid-template-columns: auto;
   `};
@@ -48,7 +52,7 @@ const HeaderElement = styled.div`
   gap: 8px;
 
   ${({ theme }) => theme.mediaWidth.upToMedium`
-   flex-direction: row-reverse;
+    flex-direction: row-reverse;
     align-items: center;
   `};
 `;
@@ -81,6 +85,10 @@ const HeaderLinks = styled(Row)`
   ${({ theme }) => theme.mediaWidth.upToLarge`
     grid-column-start: 1;
   `};
+
+  @media screen and (max-width: 1050px) {
+    grid-column-start: 2;
+  }
 
   ${({ theme }) => theme.mediaWidth.upToMedium`
     position: fixed;

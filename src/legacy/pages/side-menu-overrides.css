@@ -2,6 +2,12 @@
     position: relative;
 }
 
+@media screen and (max-width: 1050px) {
+    .side-menu-container {
+        position: fixed;
+    }
+}
+
 .address-block button {
     background: transparent;
     border: 0;
