@@ -1,0 +1,19 @@
+.side-menu-container {
+    position: relative;
+}
+
+@media screen and (max-width: 1050px) {
+    .side-menu-container {
+        position: fixed;
+    }
+}
+
+.address-block button {
+    background: transparent;
+    border: 0;
+    padding: 0;
+}
+
+.side-menu a, .side-menu span {
+    font-size: 16px;
+}
