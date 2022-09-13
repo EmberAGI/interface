@@ -25,6 +25,8 @@ import { OpenClaimAddressModalAndRedirectToSwap, RedirectPathToSwapOnly } from '
 import useAutoLogin from '../hooks/useAutoLogin';
 import { useWeb3React } from '@web3-react/core';
 import useAuthorization from '../hooks/useAuthorization';
+import logo from '../assets/svg/menu/firepot-airdao-logo.png';
+//import logoSm from '../assets/svg/menu/firepot-airdao-logo-sm.png';
 import './side-menu-overrides.css';
 
 const AppWrapper = styled.div`
@@ -69,6 +71,10 @@ const BodyWrapper = styled.div`
   z-index: 1;
 `;
 
+const Logo = styled.img`
+  height: 38px;
+`;
+
 export default function App() {
   const isLoaded = useAutoLogin();
   const { account: address } = useWeb3React();
@@ -79,7 +85,12 @@ export default function App() {
       <Route component={DarkModeQueryParamReader} />
       <AppWrapper>
         <MenuWrapper>
-          <Menu address={address} login={loginMetamask} logout={logout} />
+          <Menu
+            address={address}
+            login={loginMetamask}
+            logout={logout}
+            customLogo={<Logo src={logo} alt="Firepot Finance" />}
+          />
         </MenuWrapper>
 
         <MainWrapper>
