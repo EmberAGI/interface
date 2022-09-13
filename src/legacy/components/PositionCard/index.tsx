@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { Text } from 'rebass';
 import styled from 'styled-components';
 import { useTotalSupply } from '../../data/TotalSupply';
-
+import MetamaskIcon from '../../assets/images/metamask.png';
 import { useActiveWeb3React } from '../../hooks';
 import { useTokenBalance } from '../../state/wallet/hooks';
 import { TYPE } from '../../theme';
@@ -26,6 +26,30 @@ import { BIG_INT_ZERO } from '../../constants';
 
 export const FixedHeightRow = styled(RowBetween)`
   height: 24px;
+`;
+const StyledBalanceMax = styled.button`
+  padding: 0.5rem;
+  background-color: ${({ theme }) => theme.bg3};
+  border: 1px solid ${({ theme }) => theme.bg3};
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  transition: 0.2s;
+
+  font-weight: 500;
+  cursor: pointer;
+  margin-right: 0.5rem;
+  color: ${({ theme }) => theme.primaryText1};
+
+  :hover {
+    background-color: ${({ theme }) => theme.primary3};
+  }
+  :focus {
+    outline: none;
+  }
+
+  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
+    margin-right: 0.5rem;
+  `};
 `;
 
 export const HoverCard = styled(Card)`
@@ -159,6 +183,29 @@ export function MinimalPositionCard({ pair, showUnwrapped = false, border }: Pos
 
 export default function FullPositionCard({ pair, border, stakedBalance }: PositionCardProps) {
   const { account } = useActiveWeb3React();
+  const ethereum = window.ethereum as any;
+  const addTokenFunction = async (address: string, symbol: string | undefined, decimals: number) => {
+    try {
+      const wasAdded = await ethereum.request({
+        method: 'wallet_watchAsset',
+        params: {
+          type: 'ERC20',
+          options: {
+            address: address,
+            symbol: symbol,
+            decimals: decimals,
+          },
+        },
+      });
+      if (wasAdded) {
+        console.log('Added token');
+      } else {
+        console.log('Token was not added');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const currency0 = unwrappedToken(pair.token0);
   const currency1 = unwrappedToken(pair.token1);
@@ -195,10 +242,18 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
       <AutoColumn gap="12px">
         <FixedHeightRow>
           <AutoRow gap="8px">
+            {console.log(pair.liquidityToken.address, 'liquidityToken')}
             <DoubleCurrencyLogo currency0={currency0} currency1={currency1} size={20} />
             <Text fontWeight={500} fontSize={20}>
               {!currency0 || !currency1 ? <Dots>Loading</Dots> : `${currency0.symbol}/${currency1.symbol}`}
             </Text>
+            <StyledBalanceMax
+              onClick={() =>
+                addTokenFunction(pair.liquidityToken.address, pair.liquidityToken.symbol, pair.liquidityToken.decimals)
+              }
+            >
+              <img src={MetamaskIcon} alt={'metamask logo'} width={'16px'} height={'16px'} />
+            </StyledBalanceMax>
           </AutoRow>
           <RowFixed gap="8px">
             <ButtonEmpty padding="6px 8px" width="fit-content" onClick={() => setShowMore(!showMore)}>
