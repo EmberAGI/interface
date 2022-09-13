@@ -22,30 +22,23 @@ type ChainTokenList = {
   readonly [chainId in ChainId]: Token[];
 };
 
-export const DAI = new Token(
-  ChainId.MAINNET,
-  '0x6B175474E89094C44Da98b954EedeAC495271d0F',
-  18,
-  'DAI',
-  'Dai Stablecoin'
-);
+//export const USDC = new Token(ChainId.AMBTEST, '0x1242BDB8DD53f8ca7126d46271Dc59FD7C71C856', 6, 'USDC', 'USD//C');
 
-export const USDC = new Token(ChainId.AMBTEST, '0x1242BDB8DD53f8ca7126d46271Dc59FD7C71C856', 6, 'USDC', 'USD//C');
-export const USDT = new Token(ChainId.MAINNET, '0xdAC17F958D2ee523a2206206994597C13D831ec7', 6, 'USDT', 'Tether USD');
-export const COMP = new Token(ChainId.MAINNET, '0xc00e94Cb662C3520282E6f5717214004A7f26888', 18, 'COMP', 'Compound');
-export const MKR = new Token(ChainId.MAINNET, '0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2', 18, 'MKR', 'Maker');
-export const AMPL = new Token(ChainId.MAINNET, '0xD46bA6D942050d489DBd938a2C909A5d5039A161', 9, 'AMPL', 'Ampleforth');
-export const WBTC = new Token(ChainId.MAINNET, '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599', 8, 'WBTC', 'Wrapped BTC');
-export const BIG = new Token(ChainId.AMBTEST, '0x8FB30d1A78d7E622CCB10376A585383Cf9dEc920', 18, 'BIG', 'Big Token');
-export const SML = new Token(ChainId.AMBTEST, '0xD45f1F799097a30243605E9ba938FcB0e3f5cBC3', 18, 'SML', 'Small Token');
-export const wETH = new Token(
-  ChainId.AMBTEST,
-  '0x608EDeEfA8C63823519B89bAb865E83773FAA46d',
-  18,
-  'wETH',
-  'Wrapped Ethereum'
-);
-export const wBNB = new Token(ChainId.AMBTEST, '0x1Cc332c401fD2777C2c6bAE25097A910dFB0BC80', 18, 'wBNB', 'Wrapped BNB');
+export const USDC = new Token(ChainId.MAINNET, '0x290998B7B5589AFdc4E3f3c7eF817F05dcDEC947', 6, 'USDC', 'USD//C');
+// export const USDT = new Token(ChainId.MAINNET, '0xdAC17F958D2ee523a2206206994597C13D831ec7', 6, 'USDT', 'Tether USD');
+// export const COMP = new Token(ChainId.MAINNET, '0xc00e94Cb662C3520282E6f5717214004A7f26888', 18, 'COMP', 'Compound');
+// export const MKR = new Token(ChainId.MAINNET, '0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2', 18, 'MKR', 'Maker');
+// export const AMPL = new Token(ChainId.MAINNET, '0xD46bA6D942050d489DBd938a2C909A5d5039A161', 9, 'AMPL', 'Ampleforth');
+// export const WBTC = new Token(ChainId.MAINNET, '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599', 8, 'WBTC', 'Wrapped BTC');
+
+//export const wETH = new Token(
+//   ChainId.AMBTEST,
+//   '0x608EDeEfA8C63823519B89bAb865E83773FAA46d',
+//   18,
+//   'wETH',
+//   'Wrapped Ethereum'
+// );
+//export const wBNB = new Token(ChainId.AMBTEST, '0x1Cc332c401fD2777C2c6bAE25097A910dFB0BC80', 18, 'wBNB', 'Wrapped BNB');
 // Block time here is slightly higher (~1s) than average in order to avoid ongoing proposals past the displayed time
 export const AVERAGE_BLOCK_TIME_IN_SECS = 13;
 export const PROPOSAL_LENGTH_IN_BLOCKS = 40_320;
@@ -67,7 +60,7 @@ const WETH_ONLY: ChainTokenList = {
 // used to construct intermediary pairs for trading
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   ...WETH_ONLY,
-  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT, COMP, MKR, WBTC],
+  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], USDC],
 };
 
 /**
@@ -76,20 +69,20 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
  */
 export const CUSTOM_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: Token[] } } = {
   [ChainId.MAINNET]: {
-    [AMPL.address]: [DAI, WETH[ChainId.MAINNET]],
+    //[AMPL.address]: [DAI, WETH[ChainId.MAINNET]],
   },
 };
 
 // used for display in the default list when adding liquidity
 export const SUGGESTED_BASES: ChainTokenList = {
   ...WETH_ONLY,
-  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT, WBTC],
+  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], USDC],
 };
 
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   ...WETH_ONLY,
-  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT, WBTC],
+  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], USDC],
   [ChainId.ROPSTEN]: [...WETH_ONLY[ChainId.ROPSTEN]],
   [ChainId.RINKEBY]: [...WETH_ONLY[ChainId.RINKEBY]],
   [ChainId.GÖRLI]: [...WETH_ONLY[ChainId.GÖRLI]],
@@ -99,15 +92,9 @@ export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
 export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } = {
   [ChainId.MAINNET]: [
     [
-      new Token(ChainId.MAINNET, '0x5d3a536E4D6DbD6114cc1Ead35777bAB948E3643', 8, 'cDAI', 'Compound Dai'),
-      new Token(ChainId.MAINNET, '0x39AA39c021dfbaE8faC545936693aC917d5E7563', 8, 'cUSDC', 'Compound USD Coin'),
+      new Token(ChainId.MAINNET, '0x2b2d892C3fe2b4113dd7aC0D2c1882AF202FB28F', 18, 'SAMB', 'Synthetic Amber'),
+      new Token(ChainId.MAINNET, '0x290998B7B5589AFdc4E3f3c7eF817F05dcDEC947', 6, 'USDC', 'USD Coin'),
     ],
-    [USDC, USDT],
-    [DAI, USDT],
-  ],
-  [ChainId.AMBTEST]: [
-    [BIG, SML],
-    [BIG, wETH],
   ],
 };
 
