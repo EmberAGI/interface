@@ -30,8 +30,7 @@ export function getEtherscanLink(
   data: string,
   type: 'transaction' | 'token' | 'address' | 'block'
 ): string {
-  const prefix = `https://explorer.${ETHERSCAN_PREFIXES[chainId] || ETHERSCAN_PREFIXES[16718]}`;
-
+  const prefix = `https://airdao.io/explorer${ETHERSCAN_PREFIXES[chainId] || ETHERSCAN_PREFIXES[16718]}`;
   switch (type) {
     case 'transaction': {
       return `${prefix}/tx/${data}`;
