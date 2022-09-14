@@ -117,11 +117,7 @@ const AccountElement = styled.div<{ active: boolean }>`
   }
 `;
 
-const HideSmall = styled.span`
-  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-    display: none;
-  `};
-`;
+const HideSmall = styled.span``;
 
 const NetworkCard = styled(LightCard)`
   border-radius: 0.8rem;

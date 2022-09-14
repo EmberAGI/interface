@@ -46,6 +46,10 @@ const AppWrapper = styled.div`
 
 const MenuWrapper = styled.div`
   display: flex;
+
+  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
+    flex-flow: column;
+  `};
 `;
 
 const MainWrapper = styled.div`
@@ -74,7 +78,7 @@ const BodyWrapper = styled.div`
   z-index: 1;
 
   ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-    padding: 0rem 12px;
+    padding: 12px;
   `}
 `;
 
