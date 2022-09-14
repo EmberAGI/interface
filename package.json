@@ -89,7 +89,7 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
-    "@firepotfinance/default-token-list": "1.0.3",
+    "@firepotfinance/default-token-list": "1.0.5",
     "airdao-menu": "^2.1.27",
     "dotenv": "^10.0.0",
     "sass": "^1.54.4",
