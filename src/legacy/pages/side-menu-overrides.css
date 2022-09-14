@@ -8,12 +8,14 @@
     }
 }
 
+@media screen and (max-width: 720px) {
+    .side-menu-container {
+        position: relative;
+    }
+}
+
 .address-block button {
     background: transparent;
     border: 0;
     padding: 0;
-}
-
-.side-menu a, .side-menu span {
-    font-size: 16px;
 }
