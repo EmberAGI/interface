@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import AmbrosusLogo from '../../../legacy/assets/images/ambrosusLogo.png';
+import AmbrosusLogo from '../../../assets/images/airdaoMainLogo.png';
 import UsdcLogo from '../../../legacy/assets/images/usdclogo.png';
 
 const CardImageTextContainer = styled.div`
