@@ -23,6 +23,7 @@ import DoubleCurrencyLogo from '../DoubleLogo';
 import { RowBetween, RowFixed, AutoRow } from '../Row';
 import { Dots } from '../swap/styleds';
 import { BIG_INT_ZERO } from '../../constants';
+import { TVLParser } from '../../../utils/tvlParser';
 
 export const FixedHeightRow = styled(RowBetween)`
   height: 24px;
@@ -336,6 +337,15 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
                 {poolTokenPercentage
                   ? (poolTokenPercentage.toFixed(2) === '0.00' ? '<0.01' : poolTokenPercentage.toFixed(2)) + '%'
                   : '-'}
+              </Text>
+            </FixedHeightRow>
+
+            <FixedHeightRow>
+              <Text fontSize={16} fontWeight={500}>
+                TVL:
+              </Text>
+              <Text fontSize={16} fontWeight={500}>
+                {`${TVLParser.parse(pair)}`}
               </Text>
             </FixedHeightRow>
 
