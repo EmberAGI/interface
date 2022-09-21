@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 import { darken } from 'polished';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
+import TVLView from '../../../features/TVLDisplay/screens/TVLView';
 import LogoFP from '../../assets/images/logoFP.png';
 // import Logo from '../../assets/svg/logo.svg';
 // import LogoDark from '../../assets/svg/logo_white.svg';
@@ -349,6 +350,7 @@ export default function Header() {
               <NetworkCard title={NETWORK_LABELS[chainId]}>{NETWORK_LABELS[chainId]}</NetworkCard>
             )}
           </HideSmall>
+          <TVLView />
           <AccountElement active={!!account} style={{ pointerEvents: 'auto' }}>
             {account && userEthBalance ? (
               <BalanceText style={{ flexShrink: 0 }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
