@@ -4,17 +4,32 @@ import { formatUnits } from 'ethers/lib/utils';
 
 const STABLE_COINS_ADDRESSES = ['0xd8dd0273D31c1cd9Dba104DaCA7C1dfEE4f7b805'];
 
-interface PoolToken {
+export interface PoolToken {
   address: string;
   reserve: string;
 }
-interface TVLParameters {
+export interface TVLParameters {
   tokenA: PoolToken;
   tokenB: PoolToken;
   totalFarmStakedTokens: string;
   totalMintedTokens: string;
 }
+function duplicateStableCoin(tokenAmount: string): string {
+  return BigNumber.from(tokenAmount).mul(2).toString();
+}
 
+function getStableCoinReserve(tokenA: PoolToken, tokenB: PoolToken): string {
+  let result = '0';
+
+  if (STABLE_COINS_ADDRESSES.includes(tokenA.address)) {
+    result = tokenA.reserve;
+  }
+  if (STABLE_COINS_ADDRESSES.includes(tokenB.address)) {
+    result = tokenB.reserve;
+  }
+
+  return result;
+}
 export class TVLParser {
   pool: Pair | undefined;
   tvlParams: TVLParameters | undefined;
@@ -68,21 +83,4 @@ export class TVLParser {
       .toFixed(8)
       .toString();
   }
-}
-
-function duplicateStableCoin(tokenAmount: string): string {
-  return BigNumber.from(tokenAmount).mul(2).toString();
-}
-
-function getStableCoinReserve(tokenA: PoolToken, tokenB: PoolToken): string {
-  let result = '0';
-
-  if (STABLE_COINS_ADDRESSES.includes(tokenA.address)) {
-    result = tokenA.reserve;
-  }
-  if (STABLE_COINS_ADDRESSES.includes(tokenB.address)) {
-    result = tokenB.reserve;
-  }
-
-  return result;
 }
