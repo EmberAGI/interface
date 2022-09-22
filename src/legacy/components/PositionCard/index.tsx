@@ -238,6 +238,8 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
 
   const backgroundColor = useColor(pair?.token0);
 
+  const tvlParser = new TVLParser(18, pair);
+
   return (
     <StyledPositionCard border={border} bgColor={backgroundColor}>
       <AutoColumn gap="12px">
@@ -345,7 +347,7 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
                 TVL:
               </Text>
               <Text fontSize={16} fontWeight={500}>
-                {`${TVLParser.parse(pair)}`}
+                {`${tvlParser.parse()}`}
               </Text>
             </FixedHeightRow>
 

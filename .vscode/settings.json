@@ -16,7 +16,7 @@
   "search.useGlobalIgnoreFiles": false,
   "search.useParentIgnoreFiles": true,
   "typescript.preferences.importModuleSpecifier": "relative",
-  "editor.formatOnSave": false,
+  "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true,
   },
