@@ -2,16 +2,15 @@ import { useActiveWeb3React } from 'legacy/hooks';
 import { usePairContract } from '../../../legacy/hooks/useContract';
 import { BigNumber } from 'ethers';
 import { useEffect, useState } from 'react';
-import { useYieldFarmContract } from '../../../legacy/hooks/useContract';
+import useYieldFarmState from '../../YieldFarm/hooks/useYieldFarmState';
 import { PoolToken, TVLParameters } from '../../../utils/tvlParser';
 
-export default function usePairReserves(yieldFarmContractAddress?: string) {
+export default function usePairReserves(yieldFarmContractAddress: string) {
   const { library } = useActiveWeb3React();
-  const yieldFarmContract = useYieldFarmContract(yieldFarmContractAddress);
-  const pairContractAddress = yieldFarmContract?.stakingToken();
-  const pairContract = usePairContract(pairContractAddress);
+  const { stakingTokenAddress, stakeBalance } = useYieldFarmState(yieldFarmContractAddress);
+  const pairContract = usePairContract(stakingTokenAddress);
   const [tvlParameters, setTvlParameters] = useState<TVLParameters>();
-  const [decimals, setDecimals] = useState();
+  const [decimals, setDecimals] = useState<number>(0);
 
   useEffect(() => {
     const listener = async () => {
@@ -25,12 +24,9 @@ export default function usePairReserves(yieldFarmContractAddress?: string) {
         tokenA.address = addressToken0;
         const addressToken1 = await pairContract?.token1();
         tokenB.address = addressToken1;
-        const flpTotalBalance: string = await pairContract?.totalSupply().then((res: BigNumber) => {
-          return BigNumber.from(res).toString;
-        });
-        const farmFLPbalance: string = await yieldFarmContract?.totalSupply().then((res: BigNumber) => {
-          return BigNumber.from(res).toString;
-        });
+        const flpTotalSupply: BigNumber = await pairContract?.totalSupply();
+        const flpTotalBalance: string = BigNumber.from(flpTotalSupply).toString();
+        const farmFLPbalance: string = BigNumber.from(stakeBalance).toString();
         const tvlParams: TVLParameters = {
           tokenA: tokenA,
           tokenB: tokenB,
@@ -45,7 +41,7 @@ export default function usePairReserves(yieldFarmContractAddress?: string) {
       }
     };
     listener();
-  }, [pairContract, yieldFarmContract]);
+  }, [pairContract, stakeBalance, stakingTokenAddress]);
   return {
     tvlParameters,
     decimals,
