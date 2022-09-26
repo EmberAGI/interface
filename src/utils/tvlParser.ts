@@ -77,9 +77,6 @@ export class TVLParser {
         { address: this.tvlParams.tokenB.address, reserve: this.tvlParams.tokenB.reserve }
       )
     );
-    console.log(BigNumber.from(this.tvlParams.totalFarmStakedTokens).toString(), 'totalFarmStakedTokens');
-    console.log(duplicatedStableCoin, 'duplicated stable coin');
-    console.log(BigNumber.from(this.tvlParams.totalMintedTokens).toString(), 'TotalMinted Tokens');
 
     const precisionMultiplier = 100;
 
