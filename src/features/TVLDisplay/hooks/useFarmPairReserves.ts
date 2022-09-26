@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import useYieldFarmState from '../../YieldFarm/hooks/useYieldFarmState';
 import { PoolToken, TVLParameters } from '../../../libraries/TVLParser/types';
 
-export default function usePairReserves(yieldFarmContractAddress: string) {
+export default function useFarmPairReserves(yieldFarmContractAddress: string) {
   const { library } = useActiveWeb3React();
   const { stakingTokenAddress, stakeBalance } = useYieldFarmState(yieldFarmContractAddress);
   const pairContract = usePairContract(stakingTokenAddress);

@@ -38,7 +38,7 @@ export default function YieldFarmStatsView(props: YieldFarmStatsViewProps) {
       <CardSpaceBetweenRow>
         <CardText>TVL</CardText>
         {/*<CardText>{viewModel.tvl}</CardText> */}
-        <TVLFarmView />
+        <TVLFarmView farmContractAddress={farmContractAddress} />
       </CardSpaceBetweenRow>
     </>
   );
