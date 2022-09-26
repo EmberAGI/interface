@@ -77,19 +77,22 @@ export class TVLParser {
         { address: this.tvlParams.tokenB.address, reserve: this.tvlParams.tokenB.reserve }
       )
     );
-    console.log(this.tvlParams.totalFarmStakedTokens, 'totalFarmStakedTokens');
-    const precisionMultiplier = 10000;
-    const percentageDivider = 100;
-    const result = BigNumber.from(this.tvlParams.totalFarmStakedTokens).mul(
-      BigNumber.from(duplicatedStableCoin)
-        .mul(precisionMultiplier)
-        .div(BigNumber.from(this.tvlParams.totalMintedTokens))
-        .div(percentageDivider)
-    );
-    console.log(result, 'result');
+    console.log(BigNumber.from(this.tvlParams.totalFarmStakedTokens).toString(), 'totalFarmStakedTokens');
+    console.log(duplicatedStableCoin, 'duplicated stable coin');
+    console.log(BigNumber.from(this.tvlParams.totalMintedTokens).toString(), 'TotalMinted Tokens');
+
+    const precisionMultiplier = 100;
+
+    const result = BigNumber.from(this.tvlParams.totalFarmStakedTokens)
+      .mul(
+        BigNumber.from(duplicatedStableCoin)
+          .mul(precisionMultiplier)
+          .div(BigNumber.from(this.tvlParams.totalMintedTokens))
+      )
+      .div(precisionMultiplier);
 
     return Number(formatUnits(BigNumber.from(result), this.numberOfDecimals))
-      .toFixed(8)
+      .toFixed(4)
       .toString();
   }
 }
