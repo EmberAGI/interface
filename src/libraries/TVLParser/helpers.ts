@@ -34,7 +34,7 @@ export function duplicateStableCoin(tokenA: PoolToken, tokenB: PoolToken): BigNu
 export async function setupTVLParams(contract: Contract): Promise<TVLParameters> {
   const tokenA: PoolToken = { address: '', reserve: '' };
   const tokenB: PoolToken = { address: '', reserve: '' };
-  const reserves = await contract?.getReserves();
+  const reserves = await contract.getReserves();
   tokenA.reserve = BigNumber.from(reserves[0]).toString();
   tokenB.reserve = BigNumber.from(reserves[1]).toString();
   const addressToken0 = await contract?.token0();
