@@ -1,6 +1,6 @@
 import React from 'react';
 import { CardText } from '../../YieldFarm/components/YieldFarmStatsView';
-import useTVLFarmViewModel from '../screens/useTVLFarmViewModel';
+import useTVLFarmViewModel from './useTVLFarmViewModel';
 
 interface FarmContractAddress {
   farmContractAddress: string;

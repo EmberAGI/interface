@@ -347,7 +347,7 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
                 TVL:
               </Text>
               <Text fontSize={16} fontWeight={500}>
-                {`${tvlParser.parse()}`}
+                {`$ ${tvlParser.parse()}`}
               </Text>
             </FixedHeightRow>
 

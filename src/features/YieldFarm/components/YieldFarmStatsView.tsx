@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import useYieldFarmStatsViewModel from './useYieldFarmStatsViewModel';
-import TVLFarmView from '../../TVLDisplay/screens/TVLFarmView';
+import TVLFarmView from '../../TVLDisplay/components/TVLFarmView';
 
 export const CardText = styled.p`
   text-align: right;

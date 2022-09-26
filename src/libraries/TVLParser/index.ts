@@ -7,6 +7,7 @@ import { TVLParameters } from './types';
 const PRECISION_MULTIPLIER = 100;
 
 export class TVLParser {
+  // TODO: Logic to parse coins with no stable coin pair
   pool: Pair | undefined;
   tvlParams: TVLParameters | undefined;
   numberOfDecimals: number;
@@ -38,8 +39,6 @@ export class TVLParser {
       { address: this.pool.token1.address, reserve: this.pool.reserve1.raw.toString() }
     );
 
-    // TODO: Logic to parse coins with no stable coin pair
-
     return Number(formatUnits(duplicatedStableCoin, this.numberOfDecimals)).toFixed(4).toString();
   }
 
@@ -52,9 +51,7 @@ export class TVLParser {
       .mul(duplicatedStableCoin.mul(PRECISION_MULTIPLIER).div(BigNumber.from(this.tvlParams.totalMintedTokens)))
       .div(PRECISION_MULTIPLIER);
 
-    return Number(formatUnits(BigNumber.from(result), this.numberOfDecimals))
-      .toFixed(4)
-      .toString();
+    return Number(formatUnits(result, this.numberOfDecimals)).toFixed(4).toString();
   }
 
   private parseParams(): string {
