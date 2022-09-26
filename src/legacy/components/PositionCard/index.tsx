@@ -23,7 +23,7 @@ import DoubleCurrencyLogo from '../DoubleLogo';
 import { RowBetween, RowFixed, AutoRow } from '../Row';
 import { Dots } from '../swap/styleds';
 import { BIG_INT_ZERO } from '../../constants';
-import { TVLParser } from '../../../utils/tvlParser';
+import { TVLParser } from '../../../libraries/TVLParser';
 
 export const FixedHeightRow = styled(RowBetween)`
   height: 24px;

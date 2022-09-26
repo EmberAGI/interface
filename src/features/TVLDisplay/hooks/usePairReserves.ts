@@ -3,7 +3,7 @@ import { usePairContract } from '../../../legacy/hooks/useContract';
 import { BigNumber } from 'ethers';
 import { useEffect, useState } from 'react';
 import useYieldFarmState from '../../YieldFarm/hooks/useYieldFarmState';
-import { PoolToken, TVLParameters } from '../../../utils/tvlParser';
+import { PoolToken, TVLParameters } from '../../../libraries/TVLParser/types';
 
 export default function usePairReserves(yieldFarmContractAddress: string) {
   const { library } = useActiveWeb3React();

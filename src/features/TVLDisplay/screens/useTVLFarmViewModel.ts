@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
-import { PoolToken, TVLParameters } from '../../../utils/tvlParser';
 import usePairReserves from '../hooks/usePairReserves';
-import { TVLParser } from '../../../utils/tvlParser';
+import { TVLParser } from '../../../libraries/TVLParser';
 
 export default function useTVLFarmViewModel(yieldFarmContractAddress: string) {
   const [viewModel, setViewModel] = useState<string>('');
