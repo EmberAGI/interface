@@ -1,7 +1,11 @@
 import { BigNumber, Contract } from 'ethers';
 import { PoolToken, TVLParameters } from './types';
 
-const STABLE_COINS_ADDRESSES = ['0xd8dd0273D31c1cd9Dba104DaCA7C1dfEE4f7b805'];
+// The second address is on testnet, have to refactor to make this exclusive for testnet
+const STABLE_COINS_ADDRESSES = [
+  '0xd8dd0273D31c1cd9Dba104DaCA7C1dfEE4f7b805',
+  '0x1242BDB8DD53f8ca7126d46271Dc59FD7C71C856',
+];
 
 export function duplicateToken(tokenAmount: string): string {
   return BigNumber.from(tokenAmount).mul(2).toString();

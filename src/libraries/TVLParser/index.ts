@@ -20,6 +20,7 @@ export class TVLParser {
 
   parse(): string {
     if (this.pool) {
+      console.log(this.pool, 'pool');
       return this.parsePair();
     }
     if (this.tvlParams && this.tvlParams.totalFarmStakedTokens) {
