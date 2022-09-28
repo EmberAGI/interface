@@ -7,8 +7,10 @@ export default function useTVLFarmViewModel(yieldFarmContractAddress: string) {
   const { tvlParameters, decimals } = useFarmPairReserves?.(yieldFarmContractAddress);
 
   useEffect(() => {
-    const tvlParser = new TVLParser(decimals, undefined, tvlParameters);
-    setViewModel(tvlParser.parse());
+    if (tvlParameters) {
+      const tvlParser = new TVLParser(decimals, tvlParameters);
+      setViewModel(tvlParser.parse());
+    }
   }, [decimals, tvlParameters]);
 
   return {

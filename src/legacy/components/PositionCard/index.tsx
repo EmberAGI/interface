@@ -238,7 +238,12 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
 
   const backgroundColor = useColor(pair?.token0);
 
-  const tvlParser = new TVLParser(18, pair);
+  const POOL_DECIMAL_POINTS = 18;
+  const tvlParams = {
+    tokenA: { address: pair.token0.address, reserve: pair.reserve0.raw.toString(), decimals: pair.token0.decimals },
+    tokenB: { address: pair.token1.address, reserve: pair.reserve1.raw.toString(), decimals: pair.token1.decimals },
+  };
+  const tvlParser = new TVLParser(POOL_DECIMAL_POINTS, tvlParams);
 
   return (
     <StyledPositionCard border={border} bgColor={backgroundColor}>

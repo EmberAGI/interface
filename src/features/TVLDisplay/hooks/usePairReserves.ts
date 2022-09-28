@@ -12,9 +12,13 @@ export default function usePairReserves(contractAddress: string) {
     const listener = async () => {
       try {
         if (pairContract) {
-          const tvlParams = await setupTVLParams(pairContract);
+          const tvlParams = await setupTVLParams(
+            pairContract,
+            tvlParameters?.tokenA.decimals,
+            tvlParameters?.tokenB.decimals
+          );
           setTvlParameters(tvlParams);
-          const decimals = await pairContract?.decimals();
+          const decimals = await pairContract.decimals();
           setDecimals(decimals);
         }
       } catch (error) {
@@ -22,7 +26,7 @@ export default function usePairReserves(contractAddress: string) {
       }
     };
     listener();
-  }, [pairContract]);
+  }, [pairContract, tvlParameters]);
   return {
     tvlParameters,
     decimals,
