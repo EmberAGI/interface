@@ -46,11 +46,11 @@ export function standarizeTokenDecimals(token: PoolToken): PoolToken {
 
 export async function setupTVLParams(
   contract: Contract,
-  tokenADecimals: number,
-  tokenBDecimals: number
+  tokenADecimals?: number,
+  tokenBDecimals?: number
 ): Promise<TVLParameters> {
-  const tokenA: PoolToken = { address: '', reserve: '', decimals: tokenADecimals };
-  const tokenB: PoolToken = { address: '', reserve: '', decimals: tokenBDecimals };
+  const tokenA: PoolToken = { address: '', reserve: '', decimals: tokenADecimals || 18 };
+  const tokenB: PoolToken = { address: '', reserve: '', decimals: tokenBDecimals || 18 };
   const reserves = await contract.getReserves();
   tokenA.reserve = BigNumber.from(reserves[0]).toString();
   tokenB.reserve = BigNumber.from(reserves[1]).toString();

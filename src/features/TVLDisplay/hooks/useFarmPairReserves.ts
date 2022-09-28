@@ -15,7 +15,11 @@ export default function useFarmPairReserves(contractAddress: string) {
     const listener = async () => {
       try {
         if (pairContract) {
-          const tvlParams = await setupTVLParams(pairContract);
+          const tvlParams = await setupTVLParams(
+            pairContract,
+            tvlParameters?.tokenA.decimals,
+            tvlParameters?.tokenB.decimals
+          );
           const flpTotalSupply: BigNumber = await pairContract.totalSupply();
           const flpTotalBalance: string = BigNumber.from(flpTotalSupply).toString();
           const farmFLPbalance: string = BigNumber.from(stakeBalance).toString();
@@ -23,7 +27,7 @@ export default function useFarmPairReserves(contractAddress: string) {
           tvlParams.totalMintedTokens = flpTotalBalance;
 
           setTvlParameters(tvlParams);
-          const decimals = await pairContract?.decimals();
+          const decimals = await pairContract.decimals();
           setDecimals(decimals);
         }
       } catch (error) {
@@ -31,7 +35,7 @@ export default function useFarmPairReserves(contractAddress: string) {
       }
     };
     listener();
-  }, [pairContract, stakeBalance, stakingTokenAddress]);
+  }, [pairContract, stakeBalance, stakingTokenAddress, tvlParameters]);
   return {
     tvlParameters,
     decimals,
