@@ -23,6 +23,7 @@ import DoubleCurrencyLogo from '../DoubleLogo';
 import { RowBetween, RowFixed, AutoRow } from '../Row';
 import { Dots } from '../swap/styleds';
 import { BIG_INT_ZERO } from '../../constants';
+import { TVLParser } from '../../../libraries/TVLParser';
 
 export const FixedHeightRow = styled(RowBetween)`
   height: 24px;
@@ -237,12 +238,18 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
 
   const backgroundColor = useColor(pair?.token0);
 
+  const POOL_DECIMAL_POINTS = 18;
+  const tvlParams = {
+    tokenA: { address: pair.token0.address, reserve: pair.reserve0.raw.toString(), decimals: pair.token0.decimals },
+    tokenB: { address: pair.token1.address, reserve: pair.reserve1.raw.toString(), decimals: pair.token1.decimals },
+  };
+  const tvlParser = new TVLParser(POOL_DECIMAL_POINTS, tvlParams);
+
   return (
     <StyledPositionCard border={border} bgColor={backgroundColor}>
       <AutoColumn gap="12px">
         <FixedHeightRow>
           <AutoRow gap="8px">
-            {console.log(pair.liquidityToken.address, 'liquidityToken')}
             <DoubleCurrencyLogo currency0={currency0} currency1={currency1} size={20} />
             <Text fontWeight={500} fontSize={20}>
               {!currency0 || !currency1 ? <Dots>Loading</Dots> : `${currency0.symbol}/${currency1.symbol}`}
@@ -336,6 +343,15 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
                 {poolTokenPercentage
                   ? (poolTokenPercentage.toFixed(2) === '0.00' ? '<0.01' : poolTokenPercentage.toFixed(2)) + '%'
                   : '-'}
+              </Text>
+            </FixedHeightRow>
+
+            <FixedHeightRow>
+              <Text fontSize={16} fontWeight={500}>
+                TVL:
+              </Text>
+              <Text fontSize={16} fontWeight={500}>
+                {`$ ${tvlParser.parse()}`}
               </Text>
             </FixedHeightRow>
 

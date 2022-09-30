@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import useYieldFarmStatsViewModel from './useYieldFarmStatsViewModel';
+import TVLFarmView from '../../TVLDisplay/components/TVLFarmView';
 
-const CardText = styled.p`
+export const CardText = styled.p`
   text-align: right;
   color: black;
   font-size: 14px;
@@ -36,7 +37,8 @@ export default function YieldFarmStatsView(props: YieldFarmStatsViewProps) {
       </CardSpaceBetweenRow>
       <CardSpaceBetweenRow>
         <CardText>TVL</CardText>
-        <CardText>{viewModel.tvl}</CardText>
+        {/*<CardText>{viewModel.tvl}</CardText> */}
+        <TVLFarmView farmContractAddress={farmContractAddress} />
       </CardSpaceBetweenRow>
     </>
   );

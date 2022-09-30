@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 import LogoFP from '../../assets/images/logoFP.png';
 // import Logo from '../../assets/svg/logo.svg';
 // import LogoDark from '../../assets/svg/logo_white.svg';
+import TVLView from '../../../features/TVLDisplay/components/TVLView';
 import { useActiveWeb3React } from '../../hooks';
 import { useDarkModeManager } from '../../state/user/hooks';
 import { useETHBalances } from '../../state/wallet/hooks';
@@ -349,6 +350,7 @@ export default function Header() {
               <NetworkCard title={NETWORK_LABELS[chainId]}>{NETWORK_LABELS[chainId]}</NetworkCard>
             )}
           </HideSmall>
+          <TVLView />
           <AccountElement active={!!account} style={{ pointerEvents: 'auto' }}>
             {account && userEthBalance ? (
               <BalanceText style={{ flexShrink: 0 }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
