@@ -7,8 +7,10 @@ export default function useTVLViewModel(poolContractAddress: string) {
   const { tvlParameters, decimals } = usePairReserves?.(poolContractAddress);
 
   useEffect(() => {
-    const tvlParser = new TVLParser(decimals, undefined, tvlParameters);
-    setViewModel(tvlParser.parse());
+    if (tvlParameters) {
+      const tvlParser = new TVLParser(decimals, tvlParameters);
+      setViewModel(tvlParser.parse());
+    }
   }, [decimals, tvlParameters]);
 
   return {

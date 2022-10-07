@@ -24,16 +24,33 @@ export function duplicateStableCoin(tokenA: PoolToken, tokenB: PoolToken): BigNu
   return BigNumber.from(
     duplicateToken(
       getStableCoinReserve(
-        { address: tokenA.address, reserve: tokenA.reserve },
-        { address: tokenB.address, reserve: tokenB.reserve }
+        { address: tokenA.address, reserve: tokenA.reserve, decimals: tokenA.decimals },
+        { address: tokenB.address, reserve: tokenB.reserve, decimals: tokenB.decimals }
       )
     )
   );
 }
 
-export async function setupTVLParams(contract: Contract): Promise<TVLParameters> {
-  const tokenA: PoolToken = { address: '', reserve: '' };
-  const tokenB: PoolToken = { address: '', reserve: '' };
+export function checkTokenDecimals(token: PoolToken): boolean {
+  if (token.decimals === 18) {
+    return true;
+  }
+  return false;
+}
+
+export function standarizeTokenDecimals(token: PoolToken): PoolToken {
+  const power = BigNumber.from(10).pow(18 - token.decimals);
+  const newReserve = BigNumber.from(token.reserve).mul(power);
+  return { address: token.address, reserve: newReserve.toString(), decimals: 18 };
+}
+
+export async function setupTVLParams(
+  contract: Contract,
+  tokenADecimals?: number,
+  tokenBDecimals?: number
+): Promise<TVLParameters> {
+  const tokenA: PoolToken = { address: '', reserve: '', decimals: tokenADecimals || 18 };
+  const tokenB: PoolToken = { address: '', reserve: '', decimals: tokenBDecimals || 18 };
   const reserves = await contract.getReserves();
   tokenA.reserve = BigNumber.from(reserves[0]).toString();
   tokenB.reserve = BigNumber.from(reserves[1]).toString();
