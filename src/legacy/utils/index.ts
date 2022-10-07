@@ -22,7 +22,7 @@ const ETHERSCAN_PREFIXES: { [chainId in ChainId]: string } = {
   3: 'ropsten.',
   4: 'rinkeby.',
   5: 'goerli.',
-  22040: '-test',
+  22040: 'test',
 };
 
 export function getEtherscanLink(
@@ -30,7 +30,7 @@ export function getEtherscanLink(
   data: string,
   type: 'transaction' | 'token' | 'address' | 'block'
 ): string {
-  const prefix = `https://airdao${ETHERSCAN_PREFIXES[chainId] || ETHERSCAN_PREFIXES[16718]}.io/explorer`;
+  const prefix = `https://${ETHERSCAN_PREFIXES[chainId] || ETHERSCAN_PREFIXES[16718]}.airdao.io/explorer`;
   switch (type) {
     case 'transaction': {
       return `${prefix}/tx/${data}`;
