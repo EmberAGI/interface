@@ -58,6 +58,7 @@ const MainWrapper = styled.div`
   flex-flow: column;
   align-items: center;
   justify-content: flex-start;
+  margin-left: auto;
 `;
 
 const HeaderWrapper = styled.div`
