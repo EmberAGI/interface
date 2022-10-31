@@ -53,7 +53,7 @@ const MenuWrapper = styled.div`
 `;
 
 const MainWrapper = styled.div`
-  width: calc(100% - 320px);
+  width: 100%;
   display: flex;
   flex-flow: column;
   align-items: center;
