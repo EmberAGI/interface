@@ -28,6 +28,7 @@ import { OpenClaimAddressModalAndRedirectToSwap, RedirectPathToSwapOnly } from '
 import useAutoLogin from '../hooks/useAutoLogin';
 import { useWeb3React } from '@web3-react/core';
 import useAuthorization from '../hooks/useAuthorization';
+import APRBanner from '../../features/APRBanner/banner';
 import logo from '../assets/svg/menu/firepot-airdao-logo.png';
 //import logoSm from '../assets/svg/menu/firepot-airdao-logo-sm.png';
 import './side-menu-overrides.css';
@@ -53,12 +54,16 @@ const MenuWrapper = styled.div`
 `;
 
 const MainWrapper = styled.div`
-  width: 100%;
+  width: calc(100% - 320px);
   display: flex;
   flex-flow: column;
   align-items: center;
   justify-content: flex-start;
   margin-left: auto;
+
+  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
+    width: 100%;
+  `}
 `;
 
 const HeaderWrapper = styled.div`
@@ -109,7 +114,7 @@ export default function App() {
           <HeaderWrapper>
             <Header />
           </HeaderWrapper>
-
+          <APRBanner></APRBanner>
           <BodyWrapper>
             <Popups />
             <Polling />
