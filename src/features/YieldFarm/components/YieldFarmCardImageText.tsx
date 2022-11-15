@@ -123,11 +123,10 @@ export default function YieldFarmCardImageTextView(props: YieldFarmCardHeaderPro
         <CardImageContainer>
           <CardImageSquareLayout>
             <CardImageTopLeft>
-              {console.log(tokenImg1, 'pene')}
               <CardImage src={tokenImg1} />
             </CardImageTopLeft>
             <CardImageBottomRight>
-              <CardImage src={`'../../../assets/images/${tokenImg2}'`} />
+              <CardImage src={tokenImg2} />
             </CardImageBottomRight>
           </CardImageSquareLayout>
         </CardImageContainer>

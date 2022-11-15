@@ -7,18 +7,6 @@ import { Link } from 'react-router-dom';
 import YieldFarmStatsView from './YieldFarmStatsView';
 import { LightCard } from '../../../legacy/components/Card';
 
-const CardContainer = styled.div`
-  display: flex;
-  padding: 30px;
-  overflow: hidden;
-  box-shadow: 5px -4px 10px 0px rgb(151 197 194 / 81%);
-  border-radius: 15px;
-  flex-direction: column;
-  backdrop-filter: blur(10px);
-  background-color: rgb(255, 255, 255);
-  width: 80%;
-`;
-
 const CardSpaceBetweenRow = styled.div`
   display: flex;
   gap: 1rem;

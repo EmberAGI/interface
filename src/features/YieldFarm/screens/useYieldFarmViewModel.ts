@@ -1,10 +1,7 @@
 import { useState, useEffect } from 'react';
-import { ethers, BigNumber } from 'ethers';
-import { useActiveWeb3React } from '../../../legacy/hooks';
-import farmingContractABI from '../../../legacy/constants/abis/farmingContract.json';
-import { ERC20_ABI } from '../../../legacy/constants/abis/erc20';
-import { formatUnits } from 'ethers/lib/utils';
-import { YieldFarmStatsViewModel } from '../components/useYieldFarmStatsViewModel';
+import AirdaoLogo from '../../../assets/images/AirdaoLogo.png';
+import BusdLogo from '../../../assets/images/BusdLogo.png';
+import UsdcLogo from '../../../assets/images/UsdcLogo.png';
 
 export interface LpTokenUserPosition {
   userBalance: string;
@@ -31,14 +28,13 @@ const initialViewModel = {
       stakeToken: 'amb-usdc',
       rewardToken: 'amb-usdc',
       lpAddress: '0xA9646A0281996fDcB88f8f6f01Af52BB0268c494',
-      tokenImg1: 'AirdaoLogo.png',
-      tokenImg2: 'UsdcLogo.png',
+      tokenImg1: AirdaoLogo,
+      tokenImg2: UsdcLogo,
     },
   ],
 };
 
 export default function useYieldFarmViewModel() {
-  const { library } = useActiveWeb3React();
   const [viewModel, setViewModel] = useState<YieldFarmViewModel>(initialViewModel);
   const [farmContracts, setFarmContracts] = useState<string[]>();
 
@@ -53,16 +49,16 @@ export default function useYieldFarmViewModel() {
           stakeToken: 'AMB-USDC-flp',
           rewardToken: 'AMB-USDC-flp',
           lpAddress: '0xA9646A0281996fDcB88f8f6f01Af52BB0268c494',
-          tokenImg1: 'AirdaoLogo.png',
-          tokenImg2: 'UsdcLogo.png',
+          tokenImg1: AirdaoLogo,
+          tokenImg2: UsdcLogo,
         },
         {
           farmContractAddress: '0xA9646A0281996fDcB88f8f6f01Af52BB0268c494',
           stakeToken: 'AMB-BUSD-flp',
           rewardToken: 'AMB-BUSD-flp',
           lpAddress: '0xA9646A0281996fDcB88f8f6f01Af52BB0268c494',
-          tokenImg1: 'AirdaoLogo.png',
-          tokenImg2: 'BusdLogo.png',
+          tokenImg1: AirdaoLogo,
+          tokenImg2: BusdLogo,
         },
       ],
     });

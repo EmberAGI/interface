@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import AppBody from '../../../legacy/pages/AppBody';
 import styled from 'styled-components';
 import { TYPE } from 'legacy/theme';

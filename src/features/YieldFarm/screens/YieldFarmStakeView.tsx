@@ -12,7 +12,9 @@ import CurrencyInputPanel from '../../../libraries/components/CurrencyInputPanel
 import { RowBetween } from '../../../legacy/components/Row';
 import { Text } from 'rebass';
 import { BottomGrouping } from '../../../legacy/components/swap/styleds';
-import { TYPE } from '../../../legacy/theme';
+import AirdaoLogo from '../../../assets/images/AirdaoLogo.png';
+import BusdLogo from '../../../assets/images/BusdLogo.png';
+import UsdcLogo from '../../../assets/images/UsdcLogo.png';
 
 interface CardRowProps {
   justify?: string;
@@ -33,15 +35,6 @@ const CardRow = styled.div<CardRowProps>`
   display: flex;
   height: 40px;
   justify-content: ${(props: CardRowProps) => (props.justify ? props.justify : 'center')};
-`;
-
-const TitleRow = styled(RowBetween)`
-  ${({ theme }) => theme.mediaWidth.upToSmall`
-    flex-wrap: wrap;
-    gap: 12px;
-    width: 100%;
-    flex-direction: column-reverse;
-  `};
 `;
 
 interface YieldFarm {
@@ -76,16 +69,16 @@ export default function YieldFarmStakeView() {
         stakeToken: 'AMB-USDC-flp',
         rewardToken: 'AMB-USDC-flp',
         lpAddress: '0xA9646A0281996fDcB88f8f6f01Af52BB0268c494',
-        tokenImg1: 'AirdaoLogo.png',
-        tokenImg2: 'UsdcLogo.png',
+        tokenImg1: AirdaoLogo,
+        tokenImg2: UsdcLogo,
       },
       {
         farmContractAddress: '0xA9646A0281996fDcB88f8f6f01Af52BB0268c494',
         stakeToken: 'AMB-BUSD-flp',
         rewardToken: 'AMB-BUSD-flp',
         lpAddress: '0xA9646A0281996fDcB88f8f6f01Af52BB0268c494',
-        tokenImg1: 'AirdaoLogo.png',
-        tokenImg2: 'BusdLogo.png',
+        tokenImg1: AirdaoLogo,
+        tokenImg2: BusdLogo,
       },
     ];
     const selectCurrentFarm = () => {
