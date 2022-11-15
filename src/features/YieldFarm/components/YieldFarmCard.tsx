@@ -67,13 +67,23 @@ const StyledPositionCard = styled(LightCard)`
 
 interface YieldFarmCardProps {
   farmContractAddress: string;
+  stakeToken: string;
+  rewardToken: string;
+  lpAddress: string;
+  tokenImg1: string;
+  tokenImg2: string;
 }
 
 export default function YieldFarmCard(props: YieldFarmCardProps) {
-  const { farmContractAddress } = props;
+  const { farmContractAddress, stakeToken, rewardToken, lpAddress, tokenImg1, tokenImg2 } = props;
   return (
     <StyledPositionCard>
-      <YieldFarmCardImageTextView />
+      <YieldFarmCardImageTextView
+        stakeToken={stakeToken}
+        rewardToken={rewardToken}
+        tokenImg1={tokenImg1}
+        tokenImg2={tokenImg2}
+      />
       <YieldFarmStatsView farmContractAddress={farmContractAddress} />
       <CardSpaceBetweenRow>
         <ResponsiveButtonPrimary as={Link} to={`/stake/${farmContractAddress}`} width="48%">
@@ -82,7 +92,7 @@ export default function YieldFarmCard(props: YieldFarmCardProps) {
         <ResponsiveButtonSecondary
           as={Link}
           // REFACTOR - Must populate LP pair dynamically
-          to="/add/AMB/0xA9646A0281996fDcB88f8f6f01Af52BB0268c494"
+          to={`/add/AMB/${lpAddress}`}
           width="48%"
         >
           <Text>Add Liquidity</Text>
