@@ -7,18 +7,6 @@ import { Link } from 'react-router-dom';
 import YieldFarmStatsView from './YieldFarmStatsView';
 import { LightCard } from '../../../legacy/components/Card';
 
-const CardContainer = styled.div`
-  display: flex;
-  padding: 30px;
-  overflow: hidden;
-  box-shadow: 5px -4px 10px 0px rgb(151 197 194 / 81%);
-  border-radius: 15px;
-  flex-direction: column;
-  backdrop-filter: blur(10px);
-  background-color: rgb(255, 255, 255);
-  width: 80%;
-`;
-
 const CardSpaceBetweenRow = styled.div`
   display: flex;
   gap: 1rem;
@@ -67,13 +55,23 @@ const StyledPositionCard = styled(LightCard)`
 
 interface YieldFarmCardProps {
   farmContractAddress: string;
+  stakeToken: string;
+  rewardToken: string;
+  lpAddress: string;
+  tokenImg1: string;
+  tokenImg2: string;
 }
 
 export default function YieldFarmCard(props: YieldFarmCardProps) {
-  const { farmContractAddress } = props;
+  const { farmContractAddress, stakeToken, rewardToken, lpAddress, tokenImg1, tokenImg2 } = props;
   return (
     <StyledPositionCard>
-      <YieldFarmCardImageTextView />
+      <YieldFarmCardImageTextView
+        stakeToken={stakeToken}
+        rewardToken={rewardToken}
+        tokenImg1={tokenImg1}
+        tokenImg2={tokenImg2}
+      />
       <YieldFarmStatsView farmContractAddress={farmContractAddress} />
       <CardSpaceBetweenRow>
         <ResponsiveButtonPrimary as={Link} to={`/stake/${farmContractAddress}`} width="48%">
@@ -82,7 +80,7 @@ export default function YieldFarmCard(props: YieldFarmCardProps) {
         <ResponsiveButtonSecondary
           as={Link}
           // REFACTOR - Must populate LP pair dynamically
-          to="/add/AMB/0xA9646A0281996fDcB88f8f6f01Af52BB0268c494"
+          to={`/add/AMB/${lpAddress}`}
           width="48%"
         >
           <Text>Add Liquidity</Text>

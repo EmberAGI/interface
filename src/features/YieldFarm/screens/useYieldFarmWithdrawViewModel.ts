@@ -1,4 +1,3 @@
-import { BigNumber } from 'ethers';
 import { formatUnits, parseUnits } from 'ethers/lib/utils';
 import { useState, useEffect } from 'react';
 import useERC20Token from '../hooks/useERC20Token';

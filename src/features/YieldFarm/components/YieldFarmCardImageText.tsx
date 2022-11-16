@@ -1,7 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import AmbrosusLogo from '../../../assets/images/airdaoMainLogo.png';
-import UsdcLogo from '../../../legacy/assets/images/usdclogo.png';
 
 const CardImageTextContainer = styled.div`
   flex-grow: 0;
@@ -110,25 +108,33 @@ const CardText = styled.p`
   line-height: 0px;
 `;
 
-export default function YieldFarmCardImageTextView() {
+interface YieldFarmCardHeaderProps {
+  stakeToken: string;
+  rewardToken: string;
+  tokenImg1: string;
+  tokenImg2: string;
+}
+
+export default function YieldFarmCardImageTextView(props: YieldFarmCardHeaderProps) {
+  const { stakeToken, rewardToken, tokenImg1, tokenImg2 } = props;
   return (
     <CardImageTextContainer>
       <CardImageTextRow>
         <CardImageContainer>
           <CardImageSquareLayout>
             <CardImageTopLeft>
-              <CardImage src={AmbrosusLogo} />
+              <CardImage src={tokenImg1} />
             </CardImageTopLeft>
             <CardImageBottomRight>
-              <CardImage src={UsdcLogo} />
+              <CardImage src={tokenImg2} />
             </CardImageBottomRight>
           </CardImageSquareLayout>
         </CardImageContainer>
         <CardTextContainer>
           <CardTextLabel>Stake</CardTextLabel>
-          <CardText>AMB-USDC-flp</CardText>
+          <CardText>{stakeToken}</CardText>
           <CardTextLabel style={{ marginTop: '0.35rem' }}>Earn</CardTextLabel>
-          <CardText>AMB-USDC-flp</CardText>
+          <CardText>{rewardToken}</CardText>
         </CardTextContainer>
       </CardImageTextRow>
       <hr />

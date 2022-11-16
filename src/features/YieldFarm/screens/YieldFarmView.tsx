@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import AppBody from '../../../legacy/pages/AppBody';
 import styled from 'styled-components';
 import { TYPE } from 'legacy/theme';
@@ -45,7 +45,15 @@ export default function YieldFarmView() {
             </Card>
           ) : (
             viewModel.yieldFarms.map((yieldFarm) => (
-              <YieldFarmCard key={yieldFarm.contractAddress} farmContractAddress={yieldFarm.contractAddress} />
+              <YieldFarmCard
+                key={yieldFarm.farmContractAddress}
+                farmContractAddress={yieldFarm.farmContractAddress}
+                stakeToken={yieldFarm.stakeToken}
+                rewardToken={yieldFarm.rewardToken}
+                lpAddress={yieldFarm.lpAddress}
+                tokenImg1={yieldFarm.tokenImg1}
+                tokenImg2={yieldFarm.tokenImg2}
+              />
             ))
           )}
         </AutoColumn>

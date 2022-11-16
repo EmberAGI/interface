@@ -2,18 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'react-feather';
-import AppBody from '../../../legacy/pages/AppBody';
-import { HideSmall, TYPE } from '../../../legacy/theme';
-import { Text } from 'rebass';
-import { RowBetween, RowFixed } from '../../../legacy/components/Row';
+import { TYPE } from '../../../legacy/theme';
+import { RowBetween } from '../../../legacy/components/Row';
 import { ButtonPrimary } from '../../../legacy/components/Button';
 
-/*const TitleRow = styled.div`
-  padding: 12px 1rem 0px 1.5rem;
-  margin-bottom: 0.4rem;
-  display: flex;
-  justify-content: space-between;
-`;*/
 const StyledArrowLeft = styled(ArrowLeft)`
   color: ${({ theme }) => theme.text1};
 `;
@@ -24,16 +16,6 @@ const TitleRow = styled(RowBetween)`
   ${({ theme }) => theme.mediaWidth.upToSmall`
     flex-wrap: wrap;
     width: 100%;
-  `};
-`;
-
-const ButtonRow = styled(RowFixed)`
-  flex: 1
-  gap: 8px;
-  ${({ theme }) => theme.mediaWidth.upToSmall`
-    width: 100%;
-    flex-direction: row-reverse;
-    justify-content: space-between;
   `};
 `;
 
