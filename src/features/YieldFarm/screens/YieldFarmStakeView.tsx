@@ -73,10 +73,10 @@ export default function YieldFarmStakeView() {
         tokenImg2: UsdcLogo,
       },
       {
-        farmContractAddress: '0xA9646A0281996fDcB88f8f6f01Af52BB0268c494',
+        farmContractAddress: '0xa17DdfBCB5D8304835062324D99bfBd1d5cE4841',
         stakeToken: 'AMB-BUSD-flp',
         rewardToken: 'AMB-BUSD-flp',
-        lpAddress: '0xA9646A0281996fDcB88f8f6f01Af52BB0268c494',
+        lpAddress: '0x7A477aA8ED4884509387Dba81BA6F2B7C97597e2',
         tokenImg1: AirdaoLogo,
         tokenImg2: BusdLogo,
       },
