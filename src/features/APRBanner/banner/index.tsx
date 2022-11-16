@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import useYieldFarmStatsViewModel from '../../YieldFarm/components/useYieldFarmStatsViewModel';
 
 const APRContainer = styled.div`
@@ -27,12 +28,15 @@ interface APRBannerProps {
 }
 
 export default function APRBanner() {
-  const { viewModel } = useYieldFarmStatsViewModel('0x035Cf2b69d439565A812aAf2DfE174c89Ba3e585');
+  const { viewModel } = useYieldFarmStatsViewModel('0xa17DdfBCB5D8304835062324D99bfBd1d5cE4841');
 
   return (
     <APRContainer>
       <div>
-        <span>Stake on our high APR Farms </span>&nbsp;- APR: {viewModel.apr}%
+        <span>
+          Stake on our high <Link to="/farm">APR Farms</Link>
+        </span>
+        &nbsp;- APR: {viewModel.apr}%
       </div>
     </APRContainer>
   );
