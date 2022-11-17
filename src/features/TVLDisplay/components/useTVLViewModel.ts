@@ -2,16 +2,20 @@ import { useState, useEffect } from 'react';
 import usePairReserves from '../hooks/usePairReserves';
 import { TVLParser } from '../../../libraries/TVLParser';
 
-export default function useTVLViewModel(poolContractAddress: string) {
-  const [viewModel, setViewModel] = useState<string>('');
-  const { tvlParameters, decimals } = usePairReserves?.(poolContractAddress);
+export default function useTVLViewModel(poolContractAddresses: string[]) {
+  const [viewModel, setViewModel] = useState<number>(0);
+  const { tvlParameters: tvlParamsPool1, decimals: decimalsPool1 } = usePairReserves?.(poolContractAddresses[0]);
+  const { tvlParameters: tvlParamsPool2, decimals: decimalsPool2 } = usePairReserves?.(poolContractAddresses[1]);
 
   useEffect(() => {
-    if (tvlParameters) {
-      const tvlParser = new TVLParser(decimals, tvlParameters);
-      setViewModel(tvlParser.parse());
+    if (tvlParamsPool1 && tvlParamsPool2) {
+      const tvlParser1 = new TVLParser(decimalsPool1, tvlParamsPool1);
+      const tvlPool1 = tvlParser1.parse();
+      const tvlParser2 = new TVLParser(decimalsPool2, tvlParamsPool2);
+      const tvlPool2 = tvlParser2.parse();
+      setViewModel(Number(tvlPool1) + Number(tvlPool2));
     }
-  }, [decimals, tvlParameters]);
+  }, [decimalsPool1, tvlParamsPool1, decimalsPool2, tvlParamsPool2]);
 
   return {
     viewModel,
