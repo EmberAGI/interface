@@ -3,7 +3,7 @@ import usePairReserves from '../hooks/usePairReserves';
 import { TVLParser } from '../../../libraries/TVLParser';
 
 export default function useTVLViewModel(poolContractAddresses: string[]) {
-  const [viewModel, setViewModel] = useState<number>(0);
+  const [viewModel, setViewModel] = useState<string>('');
   const { tvlParameters: tvlParamsPool1, decimals: decimalsPool1 } = usePairReserves?.(poolContractAddresses[0]);
   const { tvlParameters: tvlParamsPool2, decimals: decimalsPool2 } = usePairReserves?.(poolContractAddresses[1]);
 
@@ -13,7 +13,7 @@ export default function useTVLViewModel(poolContractAddresses: string[]) {
       const tvlPool1 = tvlParser1.parse();
       const tvlParser2 = new TVLParser(decimalsPool2, tvlParamsPool2);
       const tvlPool2 = tvlParser2.parse();
-      setViewModel(Number(tvlPool1) + Number(tvlPool2));
+      setViewModel((Number(tvlPool1) + Number(tvlPool2)).toFixed(4));
     }
   }, [decimalsPool1, tvlParamsPool1, decimalsPool2, tvlParamsPool2]);
 
