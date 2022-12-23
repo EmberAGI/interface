@@ -23,7 +23,7 @@ import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallbac
 import useTransactionDeadline from '../../hooks/useTransactionDeadline';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import { useAuthorization } from 'airdao-components-and-tools';
+import { useAuthorization } from 'airdao-components-and-tools/hooks';
 import { Field } from '../../state/mint/actions';
 import { useDerivedMintInfo, useMintActionHandlers, useMintState } from '../../state/mint/hooks';
 
