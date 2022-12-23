@@ -23,8 +23,9 @@ import { useCurrency, useAllTokens } from '../../hooks/Tokens';
 import { ApprovalState, useApproveCallbackFromTrade } from '../../hooks/useApproveCallback';
 import { useSwapCallback } from '../../hooks/useSwapCallback';
 import useWrapCallback, { WrapType } from '../../hooks/useWrapCallback';
-import { useToggleSettingsMenu, useWalletModalToggle } from '../../state/application/hooks';
-import useAuthorization from '../../hooks/useAuthorization';
+import { useToggleSettingsMenu } from '../../state/application/hooks';
+// @ts-ignore
+import { useAuthorization } from 'airdao-components-and-tools/hooks';
 import { Field } from '../../state/swap/actions';
 import {
   useDefaultsFromURLSearch,
@@ -62,15 +63,16 @@ export default function Swap() {
   const importTokensNotInDefault =
     urlLoadedTokens &&
     urlLoadedTokens.filter((token: Token) => {
-      return !Boolean(token.address in defaultTokens);
+      return !(token.address in defaultTokens);
     });
 
-  const { account } = useActiveWeb3React();
+  const web3ReactInstance = useActiveWeb3React();
+  const { account } = web3ReactInstance;
   const theme = useContext(ThemeContext);
 
   // toggle wallet when disconnected
   //const toggleWalletModal = useWalletModalToggle();
-  const { loginMetamask } = useAuthorization();
+  const { loginMetamask } = useAuthorization(web3ReactInstance);
 
   // for expert mode
   const toggleSettings = useToggleSettingsMenu();
@@ -93,13 +95,13 @@ export default function Swap() {
 
   const parsedAmounts = showWrap
     ? {
-      [Field.INPUT]: parsedAmount,
-      [Field.OUTPUT]: parsedAmount,
-    }
+        [Field.INPUT]: parsedAmount,
+        [Field.OUTPUT]: parsedAmount,
+      }
     : {
-      [Field.INPUT]: independentField === Field.INPUT ? parsedAmount : trade?.inputAmount,
-      [Field.OUTPUT]: independentField === Field.OUTPUT ? parsedAmount : trade?.outputAmount,
-    };
+        [Field.INPUT]: independentField === Field.INPUT ? parsedAmount : trade?.inputAmount,
+        [Field.OUTPUT]: independentField === Field.OUTPUT ? parsedAmount : trade?.outputAmount,
+      };
 
   const { onSwitchTokens, onCurrencySelection, onUserInput, onChangeRecipient } = useSwapActionHandlers();
   const isValid = !swapInputError;
@@ -428,8 +430,8 @@ export default function Swap() {
                   {swapInputError
                     ? swapInputError
                     : priceImpactSeverity > 3 && !isExpertMode
-                      ? `Price Impact Too High`
-                      : `Swap${priceImpactSeverity > 2 ? ' Anyway' : ''}`}
+                    ? `Price Impact Too High`
+                    : `Swap${priceImpactSeverity > 2 ? ' Anyway' : ''}`}
                 </Text>
               </ButtonError>
             )}

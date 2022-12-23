@@ -57,13 +57,13 @@ export default async function getTokenList(
     const json = await response.json();
     if (!tokenListValidator(json)) {
       const validationErrors: string =
-        tokenListValidator.errors?.reduce<string>((memo, error) => {
-          const add = `${error.dataPath} ${error.message ?? ''}`;
+        tokenListValidator.errors?.reduce<string>((memo, err) => {
+          const add = `${err} ${err.message ?? ''}`;
           return memo.length > 0 ? `${memo}; ${add}` : `${add}`;
         }, '') ?? 'unknown error';
       throw new Error(`Token list failed validation: ${validationErrors}`);
     }
-    return json;
+    return json as unknown as TokenList;
   }
   throw new Error('Unrecognized list URL protocol.');
 }

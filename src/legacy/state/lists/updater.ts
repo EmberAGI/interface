@@ -55,6 +55,7 @@ export default function Updater(): null {
             throw new Error('unexpected no version bump');
           case VersionUpgrade.PATCH:
           case VersionUpgrade.MINOR:
+            // eslint-disable-next-line no-case-declarations
             const min = minVersionBump(list.current.tokens, list.pendingUpdate.tokens);
             // automatically update minor/patch as long as bump matches the min update
             if (bump >= min) {
