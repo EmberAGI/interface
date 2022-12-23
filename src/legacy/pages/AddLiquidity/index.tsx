@@ -21,7 +21,7 @@ import { useActiveWeb3React } from '../../hooks';
 import { useCurrency } from '../../hooks/Tokens';
 import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallback';
 import useTransactionDeadline from '../../hooks/useTransactionDeadline';
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { useAuthorization } from 'airdao-components-and-tools';
 import { Field } from '../../state/mint/actions';

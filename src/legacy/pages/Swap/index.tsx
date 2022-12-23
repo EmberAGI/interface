@@ -24,6 +24,7 @@ import { ApprovalState, useApproveCallbackFromTrade } from '../../hooks/useAppro
 import { useSwapCallback } from '../../hooks/useSwapCallback';
 import useWrapCallback, { WrapType } from '../../hooks/useWrapCallback';
 import { useToggleSettingsMenu } from '../../state/application/hooks';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { useAuthorization } from 'airdao-components-and-tools/hooks';
 import { Field } from '../../state/swap/actions';

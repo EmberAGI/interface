@@ -1,8 +1,10 @@
 import React, { Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { Menu } from 'airdao-components-and-tools/components';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { useAutoLogin } from 'airdao-components-and-tools/hooks';
 import Header from '../components/Header';

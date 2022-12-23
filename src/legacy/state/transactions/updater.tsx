@@ -5,10 +5,14 @@ import { useAddPopup, useBlockNumber } from '../application/hooks';
 import { AppDispatch, AppState } from '../index';
 import { checkedTransaction, finalizeTransaction } from './actions';
 
-export function shouldCheck(
-  lastBlockNumber: number,
-  tx: { addedTime: number; receipt?: {}; lastCheckedBlockNumber?: number }
-): boolean {
+export function shouldCheck({
+  lastBlockNumber,
+  tx,
+}: {
+  lastBlockNumber: number;
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  tx: { addedTime: number; receipt?: {}; lastCheckedBlockNumber?: number };
+}): boolean {
   if (tx.receipt) return false;
   if (!tx.lastCheckedBlockNumber) return true;
   const blocksSinceCheck = lastBlockNumber - tx.lastCheckedBlockNumber;
@@ -43,7 +47,7 @@ export default function Updater(): null {
     if (!chainId || !library || !lastBlockNumber) return;
 
     Object.keys(transactions)
-      .filter((hash) => shouldCheck(lastBlockNumber, transactions[hash]))
+      .filter((hash) => shouldCheck({ lastBlockNumber, tx: transactions[hash] }))
       .forEach((hash) => {
         library
           .getTransactionReceipt(hash)

@@ -39,6 +39,7 @@ import { Dots } from '../../components/swap/styleds';
 import { useBurnActionHandlers } from '../../state/burn/hooks';
 import { useDerivedBurnInfo, useBurnState } from '../../state/burn/hooks';
 import { Field } from '../../state/burn/actions';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { useAuthorization } from 'airdao-components-and-tools/hooks';
 import { useUserSlippageTolerance } from '../../state/user/hooks';
