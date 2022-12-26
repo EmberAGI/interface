@@ -4,6 +4,7 @@ import { TVLParser } from '../../../libraries/TVLParser';
 
 export default function useTVLFarmViewModel(yieldFarmContractAddress: string) {
   const [viewModel, setViewModel] = useState<string>('');
+  // eslint-disable-next-line no-unsafe-optional-chaining
   const { tvlParameters, decimals } = useFarmPairReserves?.(yieldFarmContractAddress);
 
   useEffect(() => {

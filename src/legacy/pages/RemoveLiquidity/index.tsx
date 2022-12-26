@@ -39,8 +39,9 @@ import { Dots } from '../../components/swap/styleds';
 import { useBurnActionHandlers } from '../../state/burn/hooks';
 import { useDerivedBurnInfo, useBurnState } from '../../state/burn/hooks';
 import { Field } from '../../state/burn/actions';
-import { useWalletModalToggle } from '../../state/application/hooks';
-import useAuthorization from '../../hooks/useAuthorization';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import { useAuthorization } from 'airdao-components-and-tools/hooks';
 import { useUserSlippageTolerance } from '../../state/user/hooks';
 import { BigNumber } from '@ethersproject/bignumber';
 
@@ -51,7 +52,8 @@ export default function RemoveLiquidity({
   },
 }: RouteComponentProps<{ currencyIdA: string; currencyIdB: string }>) {
   const [currencyA, currencyB] = [useCurrency(currencyIdA) ?? undefined, useCurrency(currencyIdB) ?? undefined];
-  const { account, chainId, library } = useActiveWeb3React();
+  const web3ReactInstance = useActiveWeb3React();
+  const { account, chainId, library } = web3ReactInstance;
   const [tokenA, tokenB] = useMemo(
     () => [wrappedCurrency(currencyA, chainId), wrappedCurrency(currencyB, chainId)],
     [currencyA, currencyB, chainId]
@@ -61,7 +63,7 @@ export default function RemoveLiquidity({
 
   // toggle wallet when disconnected
   //const toggleWalletModal = useWalletModalToggle();
-  const { loginMetamask } = useAuthorization();
+  const { loginMetamask } = useAuthorization(web3ReactInstance);
 
   // burn state
   const { independentField, typedValue } = useBurnState();
@@ -83,8 +85,8 @@ export default function RemoveLiquidity({
     [Field.LIQUIDITY_PERCENT]: parsedAmounts[Field.LIQUIDITY_PERCENT].equalTo('0')
       ? '0'
       : parsedAmounts[Field.LIQUIDITY_PERCENT].lessThan(new Percent('1', '100'))
-        ? '<1'
-        : parsedAmounts[Field.LIQUIDITY_PERCENT].toFixed(0),
+      ? '<1'
+      : parsedAmounts[Field.LIQUIDITY_PERCENT].toFixed(0),
     [Field.LIQUIDITY]:
       independentField === Field.LIQUIDITY ? typedValue : parsedAmounts[Field.LIQUIDITY]?.toSignificant(6) ?? '',
     [Field.CURRENCY_A]:
@@ -368,8 +370,9 @@ export default function RemoveLiquidity({
         </RowBetween>
 
         <TYPE.italic fontSize={12} color={theme.text2} textAlign="left" padding={'12px 0 0 0'}>
-          {`Output is estimated. If the price changes by more than ${allowedSlippage / 100
-            }% your transaction will revert.`}
+          {`Output is estimated. If the price changes by more than ${
+            allowedSlippage / 100
+          }% your transaction will revert.`}
         </TYPE.italic>
       </AutoColumn>
     );
@@ -416,8 +419,9 @@ export default function RemoveLiquidity({
     );
   }
 
-  const pendingText = `Removing ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)} ${currencyA?.symbol
-    } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(6)} ${currencyB?.symbol}`;
+  const pendingText = `Removing ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)} ${
+    currencyA?.symbol
+  } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(6)} ${currencyB?.symbol}`;
 
   const liquidityPercentChangeCallback = useCallback(
     (value: number) => {
@@ -429,8 +433,8 @@ export default function RemoveLiquidity({
   const oneCurrencyIsETH = currencyA === AMBER || currencyB === AMBER;
   const oneCurrencyIsWETH = Boolean(
     chainId &&
-    ((currencyA && currencyEquals(WETH[chainId], currencyA)) ||
-      (currencyB && currencyEquals(WETH[chainId], currencyB)))
+      ((currencyA && currencyEquals(WETH[chainId], currencyA)) ||
+        (currencyB && currencyEquals(WETH[chainId], currencyB)))
   );
 
   const handleSelectCurrencyA = useCallback(
@@ -570,15 +574,17 @@ export default function RemoveLiquidity({
                       <RowBetween style={{ justifyContent: 'flex-end' }}>
                         {oneCurrencyIsETH ? (
                           <StyledInternalLink
-                            to={`/remove/${currencyA === AMBER ? WETH[chainId].address : currencyIdA}/${currencyB === AMBER ? WETH[chainId].address : currencyIdB
-                              }`}
+                            to={`/remove/${currencyA === AMBER ? WETH[chainId].address : currencyIdA}/${
+                              currencyB === AMBER ? WETH[chainId].address : currencyIdB
+                            }`}
                           >
                             Receive SAMB
                           </StyledInternalLink>
                         ) : oneCurrencyIsWETH ? (
                           <StyledInternalLink
-                            to={`/remove/${currencyA && currencyEquals(currencyA, WETH[chainId]) ? 'AMB' : currencyIdA
-                              }/${currencyB && currencyEquals(currencyB, WETH[chainId]) ? 'AMB' : currencyIdB}`}
+                            to={`/remove/${
+                              currencyA && currencyEquals(currencyA, WETH[chainId]) ? 'AMB' : currencyIdA
+                            }/${currencyB && currencyEquals(currencyB, WETH[chainId]) ? 'AMB' : currencyIdB}`}
                           >
                             Receive AMB
                           </StyledInternalLink>

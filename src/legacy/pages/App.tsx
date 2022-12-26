@@ -1,9 +1,12 @@
 import React, { Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import Menu from 'airdao-menu/build';
+import { Menu } from 'airdao-components-and-tools/components';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import { useAutoLogin } from 'airdao-components-and-tools/hooks';
 import Header from '../components/Header';
 import Polling from '../components/Header/Polling';
 import Popups from '../components/Popups';
@@ -20,14 +23,11 @@ import PoolFinder from './PoolFinder';
 import RemoveLiquidity from './RemoveLiquidity';
 import { RedirectOldRemoveLiquidityPathStructure } from './RemoveLiquidity/redirects';
 import Swap from './Swap';
-import Faucet from './Faucet';
 import YieldFarmView from 'features/YieldFarm/screens/YieldFarmView';
 import YieldFarmStakeView from 'features/YieldFarm/screens/YieldFarmStakeView';
 import YieldFarmWithdrawView from 'features/YieldFarm/screens/YieldFarmWithdrawView';
 import { OpenClaimAddressModalAndRedirectToSwap, RedirectPathToSwapOnly } from './Swap/redirects';
-import useAutoLogin from '../hooks/useAutoLogin';
 import { useWeb3React } from '@web3-react/core';
-import useAuthorization from '../hooks/useAuthorization';
 import APRBanner from '../../features/APRBanner/banner';
 import logo from '../assets/svg/menu/firepot-airdao-logo.png';
 //import logoSm from '../assets/svg/menu/firepot-airdao-logo-sm.png';
@@ -93,21 +93,15 @@ const Logo = styled.img`
 `;
 
 export default function App() {
-  const isLoaded = useAutoLogin();
-  const { account: address } = useWeb3React();
-  const { loginMetamask, logout } = useAuthorization();
+  const web3ReactInstance = useWeb3React();
+  const isLoaded = useAutoLogin(web3ReactInstance);
 
   return !isLoaded ? null : (
     <Suspense fallback={null}>
       <Route component={DarkModeQueryParamReader} />
       <AppWrapper>
         <MenuWrapper>
-          <Menu
-            address={address}
-            login={loginMetamask}
-            logout={logout}
-            customLogo={<Logo src={logo} alt="Firepot Finance" />}
-          />
+          <Menu web3ReactInstance={web3ReactInstance} customLogo={<Logo src={logo} alt="Firepot Finance" />} />
         </MenuWrapper>
 
         <MainWrapper>

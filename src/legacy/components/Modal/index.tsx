@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { animated, useTransition, useSpring } from 'react-spring';
-import { DialogOverlay, DialogContent } from '@reach/dialog';
+import { animated, useSpring, useTransition } from 'react-spring';
+import { DialogContent, DialogOverlay } from '@reach/dialog';
 import { isMobile } from 'react-device-detect';
 import '@reach/dialog/styles.css';
 import { transparentize } from 'polished';
@@ -122,7 +122,7 @@ export default function Modal({
                 {...(isMobile
                   ? {
                       ...bind(),
-                      style: { transform: y.interpolate((y) => `translateY(${y > 0 ? y : 0}px)`) },
+                      style: { transform: y.interpolate((y: any) => `translateY(${y > 0 ? y : 0}px)`) },
                     }
                   : {})}
                 aria-label="dialog content"

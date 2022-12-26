@@ -130,7 +130,9 @@ export default function SlippageTabs({ rawSlippage, setRawSlippage, deadline, se
       if (!Number.isNaN(valueAsIntFromRoundedFloat) && valueAsIntFromRoundedFloat < 5000) {
         setRawSlippage(valueAsIntFromRoundedFloat);
       }
-    } catch {}
+    } catch (er) {
+      console.log(er);
+    }
   }
 
   function parseCustomDeadline(value: string) {
@@ -141,7 +143,9 @@ export default function SlippageTabs({ rawSlippage, setRawSlippage, deadline, se
       if (!Number.isNaN(valueAsInt) && valueAsInt > 0) {
         setDeadline(valueAsInt);
       }
-    } catch {}
+    } catch (er) {
+      console.log(er);
+    }
   }
 
   return (
@@ -233,7 +237,7 @@ export default function SlippageTabs({ rawSlippage, setRawSlippage, deadline, se
         <RowFixed>
           <OptionCustom style={{ width: '80px' }} tabIndex={-1}>
             <Input
-              color={!!deadlineError ? 'red' : undefined}
+              color={deadlineError ? 'red' : undefined}
               onBlur={() => {
                 parseCustomDeadline((deadline / 60).toString());
               }}
