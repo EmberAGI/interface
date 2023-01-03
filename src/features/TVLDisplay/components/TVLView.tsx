@@ -1,5 +1,4 @@
 import React from 'react';
-import { CardText } from '../../YieldFarm/components/YieldFarmStatsView';
 import useTVLViewModel from './useTVLViewModel';
 import { Text } from 'rebass';
 import styled from 'styled-components';

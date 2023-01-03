@@ -4,7 +4,9 @@ import { TVLParser } from '../../../libraries/TVLParser';
 
 export default function useTVLViewModel(poolContractAddresses: string[]) {
   const [viewModel, setViewModel] = useState<string>('');
+  // eslint-disable-next-line no-unsafe-optional-chaining
   const { tvlParameters: tvlParamsPool1, decimals: decimalsPool1 } = usePairReserves?.(poolContractAddresses[0]);
+  // eslint-disable-next-line no-unsafe-optional-chaining
   const { tvlParameters: tvlParamsPool2, decimals: decimalsPool2 } = usePairReserves?.(poolContractAddresses[1]);
 
   useEffect(() => {
