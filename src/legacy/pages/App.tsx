@@ -39,17 +39,12 @@ const AppWrapper = styled.div`
   flex-flow: row;
   justify-content: flex-start;
   overflow-x: hidden;
+  margin: 0px auto;
+  padding: 0px 16px;
+  max-width: 1440px;
 
   ${({ theme }) => theme.mediaWidth.upToSmall`
   flex-flow: column;
-  `};
-`;
-
-const MenuWrapper = styled.div`
-  display: flex;
-
-  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-    flex-flow: column;
   `};
 `;
 
@@ -100,9 +95,7 @@ export default function App() {
     <Suspense fallback={null}>
       <Route component={DarkModeQueryParamReader} />
       <AppWrapper>
-        <MenuWrapper>
-          <Menu web3ReactInstance={web3ReactInstance} customLogo={<Logo src={logo} alt="Firepot Finance" />} />
-        </MenuWrapper>
+        <Menu web3ReactInstance={web3ReactInstance} customLogo={<Logo src={logo} alt="Firepot Finance" />} />
 
         <MainWrapper>
           <HeaderWrapper>
