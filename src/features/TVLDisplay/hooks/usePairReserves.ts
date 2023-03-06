@@ -26,7 +26,7 @@ export default function usePairReserves(contractAddress: string) {
       }
     };
     listener();
-  }, [pairContract, tvlParameters]);
+  }, [pairContract]);
   return {
     tvlParameters,
     decimals,
