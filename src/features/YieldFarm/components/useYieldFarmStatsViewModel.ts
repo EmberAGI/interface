@@ -5,12 +5,14 @@ import useERC20Token from '../hooks/useERC20Token';
 import useYieldFarmState from '../hooks/useYieldFarmState';
 
 export interface YieldFarmStatsViewModel {
+  periodFinish: string;
   tvl: string;
   apr: string;
   dailyROI: string;
 }
 
 const initialFarmViewModel = {
+  periodFinish: '0',
   tvl: '0',
   apr: '0',
   dailyROI: '0',
@@ -18,7 +20,8 @@ const initialFarmViewModel = {
 
 export default function useYieldFarmStatsViewModel(contractAddress: string) {
   const [viewModel, setViewModel] = useState<YieldFarmStatsViewModel>(initialFarmViewModel);
-  const { stakingTokenAddress, stakeBalance, rewardsDuration, rewardsForDuration } = useYieldFarmState(contractAddress);
+  const { stakingTokenAddress, stakeBalance, rewardsDuration, rewardsForDuration, periodFinish } =
+    useYieldFarmState(contractAddress);
   const { decimals: stakingTokenDecimals } = useERC20Token(stakingTokenAddress);
 
   useEffect(() => {
@@ -46,11 +49,12 @@ export default function useYieldFarmStatsViewModel(contractAddress: string) {
 
     const newAPR = calculateAPR(rewardsDuration, rewardsForDuration, stakeBalance);
     setViewModel({
+      periodFinish: periodFinish ? periodFinish.toString() : '',
       tvl: Number(formatUnits(stakeBalance, stakingTokenDecimals)).toFixed(8).toString(),
       apr: newAPR.toFixed(2).toString(),
       dailyROI: (newAPR / daysPerYear).toFixed(2).toString(),
     });
-  }, [rewardsDuration, rewardsForDuration, stakeBalance, stakingTokenDecimals]);
+  }, [rewardsDuration, rewardsForDuration, stakeBalance, stakingTokenDecimals, periodFinish]);
 
   return { viewModel };
 }

@@ -36,7 +36,7 @@ const initialViewModel = {
 
 export default function useYieldFarmViewModel() {
   const [viewModel, setViewModel] = useState<YieldFarmViewModel>(initialViewModel);
-  const [farmContracts, setFarmContracts] = useState<string[]>();
+  const [, setFarmContracts] = useState<string[]>();
 
   useEffect(() => {
     // Get farm contract list from library
@@ -64,23 +64,23 @@ export default function useYieldFarmViewModel() {
     });
   }, []);
 
-  const getLpToken = (token: string) => {
+  const getLpToken = () => {
     console.log('getLpToken');
   };
 
-  const manageLpToken = (token: string) => {
+  const manageLpToken = () => {
     console.log('manageLpToken');
   };
 
-  const approveLpToken = (token: string) => {
+  const approveLpToken = () => {
     console.log('approveLpToken');
   };
 
-  const depositLpToken = (token: string, amount: string) => {
+  const depositLpToken = () => {
     console.log('depositLpToken');
   };
 
-  const withdrawLpToken = (token: string, amount: string) => {
+  const withdrawLpToken = () => {
     console.log('withdrawLpToken');
   };
 

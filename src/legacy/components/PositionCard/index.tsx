@@ -14,7 +14,7 @@ import { currencyId } from '../../utils/currencyId';
 import { unwrappedToken } from '../../utils/wrappedCurrency';
 import { ButtonPrimary, ButtonEmpty } from '../Button';
 
-import { useColor } from '../../hooks/useColor';
+// import { useColor } from '../../hooks/useColor';
 
 import Card, { GreyCard, LightCard } from '../Card';
 import { AutoColumn } from '../Column';
@@ -236,7 +236,7 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
         ]
       : [undefined, undefined];
 
-  const backgroundColor = useColor(pair?.token0);
+  const backgroundColor = '#2172E5';
 
   const POOL_DECIMAL_POINTS = 18;
   const tvlParams = {

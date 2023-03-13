@@ -1,5 +1,5 @@
 import { useActiveWeb3React } from 'legacy/hooks';
-import { parseUnits, formatUnits } from 'ethers/lib/utils';
+import { parseUnits } from 'ethers/lib/utils';
 import { TransactionResponse } from '@ethersproject/providers';
 import { useTransactionAdder } from '../../../legacy/state/transactions/hooks';
 import { useYieldFarmContract } from '../../../legacy/hooks/useContract';

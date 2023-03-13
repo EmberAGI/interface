@@ -22,7 +22,9 @@ export default function useFarmPairReserves(contractAddress: string) {
           );
           const flpTotalSupply: BigNumber = await pairContract.totalSupply();
           const flpTotalBalance: string = BigNumber.from(flpTotalSupply).toString();
-          const farmFLPbalance: string = BigNumber.from(stakeBalance).toString();
+          const farmFLPbalance: string = stakeBalance
+            ? BigNumber.from(stakeBalance).toString()
+            : BigNumber.from('0').toString();
           tvlParams.totalFarmStakedTokens = farmFLPbalance;
           tvlParams.totalMintedTokens = flpTotalBalance;
 
@@ -31,11 +33,11 @@ export default function useFarmPairReserves(contractAddress: string) {
           setDecimals(decimals);
         }
       } catch (error) {
-        console.error('Could fetch stats', error);
+        console.error("Couldn't fetch stats", error);
       }
     };
     listener();
-  }, [pairContract, stakeBalance, stakingTokenAddress, tvlParameters]);
+  }, [pairContract, stakeBalance, stakingTokenAddress, tvlParameters?.tokenA.decimals, tvlParameters?.tokenB.decimals]);
   return {
     tvlParameters,
     decimals,

@@ -1,4 +1,13 @@
-import { Currency, CurrencyAmount, AMBER, JSBI, Pair, Percent, Price, TokenAmount } from '@firepotfinance/firepotfinance-sdk';
+import {
+  Currency,
+  CurrencyAmount,
+  AMBER,
+  JSBI,
+  Pair,
+  Percent,
+  Price,
+  TokenAmount,
+} from '@firepotfinance/firepotfinance-sdk';
 import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { PairState, usePair } from '../../data/Reserves';
@@ -125,10 +134,14 @@ export function useDerivedMintInfo(
     currencyB,
     pair,
   ]);
-  const parsedAmounts: { [field in Field]: CurrencyAmount | undefined } = {
-    [Field.CURRENCY_A]: independentField === Field.CURRENCY_A ? independentAmount : dependentAmount,
-    [Field.CURRENCY_B]: independentField === Field.CURRENCY_A ? dependentAmount : independentAmount,
-  };
+
+  const parsedAmounts = useMemo(
+    () => ({
+      [Field.CURRENCY_A]: independentField === Field.CURRENCY_A ? independentAmount : dependentAmount,
+      [Field.CURRENCY_B]: independentField === Field.CURRENCY_A ? dependentAmount : independentAmount,
+    }),
+    [dependentAmount, independentAmount, independentField]
+  );
 
   const price = useMemo(() => {
     if (noLiquidity) {
