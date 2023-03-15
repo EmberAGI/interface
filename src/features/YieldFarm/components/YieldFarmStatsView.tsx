@@ -24,16 +24,17 @@ interface YieldFarmStatsViewProps {
 export default function YieldFarmStatsView(props: YieldFarmStatsViewProps) {
   const { farmContractAddress } = props;
   const { viewModel } = useYieldFarmStatsViewModel(farmContractAddress);
+  const currentTime = Math.floor(Date.now() / 1000);
 
   return (
     <>
       <CardSpaceBetweenRow>
         <CardText>APR</CardText>
-        <CardText>{viewModel.apr}%</CardText>
+        <CardText>{currentTime < parseInt(viewModel.periodFinish) ? viewModel.apr : '0'}%</CardText>
       </CardSpaceBetweenRow>
       <CardSpaceBetweenRow>
         <CardText>Daily ROI</CardText>
-        <CardText>{viewModel.dailyROI}%</CardText>
+        <CardText>{currentTime < parseInt(viewModel.periodFinish) ? viewModel.dailyROI : '0'}%</CardText>
       </CardSpaceBetweenRow>
       <CardSpaceBetweenRow>
         <CardText>TVL</CardText>

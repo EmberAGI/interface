@@ -5,17 +5,12 @@ import { NavLink } from 'react-router-dom';
 import { darken } from 'polished';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import LogoFP from '../../assets/images/logoFP.png';
-// import Logo from '../../assets/svg/logo.svg';
-// import LogoDark from '../../assets/svg/logo_white.svg';
 import TVLView from '../../../features/TVLDisplay/components/TVLView';
 import { useActiveWeb3React } from '../../hooks';
-import { useDarkModeManager } from '../../state/user/hooks';
+// import { useDarkModeManager } from '../../state/user/hooks';
 import { useETHBalances } from '../../state/wallet/hooks';
-
 import { LightCard } from '../Card';
-import { Moon, Sun } from 'react-feather';
-import Row, { RowFixed } from '../Row';
+import Row from '../Row';
 import Web3Status from '../Web3Status';
 
 const HeaderFrame = styled.div`
@@ -55,20 +50,6 @@ const HeaderElement = styled.div`
   ${({ theme }) => theme.mediaWidth.upToMedium`
     flex-direction: row-reverse;
     align-items: center;
-  `};
-`;
-
-const HeaderElementWrap = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const HeaderRow = styled(RowFixed)`
-  display: flex;
-  align-items: center;
-
-  ${({ theme }) => theme.mediaWidth.upToMedium`
-    width: 100%;
   `};
 `;
 
@@ -140,27 +121,6 @@ const BalanceText = styled(Text)`
   ${({ theme }) => theme.mediaWidth.upToExtraSmall`
     display: none;
   `};
-`;
-
-const Title = styled.a`
-  display: flex;
-  align-items: center;
-  pointer-events: auto;
-  justify-self: flex-start;
-  margin-right: 12px;
-  ${({ theme }) => theme.mediaWidth.upToSmall`
-    justify-self: center;
-  `};
-  :hover {
-    cursor: pointer;
-  }
-`;
-
-const Icon = styled.div`
-  transition: transform 0.3s ease;
-  :hover {
-    transform: scale(1.1);
-  }
 `;
 
 const activeClassName = 'ACTIVE';
@@ -297,7 +257,7 @@ export default function Header() {
   const { account, chainId } = useActiveWeb3React();
   const { t } = useTranslation();
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? ''];
-  const [darkMode, toggleDarkMode] = useDarkModeManager();
+  // const [darkMode, toggleDarkMode] = useDarkModeManager();
 
   return (
     <HeaderFrame>

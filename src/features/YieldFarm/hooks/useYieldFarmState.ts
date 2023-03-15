@@ -8,6 +8,7 @@ export default function useYieldFarmUserPosition(yieldFarmContractAddress: strin
   const [stakeBalance, setStakeBalance] = useState<BigNumber | undefined>();
   const [rewardsDuration, setRewardsDuration] = useState<BigNumber | undefined>();
   const [rewardsForDuration, setRewardsForDuration] = useState<BigNumber | undefined>();
+  const [periodFinish, setPeriodFinish] = useState<BigNumber | undefined>();
 
   useEffect(() => {
     if (yieldFarmContract == undefined) {
@@ -75,10 +76,22 @@ export default function useYieldFarmUserPosition(yieldFarmContractAddress: strin
       .catch((error: any) => console.error(error));
   }, [yieldFarmContract]);
 
+  useEffect(() => {
+    if (yieldFarmContract == undefined) {
+      return;
+    }
+    const getPeriodFinish = async () => {
+      const periodFinish = await yieldFarmContract.periodFinish();
+      setPeriodFinish(periodFinish);
+    };
+    getPeriodFinish();
+  }, [yieldFarmContract]);
+
   return {
     stakingTokenAddress,
     stakeBalance,
     rewardsDuration,
     rewardsForDuration,
+    periodFinish,
   };
 }

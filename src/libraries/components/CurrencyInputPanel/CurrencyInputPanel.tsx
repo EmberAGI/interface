@@ -1,20 +1,12 @@
-import { Currency, Pair, Token } from '@firepotfinance/firepotfinance-sdk';
-import React, { useState, useCallback, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { darken } from 'polished';
-import { useCurrencyBalance } from '../../../legacy/state/wallet/hooks';
 import { RowBetween } from '../../../legacy/components/Row';
 import { TYPE } from '../../../legacy/theme';
 import NumericalInput from './NumericalInput';
-import { ReactComponent as DropDown } from '../../../legacy/assets/images/dropdown.svg';
-import MetamaskIcon from '../../../legacy/assets/images/metamask.png';
-import { useActiveWeb3React } from '../../../legacy/hooks';
+// import { ReactComponent as DropDown } from '../../../legacy/assets/images/dropdown.svg';
 import { useTranslation } from 'react-i18next';
 import useTheme from '../../../legacy/hooks/useTheme';
-import { WrappedTokenInfo } from '../../../legacy/state/lists/hooks';
-import DoubleCurrencyLogo from '../../../legacy/components/DoubleLogo';
-import CurrencyLogo from '../../../legacy/components/CurrencyLogo';
-import { useCurrency } from '../../../legacy/hooks/Tokens';
 import useMediaWidth from '../../hooks/useMediaWidth';
 
 const InputRow = styled.div<{ selected: boolean }>`
@@ -25,28 +17,6 @@ const InputRow = styled.div<{ selected: boolean }>`
   ${({ theme }) => theme.mediaWidth.upToExtraSmall`
     padding: 8px 12px;
   `};
-`;
-
-const CurrencySelect = styled.button`
-  align-items: center;
-  height: 2.2rem;
-  font-size: 20px;
-  font-weight: 500;
-  border: none;
-  background-color: ${({ theme }) => theme.bg3};
-  color: ${({ theme }) => theme.text1};
-  border-radius: 12px;
-  outline: none;
-  cursor: pointer;
-  user-select: none;
-  border: none;
-  padding: 0 0.5rem;
-  transition: 0.2s;
-
-  :focus,
-  :hover {
-    background-color: ${({ theme }) => theme.bg4};
-  }
 `;
 
 const LabelRow = styled.div`
@@ -70,16 +40,6 @@ const Aligner = styled.span`
   display: flex;
   align-items: center;
   justify-content: space-between;
-`;
-
-const StyledDropDown = styled(DropDown)`
-  margin: 0 0.25rem 0 0.5rem;
-  height: 35%;
-
-  path {
-    stroke: ${({ theme }) => theme.text1};
-    stroke-width: 1.5px;
-  }
 `;
 
 const InputPanel = styled.div<{ hideInput?: boolean }>`
@@ -154,7 +114,6 @@ export default function CurrencyInputPanel({
   onMax,
   showMaxButton,
   label = 'Input',
-  tokenAddress,
   tokenName,
   disableCurrencySelect = false,
   balance,
