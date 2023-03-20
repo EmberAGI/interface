@@ -17,6 +17,15 @@ const CardSpaceBetweenRow = styled.div`
   height: 40px;
 `;
 
+const ClosedFarmLabel = styled.span`
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+  color: hsl(0, 0%, 70%);
+`;
+
 interface YieldFarmStatsViewProps {
   farmContractAddress: string;
 }
@@ -28,6 +37,15 @@ export default function YieldFarmStatsView(props: YieldFarmStatsViewProps) {
 
   return (
     <>
+      <>
+        {currentTime > parseInt(viewModel.periodFinish) ? (
+          <div>
+            <ClosedFarmLabel>Closed</ClosedFarmLabel>
+          </div>
+        ) : (
+          <></>
+        )}
+      </>
       <CardSpaceBetweenRow>
         <CardText>APR</CardText>
         <CardText>{currentTime < parseInt(viewModel.periodFinish) ? viewModel.apr : '0'}%</CardText>
