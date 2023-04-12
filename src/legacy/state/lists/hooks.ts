@@ -1,6 +1,7 @@
 import { toChecksumAddress } from 'web3-utils';
 import DEFAULT_TOKEN_LIST from '../../../libraries/tokens/tokenList.json';
-import { ChainId, Token } from '@firepotfinance/firepotfinance-sdk';
+import { Token } from '@firepotfinance/firepotfinance-sdk';
+import { ChainId } from 'types';
 import { Tags, TokenInfo, TokenList } from '@uniswap/token-lists';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
@@ -63,11 +64,11 @@ export function listToTokenMap(list: TokenList): TokenAddressMap {
           })
           ?.filter((x): x is TagInfo => Boolean(x)) ?? [];
       const token = new WrappedTokenInfo(tokenInfo, tags);
-      if (tokenMap[token.chainId][token.address] !== undefined) throw Error('Duplicate tokens.');
+      if (tokenMap[token.chainId as ChainId][token.address] !== undefined) throw Error('Duplicate tokens.');
       return {
         ...tokenMap,
         [token.chainId]: {
-          ...tokenMap[token.chainId],
+          ...tokenMap[token.chainId as ChainId],
           [token.address]: {
             token,
             list: list,

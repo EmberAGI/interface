@@ -1,4 +1,5 @@
-import { ChainId, Currency, currencyEquals, JSBI, Price, WETH } from '@firepotfinance/firepotfinance-sdk';
+import { Currency, currencyEquals, JSBI, Price, WETH } from '@firepotfinance/firepotfinance-sdk';
+import { ChainId } from 'types';
 import { useMemo } from 'react';
 import { USDC } from '../constants';
 import { PairState, usePairs } from '../data/Reserves';

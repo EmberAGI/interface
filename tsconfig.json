@@ -16,7 +16,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "downlevelIteration": true,
-    "types": ["react-spring"],
+    "types": ["react-spring", "jest"],
     "noEmit": true,
     "jsx": "preserve",
     "rootDir": "./",
@@ -25,7 +25,8 @@
       "config": ["config"],
       "features": ["features"],
       "libraries": ["libraries"],
-      "assets": ["assets"]
+      "assets": ["assets"],
+      "types": ["types"]
     }
   },
   "exclude": ["node_modules", "legacy"],

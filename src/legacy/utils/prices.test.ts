@@ -1,4 +1,5 @@
-import { ChainId, JSBI, Pair, Route, Token, TokenAmount, Trade, TradeType } from '@firepotfinance/firepotfinance-sdk';
+import { JSBI, Pair, Route, Token, TokenAmount, Trade, TradeType } from '@firepotfinance/firepotfinance-sdk';
+import { ChainId } from 'types';
 import { computeTradePriceBreakdown } from './prices';
 
 describe('prices', () => {

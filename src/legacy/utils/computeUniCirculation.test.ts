@@ -1,4 +1,5 @@
-import { ChainId, JSBI, Token, TokenAmount } from '@firepotfinance/firepotfinance-sdk';
+import { JSBI, Token, TokenAmount } from '@firepotfinance/firepotfinance-sdk';
+import { ChainId } from 'types';
 import { BigNumber } from 'ethers';
 import { ZERO_ADDRESS } from '../constants';
 import { computeUniCirculation } from './computeUniCirculation';

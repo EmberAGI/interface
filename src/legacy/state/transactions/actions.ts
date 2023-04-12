@@ -1,6 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
-import { ChainId } from '@firepotfinance/firepotfinance-sdk';
-
+import { ChainId } from 'types';
 export interface SerializableTransactionReceipt {
   to: string;
   from: string;

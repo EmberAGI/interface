@@ -1,4 +1,4 @@
-import { ChainId } from '@firepotfinance/firepotfinance-sdk';
+import { ChainId } from 'types';
 import React from 'react';
 import { Text } from 'rebass';
 import { NavLink } from 'react-router-dom';

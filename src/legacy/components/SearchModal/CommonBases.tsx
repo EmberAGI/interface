@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text } from 'rebass';
-import { ChainId, Currency, currencyEquals, AMBER, Token } from '@firepotfinance/firepotfinance-sdk';
+import { Currency, currencyEquals, AMBER, Token } from '@firepotfinance/firepotfinance-sdk';
+import { ChainId } from 'types';
 import styled from 'styled-components';
 
 import { SUGGESTED_BASES } from '../../constants';

@@ -1,4 +1,5 @@
-import { ChainId, Currency, CurrencyAmount, AMBER, Token, TokenAmount, WETH } from '@firepotfinance/firepotfinance-sdk';
+import { Currency, CurrencyAmount, AMBER, Token, TokenAmount, WETH } from '@firepotfinance/firepotfinance-sdk';
+import { ChainId } from 'types';
 
 export function wrappedCurrency(currency: Currency | undefined, chainId: ChainId | undefined): Token | undefined {
   return chainId && currency === AMBER ? WETH[chainId] : currency instanceof Token ? currency : undefined;

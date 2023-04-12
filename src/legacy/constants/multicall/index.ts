@@ -1,4 +1,4 @@
-import { ChainId } from '@firepotfinance/firepotfinance-sdk';
+import { ChainId } from 'types';
 import MULTICALL_ABI from './abi.json';
 
 const MULTICALL_NETWORKS: { [chainId in ChainId]: string } = {

@@ -1,6 +1,7 @@
 import { BigNumber } from '@ethersproject/bignumber';
 import { AddressZero } from '@ethersproject/constants';
-import { TokenAmount, Token, ChainId, Percent, JSBI } from '@firepotfinance/firepotfinance-sdk';
+import { TokenAmount, Token, Percent, JSBI } from '@firepotfinance/firepotfinance-sdk';
+import { ChainId } from 'types';
 
 import { calculateSlippageAmount, isAddress, shortenAddress, calculateGasMargin, basisPointsToPercent } from '.';
 

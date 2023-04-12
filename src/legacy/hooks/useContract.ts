@@ -1,6 +1,7 @@
 import { Contract } from '@ethersproject/contracts';
 import STAKING_REWARDS_ABI from '@uniswap/liquidity-staker/build/StakingRewards.json';
-import { ChainId, WETH } from '@firepotfinance/firepotfinance-sdk';
+import { WETH } from '@firepotfinance/firepotfinance-sdk';
+import { ChainId } from 'types';
 import IUniswapV2PairABI from '@uniswap/v2-core/build/IUniswapV2Pair.json';
 import { useMemo } from 'react';
 import {
