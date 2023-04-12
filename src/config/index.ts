@@ -1,7 +1,7 @@
 import AirdaoLogo from '../assets/images/AirdaoLogo.png';
 import BusdLogo from '../assets/images/BusdLogo.png';
 import UsdcLogo from '../assets/images/UsdcLogo.png';
-import UsdtLogo from '../../../assets/images/UsdtLogo.png';
+// import UsdtLogo from '../../../assets/images/UsdtLogo.png';
 
 const FIREPOT_LOGO_URL =
   'https://static.wixstatic.com/media/b908d5_3a7875d36a014d73b963fa1b94f66eab~mv2.png/v1/fill/w_238,h_144,al_c,lg_1,q_85,enc_auto/logo%20color%20correcto.png';
@@ -12,12 +12,12 @@ const config = {
     networkUrl: process.env.REACT_APP_NETWORK_URL ?? 'https://network.ambrosus-test.io',
     chainId: parseInt(process.env.REACT_APP_CHAIN_ID ?? '22040'),
     registrarAddress: '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e',
-    multicallAddress: '0x04319880B30E6082Aaf7368EdfE9A5E6c515d62E',
+    multicallAddress: '0xc18b9a12d9C06b7a44CCF884ECD57EB0D3754f09',
     tokens: {
       usdc: {
         name: 'USD//C',
         symbol: 'USDC',
-        address: '0x1242BDB8DD53f8ca7126d46271Dc59FD7C71C856',
+        address: '0x952b98DBDa3319BF0e339cC9CC574fF768F80f3c',
         decimals: 6,
         logoURI: 'https://etherscan.io/token/images/centre-usdc_28.png',
       },
