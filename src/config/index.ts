@@ -18,7 +18,7 @@ const config = {
         name: 'USD//C',
         symbol: 'USDC',
         address: '0x952b98DBDa3319BF0e339cC9CC574fF768F80f3c',
-        decimals: 6,
+        decimals: 18,
         logoURI: 'https://etherscan.io/token/images/centre-usdc_28.png',
       },
       usdt: {
