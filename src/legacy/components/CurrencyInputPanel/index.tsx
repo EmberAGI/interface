@@ -158,7 +158,7 @@ export default function CurrencyInputPanel({
   const ethereum = window.ethereum as any;
   const addTokenFunction = async (address: string, symbol: string | undefined, decimals: number) => {
     try {
-      const wasAdded = await ethereum.request({
+      await ethereum.request({
         method: 'wallet_watchAsset',
         params: {
           type: 'ERC20',
@@ -169,11 +169,6 @@ export default function CurrencyInputPanel({
           },
         },
       });
-      if (wasAdded) {
-        console.log('Added token');
-      } else {
-        console.log('Token was not added');
-      }
     } catch (error) {
       console.log(error);
     }

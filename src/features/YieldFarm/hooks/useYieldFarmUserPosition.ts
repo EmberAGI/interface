@@ -83,7 +83,6 @@ export default function useYieldFarmUserPosition(yieldFarmContractAddress: strin
     const listener = async () => {
       try {
         const balance = await yieldFarmContract?.balanceOf(account);
-        console.log(balance, 'Listener fired');
         setUserStakeBalance(balance);
       } catch (error) {
         console.error('Could not view balance of user', error);

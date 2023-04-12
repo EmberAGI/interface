@@ -1,7 +1,6 @@
 import { InjectedConnector } from '@web3-react/injected-connector';
-
-const { REACT_APP_CHAIN_ID } = process.env;
+import config from '../../config';
 
 export const ConfiguredInjectedConnector = new InjectedConnector({
-  supportedChainIds: [+REACT_APP_CHAIN_ID],
+  supportedChainIds: [+config.chainId],
 });

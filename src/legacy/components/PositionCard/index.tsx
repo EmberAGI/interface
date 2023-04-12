@@ -187,7 +187,7 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
   const ethereum = window.ethereum as any;
   const addTokenFunction = async (address: string, symbol: string | undefined, decimals: number) => {
     try {
-      const wasAdded = await ethereum.request({
+      await ethereum.request({
         method: 'wallet_watchAsset',
         params: {
           type: 'ERC20',
@@ -198,11 +198,6 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
           },
         },
       });
-      if (wasAdded) {
-        console.log('Added token');
-      } else {
-        console.log('Token was not added');
-      }
     } catch (error) {
       console.log(error);
     }
@@ -250,7 +245,6 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
       <AutoColumn gap="12px">
         <FixedHeightRow>
           <AutoRow gap="8px">
-            {console.log(pair.liquidityToken.address, 'liquidityToken')}
             <DoubleCurrencyLogo currency0={currency0} currency1={currency1} size={20} />
             <Text fontWeight={500} fontSize={20}>
               {!currency0 || !currency1 ? <Dots>Loading</Dots> : `${currency0.symbol}/${currency1.symbol}`}

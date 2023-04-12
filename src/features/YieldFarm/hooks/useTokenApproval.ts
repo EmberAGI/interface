@@ -17,8 +17,6 @@ export default function useTokenApproval(
   const [pendingApproval, setPendingApproval] = useState(false);
 
   useEffect(() => {
-    //DEBUG
-    console.log(`approvalState: ${approvalState}`);
     switch (approvalState) {
       case ApprovalState.UNKNOWN:
         setApprovalRequired(false);

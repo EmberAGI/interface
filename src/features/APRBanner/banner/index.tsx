@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import useYieldFarmStatsViewModel from '../../YieldFarm/components/useYieldFarmStatsViewModel';
+import config from 'config';
 
 const APRContainer = styled.div`
   max-width: 500px;
@@ -24,8 +25,8 @@ const APRContainer = styled.div`
 `;
 
 export default function APRBanner() {
-  const busdModel = useYieldFarmStatsViewModel('0xa17DdfBCB5D8304835062324D99bfBd1d5cE4841');
-  const usdcModel = useYieldFarmStatsViewModel('0x035Cf2b69d439565A812aAf2DfE174c89Ba3e585');
+  const busdModel = useYieldFarmStatsViewModel(config.yieldFarms.busd_amb.farmContractAddress);
+  const usdcModel = useYieldFarmStatsViewModel(config.yieldFarms.usdc_amb.farmContractAddress);
 
   return (
     <APRContainer>

@@ -125,30 +125,6 @@ export default function CurrencyInputPanel({
   const { t } = useTranslation();
   const theme = useTheme();
   const mediaWidth = useMediaWidth();
-  /*const ethereum = window.ethereum as any;
-
-  const addTokenFunction = async (address: string, symbol: string | undefined) => {
-    try {
-      const wasAdded = await ethereum.request({
-        method: 'wallet_watchAsset',
-        params: {
-          type: 'ERC20',
-          options: {
-            address: address,
-            symbol: symbol,
-            decimals: 18,
-          },
-        },
-      });
-      if (wasAdded) {
-        console.log('Added token');
-      } else {
-        console.log('Token was not added');
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };*/
 
   return (
     <InputPanel id={id}>
