@@ -1,7 +1,7 @@
 import AirdaoLogo from '../assets/images/AirdaoLogo.png';
 import BusdLogo from '../assets/images/BusdLogo.png';
 import UsdcLogo from '../assets/images/UsdcLogo.png';
-// import UsdtLogo from '../../../assets/images/UsdtLogo.png';
+import UsdtLogo from '../../../assets/images/UsdtLogo.png';
 
 const FIREPOT_LOGO_URL =
   'https://static.wixstatic.com/media/b908d5_3a7875d36a014d73b963fa1b94f66eab~mv2.png/v1/fill/w_238,h_144,al_c,lg_1,q_85,enc_auto/logo%20color%20correcto.png';
