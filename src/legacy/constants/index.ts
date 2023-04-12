@@ -1,4 +1,4 @@
-import { ChainId, JSBI, Percent, Token, WETH } from '@firepotfinance/firepotfinance-sdk';
+import { JSBI, Percent, Token, WETH } from '@firepotfinance/firepotfinance-sdk';
 import { AbstractConnector } from '@web3-react/abstract-connector';
 import {
   // fortmatic,
@@ -16,6 +16,11 @@ export const ROUTER_ADDRESS = '0xAa9ADAffdfFDDd64B9174F7EB451F0F1332245B2';
 
 export const LP_TOKEN_NAME = 'Firepot-LP-Token';
 export const LP_TOKEN_SYMBOL = 'FLP';
+
+export declare enum ChainId {
+  MAINNET = 16718,
+  AMBTEST = 22040,
+}
 
 // a list of tokens by chain
 type ChainTokenList = {

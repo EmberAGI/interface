@@ -16,7 +16,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "downlevelIteration": true,
-    "types": ["react-spring", "jest"],
+    "types": ["react-spring"],
     "noEmit": true,
     "jsx": "preserve",
     "rootDir": "./",
