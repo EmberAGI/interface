@@ -20,6 +20,7 @@ const config = {
         address: '0x952b98DBDa3319BF0e339cC9CC574fF768F80f3c',
         decimals: 18,
         logoURI: 'https://etherscan.io/token/images/centre-usdc_28.png',
+        chainId: parseInt(process.env.REACT_APP_CHAIN_ID ?? '22040'),
       },
       usdt: {
         name: 'USD//T',
@@ -27,14 +28,7 @@ const config = {
         address: '0x1bB13b68DbA3571415B4092802777B5cA15de897',
         decimals: 18,
         logoURI: 'https://etherscan.io/token/images/tethernew_32.png',
-      },
-      busd: {
-        name: 'Binance USD',
-        address: '0x9F9B96F8d33B58c85f0E5bB4BE53164c0Fe77cD9',
-        symbol: 'BUSD',
-        decimals: 18,
-        chainId: 22040,
-        logoURI: 'https://bscscan.com/token/images/busd_32.png',
+        chainId: parseInt(process.env.REACT_APP_CHAIN_ID ?? '22040'),
       },
     },
     yieldFarms: {

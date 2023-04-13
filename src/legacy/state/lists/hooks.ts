@@ -1,5 +1,6 @@
 import { toChecksumAddress } from 'web3-utils';
-import DEFAULT_TOKEN_LIST from '../../../libraries/tokens/tokenList.json';
+// import DEFAULT_TOKEN_LIST from '../../../libraries/tokens/tokenList.json';
+import config from 'config';
 import { Token } from '@firepotfinance/firepotfinance-sdk';
 import { ChainId } from 'types';
 import { Tags, TokenInfo, TokenList } from '@uniswap/token-lists';
@@ -7,6 +8,20 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from '../index';
 import sortByListPriority from '../../utils/listSort';
+
+const DEFAULT_TOKEN_LIST = {
+  name: 'Firepot Finance Token List',
+  timestamp: '2023-04-05T00:00:00.000Z',
+  version: {
+    major: 3,
+    minor: 0,
+    patch: 0,
+  },
+  tags: {},
+  logoURI: '',
+  keywords: ['firepotfinance', 'default'],
+  tokens: Object.values(config.tokens),
+};
 
 type TagDetails = Tags[keyof Tags];
 export interface TagInfo extends TagDetails {
