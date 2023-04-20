@@ -24,8 +24,10 @@ const APRContainer = styled.div`
 `;
 
 export default function APRBanner() {
-  const busdModel = useYieldFarmStatsViewModel('0xa17DdfBCB5D8304835062324D99bfBd1d5cE4841');
+  // const busdModel = useYieldFarmStatsViewModel('0xa17DdfBCB5D8304835062324D99bfBd1d5cE4841');
   const usdcModel = useYieldFarmStatsViewModel('0x035Cf2b69d439565A812aAf2DfE174c89Ba3e585');
+
+  console.log(usdcModel);
 
   return (
     <APRContainer>
@@ -33,11 +35,7 @@ export default function APRBanner() {
         <span>
           Stake on our high <Link to="/farm">APR Farms</Link>
         </span>
-        &nbsp;- APR:{' '}
-        {parseInt(busdModel.viewModel.apr) > parseInt(usdcModel.viewModel.apr)
-          ? busdModel.viewModel.apr
-          : usdcModel.viewModel.apr}
-        %
+        &nbsp;- APR: {parseInt(usdcModel.viewModel.apr)}%
       </div>
     </APRContainer>
   );

@@ -34,18 +34,15 @@ export class WrappedTokenInfo extends Token {
   }
 }
 
-export type TokenAddressMap = Readonly<
-  { [chainId in ChainId]: Readonly<{ [tokenAddress: string]: { token: WrappedTokenInfo; list: TokenList } }> }
->;
+export type TokenAddressMap = Readonly<{
+  [chainId in ChainId]: Readonly<{ [tokenAddress: string]: { token: WrappedTokenInfo; list: TokenList } }>;
+}>;
 
 /**
  * An empty result, useful as a default.
  */
 const EMPTY_LIST: TokenAddressMap = {
   [ChainId.AMBTEST]: {},
-  [ChainId.RINKEBY]: {},
-  [ChainId.ROPSTEN]: {},
-  [ChainId.GÖRLI]: {},
   [ChainId.MAINNET]: {},
 };
 
@@ -98,9 +95,6 @@ export function useAllLists(): {
 function combineMaps(map1: TokenAddressMap, map2: TokenAddressMap): TokenAddressMap {
   return {
     16718: { ...map1[16718], ...map2[16718] },
-    3: { ...map1[3], ...map2[3] },
-    4: { ...map1[4], ...map2[4] },
-    5: { ...map1[5], ...map2[5] },
     22040: { ...map1[22040], ...map2[22040] },
   };
 }

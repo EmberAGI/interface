@@ -51,9 +51,6 @@ export const COMMON_CONTRACT_NAMES: { [address: string]: string } = {
 
 const WETH_ONLY: ChainTokenList = {
   [ChainId.MAINNET]: [WETH[ChainId.MAINNET]],
-  [ChainId.ROPSTEN]: [WETH[ChainId.ROPSTEN]],
-  [ChainId.RINKEBY]: [WETH[ChainId.RINKEBY]],
-  [ChainId.GÖRLI]: [WETH[ChainId.GÖRLI]],
   [ChainId.AMBTEST]: [WETH[ChainId.AMBTEST]],
 };
 
@@ -83,9 +80,6 @@ export const SUGGESTED_BASES: ChainTokenList = {
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   ...WETH_ONLY,
   [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], USDC],
-  [ChainId.ROPSTEN]: [...WETH_ONLY[ChainId.ROPSTEN]],
-  [ChainId.RINKEBY]: [...WETH_ONLY[ChainId.RINKEBY]],
-  [ChainId.GÖRLI]: [...WETH_ONLY[ChainId.GÖRLI]],
   [ChainId.AMBTEST]: [...WETH_ONLY[ChainId.AMBTEST]],
 };
 
