@@ -7,7 +7,7 @@ const FIREPOT_LOGO_URL =
   'https://static.wixstatic.com/media/b908d5_3a7875d36a014d73b963fa1b94f66eab~mv2.png/v1/fill/w_238,h_144,al_c,lg_1,q_85,enc_auto/logo%20color%20correcto.png';
 
 const config = {
-  development: {
+  develop: {
     appLogoUrl: process.env.REACT_APP_LOGO_URL ?? FIREPOT_LOGO_URL,
     networkUrl: process.env.REACT_APP_NETWORK_URL ?? 'https://network.ambrosus-test.io',
     chainId: parseInt(process.env.REACT_APP_CHAIN_ID ?? '22040'),
@@ -70,6 +70,7 @@ const config = {
         symbol: 'USDC',
         name: 'USD//C',
         logoURI: 'https://etherscan.io/token/images/centre-usdc_28.png',
+        chainId: parseInt(process.env.REACT_APP_CHAIN_ID ?? '16178'),
       },
       usdt: {
         name: 'USD//T',
@@ -77,6 +78,7 @@ const config = {
         address: '0xfEE01F2D120250A0a59bfbF9C144F8ECC4425fCc',
         decimals: 18,
         logoURI: 'https://etherscan.io/token/images/tethernew_32.png',
+        chainId: parseInt(process.env.REACT_APP_CHAIN_ID ?? '16178'),
       },
       busd: {
         name: 'Binance USD',
@@ -84,6 +86,7 @@ const config = {
         symbol: 'BUSD',
         decimals: 18,
         logoURI: 'https://bscscan.com/token/images/busd_32.png',
+        chainId: parseInt(process.env.REACT_APP_CHAIN_ID ?? '16178'),
       },
     },
     yieldFarms: {
@@ -108,4 +111,4 @@ const config = {
   },
 };
 
-export default config.production;
+export default config.develop;

@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import { AppState } from '../index';
 import sortByListPriority from '../../utils/listSort';
 
-const DEFAULT_TOKEN_LIST = {
+const DEFAULT_TOKEN_LIST: TokenList = {
   name: 'Firepot Finance Token List',
   timestamp: '2023-04-05T00:00:00.000Z',
   version: {
