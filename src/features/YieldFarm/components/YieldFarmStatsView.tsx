@@ -48,11 +48,11 @@ export default function YieldFarmStatsView(props: YieldFarmStatsViewProps) {
       </>
       <CardSpaceBetweenRow>
         <CardText>APR</CardText>
-        <CardText>{currentTime < parseInt(viewModel.periodFinish) ? viewModel.apr : '0'}%</CardText>
+        <CardText>{currentTime > parseInt(viewModel.periodFinish) ? '0' : viewModel.apr}%</CardText>
       </CardSpaceBetweenRow>
       <CardSpaceBetweenRow>
         <CardText>Daily ROI</CardText>
-        <CardText>{currentTime < parseInt(viewModel.periodFinish) ? viewModel.dailyROI : '0'}%</CardText>
+        <CardText>{currentTime > parseInt(viewModel.periodFinish) ? '0' : viewModel.dailyROI}%</CardText>
       </CardSpaceBetweenRow>
       <CardSpaceBetweenRow>
         <CardText>TVL</CardText>

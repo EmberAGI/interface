@@ -20,9 +20,9 @@
     },
     {
       "name": "USD Coin",
-      "address": "0x1242BDB8DD53f8ca7126d46271Dc59FD7C71C856",
+      "address": "0x952b98DBDa3319BF0e339cC9CC574fF768F80f3c",
       "symbol": "USDC",
-      "decimals": 6,
+      "decimals": 18,
       "chainId": 22040,
       "logoURI": "https://etherscan.io/token/images/centre-usdc_28.png"
     },
@@ -32,6 +32,14 @@
       "symbol": "USDT",
       "decimals": 18,
       "chainId": 22040,
+      "logoURI": "https://etherscan.io/token/images/tethernew_32.png"
+    },
+    {
+      "name": "Tether USD",
+      "address": "0xfEE01F2D120250A0a59bfbF9C144F8ECC4425fCc",
+      "symbol": "USDT",
+      "decimals": 18,
+      "chainId": 16718,
       "logoURI": "https://etherscan.io/token/images/tethernew_32.png"
     }
   ]

@@ -34,9 +34,9 @@ const config = {
     yieldFarms: {
       usdc_amb: {
         farmContractAddress: '',
-        stakeToken: 'amb-usdc',
-        rewardToken: 'amb-usdc',
-        lpAddress: '0xA9646A0281996fDcB88f8f6f01Af52BB0268c494',
+        stakeToken: 'AMB-USDC-flp',
+        rewardToken: 'AMB-USDC-flp',
+        lpAddress: '0x2cdd0140b9e3463D3E81E243c14F8111D0b79c75',
         tokenImg1: AirdaoLogo,
         tokenImg2: UsdcLogo,
       },
@@ -74,7 +74,7 @@ const config = {
       usdt: {
         name: 'USD//T',
         symbol: 'USDT',
-        address: '0x290998B7B5589AFdc4E3f3c7eF817F05dcDEC947',
+        address: '0xfEE01F2D120250A0a59bfbF9C144F8ECC4425fCc',
         decimals: 18,
         logoURI: 'https://etherscan.io/token/images/tethernew_32.png',
       },
@@ -89,8 +89,8 @@ const config = {
     yieldFarms: {
       usdc_amb: {
         farmContractAddress: '0x035Cf2b69d439565A812aAf2DfE174c89Ba3e585',
-        stakeToken: 'amb-usdc',
-        rewardToken: 'amb-usdc',
+        stakeToken: 'AMB-USDC-flp',
+        rewardToken: 'AMB-USDC-flp',
         lpAddress: '0xA9646A0281996fDcB88f8f6f01Af52BB0268c494',
         tokenImg1: AirdaoLogo,
         tokenImg2: UsdcLogo,
@@ -108,4 +108,4 @@ const config = {
   },
 };
 
-export default config.development;
+export default config.production;
