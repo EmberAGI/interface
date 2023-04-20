@@ -1,0 +1,46 @@
+{
+  "name": "Firepot Finance Token List",
+  "timestamp": "2023-04-05T00:00:00.000Z",
+  "version": {
+    "major": 2,
+    "minor": 0,
+    "patch": 0
+  },
+  "tags": {},
+  "logoURI": "",
+  "keywords": ["firepotfinance", "default"],
+  "tokens": [
+    {
+      "name": "USD Coin",
+      "address": "0xd8dd0273D31c1cd9Dba104DaCA7C1dfEE4f7b805",
+      "symbol": "USDC",
+      "decimals": 18,
+      "chainId": 16718,
+      "logoURI": "https://etherscan.io/token/images/centre-usdc_28.png"
+    },
+    {
+      "name": "USD Coin",
+      "address": "0x952b98DBDa3319BF0e339cC9CC574fF768F80f3c",
+      "symbol": "USDC",
+      "decimals": 18,
+      "chainId": 22040,
+      "logoURI": "https://etherscan.io/token/images/centre-usdc_28.png"
+    },
+    {
+      "name": "Tether USD",
+      "address": "0x1bB13b68DbA3571415B4092802777B5cA15de897",
+      "symbol": "USDT",
+      "decimals": 18,
+      "chainId": 22040,
+      "logoURI": "https://etherscan.io/token/images/tethernew_32.png"
+    },
+    {
+      "name": "Tether USD",
+      "address": "0xfEE01F2D120250A0a59bfbF9C144F8ECC4425fCc",
+      "symbol": "USDT",
+      "decimals": 18,
+      "chainId": 16718,
+      "logoURI": "https://etherscan.io/token/images/tethernew_32.png"
+    }
+  ]
+}

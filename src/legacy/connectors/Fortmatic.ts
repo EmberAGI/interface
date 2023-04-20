@@ -1,14 +1,12 @@
-import { ChainId } from '@firepotfinance/firepotfinance-sdk';
+import { ChainId } from 'types';
 import { FortmaticConnector as FortmaticConnectorCore } from '@web3-react/fortmatic-connector';
 
 export const OVERLAY_READY = 'OVERLAY_READY';
 
-type FormaticSupportedChains = Extract<ChainId, ChainId.MAINNET | ChainId.ROPSTEN | ChainId.RINKEBY | ChainId.AMBTEST>;
+type FormaticSupportedChains = Extract<ChainId, ChainId.MAINNET | ChainId.AMBTEST>;
 
 const CHAIN_ID_NETWORK_ARGUMENT: { readonly [chainId in FormaticSupportedChains]: string | undefined } = {
   [ChainId.MAINNET]: undefined,
-  [ChainId.ROPSTEN]: 'ropsten',
-  [ChainId.RINKEBY]: 'rinkeby',
   [ChainId.AMBTEST]: 'ambtest',
 };
 

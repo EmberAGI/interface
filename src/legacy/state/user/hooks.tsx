@@ -1,4 +1,5 @@
-import { ChainId, Pair, Token } from '@firepotfinance/firepotfinance-sdk';
+import { Pair, Token } from '@firepotfinance/firepotfinance-sdk';
+import { ChainId } from 'types';
 import flatMap from 'lodash.flatmap';
 import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';

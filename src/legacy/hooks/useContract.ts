@@ -1,6 +1,7 @@
 import { Contract } from '@ethersproject/contracts';
 import STAKING_REWARDS_ABI from '@uniswap/liquidity-staker/build/StakingRewards.json';
-import { ChainId, WETH } from '@firepotfinance/firepotfinance-sdk';
+import { WETH } from '@firepotfinance/firepotfinance-sdk';
+import { ChainId } from 'types';
 import IUniswapV2PairABI from '@uniswap/v2-core/build/IUniswapV2Pair.json';
 import { useMemo } from 'react';
 import {
@@ -69,9 +70,7 @@ export function useENSRegistrarContract(withSignerIfPossible?: boolean): Contrac
   if (chainId) {
     switch (chainId) {
       case ChainId.MAINNET:
-      case ChainId.GÖRLI:
-      case ChainId.ROPSTEN:
-      case ChainId.RINKEBY:
+      case ChainId.AMBTEST:
         address = '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e';
         break;
     }

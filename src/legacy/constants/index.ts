@@ -1,4 +1,4 @@
-import { ChainId, JSBI, Percent, Token, WETH } from '@firepotfinance/firepotfinance-sdk';
+import { JSBI, Percent, Token, WETH } from '@firepotfinance/firepotfinance-sdk';
 import { AbstractConnector } from '@web3-react/abstract-connector';
 import {
   // fortmatic,
@@ -7,38 +7,37 @@ import {
   //walletconnect,
   //walletlink,
 } from '../connectors';
+import config from 'config';
+import { ChainId } from 'types';
 
+// REFACTOR THIS IN NEW CONFIG HANDLING
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
 export const FACTORY_ADDRESS = '0xe63Cf585Dae8273A5e37AfF6da2f823FBf3Eb5BE';
 export const ROUTER_ADDRESS = '0xAa9ADAffdfFDDd64B9174F7EB451F0F1332245B2';
 
 export const LP_TOKEN_NAME = 'Firepot-LP-Token';
 export const LP_TOKEN_SYMBOL = 'FLP';
-// export const LP_TOKEN_NAME = 'Swap-LP-Token';
-// export const LP_TOKEN_SYMBOL = 'SWAP-LP';
 
 // a list of tokens by chain
 type ChainTokenList = {
   readonly [chainId in ChainId]: Token[];
 };
 
-//export const USDC = new Token(ChainId.AMBTEST, '0x1242BDB8DD53f8ca7126d46271Dc59FD7C71C856', 6, 'USDC', 'USD//C');
+export const USDC = new Token(
+  config.chainId,
+  config.tokens.usdc.address,
+  config.tokens.usdc.decimals,
+  config.tokens.usdc.symbol,
+  config.tokens.usdc.name
+);
+export const USDT = new Token(
+  config.chainId,
+  config.tokens.usdt.address,
+  config.tokens.usdt.decimals,
+  config.tokens.usdt.symbol,
+  config.tokens.usdt.name
+);
 
-export const USDC = new Token(ChainId.MAINNET, '0x290998B7B5589AFdc4E3f3c7eF817F05dcDEC947', 6, 'USDC', 'USD//C');
-// export const USDT = new Token(ChainId.MAINNET, '0xdAC17F958D2ee523a2206206994597C13D831ec7', 6, 'USDT', 'Tether USD');
-// export const COMP = new Token(ChainId.MAINNET, '0xc00e94Cb662C3520282E6f5717214004A7f26888', 18, 'COMP', 'Compound');
-// export const MKR = new Token(ChainId.MAINNET, '0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2', 18, 'MKR', 'Maker');
-// export const AMPL = new Token(ChainId.MAINNET, '0xD46bA6D942050d489DBd938a2C909A5d5039A161', 9, 'AMPL', 'Ampleforth');
-// export const WBTC = new Token(ChainId.MAINNET, '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599', 8, 'WBTC', 'Wrapped BTC');
-
-//export const wETH = new Token(
-//   ChainId.AMBTEST,
-//   '0x608EDeEfA8C63823519B89bAb865E83773FAA46d',
-//   18,
-//   'wETH',
-//   'Wrapped Ethereum'
-// );
-//export const wBNB = new Token(ChainId.AMBTEST, '0x1Cc332c401fD2777C2c6bAE25097A910dFB0BC80', 18, 'wBNB', 'Wrapped BNB');
 // Block time here is slightly higher (~1s) than average in order to avoid ongoing proposals past the displayed time
 export const AVERAGE_BLOCK_TIME_IN_SECS = 13;
 export const PROPOSAL_LENGTH_IN_BLOCKS = 40_320;
@@ -51,9 +50,6 @@ export const COMMON_CONTRACT_NAMES: { [address: string]: string } = {
 
 const WETH_ONLY: ChainTokenList = {
   [ChainId.MAINNET]: [WETH[ChainId.MAINNET]],
-  [ChainId.ROPSTEN]: [WETH[ChainId.ROPSTEN]],
-  [ChainId.RINKEBY]: [WETH[ChainId.RINKEBY]],
-  [ChainId.GÖRLI]: [WETH[ChainId.GÖRLI]],
   [ChainId.AMBTEST]: [WETH[ChainId.AMBTEST]],
 };
 
@@ -68,25 +64,20 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
  * tokens.
  */
 export const CUSTOM_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: Token[] } } = {
-  [ChainId.MAINNET]: {
-    //[AMPL.address]: [DAI, WETH[ChainId.MAINNET]],
-  },
+  [ChainId.MAINNET]: {},
 };
 
 // used for display in the default list when adding liquidity
 export const SUGGESTED_BASES: ChainTokenList = {
-  ...WETH_ONLY,
-  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], USDC],
+  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], USDC, USDT],
+  [ChainId.AMBTEST]: [USDC, USDT],
 };
 
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   ...WETH_ONLY,
-  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], USDC],
-  [ChainId.ROPSTEN]: [...WETH_ONLY[ChainId.ROPSTEN]],
-  [ChainId.RINKEBY]: [...WETH_ONLY[ChainId.RINKEBY]],
-  [ChainId.GÖRLI]: [...WETH_ONLY[ChainId.GÖRLI]],
-  [ChainId.AMBTEST]: [...WETH_ONLY[ChainId.AMBTEST]],
+  [ChainId.MAINNET]: [USDC, USDT],
+  [ChainId.AMBTEST]: [USDC, USDT],
 };
 
 export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } = {
@@ -96,6 +87,7 @@ export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } 
       new Token(ChainId.MAINNET, '0x290998B7B5589AFdc4E3f3c7eF817F05dcDEC947', 6, 'USDC', 'USD Coin'),
     ],
   ],
+  [ChainId.AMBTEST]: [],
 };
 
 export interface WalletInfo {

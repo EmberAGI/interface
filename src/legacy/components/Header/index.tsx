@@ -1,4 +1,4 @@
-import { ChainId } from '@firepotfinance/firepotfinance-sdk';
+import { ChainId } from 'types';
 import React from 'react';
 import { Text } from 'rebass';
 import { NavLink } from 'react-router-dom';
@@ -247,9 +247,6 @@ export const StyledMenuButton = styled.button`
 `;
 
 const NETWORK_LABELS: { [chainId in ChainId]?: string } = {
-  [ChainId.RINKEBY]: 'Rinkeby',
-  [ChainId.ROPSTEN]: 'Ropsten',
-  [ChainId.GÖRLI]: 'Goerli',
   [ChainId.AMBTEST]: 'Ambtest',
 };
 

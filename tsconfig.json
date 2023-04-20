@@ -19,7 +19,15 @@
     "types": ["react-spring", "jest"],
     "noEmit": true,
     "jsx": "preserve",
-    "baseUrl": "src"
+    "rootDir": "./",
+    "baseUrl": "src",
+    "paths": {
+      "config": ["config"],
+      "features": ["features"],
+      "libraries": ["libraries"],
+      "assets": ["assets"],
+      "types": ["types"]
+    }
   },
   "exclude": ["node_modules", "legacy"],
   "include": ["./src/**/*.ts", "./src/**/*.tsx", "src/components/Confetti/index.js"]

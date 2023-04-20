@@ -5,19 +5,17 @@ import { WalletLinkConnector } from '@web3-react/walletlink-connector';
 // import { PortisConnector } from '@web3-react/portis-connector';
 // import { FortmaticConnector } from './Fortmatic';
 import { NetworkConnector } from './NetworkConnector';
+import config from 'config';
 
-const REACT_APP_NETWORK_URL = process.env.REACT_APP_NETWORK_URL;
 // const FORMATIC_KEY = process.env.REACT_APP_FORTMATIC_KEY
 // const PORTIS_ID = process.env.REACT_APP_PORTIS_ID
 
-export const NETWORK_CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '16718');
-
-if (typeof REACT_APP_NETWORK_URL === 'undefined') {
-  throw new Error(`REACT_APP_NETWORK_URL must be a defined environment variable`);
+if (typeof config.networkUrl === 'undefined') {
+  throw new Error(`network url must be a defined environment variable`);
 }
 
 export const network = new NetworkConnector({
-  urls: { [NETWORK_CHAIN_ID]: REACT_APP_NETWORK_URL },
+  urls: { [config.chainId]: config.networkUrl },
 });
 
 let networkLibrary: Web3Provider | undefined;
@@ -26,12 +24,12 @@ export function getNetworkLibrary(): Web3Provider {
 }
 
 export const injected = new InjectedConnector({
-  supportedChainIds: [NETWORK_CHAIN_ID],
+  supportedChainIds: [config.chainId],
 });
 
 // mainnet only
 export const walletconnect = new WalletConnectConnector({
-  rpc: { 16718: REACT_APP_NETWORK_URL },
+  rpc: { [config.chainId]: config.networkUrl },
   bridge: 'https://bridge.walletconnect.org',
   qrcode: true,
   pollingInterval: 15000,
@@ -51,7 +49,7 @@ export const walletconnect = new WalletConnectConnector({
 
 // mainnet only
 export const walletlink = new WalletLinkConnector({
-  url: REACT_APP_NETWORK_URL,
+  url: config.networkUrl,
   appName: 'FirepotSwap',
   // appLogoUrl: '',
 });

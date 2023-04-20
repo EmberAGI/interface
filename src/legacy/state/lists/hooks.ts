@@ -1,11 +1,27 @@
 import { toChecksumAddress } from 'web3-utils';
-import DEFAULT_TOKEN_LIST from '@firepotfinance/default-token-list';
-import { ChainId, Token } from '@firepotfinance/firepotfinance-sdk';
+// import DEFAULT_TOKEN_LIST from '../../../libraries/tokens/tokenList.json';
+import config from 'config';
+import { Token } from '@firepotfinance/firepotfinance-sdk';
+import { ChainId } from 'types';
 import { Tags, TokenInfo, TokenList } from '@uniswap/token-lists';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from '../index';
 import sortByListPriority from '../../utils/listSort';
+
+const DEFAULT_TOKEN_LIST: TokenList = {
+  name: 'Firepot Finance Token List',
+  timestamp: '2023-04-05T00:00:00.000Z',
+  version: {
+    major: 3,
+    minor: 0,
+    patch: 0,
+  },
+  tags: {},
+  logoURI: '',
+  keywords: ['firepotfinance', 'default'],
+  tokens: Object.values(config.tokens),
+};
 
 type TagDetails = Tags[keyof Tags];
 export interface TagInfo extends TagDetails {
@@ -34,18 +50,15 @@ export class WrappedTokenInfo extends Token {
   }
 }
 
-export type TokenAddressMap = Readonly<
-  { [chainId in ChainId]: Readonly<{ [tokenAddress: string]: { token: WrappedTokenInfo; list: TokenList } }> }
->;
+export type TokenAddressMap = Readonly<{
+  [chainId in ChainId]: Readonly<{ [tokenAddress: string]: { token: WrappedTokenInfo; list: TokenList } }>;
+}>;
 
 /**
  * An empty result, useful as a default.
  */
 const EMPTY_LIST: TokenAddressMap = {
   [ChainId.AMBTEST]: {},
-  [ChainId.RINKEBY]: {},
-  [ChainId.ROPSTEN]: {},
-  [ChainId.GÖRLI]: {},
   [ChainId.MAINNET]: {},
 };
 
@@ -66,11 +79,11 @@ export function listToTokenMap(list: TokenList): TokenAddressMap {
           })
           ?.filter((x): x is TagInfo => Boolean(x)) ?? [];
       const token = new WrappedTokenInfo(tokenInfo, tags);
-      if (tokenMap[token.chainId][token.address] !== undefined) throw Error('Duplicate tokens.');
+      if (tokenMap[token.chainId as ChainId][token.address] !== undefined) throw Error('Duplicate tokens.');
       return {
         ...tokenMap,
         [token.chainId]: {
-          ...tokenMap[token.chainId],
+          ...tokenMap[token.chainId as ChainId],
           [token.address]: {
             token,
             list: list,
@@ -98,9 +111,6 @@ export function useAllLists(): {
 function combineMaps(map1: TokenAddressMap, map2: TokenAddressMap): TokenAddressMap {
   return {
     16718: { ...map1[16718], ...map2[16718] },
-    3: { ...map1[3], ...map2[3] },
-    4: { ...map1[4], ...map2[4] },
-    5: { ...map1[5], ...map2[5] },
     22040: { ...map1[22040], ...map2[22040] },
   };
 }
@@ -145,24 +155,7 @@ export function useActiveListUrls(): string[] | undefined {
     tags: {},
     logoURI: 'ipfs://QmNa8mQkrNKp1WEEeGjFezDmDeodkWRevGFN8JCV7b4Xir',
     keywords: ['uniswap', 'default'],
-    tokens: [
-      {
-        chainId: 22040,
-        address: '0x8FB30d1A78d7E622CCB10376A585383Cf9dEc920',
-        name: 'BigToken',
-        symbol: 'BIG',
-        decimals: 18,
-        logoURI: 'https://assets.coingecko.com/coins/images/12390/thumb/ACH_%281%29.png?1599691266',
-      },
-      {
-        chainId: 22040,
-        address: '0xD45f1F799097a30243605E9ba938FcB0e3f5cBC3',
-        name: 'SmallToken',
-        symbol: 'SML',
-        decimals: 18,
-        logoURI: 'https://assets.coingecko.com/coins/images/4490/thumb/aergo.png?1647696770',
-      },
-    ],
+    tokens: [],
   };
   return [JSON.stringify(json)];
 }
@@ -179,24 +172,7 @@ export function useInactiveListUrls(): string[] {
     tags: {},
     logoURI: 'ipfs://QmNa8mQkrNKp1WEEeGjFezDmDeodkWRevGFN8JCV7b4Xir',
     keywords: ['uniswap', 'default'],
-    tokens: [
-      {
-        chainId: 22040,
-        address: '0x8FB30d1A78d7E622CCB10376A585383Cf9dEc920',
-        name: 'BigToken',
-        symbol: 'BIG',
-        decimals: 18,
-        logoURI: 'https://assets.coingecko.com/coins/images/12390/thumb/ACH_%281%29.png?1599691266',
-      },
-      {
-        chainId: 22040,
-        address: '0xD45f1F799097a30243605E9ba938FcB0e3f5cBC3',
-        name: 'SmallToken',
-        symbol: 'SML',
-        decimals: 18,
-        logoURI: 'https://assets.coingecko.com/coins/images/4490/thumb/aergo.png?1647696770',
-      },
-    ],
+    tokens: [],
   };
   return [JSON.stringify(json)];
 }

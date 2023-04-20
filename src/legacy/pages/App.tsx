@@ -30,7 +30,6 @@ import { OpenClaimAddressModalAndRedirectToSwap, RedirectPathToSwapOnly } from '
 import { useWeb3React } from '@web3-react/core';
 import APRBanner from '../../features/APRBanner/banner';
 import logo from '../assets/svg/menu/firepot-airdao-logo.png';
-//import logoSm from '../assets/svg/menu/firepot-airdao-logo-sm.png';
 import './side-menu-overrides.css';
 
 const AppWrapper = styled.div`

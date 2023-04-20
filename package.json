@@ -35,7 +35,7 @@
     "@reach/portal": "0.15.0",
     "@reduxjs/toolkit": "^1.9.1",
     "@truffle/hdwallet-provider": "^2.1.2",
-    "@types/jest": "^29.2.4",
+    "@types/jest": "^29.5.0",
     "@types/lodash.flatmap": "^4.5.7",
     "@types/multicodec": "^2.1.0",
     "@types/node": "^18.11.10",

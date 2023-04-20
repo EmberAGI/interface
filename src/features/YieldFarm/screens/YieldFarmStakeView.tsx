@@ -12,9 +12,7 @@ import CurrencyInputPanel from '../../../libraries/components/CurrencyInputPanel
 import { RowBetween } from '../../../legacy/components/Row';
 import { Text } from 'rebass';
 import { BottomGrouping } from '../../../legacy/components/swap/styleds';
-import AirdaoLogo from '../../../assets/images/AirdaoLogo.png';
-import BusdLogo from '../../../assets/images/BusdLogo.png';
-import UsdcLogo from '../../../assets/images/UsdcLogo.png';
+import config from 'config';
 
 interface CardRowProps {
   justify?: string;
@@ -63,24 +61,7 @@ export default function YieldFarmStakeView() {
   const [currentFarm, setCurrentFarm] = useState<YieldFarm | undefined>(initialFarmState);
 
   useEffect(() => {
-    const yieldFarms: YieldFarm[] = [
-      {
-        farmContractAddress: '0x035Cf2b69d439565A812aAf2DfE174c89Ba3e585',
-        stakeToken: 'AMB-USDC-flp',
-        rewardToken: 'AMB-USDC-flp',
-        lpAddress: '0xA9646A0281996fDcB88f8f6f01Af52BB0268c494',
-        tokenImg1: AirdaoLogo,
-        tokenImg2: UsdcLogo,
-      },
-      {
-        farmContractAddress: '0xa17DdfBCB5D8304835062324D99bfBd1d5cE4841',
-        stakeToken: 'AMB-BUSD-flp',
-        rewardToken: 'AMB-BUSD-flp',
-        lpAddress: '0x7A477aA8ED4884509387Dba81BA6F2B7C97597e2',
-        tokenImg1: AirdaoLogo,
-        tokenImg2: BusdLogo,
-      },
-    ];
+    const yieldFarms: YieldFarm[] = [config.yieldFarms.usdc_amb, config.yieldFarms.busd_amb];
     const selectCurrentFarm = () => {
       return yieldFarms.find((farm) => farm.farmContractAddress === stakingTokenAddress);
     };
