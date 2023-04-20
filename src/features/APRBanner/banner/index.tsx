@@ -27,8 +27,6 @@ export default function APRBanner() {
   // const busdModel = useYieldFarmStatsViewModel('0xa17DdfBCB5D8304835062324D99bfBd1d5cE4841');
   const usdcModel = useYieldFarmStatsViewModel('0x035Cf2b69d439565A812aAf2DfE174c89Ba3e585');
 
-  console.log(usdcModel);
-
   return (
     <APRContainer>
       <div>
