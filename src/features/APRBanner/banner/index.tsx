@@ -33,11 +33,7 @@ export default function APRBanner() {
         <span>
           Stake on our high <Link to="/farm">APR Farms</Link>
         </span>
-        &nbsp;- APR:{' '}
-        {parseInt(busdModel.viewModel.apr) > parseInt(usdcModel.viewModel.apr)
-          ? busdModel.viewModel.apr
-          : usdcModel.viewModel.apr}
-        %
+        &nbsp;- APR: {usdcModel.viewModel.apr}%
       </div>
     </APRContainer>
   );
