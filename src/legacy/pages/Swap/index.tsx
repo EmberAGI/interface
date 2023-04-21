@@ -85,18 +85,20 @@ export default function Swap() {
   // swap state
   const { independentField, typedValue, recipient } = useSwapState();
   const { v2Trade, currencyBalances, parsedAmount, currencies, inputError: swapInputError } = useDerivedSwapInfo();
+  console.log('V2 TRADE', v2Trade);
   const {
     wrapType,
     execute: onWrap,
     inputError: wrapInputError,
   } = useWrapCallback(currencies[Field.INPUT], currencies[Field.OUTPUT], typedValue);
 
-  console.log(wrapType);
+  console.log('WRAP TYPE', wrapType);
 
   const showWrap: boolean = wrapType !== WrapType.NOT_APPLICABLE;
   const trade = showWrap ? undefined : v2Trade;
 
-  console.log(trade);
+  console.log('SHOW WRAP', showWrap);
+  console.log('TRADE', trade);
 
   const parsedAmounts = showWrap
     ? {
@@ -139,6 +141,10 @@ export default function Swap() {
     swapErrorMessage: undefined,
     txHash: undefined,
   });
+
+  console.log('SHOW CONFIRM', showConfirm);
+  console.log('SHOW CONFIRM', tradeToConfirm);
+  console.log('SHOW CONFIRM', attemptingTxn);
 
   const formattedAmounts = {
     [independentField]: typedValue,

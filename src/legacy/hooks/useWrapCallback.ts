@@ -35,7 +35,7 @@ export default function useWrapCallback(
   console.log('INPUT', inputCurrency);
   console.log('OUTPUT', outputCurrency);
   console.log('AMBER', AMBER);
-  if (chainId) console.log(WETH[chainId]);
+  if (chainId) console.log('WETH', WETH[chainId]);
 
   return useMemo(() => {
     if (!wethContract || !chainId || !inputCurrency || !outputCurrency) return NOT_APPLICABLE;
