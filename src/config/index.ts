@@ -135,15 +135,15 @@ const config = {
     factoryInitHash: '0xa02108a20103c6b7994b253834b7e2d8ee2eae0400220a2074fe8d885ce59fce',
     tokens: {
       usdc: {
+        name: 'USD Coin',
+        symbol: 'USDC',
         address: '0xd8dd0273D31c1cd9Dba104DaCA7C1dfEE4f7b805',
         decimals: 18,
-        symbol: 'USDC',
-        name: 'USD//C',
         logoURI: 'https://etherscan.io/token/images/centre-usdc_28.png',
         chainId: envChainId === 0 ? 16718 : envChainId,
       },
       usdt: {
-        name: 'USD//T',
+        name: 'Tether USD',
         symbol: 'USDT',
         address: '0xfEE01F2D120250A0a59bfbF9C144F8ECC4425fCc',
         decimals: 18,
@@ -152,8 +152,8 @@ const config = {
       },
       busd: {
         name: 'Binance USD',
-        address: '0x7A477aA8ED4884509387Dba81BA6F2B7C97597e2',
         symbol: 'BUSD',
+        address: '0x7A477aA8ED4884509387Dba81BA6F2B7C97597e2',
         decimals: 18,
         logoURI: 'https://bscscan.com/token/images/busd_32.png',
         chainId: envChainId === 0 ? 16718 : envChainId,
