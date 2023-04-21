@@ -143,8 +143,8 @@ export default function Swap() {
   });
 
   console.log('SHOW CONFIRM', showConfirm);
-  console.log('SHOW CONFIRM', tradeToConfirm);
-  console.log('SHOW CONFIRM', attemptingTxn);
+  console.log('TRADE TO CONFIRM', tradeToConfirm);
+  console.log('ATTEMPTING TXC', attemptingTxn);
 
   const formattedAmounts = {
     [independentField]: typedValue,
