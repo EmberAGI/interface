@@ -117,23 +117,31 @@ export function useDerivedSwapInfo(): {
     recipient,
   } = useSwapState();
 
+  console.log('independentField', independentField);
+
   const inputCurrency = useCurrency(inputCurrencyId);
   const outputCurrency = useCurrency(outputCurrencyId);
   const recipientLookup = useENS(recipient ?? undefined);
   const to: string | null = (recipient === null ? account : recipientLookup.address) ?? null;
 
+  console.log('Recipient lookups', recipientLookup);
+
   const relevantTokenBalances = useCurrencyBalances(account ?? undefined, [
     inputCurrency ?? undefined,
     outputCurrency ?? undefined,
   ]);
+  console.log('Relevant token balances', relevantTokenBalances);
 
   const isExactIn: boolean = independentField === Field.INPUT;
+  console.log('isExactIn', isExactIn);
   const parsedAmount = tryParseAmount(typedValue, (isExactIn ? inputCurrency : outputCurrency) ?? undefined);
 
   const bestTradeExactIn = useTradeExactIn(isExactIn ? parsedAmount : undefined, outputCurrency ?? undefined);
   const bestTradeExactOut = useTradeExactOut(inputCurrency ?? undefined, !isExactIn ? parsedAmount : undefined);
 
   const v2Trade = isExactIn ? bestTradeExactIn : bestTradeExactOut;
+
+  console.log('V2 INSIDE TRADE', v2Trade);
 
   const currencyBalances = {
     [Field.INPUT]: relevantTokenBalances[0],
