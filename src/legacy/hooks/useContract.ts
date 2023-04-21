@@ -1,6 +1,5 @@
 import { Contract } from '@ethersproject/contracts';
 import STAKING_REWARDS_ABI from '@uniswap/liquidity-staker/build/StakingRewards.json';
-import { WETH } from '@firepotfinance/firepotfinance-sdk';
 import { ChainId } from 'types';
 import IUniswapV2PairABI from '@uniswap/v2-core/build/IUniswapV2Pair.json';
 import { useMemo } from 'react';
@@ -18,6 +17,7 @@ import FARMINGCONTRACT_ABI from '../constants/abis/farmingContract.json';
 import { MULTICALL_ABI, MULTICALL_NETWORKS } from '../constants/multicall';
 import { getContract } from '../utils';
 import { useActiveWeb3React } from './index';
+import { WETH } from '../../libraries/sdk';
 
 // returns null on errors
 function useContract(address: string | undefined, ABI: any, withSignerIfPossible = true): Contract | null {

@@ -1,4 +1,5 @@
-import { JSBI, Percent, Token, WETH } from '@firepotfinance/firepotfinance-sdk';
+import { JSBI, Percent, Token } from '@firepotfinance/firepotfinance-sdk';
+import { WETH } from '../../libraries/sdk';
 import { AbstractConnector } from '@web3-react/abstract-connector';
 import {
   // fortmatic,
@@ -12,8 +13,6 @@ import { ChainId } from 'types';
 
 // REFACTOR THIS IN NEW CONFIG HANDLING
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
-export const FACTORY_ADDRESS = '0xe63Cf585Dae8273A5e37AfF6da2f823FBf3Eb5BE';
-export const ROUTER_ADDRESS = '0xAa9ADAffdfFDDd64B9174F7EB451F0F1332245B2';
 
 export const LP_TOKEN_NAME = 'Firepot-LP-Token';
 export const LP_TOKEN_SYMBOL = 'FLP';
@@ -22,6 +21,14 @@ export const LP_TOKEN_SYMBOL = 'FLP';
 type ChainTokenList = {
   readonly [chainId in ChainId]: Token[];
 };
+
+const AMB_TESTNET = new Token(
+  config.chainId,
+  '0x7cee2ae3042D2C646Aa24FACfA92dfeE589046f0',
+  18,
+  'AMB',
+  'Synthetic Amber'
+);
 
 export const USDC = new Token(
   config.chainId,
@@ -50,13 +57,14 @@ export const COMMON_CONTRACT_NAMES: { [address: string]: string } = {
 
 const WETH_ONLY: ChainTokenList = {
   [ChainId.MAINNET]: [WETH[ChainId.MAINNET]],
-  [ChainId.AMBTEST]: [WETH[ChainId.AMBTEST]],
+  [ChainId.AMBTEST]: [AMB_TESTNET],
 };
 
 // used to construct intermediary pairs for trading
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   ...WETH_ONLY,
-  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], USDC],
+  [ChainId.MAINNET]: [USDC, USDT],
+  [ChainId.AMBTEST]: [USDC, USDT],
 };
 
 /**
@@ -69,24 +77,19 @@ export const CUSTOM_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: To
 
 // used for display in the default list when adding liquidity
 export const SUGGESTED_BASES: ChainTokenList = {
-  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], USDC, USDT],
+  [ChainId.MAINNET]: [USDC, USDT],
   [ChainId.AMBTEST]: [USDC, USDT],
 };
 
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   ...WETH_ONLY,
-  [ChainId.MAINNET]: [USDC, USDT],
-  [ChainId.AMBTEST]: [USDC, USDT],
+  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], USDC, USDT],
+  [ChainId.AMBTEST]: [AMB_TESTNET, USDC, USDT],
 };
 
 export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } = {
-  [ChainId.MAINNET]: [
-    [
-      new Token(ChainId.MAINNET, '0x2b2d892C3fe2b4113dd7aC0D2c1882AF202FB28F', 18, 'SAMB', 'Synthetic Amber'),
-      new Token(ChainId.MAINNET, '0x290998B7B5589AFdc4E3f3c7eF817F05dcDEC947', 6, 'USDC', 'USD Coin'),
-    ],
-  ],
+  [ChainId.MAINNET]: [],
   [ChainId.AMBTEST]: [],
 };
 

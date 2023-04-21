@@ -1,4 +1,5 @@
-import { JSBI, Pair, Percent, TokenAmount } from '@firepotfinance/firepotfinance-sdk';
+import { JSBI, Percent, TokenAmount } from '@firepotfinance/firepotfinance-sdk';
+import { Pair } from '../../../libraries/entities/Pair';
 import { darken } from 'polished';
 import React, { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'react-feather';

@@ -25,7 +25,7 @@ const APRContainer = styled.div`
 `;
 
 export default function APRBanner() {
-  const busdModel = useYieldFarmStatsViewModel(config.yieldFarms.busd_amb.farmContractAddress);
+  // const busdModel = useYieldFarmStatsViewModel(config.yieldFarms.busd_amb.farmContractAddress);
   const usdcModel = useYieldFarmStatsViewModel(config.yieldFarms.usdc_amb.farmContractAddress);
   const currentTime = Math.floor(Date.now() / 1000);
 
@@ -35,13 +35,7 @@ export default function APRBanner() {
         <span>
           Stake on our high <Link to="/farm">APR Farms</Link>
         </span>
-        &nbsp;- APR:{' '}
-        {currentTime < parseInt(usdcModel.viewModel.periodFinish)
-          ? parseInt(busdModel.viewModel.apr) > parseInt(usdcModel.viewModel.apr)
-            ? busdModel.viewModel.apr
-            : usdcModel.viewModel.apr
-          : '0'}
-        %
+        &nbsp;- APR: {currentTime < parseInt(usdcModel.viewModel.periodFinish) ? usdcModel.viewModel.apr : '0'}%
       </div>
     </APRContainer>
   );

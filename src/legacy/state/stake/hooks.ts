@@ -1,4 +1,5 @@
-import { ChainId, CurrencyAmount, JSBI, Token, TokenAmount, WETH } from '@firepotfinance/firepotfinance-sdk';
+import { ChainId, CurrencyAmount, JSBI, Token, TokenAmount } from '@firepotfinance/firepotfinance-sdk';
+import { WETH } from '../../../libraries/sdk';
 import { USDC } from '../../constants';
 import { useActiveWeb3React } from '../../hooks';
 import { tryParseAmount } from '../swap/hooks';

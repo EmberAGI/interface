@@ -1,4 +1,5 @@
-import { Currency, CurrencyAmount, AMBER, Token, TokenAmount, WETH } from '@firepotfinance/firepotfinance-sdk';
+import { Currency, CurrencyAmount, AMBER, Token, TokenAmount } from '@firepotfinance/firepotfinance-sdk';
+import { WETH } from '../../libraries/sdk';
 import { ChainId } from 'types';
 
 export function wrappedCurrency(currency: Currency | undefined, chainId: ChainId | undefined): Token | undefined {

@@ -15,7 +15,7 @@ import { Field, replaceSwapState, selectCurrency, setRecipient, switchCurrencies
 import { SwapState } from './reducer';
 import { useUserSlippageTolerance } from '../user/hooks';
 import { computeSlippageAdjustedAmounts } from '../../utils/prices';
-import { FACTORY_ADDRESS, ROUTER_ADDRESS } from '../../constants';
+import config from 'config';
 
 export function useSwapState(): AppState['swap'] {
   return useSelector<AppState, AppState['swap']>((state) => state.swap);
@@ -86,7 +86,7 @@ export function tryParseAmount(value?: string, currency?: Currency): CurrencyAmo
   return undefined;
 }
 
-const BAD_RECIPIENT_ADDRESSES: string[] = [FACTORY_ADDRESS, ROUTER_ADDRESS];
+const BAD_RECIPIENT_ADDRESSES: string[] = [config.factoryAddress, config.routerAddress];
 
 /**
  * Returns true if any of the pairs or tokens in a trade have the given checksummed address

@@ -1,5 +1,5 @@
 import { BigNumber } from 'ethers';
-import { Pair } from '@firepotfinance/firepotfinance-sdk';
+import { Pair } from '../entities/Pair';
 import { formatUnits } from 'ethers/lib/utils';
 import { checkTokenDecimals, duplicateStableCoin, standarizeTokenDecimals } from './helpers';
 import { TVLParameters } from './types';

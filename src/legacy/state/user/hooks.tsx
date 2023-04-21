@@ -1,4 +1,5 @@
-import { Pair, Token } from '@firepotfinance/firepotfinance-sdk';
+import { Token } from '@firepotfinance/firepotfinance-sdk';
+import { Pair } from '../../../libraries/entities/Pair';
 import { ChainId } from 'types';
 import flatMap from 'lodash.flatmap';
 import { useCallback, useMemo } from 'react';
@@ -205,6 +206,7 @@ export function toV2LiquidityToken([tokenA, tokenB]: [Token, Token]): Token {
 export function useTrackedTokenPairs(): [Token, Token][] {
   const { chainId } = useActiveWeb3React();
   const tokens = useAllTokens();
+
   // pinned pairs
   const pinnedPairs = useMemo(() => (chainId ? PINNED_PAIRS[chainId] ?? [] : []), [chainId]);
 

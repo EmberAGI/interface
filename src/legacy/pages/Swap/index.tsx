@@ -91,8 +91,12 @@ export default function Swap() {
     inputError: wrapInputError,
   } = useWrapCallback(currencies[Field.INPUT], currencies[Field.OUTPUT], typedValue);
 
+  console.log(wrapType);
+
   const showWrap: boolean = wrapType !== WrapType.NOT_APPLICABLE;
   const trade = showWrap ? undefined : v2Trade;
+
+  console.log(trade);
 
   const parsedAmounts = showWrap
     ? {

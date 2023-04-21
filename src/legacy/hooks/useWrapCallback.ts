@@ -1,10 +1,11 @@
-import { Currency, currencyEquals, AMBER, WETH } from '@firepotfinance/firepotfinance-sdk';
+import { Currency, currencyEquals, AMBER } from '@firepotfinance/firepotfinance-sdk';
 import { useMemo } from 'react';
 import { tryParseAmount } from '../state/swap/hooks';
 import { useTransactionAdder } from '../state/transactions/hooks';
 import { useCurrencyBalance } from '../state/wallet/hooks';
 import { useActiveWeb3React } from './index';
 import { useWETHContract } from './useContract';
+import { WETH } from '../../libraries/sdk';
 
 export enum WrapType {
   NOT_APPLICABLE,
@@ -30,6 +31,11 @@ export default function useWrapCallback(
   // we can always parse the amount typed as the input currency, since wrapping is 1:1
   const inputAmount = useMemo(() => tryParseAmount(typedValue, inputCurrency), [inputCurrency, typedValue]);
   const addTransaction = useTransactionAdder();
+
+  console.log('INPUT', inputCurrency);
+  console.log('OUTPUT', outputCurrency);
+  console.log('AMBER', AMBER);
+  if (chainId) console.log(WETH[chainId]);
 
   return useMemo(() => {
     if (!wethContract || !chainId || !inputCurrency || !outputCurrency) return NOT_APPLICABLE;
@@ -69,6 +75,7 @@ export default function useWrapCallback(
         inputError: sufficientBalance ? undefined : 'Insufficient SAMB balance',
       };
     } else {
+      console.log('LLEGO AL FINAL');
       return NOT_APPLICABLE;
     }
   }, [wethContract, chainId, inputCurrency, outputCurrency, inputAmount, balance, addTransaction]);

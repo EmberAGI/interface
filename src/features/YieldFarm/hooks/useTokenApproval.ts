@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
-import { ROUTER_ADDRESS } from '../../../legacy/constants';
 import { useCurrency } from '../../../legacy/hooks/Tokens';
 import { ApprovalState, useApproveCallback } from '../../../legacy/hooks/useApproveCallback';
 import { tryParseAmount } from '../../../legacy/state/swap/hooks';
+import config from 'config';
 
 export default function useTokenApproval(
   spendableTokenAmount?: string,
   spendableTokenAddress?: string,
-  spenderAddress: string = ROUTER_ADDRESS
+  spenderAddress: string = config.routerAddress
 ) {
   const currency = useCurrency(spendableTokenAddress) ?? undefined;
   const currencyAmount = tryParseAmount(spendableTokenAmount, currency);

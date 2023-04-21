@@ -11,9 +11,9 @@ import { Text } from 'rebass';
 import { BottomGrouping } from '../../../legacy/components/swap/styleds';
 import { useParams } from 'react-router-dom';
 import { TYPE } from '../../../legacy/theme';
-import AirdaoLogo from '../../../assets/images/AirdaoLogo.png';
+// import AirdaoLogo from '../../../assets/images/AirdaoLogo.png';
 import config from 'config';
-import UsdcLogo from '../../../assets/images/UsdcLogo.png';
+// import UsdcLogo from '../../../assets/images/UsdcLogo.png';
 
 const Container = styled.div`
   padding: 1rem;

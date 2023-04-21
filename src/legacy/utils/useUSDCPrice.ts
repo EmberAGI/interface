@@ -1,10 +1,11 @@
-import { Currency, currencyEquals, JSBI, Price, WETH } from '@firepotfinance/firepotfinance-sdk';
+import { Currency, currencyEquals, JSBI, Price } from '@firepotfinance/firepotfinance-sdk';
 import { ChainId } from 'types';
 import { useMemo } from 'react';
 import { USDC } from '../constants';
 import { PairState, usePairs } from '../data/Reserves';
 import { useActiveWeb3React } from '../hooks';
 import { wrappedCurrency } from './wrappedCurrency';
+import { WETH } from '../../libraries/sdk';
 
 /**
  * Returns the price in USDC of the input currency

@@ -25,7 +25,7 @@ const initialViewModel = {
 };
 
 export default function useYieldFarmViewModel() {
-  const [viewModel, setViewModel] = useState<YieldFarmViewModel>(initialViewModel);
+  const [viewModel] = useState<YieldFarmViewModel>(initialViewModel);
 
   return {
     viewModel,
