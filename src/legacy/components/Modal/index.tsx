@@ -38,10 +38,10 @@ const StyledDialogContent = styled(({ minHeight, maxHeight, mobile, isOpen, ...r
     background-color: ${({ theme }) => theme.bg1};
     box-shadow: 0 4px 8px 0 ${({ theme }) => transparentize(0.95, theme.shadow1)};
     padding: 0px;
-    width: 50vw;
+    width: 100vw;
     overflow-y: ${({ mobile }) => (mobile ? 'scroll' : 'hidden')};
     overflow-x: hidden;
-    z-index: 9999;
+    
     max-width: 420px;
     ${({ maxHeight }) =>
       maxHeight &&
@@ -55,6 +55,10 @@ const StyledDialogContent = styled(({ minHeight, maxHeight, mobile, isOpen, ...r
       `}
     display: flex;
     border-radius: 20px;
+    
+    @media (max-width: 500px) {
+      width: 90%;
+    }
   }
 `;
 

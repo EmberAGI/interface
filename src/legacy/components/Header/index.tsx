@@ -184,11 +184,19 @@ const StyledHeaderImg = styled.div`
   justify-content: center;
   width: 100%;
   background: white;
+
+  @media (max-width: 768px) {
+    background: transparent;
+  }
   
   img {
     max-width: 100%;
     object-fit: cover;
     height: 100%;
+    
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
 `;
 
