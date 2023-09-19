@@ -12,21 +12,12 @@ const StyledArrowLeft = styled(ArrowLeft)`
 
 const TitleRow = styled(RowBetween)`
   padding: 1rem 1rem 0 1rem;
-
-  ${({ theme }) => theme.mediaWidth.upToSmall`
-    flex-wrap: wrap;
-    width: 100%;
-  `};
 `;
 
 const ResponsiveButtonPrimary = styled(ButtonPrimary)`
   width: fit-content;
   font-size: 0.8rem;
   padding: 6px 10px;
-
-  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-    font-size: 0.75rem;
-  `};
 `;
 
 const EdgeWrapper = styled.div`

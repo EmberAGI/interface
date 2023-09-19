@@ -12,34 +12,17 @@ const CardSpaceBetweenRow = styled.div`
   gap: 1rem;
   justify-content: space-evenly;
   height: 40px;
-
-  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-  gap: 0.5rem;
-  `};
 `;
 
 const ResponsiveButtonPrimary = styled(ButtonPrimary)`
   width: fit-content;
   padding: 8px;
-  ${({ theme }) => theme.mediaWidth.upToSmall`
-    width: 48%;
-  `};
-
-  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-    font-size: 0.85rem;
-  `};
 `;
 
 const ResponsiveButtonSecondary = styled(ButtonSecondary)`
   width: fit-content;
   padding: 8px;
   border-radius: 20px;
-  ${({ theme }) => theme.mediaWidth.upToSmall`
-    width: 48%;
-  `};
-  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-    font-size: 0.85rem;
-  `};
 `;
 
 const StyledPositionCard = styled(LightCard)`
@@ -47,10 +30,6 @@ const StyledPositionCard = styled(LightCard)`
   overflow: hidden;
   border: 1px solid ${({ theme }) => theme.primary1};
   background: ${({ theme }) => theme.bg1};
-
-  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-    padding: 20px;
-  `};
 `;
 
 interface YieldFarmCardProps {

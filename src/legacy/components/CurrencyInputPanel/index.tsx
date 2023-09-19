@@ -103,10 +103,6 @@ const StyledBalanceMax = styled.button`
   :focus {
     outline: none;
   }
-
-  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-    margin-right: 0.5rem;
-  `};
 `;
 
 const StyledLabel = styled.span`

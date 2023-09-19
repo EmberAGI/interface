@@ -47,10 +47,6 @@ const StyledBalanceMax = styled.button`
   :focus {
     outline: none;
   }
-
-  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-    margin-right: 0.5rem;
-  `};
 `;
 
 export const HoverCard = styled(Card)`

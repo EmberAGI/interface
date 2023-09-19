@@ -29,18 +29,10 @@ const TitleRow = styled(RowBetween)`
 
 const ButtonRow = styled(RowFixed)`
   gap: 8px;
-  ${({ theme }) => theme.mediaWidth.upToSmall`
-    width: 100%;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-  `};
 `;
 
 const ResponsiveButtonPrimary = styled(ButtonPrimary)`
   width: fit-content;
-  ${({ theme }) => theme.mediaWidth.upToSmall`
-    width: 48%;
-  `};
 `;
 
 const EmptyProposals = styled.div`

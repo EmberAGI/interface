@@ -13,10 +13,6 @@ const InputRow = styled.div<{ selected: boolean }>`
   ${({ theme }) => theme.flexRowNoWrap}
   align-items: center;
   padding: ${({ selected }) => (selected ? '0.8rem 0.6rem 0.8rem 1.1rem' : '0.8rem 0.8rem 0.8rem 1.1rem')};
-
-  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-    padding: 8px 12px;
-  `};
 `;
 
 const LabelRow = styled.div`
@@ -30,10 +26,6 @@ const LabelRow = styled.div`
     cursor: pointer;
     color: ${({ theme }) => darken(0.2, theme.text2)};
   }
-
-  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-    padding: 8px 12px 0 12px;
-  `};
 `;
 
 const Aligner = styled.span`
@@ -58,12 +50,6 @@ const Container = styled.div<{ hideInput: boolean }>`
 const StyledTokenName = styled.span<{ active?: boolean }>`
   ${({ active }) => (active ? '  margin: 0 0.25rem 0 0.75rem;' : '  margin: 0 0.25rem 0 0.25rem;')}
   font-size:  ${({ active }) => (active ? '20px' : '16px')};
-
-  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-    font-weight: 500;
-    margin-right: 0;
-    font-size: 0.7rem;
-  `};
 `;
 
 const StyledBalanceMax = styled.button`
@@ -85,11 +71,6 @@ const StyledBalanceMax = styled.button`
   :focus {
     outline: none;
   }
-
-  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-    margin-right: 4px;
-    font-size: 0.5rem;
-  `};
 `;
 
 interface CurrencyInputPanelProps {

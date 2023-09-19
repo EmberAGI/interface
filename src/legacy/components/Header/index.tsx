@@ -34,16 +34,10 @@ const HeaderElement = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-
-  ${({ theme }) => theme.mediaWidth.upToMedium`
-    flex-direction: row-reverse;
-    align-items: center;
-  `};
 `;
 
 const HeaderLinks = styled(Row)`
   grid-column-start: 2;
-  margin: 0 auto;
   padding: 0.3rem;
   justify-content: center;
   border-radius: 0.8rem;
@@ -52,24 +46,7 @@ const HeaderLinks = styled(Row)`
   background-color: ${({ theme }) => theme.bg1};
   position: relative;
   width: fit-content;
-  ${({ theme }) => theme.mediaWidth.upToLarge`
-    grid-column-start: 1;
-  `};
-
-  @media screen and (max-width: 1050px) {
-    grid-column-start: 2;
-  }
-
-  ${({ theme }) => theme.mediaWidth.upToMedium`
-    position: fixed;
-    bottom: 0;
-    padding: .5rem;
-    width: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 0;
-    border-top: 1px solid ${({ theme }) => theme.bg3};
-  `};
+  margin: 143px auto 32px;
 `;
 
 const AccountElement = styled.div<{ active: boolean }>`
@@ -94,21 +71,9 @@ const NetworkCard = styled(LightCard)`
   padding: 8px 12px;
   box-shadow: rgba(0, 0, 0, 0.01) 0px 0px 1px, rgba(0, 0, 0, 0.04) 0px 4px 8px, rgba(0, 0, 0, 0.04) 0px 16px 24px,
     rgba(0, 0, 0, 0.01) 0px 24px 32px;
-
-  ${({ theme }) => theme.mediaWidth.upToSmall`
-    margin: 0;
-    margin-right: 0.5rem;
-    width: initial;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    flex-shrink: 1;
-  `};
 `;
 
 const BalanceText = styled(Text)`
-  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-    display: none;
-  `};
 `;
 
 const activeClassName = 'ACTIVE';
@@ -143,20 +108,6 @@ const StyledNavLink = styled(NavLink).attrs({
     color: ${({ theme }) => darken(0.1, theme.text1)};
   }
 
-  ${({ theme }) => theme.mediaWidth.upToMedium`
-    border-radius: 8px;
-    padding: 0.3rem 7%;
-    border: 1px solid ${({ theme }) => theme.bg3};
-
-    &:not(:last-child) {
-      margin-right: 2%;
-    }
-  `};
-
-  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-    font-size: 0.8rem;
-    padding: 0.3rem 5%;
-  `};
 `;
 
 const StyledLink = styled.a`
@@ -186,21 +137,6 @@ const StyledLink = styled.a`
   :focus {
     color: ${({ theme }) => darken(0.1, theme.text1)};
   }
-
-  ${({ theme }) => theme.mediaWidth.upToMedium`
-    border-radius: 8px;
-    padding: 0.3rem 7%;
-    border: 1px solid ${({ theme }) => theme.bg3};
-
-    &:not(:last-child) {
-      margin-right: 2%;
-    }
-  `};
-
-  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-    font-size: 0.8rem;
-    padding: 0.3rem 5%;
-  `};
 `;
 
 export const StyledMenuButton = styled.button`

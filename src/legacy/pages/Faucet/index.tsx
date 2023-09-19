@@ -44,34 +44,17 @@ const IconWrapper = styled.div<{ size?: number }>`
     height: ${({ size }) => (size ? size + 'px' : '32px')};
     width: ${({ size }) => (size ? size + 'px' : '32px')};
   }
-  ${({ theme }) => theme.mediaWidth.upToMedium`
-    align-items: flex-end;
-  `};
 `;
 
 const TitleRow = styled(RowBetween)`
-  ${({ theme }) => theme.mediaWidth.upToSmall`
-    flex-wrap: wrap;
-    gap: 12px;
-    width: 100%;
-    flex-direction: column-reverse;
-  `};
 `;
 
 const ButtonRow = styled(RowFixed)`
   gap: 8px;
-  ${({ theme }) => theme.mediaWidth.upToSmall`
-    width: 100%;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-  `};
 `;
 
 const ResponsiveButtonPrimary = styled(ButtonPrimary)`
   width: fit-content;
-  ${({ theme }) => theme.mediaWidth.upToSmall`
-    width: 48%;
-  `};
 `;
 
 const EmptyProposals = styled.div`

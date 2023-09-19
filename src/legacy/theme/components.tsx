@@ -282,14 +282,8 @@ export const HideSmall = styled.span`
 `;
 
 export const HideExtraSmall = styled.span`
-  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-    display: none;
-  `};
 `;
 
 export const ExtraSmallOnly = styled.span`
   display: none;
-  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-    display: block;
-  `};
 `;

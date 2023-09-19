@@ -3,9 +3,6 @@ import useTVLViewModel from './useTVLViewModel';
 import { Text } from 'rebass';
 import styled from 'styled-components';
 const BalanceText = styled(Text)`
-  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-    display: none;
-  `};
 `;
 export default function TVLView() {
   //Refactor to grab this from redux state

@@ -103,10 +103,6 @@ const MenuFlyout = styled.span`
 
   /* Shadows/4 */
   box-shadow: 0px 8px 24px 0px rgba(47, 43, 67, 0.10);
-
-  ${({ theme }) => theme.mediaWidth.upToMedium`
-    min-width: 18.125rem;
-  `};
 `;
 
 const Break = styled.div`

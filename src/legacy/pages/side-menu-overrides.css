@@ -9,10 +9,10 @@
     }
 }
 
-@media screen and (max-width: 720px) {
-    .side-menu-container {
-        position: relative;
-    }
+@media screen and (max-width: 430px) {
+  .side-menu-container {
+    margin-left: 0;
+  }
 }
 
 .address-block button {

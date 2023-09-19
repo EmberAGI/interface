@@ -32,10 +32,6 @@ export const MaxButton = styled.button<{ width: string }>`
     border: 1px solid ${({ theme }) => theme.primary1};
     outline: none;
   }
-
-  ${({ theme }) => theme.mediaWidth.upToSmall`
-    padding: 0.25rem 0.5rem;
-  `};
 `;
 
 export const Dots = styled.span`

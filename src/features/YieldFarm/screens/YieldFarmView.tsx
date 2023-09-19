@@ -17,10 +17,6 @@ const PageWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-    padding: 12px;
-  `};
 `;
 
 const TitleRow = styled.div`

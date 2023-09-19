@@ -49,6 +49,10 @@ const MainWrapper = styled.div`
   align-items: center;
   justify-content: flex-start;
   width: 100%;
+  
+  @media(max-width: 768px) {
+    padding: 0 16px;
+  }
 `;
 
 const HeaderWrapper = styled.div`
@@ -66,11 +70,7 @@ const BodyWrapper = styled.div`
   justify-content: center;
   overflow-y: auto;
   overflow-x: hidden;
-  z-index: 1;
-
-  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-    padding: 12px;
-  `}
+  z-index: 9;
 `;
 
 const Logo = styled.img`

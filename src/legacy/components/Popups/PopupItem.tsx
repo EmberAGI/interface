@@ -24,13 +24,6 @@ export const Popup = styled.div`
   position: relative;
   border-radius: 13px;
   overflow: hidden;
-
-  ${({ theme }) => theme.mediaWidth.upToSmall`
-    min-width: 290px;
-    &:not(:last-of-type) {
-      margin-right: 20px;
-    }
-  `}
 `;
 const Fader = styled.div`
   position: absolute;
