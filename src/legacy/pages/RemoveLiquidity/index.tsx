@@ -651,7 +651,7 @@ export default function RemoveLiquidity({
             )}
             <div style={{ position: 'relative' }}>
               {!account ? (
-                <ButtonPrimary onClick={loginMetamask}>Connect Wallet</ButtonPrimary>
+                <ButtonPrimary style={{backgroundColor: 'rgba(255, 94, 13, 1)'}} onClick={loginMetamask}>Connect Wallet</ButtonPrimary>
               ) : (
                 <RowBetween>
                   <ButtonConfirmed

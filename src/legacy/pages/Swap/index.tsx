@@ -354,7 +354,7 @@ export default function Swap() {
 
           <BottomGrouping>
             {!account ? (
-              <ButtonPrimary onClick={loginMetamask}>Connect Wallet</ButtonPrimary>
+              <ButtonPrimary style={{backgroundColor: 'rgba(255, 94, 13, 1)'}} onClick={loginMetamask}>Connect Wallet</ButtonPrimary>
             ) : showWrap ? (
               <ButtonPrimary disabled={Boolean(wrapInputError)} onClick={onWrap}>
                 {wrapInputError ??

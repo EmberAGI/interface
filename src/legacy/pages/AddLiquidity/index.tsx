@@ -390,7 +390,7 @@ export default function AddLiquidity({
             )}
 
             {!account ? (
-              <ButtonPrimary onClick={loginMetamask}>Connect Wallet</ButtonPrimary>
+              <ButtonPrimary style={{backgroundColor: 'rgba(255, 94, 13, 1)'}} onClick={loginMetamask}>Connect Wallet</ButtonPrimary>
             ) : (
               <AutoColumn gap={'md'}>
                 {(approvalA === ApprovalState.NOT_APPROVED ||
