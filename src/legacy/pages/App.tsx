@@ -70,7 +70,7 @@ const BodyWrapper = styled.div`
   justify-content: center;
   overflow-y: auto;
   overflow-x: hidden;
-  z-index: 9;
+  z-index: 2;
 `;
 
 const Logo = styled.img`
