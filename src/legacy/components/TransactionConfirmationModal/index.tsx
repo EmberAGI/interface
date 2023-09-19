@@ -22,7 +22,6 @@ const Section = styled(AutoColumn)`
 `;
 
 const BottomSection = styled(Section)`
-  background-color: ${({ theme }) => theme.bg2};
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
 `;
@@ -46,7 +45,7 @@ function ConfirmationPendingContent({ onDismiss, pendingText }: { onDismiss: () 
           <Text fontWeight={500} fontSize={20}>
             Waiting For Confirmation
           </Text>
-          <AutoColumn gap="12px" justify={'center'}>
+          <AutoColumn gap="12px" justify={'center'} style={{margin: '16px 0'}}>
             <Text fontWeight={600} fontSize={14} color="" textAlign="center">
               {pendingText}
             </Text>

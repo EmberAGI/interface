@@ -80,6 +80,7 @@ export const SearchInput = styled.input`
   padding: 16px;
   align-items: center;
   width: 100%;
+  height: 48px;
   white-space: nowrap;
   background: none;
   border: none;
@@ -87,10 +88,14 @@ export const SearchInput = styled.input`
   border-radius: 20px;
   color: ${({ theme }) => theme.text1};
   border-style: solid;
-  border: 1px solid ${({ theme }) => theme.bg3};
+  border: 1px solid #e6e6e8;
   -webkit-appearance: none;
-
-  font-size: 18px;
+  color: #0E0E0E;
+  font-family: Inter,sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 28px;
+  font-size: 20px;
 
   ::placeholder {
     color: ${({ theme }) => theme.text3};

@@ -2,10 +2,10 @@ import { BigNumber } from '@ethersproject/bignumber';
 import { TransactionResponse } from '@ethersproject/providers';
 import { Currency, AMBER, TokenAmount } from '@firepotfinance/firepotfinance-sdk';
 import React, { useCallback, useContext, useState } from 'react';
-import { Plus } from 'react-feather';
+import { ReactComponent as Plus } from '../../assets/svg/plus.svg';
 import { RouteComponentProps } from 'react-router-dom';
 import { Text } from 'rebass';
-import { ThemeContext } from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
 import { ButtonError, ButtonPrimary } from '../../components/Button';
 import { LightCard } from '../../components/Card';
 import { AutoColumn, ColumnCenter } from '../../components/Column';
@@ -38,6 +38,17 @@ import { Dots, Wrapper } from '../Pool/styleds';
 import { ConfirmAddModalBottom } from './ConfirmAddModalBottom';
 import { currencyId } from '../../utils/currencyId';
 import { PoolPriceBar } from './PoolPriceBar';
+
+const StyledTip = styled.p`
+  color: var(--neutral-300, #A1A6B2);
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: -0.16px;
+  margin: 0 0 28px;
+`;
 
 export default function AddLiquidity({
   match: {
@@ -319,31 +330,27 @@ export default function AddLiquidity({
             {noLiquidity ||
               (isCreate ? (
                 <ColumnCenter>
-                  <LightCard>
-                    <AutoColumn gap="10px">
-                      <TYPE.link fontWeight={600} color={'primaryText1'}>
-                        You are the first liquidity provider.
-                      </TYPE.link>
-                      <TYPE.link fontWeight={400} color={'primaryText1'}>
-                        The ratio of tokens you add will set the price of this pool.
-                      </TYPE.link>
-                      <TYPE.link fontWeight={400} color={'primaryText1'}>
-                        Once you are happy with the rate click supply to review.
-                      </TYPE.link>
-                    </AutoColumn>
-                  </LightCard>
+                  <AutoColumn gap="10px">
+                    <TYPE.link fontWeight={600} color={'primaryText1'}>
+                      You are the first liquidity provider.
+                    </TYPE.link>
+                    <TYPE.link fontWeight={400} color={'primaryText1'}>
+                      The ratio of tokens you add will set the price of this pool.
+                    </TYPE.link>
+                    <TYPE.link fontWeight={400} color={'primaryText1'}>
+                      Once you are happy with the rate click supply to review.
+                    </TYPE.link>
+                  </AutoColumn>
                 </ColumnCenter>
               ) : (
                 <ColumnCenter>
-                  <LightCard>
-                    <AutoColumn gap="10px">
-                      <TYPE.link fontWeight={400} color={'primaryText1'}>
-                        <b>Tip:</b> When you add liquidity, you will receive pool tokens representing your position.
-                        These tokens automatically earn fees proportional to your share of the pool, and can be redeemed
-                        at any time.
-                      </TYPE.link>
-                    </AutoColumn>
-                  </LightCard>
+                  <AutoColumn gap="10px">
+                    <StyledTip>
+                      <b style={{color: '#222426'}}>Tip:</b> When you add liquidity, you will receive pool tokens representing your position.
+                      These tokens automatically earn fees proportional to your share of the pool, and can be redeemed
+                      at any time.
+                    </StyledTip>
+                  </AutoColumn>
                 </ColumnCenter>
               ))}
             <CurrencyInputPanel
@@ -358,8 +365,8 @@ export default function AddLiquidity({
               id="add-liquidity-input-tokena"
               showCommonBases
             />
-            <ColumnCenter>
-              <Plus size="16" color={theme.text2} />
+            <ColumnCenter style={{margin: '32px 0'}}>
+              <Plus />
             </ColumnCenter>
             <CurrencyInputPanel
               value={formattedAmounts[Field.CURRENCY_B]}
@@ -374,23 +381,12 @@ export default function AddLiquidity({
               showCommonBases
             />
             {currencies[Field.CURRENCY_A] && currencies[Field.CURRENCY_B] && pairState !== PairState.INVALID && (
-              <>
-                <LightCard padding="0px" borderRadius={'20px'}>
-                  <RowBetween padding="1rem">
-                    <TYPE.subHeader fontWeight={500} fontSize={14}>
-                      {noLiquidity ? 'Initial prices' : 'Prices'} and pool share
-                    </TYPE.subHeader>
-                  </RowBetween>{' '}
-                  <LightCard padding="1rem" borderRadius={'20px'}>
-                    <PoolPriceBar
-                      currencies={currencies}
-                      poolTokenPercentage={poolTokenPercentage}
-                      noLiquidity={noLiquidity}
-                      price={price}
-                    />
-                  </LightCard>
-                </LightCard>
-              </>
+              <PoolPriceBar
+                currencies={currencies}
+                poolTokenPercentage={poolTokenPercentage}
+                noLiquidity={noLiquidity}
+                price={price}
+              />
             )}
 
             {!account ? (
@@ -432,13 +428,14 @@ export default function AddLiquidity({
                     </RowBetween>
                   )}
                 <ButtonError
+                  style={{marginTop: 16}}
                   onClick={() => {
                     expertMode ? onAdd() : setShowConfirm(true);
                   }}
                   disabled={!isValid || approvalA !== ApprovalState.APPROVED || approvalB !== ApprovalState.APPROVED}
                   error={!isValid && !!parsedAmounts[Field.CURRENCY_A] && !!parsedAmounts[Field.CURRENCY_B]}
                 >
-                  <Text fontSize={20} fontWeight={500}>
+                  <Text>
                     {error ?? 'Supply'}
                   </Text>
                 </ButtonError>

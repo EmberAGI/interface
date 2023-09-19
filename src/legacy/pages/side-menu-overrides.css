@@ -1,5 +1,6 @@
 .side-menu-container {
-    position: relative;
+    position: fixed;
+    margin-left: 16px;
 }
 
 @media screen and (max-width: 1050px) {

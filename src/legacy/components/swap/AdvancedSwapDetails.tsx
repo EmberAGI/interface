@@ -19,7 +19,7 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
 
   return (
     <>
-      <AutoColumn style={{ padding: '0 16px' }}>
+      <AutoColumn>
         <RowBetween>
           <RowFixed>
             <TYPE.black fontSize={14} fontWeight={400} color={theme.text2}>
@@ -37,7 +37,7 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
             </TYPE.black>
           </RowFixed>
         </RowBetween>
-        <RowBetween>
+        <RowBetween marginTop={16}>
           <RowFixed>
             <TYPE.black fontSize={14} fontWeight={400} color={theme.text2}>
               Price Impact
@@ -47,7 +47,7 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
           <FormattedPriceImpact priceImpact={priceImpactWithoutFee} />
         </RowBetween>
 
-        <RowBetween>
+        <RowBetween marginTop={16}>
           <RowFixed>
             <TYPE.black fontSize={14} fontWeight={400} color={theme.text2}>
               Liquidity Provider Fee
@@ -81,7 +81,7 @@ export function AdvancedSwapDetails({ trade }: AdvancedSwapDetailsProps) {
           <TradeSummary trade={trade} allowedSlippage={allowedSlippage} />
           {showRoute && (
             <>
-              <RowBetween style={{ padding: '0 16px' }}>
+              <RowBetween style={{ marginTop: 16 }}>
                 <span style={{ display: 'flex', alignItems: 'center' }}>
                   <TYPE.black fontSize={14} fontWeight={400} color={theme.text2}>
                     Route

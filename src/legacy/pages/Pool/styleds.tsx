@@ -3,39 +3,35 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   position: relative;
-  padding: 1rem;
+  padding-top: 1rem;
 `;
 
 export const ClickableText = styled(Text)`
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: -0.14px;
   :hover {
     cursor: pointer;
   }
-  color: ${({ theme }) => theme.primary1};
+  color: ${({ theme }) => '#676B73'};
 `;
 export const MaxButton = styled.button<{ width: string }>`
-  padding: 0.5rem 1rem;
-  background-color: ${({ theme }) => theme.primary5};
-  border: 1px solid ${({ theme }) => theme.primary5};
-  border-radius: 0.5rem;
-  font-size: 1rem;
+  border-radius: 1000px;
+  background: var(--alpha-black-5, rgba(14, 14, 14, 0.05));
+  padding: 12px 16px;
+  color: var(--neutral-900, #0E0E0E);
+  text-align: center;
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  font-style: normal;
   font-weight: 500;
+  line-height: 24px; /* 150% */
+  letter-spacing: -0.16px;
+  border: 0;
   cursor: pointer;
-  margin: 0.25rem;
-  overflow: hidden;
-  transition: 0.2s;
-
-  :hover {
-    opacity: 0.6;
-  }
-
-  :focus {
-    border: 1px solid ${({ theme }) => theme.primary1};
-    outline: none;
-  }
-
-  ${({ theme }) => theme.mediaWidth.upToSmall`
-    padding: 0.25rem 0.5rem;
-  `};
 `;
 
 export const Dots = styled.span`

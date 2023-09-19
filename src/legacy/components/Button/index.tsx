@@ -12,12 +12,11 @@ const Base = styled(RebassButton)<{
   borderRadius?: string;
   altDisabledStyle?: boolean;
 }>`
-  padding: ${({ padding }) => (padding ? padding : '18px')};
   width: ${({ width }) => (width ? width : '100%')};
   font-weight: 500;
   text-align: center;
-  border-radius: 20px;
-  border-radius: ${({ borderRadius }) => borderRadius && borderRadius};
+  border-radius: 1000px;
+  padding: 12px 16px;
   outline: none;
   border: 1px solid transparent;
   color: white;
@@ -30,7 +29,13 @@ const Base = styled(RebassButton)<{
   position: relative;
   z-index: 1;
   transition: 0.25s;
-
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 150% */
+  letter-spacing: -0.16px;
+  
   &:disabled {
     cursor: auto;
   }
@@ -43,6 +48,9 @@ const Base = styled(RebassButton)<{
 export const ButtonPrimary = styled(Base)`
   background-color: ${({ theme }) => theme.primary1};
   color: white;
+  border-radius: 1000px;
+  padding: 12px 16px;
+  
   &:focus {
     box-shadow: 0 0 0 1pt ${({ theme }) => darken(0.05, theme.primary1)};
     background-color: ${({ theme }) => darken(0.05, theme.primary1)};
@@ -55,13 +63,10 @@ export const ButtonPrimary = styled(Base)`
     background-color: ${({ theme }) => darken(0.1, theme.primary1)};
   }
   &:disabled {
-    background-color: ${({ theme, altDisabledStyle, disabled }) =>
-      altDisabledStyle ? (disabled ? theme.bg3 : theme.primary1) : theme.bg3};
-    color: ${({ theme, altDisabledStyle, disabled }) =>
-      altDisabledStyle ? (disabled ? theme.text3 : 'white') : theme.text3};
+    background-color: ${({ theme, altDisabledStyle, disabled }) => 'rgba(14, 14, 14, 0.05)'};
+    color: var(--alpha-black-30, rgba(14, 14, 14, 0.30));
     cursor: auto;
     box-shadow: none;
-    border: 1px solid transparent;
     outline: none;
     opacity: ${({ altDisabledStyle }) => (altDisabledStyle ? '0.5' : '1')};
   }

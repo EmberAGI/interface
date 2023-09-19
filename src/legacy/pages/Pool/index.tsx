@@ -21,16 +21,10 @@ import { Dots } from '../../components/swap/styleds';
 const PageWrapper = styled(AutoColumn)`
   max-width: 640px;
   width: 100%;
-  padding: 1rem;
 `;
 
 const TitleRow = styled(RowBetween)`
-  ${({ theme }) => theme.mediaWidth.upToSmall`
-    flex-wrap: wrap;
-    gap: 12px;
-    width: 100%;
-    flex-direction: column-reverse;
-  `};
+  
 `;
 
 const ButtonRow = styled(RowFixed)`
@@ -57,6 +51,18 @@ const EmptyProposals = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
+
+const StyledLabel = styled.p`
+  color: var(--neutral-800, #191919);
+  font-family: Inter, sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 32px; /* 133.333% */
+  letter-spacing: -0.384px;
+  margin-bottom: 32px;
+  margin-top: 0;
 `;
 
 export default function Pool() {
@@ -100,22 +106,17 @@ export default function Pool() {
         <SwapPoolTabs active={'pool'} />
         <AutoColumn gap="lg" justify="center">
           <AutoColumn gap="lg" style={{ width: '100%' }}>
-            <TitleRow style={{ marginTop: '1rem' }} padding={'0'}>
-              <HideSmall>
-                <TYPE.mediumHeader style={{ justifySelf: 'flex-start' }}>Your liquidity</TYPE.mediumHeader>
-              </HideSmall>
-              <ButtonRow>
-                <ResponsiveButtonPrimary as={Link} padding="6px 10px" to="/create/AMB">
-                  Create a pair
-                </ResponsiveButtonPrimary>
-                <ResponsiveButtonPrimary id="join-pool-button" as={Link} padding="6px 10px" to="/add/AMB">
-                  <Text fontWeight={500} fontSize={16}>
-                    Add Liquidity
-                  </Text>
-                </ResponsiveButtonPrimary>
-              </ButtonRow>
-            </TitleRow>
-
+            <StyledLabel>Your liquidity</StyledLabel>
+            <ButtonRow style={{width: '100%', display: 'flex', justifyContent: 'space-between', marginBottom: 32}}>
+              <ResponsiveButtonPrimary style={{width: '47%'}} as={Link} padding="6px 10px" to="/create/AMB">
+                Create a pair
+              </ResponsiveButtonPrimary>
+              <ResponsiveButtonPrimary style={{width: '47%', background: 'rgba(14, 14, 14, 0.05)', color: '#0E0E0E'}} id="join-pool-button" as={Link} padding="6px 10px" to="/add/AMB">
+                <Text fontWeight={500} fontSize={16}>
+                  Add Liquidity
+                </Text>
+              </ResponsiveButtonPrimary>
+            </ButtonRow>
             {!account ? (
               <Card padding="40px">
                 <TYPE.body color={theme.text3} textAlign="center">

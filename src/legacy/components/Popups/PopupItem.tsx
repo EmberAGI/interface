@@ -11,7 +11,7 @@ import TransactionPopup from './TransactionPopup';
 export const StyledClose = styled(X)`
   position: absolute;
   right: 10px;
-  top: 10px;
+  top: 26px;
 
   :hover {
     cursor: pointer;
@@ -20,12 +20,9 @@ export const StyledClose = styled(X)`
 export const Popup = styled.div`
   display: inline-block;
   width: 100%;
-  padding: 1em;
   background-color: ${({ theme }) => theme.bg1};
   position: relative;
-  border-radius: 10px;
-  padding: 20px;
-  padding-right: 35px;
+  border-radius: 13px;
   overflow: hidden;
 
   ${({ theme }) => theme.mediaWidth.upToSmall`
@@ -96,7 +93,6 @@ export default function PopupItem({
     <Popup>
       <StyledClose color={theme.text2} onClick={removeThisPopup} />
       {popupContent}
-      {removeAfterMs !== null ? <AnimatedFader style={faderStyle} /> : null}
     </Popup>
   );
 }

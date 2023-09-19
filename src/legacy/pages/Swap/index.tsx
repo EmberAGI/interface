@@ -1,8 +1,9 @@
 import { CurrencyAmount, JSBI, Token, Trade } from '@firepotfinance/firepotfinance-sdk';
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { ArrowDown } from 'react-feather';
+import { ReactComponent as SwapBtn } from '../../assets/svg/swap.svg';
 import { Text } from 'rebass';
-import { ThemeContext } from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
 import AddressInputPanel from '../../components/AddressInputPanel';
 import { ButtonError, ButtonPrimary, ButtonConfirmed } from '../../components/Button';
 import Card, { GreyCard } from '../../components/Card';
@@ -41,6 +42,11 @@ import { computeTradePriceBreakdown, warningSeverity } from '../../utils/prices'
 import AppBody from '../AppBody';
 import { ClickableText } from '../Pool/styleds';
 import Loader from '../../components/Loader';
+
+const StyledSwapBtn = styled(SwapBtn)`
+  margin: 16px 0;
+`;
+
 
 export default function Swap() {
   const loadedUrlParams = useDefaultsFromURLSearch();
@@ -279,13 +285,11 @@ export default function Swap() {
             <AutoColumn justify="space-between">
               <AutoRow justify={isExpertMode ? 'space-between' : 'center'} style={{ padding: '0 1rem' }}>
                 <ArrowWrapper clickable>
-                  <ArrowDown
-                    size="16"
+                  <StyledSwapBtn
                     onClick={() => {
                       setApprovalSubmitted(false); // reset 2 step UI for approvals
                       onSwitchTokens();
                     }}
-                    color={currencies[Field.INPUT] && currencies[Field.OUTPUT] ? theme.primary1 : theme.text2}
                   />
                 </ArrowWrapper>
                 {recipient === null && !showWrap && isExpertMode ? (
@@ -322,28 +326,28 @@ export default function Swap() {
 
             {showWrap ? null : (
               <Card padding={showWrap ? '.25rem 1rem 0 1rem' : '0px'} borderRadius={'20px'}>
-                <AutoColumn gap="8px" style={{ padding: '3px 4px' }}>
-                  {Boolean(trade) && (
-                    <RowBetween align="center">
-                      <Text fontWeight={500} fontSize={14} color={theme.text2}>
-                        Price
-                      </Text>
-                      <TradePrice
-                        price={trade?.executionPrice}
-                        showInverted={showInverted}
-                        setShowInverted={setShowInverted}
-                      />
-                    </RowBetween>
-                  )}
-                  <RowBetween align="center">
-                    <ClickableText fontWeight={500} fontSize={14} color={theme.text2} onClick={toggleSettings}>
+                <AutoColumn gap="8px">
+                  <RowBetween align="center" marginTop={16}>
+                    <ClickableText onClick={toggleSettings}>
                       Slippage Tolerance
                     </ClickableText>
-                    <ClickableText fontWeight={500} fontSize={14} color={theme.text2} onClick={toggleSettings}>
+                    <ClickableText onClick={toggleSettings}>
                       {allowedSlippage / 100}%
                     </ClickableText>
                   </RowBetween>
                 </AutoColumn>
+                {Boolean(trade) && (
+                  <RowBetween align="center" marginTop={16}>
+                    <Text fontWeight={500} fontSize={14} color={theme.text2}>
+                      Price
+                    </Text>
+                    <TradePrice
+                      price={trade?.executionPrice}
+                      showInverted={showInverted}
+                      setShowInverted={setShowInverted}
+                    />
+                  </RowBetween>
+                )}
               </Card>
             )}
           </AutoColumn>
@@ -357,10 +361,10 @@ export default function Swap() {
                   (wrapType === WrapType.WRAP ? 'Wrap' : wrapType === WrapType.UNWRAP ? 'Unwrap' : null)}
               </ButtonPrimary>
             ) : noRoute && userHasSpecifiedInputOutput ? (
-              <GreyCard style={{ textAlign: 'center' }}>
+              <ButtonPrimary disabled style={{ textAlign: 'center' }}>
                 <TYPE.main mb="4px">Insufficient liquidity for this trade.</TYPE.main>
                 {singleHopOnly && <TYPE.main mb="4px">Try enabling multi-hop trades.</TYPE.main>}
-              </GreyCard>
+              </ButtonPrimary>
             ) : showApproveFlow ? (
               <RowBetween>
                 <ButtonConfirmed
@@ -427,7 +431,7 @@ export default function Swap() {
                 disabled={!isValid || (priceImpactSeverity > 3 && !isExpertMode) || !!swapCallbackError}
                 error={isValid && priceImpactSeverity > 2 && !swapCallbackError}
               >
-                <Text fontSize={20} fontWeight={500}>
+                <Text>
                   {swapInputError
                     ? swapInputError
                     : priceImpactSeverity > 3 && !isExpertMode

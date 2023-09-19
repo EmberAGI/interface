@@ -48,7 +48,7 @@ export function colors(darkMode: boolean): Colors {
     text5: darkMode ? '#2C2F36' : '#EDEEF2',
 
     // backgrounds / greys
-    bg1: darkMode ? '#1d1f24' : '#fafafa',
+    bg1: darkMode ? '#1d1f24' : 'white',
     bg2: darkMode ? '#27292e' : '#ededed',
     bg3: darkMode ? '#3a3d47' : '#e6e6e8',
     bg4: darkMode ? '#4c4f5c' : '#CED0D9',
@@ -59,7 +59,7 @@ export function colors(darkMode: boolean): Colors {
     advancedBG: darkMode ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.6)',
 
     //primary colors
-    primary1: '#2792d6',
+    primary1: '#3568DD',
     primary2: '#3099db',
     primary3: '#389fe0',
     primary4: '#54afe8',
@@ -69,7 +69,7 @@ export function colors(darkMode: boolean): Colors {
     primaryText1: darkMode ? '#fff' : '#000',
 
     // secondary colors
-    secondary1: '#3B6A9C',
+    secondary1: '#3568DD',
     secondary2: darkMode ? '#17000b26' : '#F6DDE8',
     secondary3: darkMode ? '#17000b26' : '#FDEAF1',
 
@@ -80,7 +80,7 @@ export function colors(darkMode: boolean): Colors {
     green1: '#27AE60',
     yellow1: '#FFE270',
     yellow2: '#F3841E',
-    blue1: '#3B6A9C',
+    blue1: '#3568DD',
   };
 }
 
@@ -202,7 +202,6 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  font-feature-settings: 'ss01' on, 'ss02' on, 'cv01' on, 'cv03' on;
 }
 `;
 

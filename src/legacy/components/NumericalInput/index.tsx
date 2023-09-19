@@ -3,22 +3,24 @@ import styled from 'styled-components';
 import { escapeRegExp } from '../../utils';
 
 const StyledInput = styled.input<{ error?: boolean; fontSize?: string; align?: string }>`
-  color: ${({ error, theme }) => (error ? theme.red1 : theme.text1)};
+  color: ${({ error, theme }) => (error ? theme.red1 : '#0E0E0E')};
   width: 0;
   position: relative;
-  font-weight: 500;
   outline: none;
   border: none;
   flex: 1 1 auto;
-  background-color: ${({ theme }) => theme.bg1};
-  font-size: ${({ fontSize }) => fontSize ?? '24px'};
-  text-align: ${({ align }) => align && align};
+  font-size: ${({ fontSize }) => fontSize ?? '20px'};
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   padding: 0px;
   -webkit-appearance: textfield;
-
+  text-align: right;
+  font-family: Inter, sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 28px; /* 140% */
+  letter-spacing: -0.28px;
   ::-webkit-search-decoration {
     -webkit-appearance: none;
   }

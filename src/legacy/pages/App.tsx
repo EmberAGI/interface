@@ -40,36 +40,26 @@ const AppWrapper = styled.div`
   justify-content: flex-start;
   overflow-x: hidden;
   margin: 0px auto;
-  padding: 0px 16px;
-  max-width: 1440px;
-
-  ${({ theme }) => theme.mediaWidth.upToSmall`
-  flex-flow: column;
-  `};
+  width: 100%;
 `;
 
 const MainWrapper = styled.div`
-  width: calc(100% - 320px);
   display: flex;
-  flex-flow: column;
+  flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  margin-left: auto;
-
-  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-    width: 100%;
-  `}
+  width: 100%;
 `;
 
 const HeaderWrapper = styled.div`
-  ${({ theme }) => theme.flexRowNoWrap}
-  width: 100%;
-  justify-content: space-between;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
 `;
 
 const BodyWrapper = styled.div`
   width: 100%;
-  padding: 3rem 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -95,13 +85,11 @@ export default function App() {
     <Suspense fallback={null}>
       <Route component={DarkModeQueryParamReader} />
       <AppWrapper>
-        <Menu web3ReactInstance={web3ReactInstance} customLogo={<Logo src={logo} alt="Firepot Finance" />} />
-
+        <Menu initHidden web3ReactInstance={web3ReactInstance} customLogo={<Logo src={logo} alt="Firepot Finance" />} />
         <MainWrapper>
           <HeaderWrapper>
             <Header />
           </HeaderWrapper>
-          <APRBanner></APRBanner>
           <BodyWrapper>
             <Popups />
             <Polling />

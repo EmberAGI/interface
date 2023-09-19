@@ -17,30 +17,30 @@ const InputPanel = styled.div`
 `;
 
 const ContainerRow = styled.div<{ error: boolean }>`
+  height: 48px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 1.25rem;
-  border: 1px solid ${({ error, theme }) => (error ? theme.red1 : theme.bg2)};
+  border: 1px solid ${({ error, theme }) => (error ? theme.red1 : '#e6e6e8')};
   transition: border-color 300ms ${({ error }) => (error ? 'step-end' : 'step-start')},
     color 500ms ${({ error }) => (error ? 'step-end' : 'step-start')};
-  background-color: ${({ theme }) => theme.bg1};
+  background-color: ${({ theme }) => 'white'};
 `;
 
 const InputContainer = styled.div`
   flex: 1;
-  padding: 1rem;
+  padding: 0 16px;
 `;
 
 const Input = styled.input<{ error?: boolean }>`
-  font-size: 1.25rem;
+  font-size: 20px;
   outline: none;
   border: none;
   flex: 1 1 auto;
   width: 0;
-  background-color: ${({ theme }) => theme.bg1};
   transition: color 300ms ${({ error }) => (error ? 'step-end' : 'step-start')};
-  color: ${({ error, theme }) => (error ? theme.red1 : theme.primary1)};
+  color: ${({ error, theme }) => (error ? theme.red1 : '#0E0E0E')};
   overflow: hidden;
   text-overflow: ellipsis;
   font-weight: 500;
@@ -63,6 +63,16 @@ const Input = styled.input<{ error?: boolean }>`
   ::placeholder {
     color: ${({ theme }) => theme.text4};
   }
+`;
+
+const StyledLabel = styled.p`
+  color: var(--neutral-900,#0E0E0E);
+  font-family: Inter,sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  margin: 16px 0;
 `;
 
 export default function AddressInputPanel({
@@ -94,13 +104,13 @@ export default function AddressInputPanel({
 
   return (
     <InputPanel id={id}>
+      <StyledLabel>
+        Recipient
+      </StyledLabel>
       <ContainerRow error={error}>
         <InputContainer>
           <AutoColumn gap="md">
             <RowBetween>
-              <TYPE.black color={theme.text2} fontWeight={500} fontSize={14}>
-                Recipient
-              </TYPE.black>
               {address && chainId && (
                 <ExternalLink href={getEtherscanLink(chainId, name ?? address, 'address')} style={{ fontSize: '14px' }}>
                   (View on Explorer)

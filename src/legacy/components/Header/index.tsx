@@ -12,27 +12,15 @@ import { useETHBalances } from '../../state/wallet/hooks';
 import { LightCard } from '../Card';
 import Row from '../Row';
 import Web3Status from '../Web3Status';
+import headerSvg from "../../assets/svg/header.svg";
 
 const HeaderFrame = styled.div`
   width: 100%;
-  margin: 0.8rem auto;
-  padding: 0.8rem 1.6rem;
   z-index: 2;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  align-items: center;
-
-  ${({ theme }) => theme.mediaWidth.upToLarge`
-    grid-template-columns: auto auto;
-  `};
 
   @media screen and (max-width: 1050px) {
     grid-template-columns: 1fr 1fr 1fr;
   }
-
-  ${({ theme }) => theme.mediaWidth.upToMedium`
-    grid-template-columns: auto;
-  `};
 `;
 
 const HeaderControls = styled.div`
@@ -55,7 +43,6 @@ const HeaderElement = styled.div`
 
 const HeaderLinks = styled(Row)`
   grid-column-start: 2;
-  width: auto;
   margin: 0 auto;
   padding: 0.3rem;
   justify-content: center;
@@ -63,7 +50,8 @@ const HeaderLinks = styled(Row)`
   box-shadow: rgba(0, 0, 0, 0.01) 0px 0px 1px, rgba(0, 0, 0, 0.04) 0px 4px 8px, rgba(0, 0, 0, 0.04) 0px 16px 24px,
     rgba(0, 0, 0, 0.01) 0px 24px 32px;
   background-color: ${({ theme }) => theme.bg1};
-
+  position: relative;
+  width: fit-content;
   ${({ theme }) => theme.mediaWidth.upToLarge`
     grid-column-start: 1;
   `};
@@ -253,6 +241,21 @@ const NETWORK_LABELS: { [chainId in ChainId]?: string } = {
   [ChainId.AMBTEST]: 'Ambtest',
 };
 
+const StyledHeaderImg = styled.div`
+  position: absolute;
+  height: 248px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background: white;
+  
+  img {
+    max-width: 100%;
+    object-fit: cover;
+    height: 100%;
+  }
+`;
+
 export default function Header() {
   const { account, chainId } = useActiveWeb3React();
   const { t } = useTranslation();
@@ -270,6 +273,9 @@ export default function Header() {
         </Title>
       </HeaderRow> */}
 
+      <StyledHeaderImg>
+        <img src={headerSvg} alt='header'/>
+      </StyledHeaderImg>
       <HeaderLinks>
         <StyledNavLink id={`swap-nav-link`} to={'/swap'}>
           {t('swap')}
@@ -287,45 +293,7 @@ export default function Header() {
         >
           {t('pool')}
         </StyledNavLink>
-        <StyledNavLink
-          id={`farm-nav-link`}
-          to={'/farm'}
-          isActive={(match, { pathname }) =>
-            Boolean(match) || pathname.startsWith('/stake') || pathname.startsWith('/withdraw')
-          }
-        >
-          {t('Farm')}
-        </StyledNavLink>
-        {chainId !== ChainId.MAINNET && (
-          <StyledLink id={`faucet-nav-link`} href={'https://faucet.ambrosus-test.io/'} target="_blank">
-            🚰 {t('Faucet')}
-          </StyledLink>
-        )}
       </HeaderLinks>
-
-      <HeaderControls>
-        <HeaderElement>
-          <HideSmall>
-            {chainId && NETWORK_LABELS[chainId] && (
-              <NetworkCard title={NETWORK_LABELS[chainId]}>{NETWORK_LABELS[chainId]}</NetworkCard>
-            )}
-          </HideSmall>
-          <TVLView />
-          <AccountElement active={!!account} style={{ pointerEvents: 'auto' }}>
-            {account && userEthBalance ? (
-              <BalanceText style={{ flexShrink: 0 }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
-                {userEthBalance?.toSignificant(8)} AMB
-              </BalanceText>
-            ) : null}
-            <Web3Status />
-          </AccountElement>
-        </HeaderElement>
-        {/*<HeaderElementWrap>
-          <StyledMenuButton onClick={toggleDarkMode}>
-            {darkMode ? <Moon size={20} /> : <Sun size={20} />}
-          </StyledMenuButton>
-        </HeaderElementWrap>*/}
-      </HeaderControls>
     </HeaderFrame>
   );
 }

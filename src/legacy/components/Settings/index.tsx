@@ -1,5 +1,6 @@
 import React, { useContext, useRef, useState } from 'react';
-import { Settings, X } from 'react-feather';
+import { X } from 'react-feather';
+import {ReactComponent as Settings} from "../../assets/svg/settings.svg";
 import { Text } from 'rebass';
 import styled, { ThemeContext } from 'styled-components';
 import { useOnClickOutside } from '../../hooks/useOnClickOutside';
@@ -21,8 +22,8 @@ import Toggle from '../Toggle';
 import TransactionSettings from '../TransactionSettings';
 
 const StyledMenuIcon = styled(Settings)`
-  height: 20px;
-  width: 20px;
+  height: 28px;
+  width: 28px;
 
   > * {
     stroke: ${({ theme }) => theme.text2};
@@ -86,19 +87,22 @@ const StyledMenu = styled.div`
 `;
 
 const MenuFlyout = styled.span`
-  min-width: 20.125rem;
+  min-width: 420px;
   background-color: ${({ theme }) => theme.bg2};
-  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04),
-    0px 24px 32px rgba(0, 0, 0, 0.01);
-  border: 1px solid ${({ theme }) => theme.bg4};
-  border-radius: 12px;
   display: flex;
   flex-direction: column;
   font-size: 1rem;
   position: absolute;
   top: 3rem;
   right: 0rem;
+  padding: 32px;
   z-index: 100;
+  border-radius: 40px;
+  border: 1px solid var(--neutral-100, #E6E6E6);
+  background: var(--neutral-0, #FFF);
+
+  /* Shadows/4 */
+  box-shadow: 0px 8px 24px 0px rgba(47, 43, 67, 0.10);
 
   ${({ theme }) => theme.mediaWidth.upToMedium`
     min-width: 18.125rem;
@@ -118,6 +122,17 @@ const ModalContentWrapper = styled.div`
   padding: 2rem 0;
   background-color: ${({ theme }) => theme.bg2};
   border-radius: 20px;
+`;
+
+const StyledTitle = styled.p`
+  color: #0E0E0E;
+  font-family: Inter, sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px; /* 144.444% */
+  letter-spacing: -0.216px;
+  margin: 0 0 24px;
 `;
 
 export default function SettingsTab() {
@@ -191,20 +206,20 @@ export default function SettingsTab() {
       </StyledMenuButton>
       {open && (
         <MenuFlyout>
-          <AutoColumn gap="md" style={{ padding: '1rem' }}>
-            <Text fontWeight={600} fontSize={14}>
+          <AutoColumn gap="md">
+            <StyledTitle>
               Transaction Settings
-            </Text>
+            </StyledTitle>
             <TransactionSettings
               rawSlippage={userSlippageTolerance}
               setRawSlippage={setUserslippageTolerance}
               deadline={ttl}
               setDeadline={setTtl}
             />
-            <Text fontWeight={600} fontSize={14}>
+            <StyledTitle>
               Interface Settings
-            </Text>
-            <RowBetween>
+            </StyledTitle>
+            <RowBetween marginBottom={16}>
               <RowFixed>
                 <TYPE.black fontWeight={400} fontSize={14} color={theme.text2}>
                   Toggle Expert Mode

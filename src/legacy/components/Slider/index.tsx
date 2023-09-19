@@ -19,56 +19,38 @@ const StyledRangeInput = styled.input<{ size: number }>`
     -webkit-appearance: none;
     height: ${({ size }) => size}px;
     width: ${({ size }) => size}px;
-    background-color: #565a69;
+    background-color: #222426;
     border-radius: 100%;
     border: none;
-    transform: translateY(-50%);
+    transform: translateY(-40%);
     color: ${({ theme }) => theme.bg1};
-
-    &:hover,
-    &:focus {
-      box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.08), 0px 16px 24px rgba(0, 0, 0, 0.06),
-        0px 24px 32px rgba(0, 0, 0, 0.04);
-    }
   }
 
   &::-moz-range-thumb {
     height: ${({ size }) => size}px;
     width: ${({ size }) => size}px;
-    background-color: #565a69;
+    background-color: #222426;
     border-radius: 100%;
     border: none;
     color: ${({ theme }) => theme.bg1};
-
-    &:hover,
-    &:focus {
-      box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.08), 0px 16px 24px rgba(0, 0, 0, 0.06),
-        0px 24px 32px rgba(0, 0, 0, 0.04);
-    }
   }
 
   &::-ms-thumb {
     height: ${({ size }) => size}px;
     width: ${({ size }) => size}px;
-    background-color: #565a69;
+    background-color: #222426;
     border-radius: 100%;
     color: ${({ theme }) => theme.bg1};
-
-    &:hover,
-    &:focus {
-      box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.08), 0px 16px 24px rgba(0, 0, 0, 0.06),
-        0px 24px 32px rgba(0, 0, 0, 0.04);
-    }
   }
 
   &::-webkit-slider-runnable-track {
-    background: linear-gradient(90deg, ${({ theme }) => theme.bg5}, ${({ theme }) => theme.bg3});
-    height: 2px;
+    background: #222426;
+    height: 3px;
   }
 
   &::-moz-range-track {
-    background: linear-gradient(90deg, ${({ theme }) => theme.bg5}, ${({ theme }) => theme.bg3});
-    height: 2px;
+    background: #222426;
+    height: 3px;
   }
 
   &::-ms-track {
@@ -77,7 +59,7 @@ const StyledRangeInput = styled.input<{ size: number }>`
     color: transparent;
 
     background: ${({ theme }) => theme.bg5};
-    height: 2px;
+    height: 3px;
   }
   &::-ms-fill-lower {
     background: ${({ theme }) => theme.bg5};
@@ -96,7 +78,7 @@ interface InputSliderProps {
   size?: number;
 }
 
-export default function Slider({ value, onChange, min = 0, step = 1, max = 100, size = 28 }: InputSliderProps) {
+export default function Slider({ value, onChange, min = 0, step = 1, max = 100, size = 16 }: InputSliderProps) {
   const changeCallback = useCallback(
     (e) => {
       onChange(parseInt(e.target.value));
@@ -109,7 +91,7 @@ export default function Slider({ value, onChange, min = 0, step = 1, max = 100, 
       size={size}
       type="range"
       value={value}
-      style={{ width: '90%', marginLeft: 15, marginRight: 15, padding: '15px 0' }}
+      style={{ width: '100%', padding: '15px 0' }}
       onChange={changeCallback}
       aria-labelledby="input slider"
       step={step}

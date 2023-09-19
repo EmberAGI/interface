@@ -63,8 +63,10 @@ export const HoverCard = styled(Card)`
 const StyledPositionCard = styled(LightCard)<{ bgColor: any }>`
   position: relative;
   overflow: hidden;
-  border: 1px solid ${({ theme }) => theme.primary1};
-  background: ${({ theme }) => theme.bg1};
+  border: 0;
+  border-radius: 16px;
+  background: var(--neutral-0, #FFF);
+  box-shadow: 0px 6px 12px 0px rgba(47, 43, 67, 0.10);
 `;
 
 interface PositionCardProps {
@@ -182,6 +184,28 @@ export function MinimalPositionCard({ pair, showUnwrapped = false, border }: Pos
   );
 }
 
+const StyledChevron = styled.div`
+  border-radius: 20px;
+  width: 40px;
+  height: 40px;
+  background: var(--alpha-black-5, rgba(14, 14, 14, 0.05));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StyledItem = styled.span`
+  color: var(--neutral-400, #676B73);
+
+  /* Caption 1/500 - Medium */
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: -0.14px;
+`;
+
 export default function FullPositionCard({ pair, border, stakedBalance }: PositionCardProps) {
   const { account } = useActiveWeb3React();
   const ethereum = window.ethereum as any;
@@ -264,37 +288,35 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
             </StyledBalanceMax>
           </AutoRow>
           <RowFixed gap="8px">
-            <ButtonEmpty padding="6px 8px" width="fit-content" onClick={() => setShowMore(!showMore)}>
+            <ButtonEmpty width="fit-content" style={{padding: 0}} onClick={() => setShowMore(!showMore)}>
               {showMore ? (
-                <>
-                  Manage
-                  <ChevronUp size="52" style={{ marginLeft: '0.4rem', marginTop: '0.2rem' }} />
-                </>
+                <StyledChevron>
+                  <ChevronUp style={{width: 20, height: 20}} size="20"/>
+                </StyledChevron>
               ) : (
-                <>
-                  Manage
-                  <ChevronDown size="52" style={{ marginLeft: '0.4rem', marginTop: '0.2rem' }} />
-                </>
+                <StyledChevron>
+                  <ChevronDown style={{width: 20, height: 20}} size="20"/>
+                </StyledChevron>
               )}
             </ButtonEmpty>
           </RowFixed>
         </FixedHeightRow>
 
         {showMore && (
-          <AutoColumn gap="8px">
+          <AutoColumn gap="8px" style={{marginTop: 24, gap: 16}}>
             <FixedHeightRow>
-              <Text fontSize={16} fontWeight={500}>
+              <StyledItem>
                 Your total pool tokens:
-              </Text>
+              </StyledItem>
               <Text fontSize={16} fontWeight={500}>
                 {userPoolBalance ? userPoolBalance.toSignificant(4) : '-'}
               </Text>
             </FixedHeightRow>
             {stakedBalance && (
               <FixedHeightRow>
-                <Text fontSize={16} fontWeight={500}>
+                <StyledItem >
                   Pool tokens in rewards pool:
-                </Text>
+                </StyledItem>
                 <Text fontSize={16} fontWeight={500}>
                   {stakedBalance.toSignificant(4)}
                 </Text>
@@ -302,9 +324,9 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
             )}
             <FixedHeightRow>
               <RowFixed>
-                <Text fontSize={16} fontWeight={500}>
+                <StyledItem>
                   Pooled {currency0.symbol}:
-                </Text>
+                </StyledItem>
               </RowFixed>
               {token0Deposited ? (
                 <RowFixed>
@@ -320,9 +342,9 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
 
             <FixedHeightRow>
               <RowFixed>
-                <Text fontSize={16} fontWeight={500}>
+                <StyledItem >
                   Pooled {currency1.symbol}:
-                </Text>
+                </StyledItem>
               </RowFixed>
               {token1Deposited ? (
                 <RowFixed>
@@ -337,9 +359,9 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
             </FixedHeightRow>
 
             <FixedHeightRow>
-              <Text fontSize={16} fontWeight={500}>
+              <StyledItem >
                 Your pool share:
-              </Text>
+              </StyledItem>
               <Text fontSize={16} fontWeight={500}>
                 {poolTokenPercentage
                   ? (poolTokenPercentage.toFixed(2) === '0.00' ? '<0.01' : poolTokenPercentage.toFixed(2)) + '%'
@@ -348,9 +370,9 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
             </FixedHeightRow>
 
             <FixedHeightRow>
-              <Text fontSize={16} fontWeight={500}>
+              <StyledItem>
                 TVL:
-              </Text>
+              </StyledItem>
               <Text fontSize={16} fontWeight={500}>
                 {`$ ${tvlParser.parse()}`}
               </Text>
@@ -359,6 +381,7 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
             {userDefaultPoolBalance && JSBI.greaterThan(userDefaultPoolBalance.raw, BIG_INT_ZERO) && (
               <RowBetween marginTop="10px">
                 <ButtonPrimary
+                  style={{background: 'rgba(14, 14, 14, 0.05)', color: '#0E0E0E'}}
                   padding="8px"
                   as={Link}
                   to={`/add/${currencyId(currency0)}/${currencyId(currency1)}`}
@@ -367,6 +390,7 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
                   Add
                 </ButtonPrimary>
                 <ButtonPrimary
+                  style={{background: 'rgba(14, 14, 14, 0.05)', color: '#0E0E0E'}}
                   padding="8px"
                   as={Link}
                   width="48%"

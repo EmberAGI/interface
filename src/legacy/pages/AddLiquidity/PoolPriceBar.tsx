@@ -21,32 +21,30 @@ export function PoolPriceBar({
 }) {
   const theme = useContext(ThemeContext);
   return (
-    <AutoColumn gap="md">
-      <AutoRow justify="space-around" gap="4px">
-        <AutoColumn justify="center">
-          <TYPE.black>{price?.toSignificant(6) ?? '-'}</TYPE.black>
+    <AutoColumn style={{marginBottom: 32}}>
+        <AutoRow style={{marginTop: 16}} justify="space-between">
           <Text fontWeight={500} fontSize={14} color={theme.text2} pt={1}>
             {currencies[Field.CURRENCY_B]?.symbol} per {currencies[Field.CURRENCY_A]?.symbol}
           </Text>
-        </AutoColumn>
-        <AutoColumn justify="center">
-          <TYPE.black>{price?.invert()?.toSignificant(6) ?? '-'}</TYPE.black>
+          <TYPE.black fontSize={14}>{price?.toSignificant(6) ?? '-'}</TYPE.black>
+        </AutoRow>
+        <AutoRow style={{marginTop: 16}} justify="space-between">
           <Text fontWeight={500} fontSize={14} color={theme.text2} pt={1}>
             {currencies[Field.CURRENCY_A]?.symbol} per {currencies[Field.CURRENCY_B]?.symbol}
           </Text>
-        </AutoColumn>
-        <AutoColumn justify="center">
-          <TYPE.black>
+          <TYPE.black fontSize={14}>{price?.invert()?.toSignificant(6) ?? '-'}</TYPE.black>
+        </AutoRow>
+        <AutoRow style={{marginTop: 16}} justify="space-between">
+          <Text fontWeight={500} fontSize={14} color={theme.text2} pt={1}>
+            Share of Pool
+          </Text>
+          <TYPE.black fontSize={14}>
             {noLiquidity && price
               ? '100'
               : (poolTokenPercentage?.lessThan(ONE_BIPS) ? '<0.01' : poolTokenPercentage?.toFixed(2)) ?? '0'}
             %
           </TYPE.black>
-          <Text fontWeight={500} fontSize={14} color={theme.text2} pt={1}>
-            Share of Pool
-          </Text>
-        </AutoColumn>
-      </AutoRow>
+        </AutoRow>
     </AutoColumn>
   );
 }

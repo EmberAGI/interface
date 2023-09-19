@@ -39,9 +39,9 @@ export default function SwapModalHeader({
     <AutoColumn gap={'md'} style={{ marginTop: '20px' }}>
       <RowBetween align="flex-end">
         <RowFixed gap={'0px'}>
-          <CurrencyLogo currency={trade.inputAmount.currency} size={'24px'} style={{ marginRight: '12px' }} />
+          <CurrencyLogo currency={trade.inputAmount.currency} size={'20px'} style={{ marginRight: '12px' }} />
           <TruncatedText
-            fontSize={24}
+            fontSize={20}
             fontWeight={500}
             color={showAcceptChanges && trade.tradeType === TradeType.EXACT_OUTPUT ? theme.primary1 : ''}
           >
@@ -55,13 +55,13 @@ export default function SwapModalHeader({
         </RowFixed>
       </RowBetween>
       <RowFixed>
-        <ArrowDown size="16" color={theme.text2} style={{ marginLeft: '4px', minWidth: '16px' }} />
+        <ArrowDown size="16" color={theme.text2} style={{ margin: '16px 0 16px 4px', minWidth: '16px' }} />
       </RowFixed>
       <RowBetween align="flex-end">
         <RowFixed gap={'0px'}>
-          <CurrencyLogo currency={trade.outputAmount.currency} size={'24px'} style={{ marginRight: '12px' }} />
+          <CurrencyLogo currency={trade.outputAmount.currency} size={'20px'} style={{ marginRight: '12px' }} />
           <TruncatedText
-            fontSize={24}
+            fontSize={20}
             fontWeight={500}
             color={
               priceImpactSeverity > 2
@@ -75,7 +75,7 @@ export default function SwapModalHeader({
           </TruncatedText>
         </RowFixed>
         <RowFixed gap={'0px'}>
-          <Text fontSize={24} fontWeight={500} style={{ marginLeft: '10px' }}>
+          <Text fontSize={20} fontWeight={500} style={{ marginLeft: '10px' }}>
             {trade.outputAmount.currency.symbol}
           </Text>
         </RowFixed>
