@@ -58,6 +58,8 @@ const StyledDialogContent = styled(({ minHeight, maxHeight, mobile, isOpen, ...r
     
     @media (max-width: 500px) {
       width: 90%;
+      margin-top: 130px;
+      max-height: calc(80vh - 130px);
     }
   }
 `;

@@ -11,6 +11,10 @@ export const BodyWrapper = styled.div`
   border: 1px solid var(--neutral-100, #E6E6E6);
   background: var(--neutral-0, #FFF);
   background: ${({ theme }) => theme.bg1};
+
+  @media (max-width: 600px) {
+    padding: 24px;
+  }
 `;
 
 export default function AppBody({ children }: { children: React.ReactNode }) {

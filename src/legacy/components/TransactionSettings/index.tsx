@@ -52,6 +52,10 @@ const Option = styled(FancyButton)<{ active: boolean }>`
   letter-spacing: -0.16px;
   background-color: ${({ active, theme }) => active ? theme.primary1 : 'rgba(14, 14, 14, 0.05)'};
   color: ${({ active, theme }) => (active ? theme.white : 'rgba(14, 14, 14, 1)')};
+
+  @media (max-width:500px) {
+    margin: 0;
+  }
 `;
 
 const Input = styled.input`
@@ -85,11 +89,24 @@ const OptionCustom = styled(FancyButton)<{ active?: boolean; warning?: boolean }
     border: 0px;
     border-radius: 2rem;
   }
+
+  @media (max-width:500px) {
+    width: 100%;
+    flex: none;
+  }
 `;
 
 const SlippageEmojiContainer = styled.span`
   color: #f3841e;
 `;
+
+const StyledRow = styled(RowBetween)`
+  @media (max-width: 500px) {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 16px;
+  }
+`
 
 export interface SlippageTabsProps {
   rawSlippage: number;
@@ -163,7 +180,7 @@ export default function SlippageTabs({ rawSlippage, setRawSlippage, deadline, se
           </TYPE.black>
           <QuestionHelper text="Your transaction will revert if the price changes unfavorably by more than this percentage." />
         </RowFixed>
-        <RowBetween marginBottom={24}>
+        <StyledRow marginBottom={24}>
           <OptionCustom active={![10, 50, 100].includes(rawSlippage)} warning={!slippageInputIsValid} tabIndex={-1}>
             <RowBetween>
               {!!slippageInput &&
@@ -215,7 +232,7 @@ export default function SlippageTabs({ rawSlippage, setRawSlippage, deadline, se
           >
             1%
           </Option>
-        </RowBetween>
+        </StyledRow>
         {!!slippageError && (
           <RowBetween
             style={{

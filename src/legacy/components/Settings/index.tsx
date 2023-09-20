@@ -103,6 +103,13 @@ const MenuFlyout = styled.span`
 
   /* Shadows/4 */
   box-shadow: 0px 8px 24px 0px rgba(47, 43, 67, 0.10);
+  
+  @media (max-width: 500px) {
+    right: -24px;
+    padding: 24px;
+    min-width: auto;
+    width: calc(100vw - 33px);
+  }
 `;
 
 const Break = styled.div`

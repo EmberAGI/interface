@@ -202,6 +202,20 @@ const StyledItem = styled.span`
   letter-spacing: -0.14px;
 `;
 
+const StyledName = styled.span`
+  color: var(--neutral-700, #222426);
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 150% */
+  letter-spacing: -0.16px;
+  
+  @media (max-width: 600px) {
+    font-size: 14px;
+  }
+`;
+
 export default function FullPositionCard({ pair, border, stakedBalance }: PositionCardProps) {
   const { account } = useActiveWeb3React();
   const ethereum = window.ethereum as any;
@@ -272,9 +286,9 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
           <AutoRow gap="8px">
             {console.log(pair.liquidityToken.address, 'liquidityToken')}
             <DoubleCurrencyLogo currency0={currency0} currency1={currency1} size={20} />
-            <Text fontWeight={500} fontSize={20}>
+            <StyledName>
               {!currency0 || !currency1 ? <Dots>Loading</Dots> : `${currency0.symbol}/${currency1.symbol}`}
-            </Text>
+            </StyledName>
             <StyledBalanceMax
               onClick={() =>
                 addTokenFunction(pair.liquidityToken.address, pair.liquidityToken.symbol, pair.liquidityToken.decimals)

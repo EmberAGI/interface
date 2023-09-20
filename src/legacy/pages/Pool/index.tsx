@@ -29,6 +29,14 @@ const TitleRow = styled(RowBetween)`
 
 const ButtonRow = styled(RowFixed)`
   gap: 8px;
+  
+  @media (max-width: 600px) {
+    flex-direction: column;
+    
+    a {
+      width: 100% !important;
+    }
+  }
 `;
 
 const ResponsiveButtonPrimary = styled(ButtonPrimary)`
