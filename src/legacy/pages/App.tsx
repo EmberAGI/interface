@@ -3,14 +3,10 @@ import { Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import { Menu } from 'airdao-components-and-tools/components';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { useAutoLogin } from 'airdao-components-and-tools/hooks';
+import { useAutoLogin, useAuthorization } from 'airdao-components-and-tools/hooks';
 import Header from '../components/Header';
 import Polling from '../components/Header/Polling';
 import Popups from '../components/Popups';
-// import Web3ReactManager from '../components/Web3ReactManager';
 import DarkModeQueryParamReader from '../theme/DarkModeQueryParamReader';
 import AddLiquidity from './AddLiquidity';
 import {
@@ -28,13 +24,15 @@ import YieldFarmStakeView from 'features/YieldFarm/screens/YieldFarmStakeView';
 import YieldFarmWithdrawView from 'features/YieldFarm/screens/YieldFarmWithdrawView';
 import { OpenClaimAddressModalAndRedirectToSwap, RedirectPathToSwapOnly } from './Swap/redirects';
 import { useWeb3React } from '@web3-react/core';
-import logo from '../assets/svg/menu/firepot-airdao-logo.png';
-import './side-menu-overrides.css';
 
 import {
   metamaskConnector,
   walletconnectConnector,
 } from 'airdao-components-and-tools/utils';
+
+import { Header as HeaderMenu } from '@airdao/ui-library';
+import { useCurrencyBalance } from '../state/wallet/hooks';
+import { AMBER } from '@firepotfinance/firepotfinance-sdk';
 
 const AppWrapper = styled.div`
   min-height: 100vh;
@@ -81,19 +79,35 @@ const Logo = styled.img`
 `;
 
 export default function App() {
-  const web3ReactInstance = useWeb3React();
+  const { account } = useWeb3React();
   const isLoaded = useAutoLogin(metamaskConnector);
+
+  const { loginMetamask, loginWalletConnect, logout } = useAuthorization(
+    metamaskConnector,
+    walletconnectConnector
+  );
+
+  const balance = useCurrencyBalance(account, AMBER);
 
   return !isLoaded ? null : (
     <Suspense fallback={null}>
       <Route component={DarkModeQueryParamReader} />
       <AppWrapper>
-        <Menu
-          initHidden
-          customLogo={<Logo src={logo} alt="Firepot Finance" />}
-          metamaskConnector={metamaskConnector}
-          walletconnectConnector={walletconnectConnector}
+        {/*<Menu*/}
+        {/*  initHidden*/}
+        {/*  customLogo={<Logo src={logo} alt="Firepot Finance" />}*/}
+        {/*  metamaskConnector={metamaskConnector}*/}
+        {/*  walletconnectConnector={walletconnectConnector}*/}
+        {/*/>*/}
+
+        <HeaderMenu
+          loginMetamask={loginMetamask}
+          loginWalletConnect={loginWalletConnect}
+          account={account}
+          disconnect={logout}
+          balance={balance?.toFixed(2)}
         />
+
         <MainWrapper>
           <HeaderWrapper>
             <Header />
@@ -101,7 +115,6 @@ export default function App() {
           <BodyWrapper>
             <Popups />
             <Polling />
-            {/*<Web3ReactManager>*/}
               <Switch>
                 <Route exact strict path="/swap" component={Swap} />
                 <Route exact strict path="/claim" component={OpenClaimAddressModalAndRedirectToSwap} />
@@ -121,7 +134,6 @@ export default function App() {
                 <Route exact strict path="/withdraw/:stakingTokenAddress" component={YieldFarmWithdrawView} />
                 <Route component={RedirectPathToSwapOnly} />
               </Switch>
-            {/*</Web3ReactManager>*/}
           </BodyWrapper>
         </MainWrapper>
       </AppWrapper>

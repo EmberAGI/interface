@@ -26,3 +26,4 @@ declare module 'multihashes' {
 }
 
 declare module 'airdao-components-and-tools/utils'
+declare module '@airdao/ui-library'

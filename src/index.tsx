@@ -31,7 +31,6 @@ const connectors = [
   [walletconnectConnector, walletconnectHooks],
 ];
 
-
 function Updaters() {
   return (
     <>
@@ -43,7 +42,6 @@ function Updaters() {
     </>
   );
 }
-
 
 ReactDOM.render(
   <StrictMode>
