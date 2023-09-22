@@ -10,7 +10,7 @@ import { useAutoLogin } from 'airdao-components-and-tools/hooks';
 import Header from '../components/Header';
 import Polling from '../components/Header/Polling';
 import Popups from '../components/Popups';
-import Web3ReactManager from '../components/Web3ReactManager';
+// import Web3ReactManager from '../components/Web3ReactManager';
 import DarkModeQueryParamReader from '../theme/DarkModeQueryParamReader';
 import AddLiquidity from './AddLiquidity';
 import {
@@ -28,10 +28,13 @@ import YieldFarmStakeView from 'features/YieldFarm/screens/YieldFarmStakeView';
 import YieldFarmWithdrawView from 'features/YieldFarm/screens/YieldFarmWithdrawView';
 import { OpenClaimAddressModalAndRedirectToSwap, RedirectPathToSwapOnly } from './Swap/redirects';
 import { useWeb3React } from '@web3-react/core';
-import APRBanner from '../../features/APRBanner/banner';
 import logo from '../assets/svg/menu/firepot-airdao-logo.png';
-//import logoSm from '../assets/svg/menu/firepot-airdao-logo-sm.png';
 import './side-menu-overrides.css';
+
+import {
+  metamaskConnector,
+  walletconnectConnector,
+} from 'airdao-components-and-tools/utils';
 
 const AppWrapper = styled.div`
   min-height: 100vh;
@@ -79,13 +82,18 @@ const Logo = styled.img`
 
 export default function App() {
   const web3ReactInstance = useWeb3React();
-  const isLoaded = useAutoLogin(web3ReactInstance);
+  const isLoaded = useAutoLogin(metamaskConnector);
 
   return !isLoaded ? null : (
     <Suspense fallback={null}>
       <Route component={DarkModeQueryParamReader} />
       <AppWrapper>
-        <Menu initHidden web3ReactInstance={web3ReactInstance} customLogo={<Logo src={logo} alt="Firepot Finance" />} />
+        <Menu
+          initHidden
+          customLogo={<Logo src={logo} alt="Firepot Finance" />}
+          metamaskConnector={metamaskConnector}
+          walletconnectConnector={walletconnectConnector}
+        />
         <MainWrapper>
           <HeaderWrapper>
             <Header />
@@ -93,14 +101,13 @@ export default function App() {
           <BodyWrapper>
             <Popups />
             <Polling />
-            <Web3ReactManager>
+            {/*<Web3ReactManager>*/}
               <Switch>
                 <Route exact strict path="/swap" component={Swap} />
                 <Route exact strict path="/claim" component={OpenClaimAddressModalAndRedirectToSwap} />
                 <Route exact strict path="/find" component={PoolFinder} />
                 <Route exact strict path="/pool" component={Pool} />
                 <Route exact strict path="/farm" component={YieldFarmView} />
-                {/*<Route exact strict path="/faucet" component={Faucet} />*/}
                 <Route exact strict path="/create" component={RedirectToAddLiquidity} />
                 <Route exact path="/add" component={AddLiquidity} />
                 <Route exact path="/add/:currencyIdA" component={RedirectOldAddLiquidityPathStructure} />
@@ -114,7 +121,7 @@ export default function App() {
                 <Route exact strict path="/withdraw/:stakingTokenAddress" component={YieldFarmWithdrawView} />
                 <Route component={RedirectPathToSwapOnly} />
               </Switch>
-            </Web3ReactManager>
+            {/*</Web3ReactManager>*/}
           </BodyWrapper>
         </MainWrapper>
       </AppWrapper>

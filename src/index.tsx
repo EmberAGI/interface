@@ -1,11 +1,10 @@
 import './polyfill';
-import { Web3ReactProvider, createWeb3ReactRoot } from '@web3-react/core';
+import { Web3ReactProvider } from '@web3-react/core';
 import 'inter-ui';
 import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import { NetworkContextName } from './legacy/constants';
 import './i18n';
 import App from './legacy/pages/App';
 import store from './legacy/state';
@@ -15,13 +14,23 @@ import MulticallUpdater from './legacy/state/multicall/updater';
 import TransactionUpdater from './legacy/state/transactions/updater';
 import UserUpdater from './legacy/state/user/updater';
 import ThemeProvider, { FixedGlobalStyle, ThemedGlobalStyle } from './legacy/theme';
-import getLibrary from './legacy/utils/getLibrary';
-
-const Web3ProviderNetwork = createWeb3ReactRoot(NetworkContextName);
 
 if ('ethereum' in window) {
   (window.ethereum as any).autoRefreshOnNetworkChange = false;
 }
+
+import {
+  metamaskConnector,
+  metamaskHooks,
+  walletconnectConnector,
+  walletconnectHooks,
+} from 'airdao-components-and-tools/utils';
+
+const connectors = [
+  [metamaskConnector, metamaskHooks],
+  [walletconnectConnector, walletconnectHooks],
+];
+
 
 function Updaters() {
   return (
@@ -35,11 +44,13 @@ function Updaters() {
   );
 }
 
+
 ReactDOM.render(
   <StrictMode>
     <FixedGlobalStyle />
-    <Web3ReactProvider getLibrary={getLibrary}>
-      <Web3ProviderNetwork getLibrary={getLibrary}>
+    {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+    {/* @ts-ignore */}
+    <Web3ReactProvider connectors={connectors}>
         <Provider store={store}>
           <Updaters />
           <ThemeProvider>
@@ -49,7 +60,6 @@ ReactDOM.render(
             </BrowserRouter>
           </ThemeProvider>
         </Provider>
-      </Web3ProviderNetwork>
     </Web3ReactProvider>
   </StrictMode>,
   document.getElementById('root')
