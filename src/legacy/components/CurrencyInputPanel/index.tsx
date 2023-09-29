@@ -155,6 +155,7 @@ interface CurrencyInputPanelProps {
   id: string;
   showCommonBases?: boolean;
   customBalanceText?: string;
+  secondField?: any;
 }
 
 export default function CurrencyInputPanel({
@@ -173,6 +174,7 @@ export default function CurrencyInputPanel({
   id,
   showCommonBases,
   customBalanceText,
+  secondField,
 }: CurrencyInputPanelProps) {
   const { t } = useTranslation();
   const [modalOpen, setModalOpen] = useState(false);
@@ -273,9 +275,11 @@ export default function CurrencyInputPanel({
           {!hideBalance && !!currency && selectedCurrencyBalance
             ? <>
                 {(customBalanceText ?? 'Balance: ') + selectedCurrencyBalance?.toSignificant(6)}
-                <StyledMax onClick={onMax}>
-                  Max
-                </StyledMax>
+                {!secondField && (
+                  <StyledMax onClick={onMax}>
+                    Max
+                  </StyledMax>
+                )}
               </>
             : ''}
         </StyleBalance>
