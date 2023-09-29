@@ -311,21 +311,6 @@ export default function AddLiquidity({
       <AppBody>
         <AddRemoveTabs creating={isCreate} adding={true} />
         <Wrapper>
-          <TransactionConfirmationModal
-            isOpen={showConfirm}
-            onDismiss={handleDismissConfirmation}
-            attemptingTxn={attemptingTxn}
-            hash={txHash}
-            content={() => (
-              <ConfirmationModalContent
-                title={noLiquidity ? 'You are creating a pool' : 'You will receive'}
-                onDismiss={handleDismissConfirmation}
-                topContent={modalHeader}
-                bottomContent={modalBottom}
-              />
-            )}
-            pendingText={pendingText}
-          />
           <AutoColumn gap="20px">
             {noLiquidity ||
               (isCreate ? (

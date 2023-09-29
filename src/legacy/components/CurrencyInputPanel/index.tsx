@@ -211,7 +211,7 @@ export default function CurrencyInputPanel({
       <StyledLabel>
         {label}
       </StyledLabel>
-      <InputPanel id={id}>
+      <InputPanel id={id} style={!account ? {pointerEvents: 'none'} : {}}>
         <Container hideInput={hideInput}>
           <InputRow style={hideInput ? { padding: '0', borderRadius: '8px' } : {}} selected={disableCurrencySelect}>
             <CurrencySelect

@@ -34,20 +34,16 @@ const StyledDialogContent = styled(({ minHeight, maxHeight, mobile, isOpen, ...r
   overflow-y: ${({ mobile }) => (mobile ? 'scroll' : 'hidden')};
 
   &[data-reach-dialog-content] {
-    margin: 0 0 2rem 0;
+    margin: 100px 0 0 0;
     background-color: ${({ theme }) => theme.bg1};
     box-shadow: 0 4px 8px 0 ${({ theme }) => transparentize(0.95, theme.shadow1)};
     padding: 0px;
     width: 100vw;
     overflow-y: ${({ mobile }) => (mobile ? 'scroll' : 'hidden')};
     overflow-x: hidden;
+    max-height: calc(80vh - 130px);
     
     max-width: 420px;
-    ${({ maxHeight }) =>
-      maxHeight &&
-      css`
-        max-height: ${maxHeight}vh;
-      `}
     ${({ minHeight }) =>
       minHeight &&
       css`
@@ -59,7 +55,6 @@ const StyledDialogContent = styled(({ minHeight, maxHeight, mobile, isOpen, ...r
     @media (max-width: 500px) {
       width: 90%;
       margin-top: 130px;
-      max-height: calc(80vh - 130px);
     }
   }
 `;

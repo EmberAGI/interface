@@ -42,15 +42,22 @@ import { computeTradePriceBreakdown, warningSeverity } from '../../utils/prices'
 import AppBody from '../AppBody';
 import { ClickableText } from '../Pool/styleds';
 import Loader from '../../components/Loader';
+import {
+  metamaskConnector,
+  walletconnectConnector
+} from "airdao-components-and-tools/utils";
 
 const StyledSwapBtn = styled(SwapBtn)`
   margin: 16px 0;
 `;
 
-
 export default function Swap() {
   const loadedUrlParams = useDefaultsFromURLSearch();
 
+  const { loginMetamask } = useAuthorization(
+    metamaskConnector,
+    walletconnectConnector
+  );
   // token warning stuff
   const [loadedInputCurrency, loadedOutputCurrency] = [
     useCurrency(loadedUrlParams?.inputCurrencyId),
@@ -79,7 +86,6 @@ export default function Swap() {
 
   // toggle wallet when disconnected
   //const toggleWalletModal = useWalletModalToggle();
-  const { loginMetamask } = useAuthorization(web3ReactInstance);
 
   // for expert mode
   const toggleSettings = useToggleSettingsMenu();
@@ -245,6 +251,10 @@ export default function Swap() {
     [onCurrencySelection]
   );
 
+  const connect = () => {
+    loginMetamask()
+  }
+
   return (
     <>
       <TokenWarningModal
@@ -354,7 +364,9 @@ export default function Swap() {
 
           <BottomGrouping>
             {!account ? (
-              <ButtonPrimary style={{backgroundColor: 'rgba(255, 94, 13, 1)'}} onClick={loginMetamask}>Connect Wallet</ButtonPrimary>
+              <ButtonPrimary style={{backgroundColor: 'rgba(255, 94, 13, 1)'}} onClick={connect}>
+                Connect Wallet
+              </ButtonPrimary>
             ) : showWrap ? (
               <ButtonPrimary disabled={Boolean(wrapInputError)} onClick={onWrap}>
                 {wrapInputError ??

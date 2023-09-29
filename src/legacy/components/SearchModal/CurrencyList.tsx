@@ -138,7 +138,7 @@ export default function CurrencyList({
   showImportView,
   setImportToken,
 }: {
-  height: number;
+  height: any;
   currencies: Currency[];
   selectedCurrency?: Currency | null;
   onCurrencySelect: (currency: Currency) => void;
@@ -196,7 +196,7 @@ export default function CurrencyList({
 
   return (
     <FixedSizeList
-      height={height}
+      height={300}
       ref={fixedListRef as any}
       width="100%"
       itemData={itemData}

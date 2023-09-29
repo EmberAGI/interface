@@ -505,21 +505,6 @@ export default function RemoveLiquidity({
       <AppBody>
         <AddRemoveTabs creating={false} adding={false} />
         <Wrapper>
-          <TransactionConfirmationModal
-            isOpen={showConfirm}
-            onDismiss={handleDismissConfirmation}
-            attemptingTxn={attemptingTxn}
-            hash={txHash ? txHash : ''}
-            content={() => (
-              <ConfirmationModalContent
-                title={'You will receive'}
-                onDismiss={handleDismissConfirmation}
-                topContent={modalHeader}
-                bottomContent={modalBottom}
-              />
-            )}
-            pendingText={pendingText}
-          />
           <AutoColumn gap="md">
             <StyledTip>
               <b style={{color: '#222426'}}>Tip:</b> Removing pool tokens converts your position back into underlying tokens at the current
