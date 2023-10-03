@@ -40,8 +40,8 @@ const StyledDialogContent = styled(({ minHeight, maxHeight, mobile, isOpen, ...r
     padding: 0px;
     width: 100vw;
     overflow-y: ${({ mobile }) => (mobile ? 'scroll' : 'hidden')};
-    overflow-x: hidden;
-    max-height: calc(80vh - 130px);
+    overflow-x: auto;
+    max-height: calc(100vh - 130px);
     
     max-width: 420px;
     ${({ minHeight }) =>
@@ -55,6 +55,8 @@ const StyledDialogContent = styled(({ minHeight, maxHeight, mobile, isOpen, ...r
     @media (max-width: 500px) {
       width: 90%;
       margin-top: 130px;
+      min-height: auto;
+      margin-bottom: 20px;
     }
   }
 `;
