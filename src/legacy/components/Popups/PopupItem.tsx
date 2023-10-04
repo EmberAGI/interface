@@ -52,7 +52,7 @@ export default function PopupItem({
 
     const timeout = setTimeout(() => {
       removeThisPopup();
-    }, removeAfterMs);
+    }, 5000);
 
     return () => {
       clearTimeout(timeout);

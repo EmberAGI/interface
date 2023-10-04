@@ -174,6 +174,12 @@ export default function Swap() {
     }
   }, [approval, approvalSubmitted]);
 
+  useEffect(() => {
+    if (!account) {
+      handleTypeInput('')
+    }
+  }, [account])
+
   const maxAmountInput: CurrencyAmount | undefined = maxAmountSpend(currencyBalances[Field.INPUT]);
   const atMaxAmountInput = Boolean(maxAmountInput && parsedAmounts[Field.INPUT]?.equalTo(maxAmountInput));
 
@@ -253,7 +259,7 @@ export default function Swap() {
 
   const connect = () => {
     loginMetamask()
-  }
+  };
 
   return (
     <>
@@ -342,7 +348,7 @@ export default function Swap() {
                     <ClickableText onClick={toggleSettings}>
                       Slippage Tolerance
                     </ClickableText>
-                    <ClickableText onClick={toggleSettings}>
+                    <ClickableText onClick={toggleSettings} style={{color: '#1d1d1d', fontWeight: 600}}>
                       {allowedSlippage / 100}%
                     </ClickableText>
                   </RowBetween>

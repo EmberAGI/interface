@@ -38,12 +38,10 @@ const HeaderElement = styled.div`
 
 const HeaderLinks = styled(Row)`
   grid-column-start: 2;
-  padding: 0.3rem;
   justify-content: center;
-  border-radius: 0.8rem;
-  box-shadow: rgba(0, 0, 0, 0.01) 0px 0px 1px, rgba(0, 0, 0, 0.04) 0px 4px 8px, rgba(0, 0, 0, 0.04) 0px 16px 24px,
-    rgba(0, 0, 0, 0.01) 0px 24px 32px;
-  background-color: ${({ theme }) => theme.bg1};
+  border-radius: 24px;
+  background-color: #F2F2F2;
+  padding: 4px;
   position: relative;
   width: fit-content;
   margin: 143px auto 32px;
@@ -82,15 +80,16 @@ const StyledNavLink = styled(NavLink).attrs({
   activeClassName,
 })`
   ${({ theme }) => theme.flexRowNoWrap}
-  align-items: left;
-  border-radius: 12px;
+  border-radius: 24px;
   outline: none;
+  justify-content: center;
   cursor: pointer;
   text-decoration: none;
   color: ${({ theme }) => theme.text2};
   font-size: 0.9rem;
-  width: fit-content;
-  padding: 0.3rem 0.6rem;
+  padding: 8px 0;
+  width: 103px;
+  text-align: center;
   font-weight: 500;
   transition: 0.3s;
 
@@ -99,8 +98,16 @@ const StyledNavLink = styled(NavLink).attrs({
   }
 
   &.${activeClassName} {
+    color: #162C5D;
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 150% */
+    letter-spacing: -0.16px;
     color: ${({ theme }) => theme.text1};
-    background-color: ${({ theme }) => theme.bg3};
+    background-color: #fff;
+    box-shadow: 0px 1px 3px 0px rgba(47, 43, 67, 0.10), 0px -1px 0px 0px rgba(47, 43, 67, 0.10) inset;
   }
 
   :hover,

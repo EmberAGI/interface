@@ -30,9 +30,9 @@ const CurrencySelect = styled.button`
   color: ${({ theme }) => 'rgba(14, 14, 14, 0.6)'};
   border-radius: 12px;
   outline: none;
-  background: ${({ theme }) => 'white'};
   cursor: pointer;
   user-select: none;
+  background: transparent;
   border: none;
   padding: 0;
   transition: 0.2s;
@@ -213,7 +213,7 @@ export default function CurrencyInputPanel({
       <StyledLabel>
         {label}
       </StyledLabel>
-      <InputPanel id={id} style={!account ? {pointerEvents: 'none'} : {}}>
+      <InputPanel id={id} style={!account ? {pointerEvents: 'none', background: 'rgba(14, 14, 14, 0.05)'} : {}}>
         <Container hideInput={hideInput}>
           <InputRow style={hideInput ? { padding: '0', borderRadius: '8px' } : {}} selected={disableCurrencySelect}>
             <CurrencySelect
