@@ -29,7 +29,6 @@ import {
   metamaskConnector,
   walletconnectConnector,
 } from 'airdao-components-and-tools/utils';
-
 import { Header as HeaderMenu } from '@airdao/ui-library';
 import { useCurrencyBalance } from '../state/wallet/hooks';
 import { AMBER } from '@firepotfinance/firepotfinance-sdk';
