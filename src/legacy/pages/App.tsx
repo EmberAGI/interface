@@ -167,7 +167,7 @@ export default function App() {
                   Guides
                 </Button>
               </a>
-              <a href="https://staging-testnet.airdao.io/team" target="_blank" rel="noreferrer">
+              <a href="https://airdao.io/team" target="_blank" rel="noreferrer">
                 <Button type="tetiary" size="large" leadIcon={<ChatHelpIcon />}>
                   Support
                 </Button>
