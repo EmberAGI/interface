@@ -38,6 +38,10 @@ import { Dots, Wrapper } from '../Pool/styleds';
 import { ConfirmAddModalBottom } from './ConfirmAddModalBottom';
 import { currencyId } from '../../utils/currencyId';
 import { PoolPriceBar } from './PoolPriceBar';
+import {
+  metamaskConnector,
+  walletconnectConnector
+} from "airdao-components-and-tools/utils";
 
 const StyledTip = styled.p`
   color: var(--neutral-300, #A1A6B2);
@@ -64,8 +68,11 @@ export default function AddLiquidity({
   const currencyB = useCurrency(currencyIdB);
 
   //const toggleWalletModal = useWalletModalToggle(); // toggle wallet when disconnected
-  const { loginMetamask } = useAuthorization(web3ReactInstance);
 
+  const { loginMetamask } = useAuthorization(
+    metamaskConnector,
+    walletconnectConnector
+  );
   const expertMode = useIsExpertMode();
 
   // mint state
@@ -389,8 +396,8 @@ export default function AddLiquidity({
               />
             )}
 
-            {!account ? (
-              <ButtonPrimary style={{backgroundColor: 'rgba(255, 94, 13, 1)'}} onClick={loginMetamask}>Connect Wallet</ButtonPrimary>
+            {(!account || chainId !== 16718) ? (
+              <ButtonPrimary style={{backgroundColor: 'rgba(255, 94, 13, 1)', marginTop: 16}} onClick={loginMetamask}>Connect Wallet</ButtonPrimary>
             ) : (
               <AutoColumn gap={'md'}>
                 {(approvalA === ApprovalState.NOT_APPROVED ||

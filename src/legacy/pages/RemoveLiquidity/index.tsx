@@ -44,6 +44,10 @@ import { Field } from '../../state/burn/actions';
 import { useAuthorization } from 'airdao-components-and-tools/hooks';
 import { useUserSlippageTolerance } from '../../state/user/hooks';
 import { BigNumber } from '@ethersproject/bignumber';
+import {
+  metamaskConnector,
+  walletconnectConnector
+} from "airdao-components-and-tools/utils";
 
 const StyledTip = styled.p`
   color: var(--neutral-300, #A1A6B2);
@@ -93,7 +97,11 @@ export default function RemoveLiquidity({
 
   // toggle wallet when disconnected
   //const toggleWalletModal = useWalletModalToggle();
-  const { loginMetamask } = useAuthorization(web3ReactInstance);
+
+  const { loginMetamask } = useAuthorization(
+    metamaskConnector,
+    walletconnectConnector
+  );
 
   // burn state
   const { independentField, typedValue } = useBurnState();
@@ -650,8 +658,8 @@ export default function RemoveLiquidity({
               </div>
             )}
             <div style={{ position: 'relative' }}>
-              {!account ? (
-                <ButtonPrimary style={{backgroundColor: 'rgba(255, 94, 13, 1)'}} onClick={loginMetamask}>Connect Wallet</ButtonPrimary>
+              {(!account || chainId !== 16718) ? (
+                <ButtonPrimary style={{backgroundColor: 'rgba(255, 94, 13, 1)', marginTop: 16}} onClick={loginMetamask}>Connect Wallet</ButtonPrimary>
               ) : (
                 <RowBetween>
                   <ButtonConfirmed

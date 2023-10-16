@@ -81,7 +81,7 @@ export default function Swap() {
     });
 
   const web3ReactInstance = useActiveWeb3React();
-  const { account } = web3ReactInstance;
+  const { account, chainId } = web3ReactInstance;
   const theme = useContext(ThemeContext);
 
   // toggle wallet when disconnected
@@ -370,7 +370,7 @@ export default function Swap() {
           </AutoColumn>
 
           <BottomGrouping>
-            {!account ? (
+            {(!account || chainId !== 16718) ? (
               <ButtonPrimary style={{backgroundColor: 'rgba(255, 94, 13, 1)'}} onClick={connect}>
                 Connect Wallet
               </ButtonPrimary>

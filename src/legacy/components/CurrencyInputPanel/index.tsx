@@ -178,7 +178,7 @@ export default function CurrencyInputPanel({
 }: CurrencyInputPanelProps) {
   const { t } = useTranslation();
   const [modalOpen, setModalOpen] = useState(false);
-  const { account } = useActiveWeb3React();
+  const { account, chainId } = useActiveWeb3React();
   const selectedCurrencyBalance = useCurrencyBalance(account ?? undefined, currency ?? undefined);
   const theme = useTheme();
   const ethereum = window.ethereum as any;
@@ -213,7 +213,7 @@ export default function CurrencyInputPanel({
       <StyledLabel>
         {label}
       </StyledLabel>
-      <InputPanel id={id} style={!account ? {pointerEvents: 'none', background: 'rgba(14, 14, 14, 0.05)'} : {}}>
+      <InputPanel id={id} style={(!account || chainId !== 16718) ? {pointerEvents: 'none', background: 'rgba(14, 14, 14, 0.05)'} : {}}>
         <Container hideInput={hideInput}>
           <InputRow style={hideInput ? { padding: '0', borderRadius: '8px' } : {}} selected={disableCurrencySelect}>
             <CurrencySelect
