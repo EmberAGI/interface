@@ -157,12 +157,12 @@ export default function App() {
           </BodyWrapper>
           <FooterWrapper>
             <HelpWrapper>
-              <a href="https://airdao.academy/guides/firepotswap-swap-guide" target="_blank" rel="noreferrer">
+              <a href="https://airdao.academy/guides/firepotswap-swap-guide" target="_blank" rel="noreferrer nofollow">
                 <Button type="tetiary" size="large" leadIcon={<BookIcon />}>
                   Learn how to Stake
                 </Button>
               </a>
-              <a href="https://airdao.academy/" target="_blank" rel="noreferrer">
+              <a href="https://airdao.academy/" target="_blank" rel="noreferrer nofollow">
                 <Button type="tetiary" size="large" leadIcon={<InfoIcon />}>
                   Guides
                 </Button>
