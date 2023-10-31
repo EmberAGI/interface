@@ -39,7 +39,7 @@ const FancyButton = styled.button`
 
 const Option = styled(FancyButton)<{ active: boolean }>`
   margin-left: 16px;
-  height: 48px;
+  height: 40px;
   border: 0;
   :hover {
     cursor: pointer;
@@ -72,7 +72,7 @@ const Input = styled.input`
 `;
 
 const OptionCustom = styled(FancyButton)<{ active?: boolean; warning?: boolean }>`
-  height: 48px;
+  height: 40px;
   position: relative;
   padding: 0 0.75rem;
   flex: 1;

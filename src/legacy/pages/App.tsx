@@ -159,7 +159,7 @@ export default function App() {
             <HelpWrapper>
               <a href="https://airdao.academy/guides/firepotswap-swap-guide" target="_blank" rel="noreferrer nofollow">
                 <Button type="tetiary" size="large" leadIcon={<BookIcon />}>
-                  Learn how to Stake
+                  Learn how to Swap
                 </Button>
               </a>
               <a href="https://airdao.academy/" target="_blank" rel="noreferrer nofollow">
