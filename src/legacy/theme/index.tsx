@@ -186,6 +186,7 @@ body {
 
 a {
   color: ${colors(false).blue1};
+  text-decoration: none;
 }
 
 * {
