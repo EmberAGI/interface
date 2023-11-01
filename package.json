@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@airdao/ui-library": "^1.0.5",
+    "@airdao/ui-library": "latest",
     "@firepotfinance/default-token-list": "^1.0.6",
     "airdao-components-and-tools": "github:ambrosus/airdao-components-and-tools#web3-react-migration",
     "sass": "^1.56.1",
