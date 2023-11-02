@@ -195,6 +195,8 @@ a {
 
 button {
   user-select: none;
+  background: transparent;
+  border: 0;
 }
 
 html {
