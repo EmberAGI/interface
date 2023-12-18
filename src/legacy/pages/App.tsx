@@ -73,10 +73,6 @@ const BodyWrapper = styled.div`
   z-index: 2;
 `;
 
-const Logo = styled.img`
-  height: 38px;
-`;
-
 const FooterWrapper = styled.div`
   margin-top: auto;
   width: 100%;
